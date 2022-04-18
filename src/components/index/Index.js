@@ -45,8 +45,8 @@ export default function Index() {
             <div className={Style.hero}>
                 <div className="container">
                     <div className={Style["hero-row"]}>
-                        <div className={Style["hero-text"] + " col-md-6 order-md-1 order-2 change-dir change-text"}>
-                            <h1>
+                        <div className={Style["hero-text"] + " col-12 col-md-6 order-md-1 order-2 change-dir change-text"}>
+                            <h1 className={'mt-5 mt-md-0'}>
                                 {sp.get("lang") === "fa" ?
                                     "به وبسایت کاریابی دانشگاه خلیج فارس خوش آمدید" :
                                     "Welcome to the job search website of Persian Gulf University"
@@ -62,7 +62,7 @@ export default function Index() {
                                 }
                             </button>
                         </div>
-                        <div className={Style["hero-img"] + " col-md-6 order-md-2 order-1"}>
+                        <div className={Style["hero-img"] + " col-12 d-none d-md-block col-md-6 order-md-2 order-1"}>
                             <img src={HandLogo} alt=""/>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ export default function Index() {
             {/*    </div>*/}
             {/*</div>*/}
             <div className={Style.advertising}>
-                <div className="container">
+                <div className="container mt-5">
                     <h3 className="text-center">آگهی های استخدامی</h3>
                     <div className="row py-4">
 

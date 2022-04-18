@@ -261,7 +261,7 @@ export default function Resume(src, options) {
                                 {
                                     sp.get("lang") === "fa" ?
                                         userInfoJson.LastName !== null && userInfoJson.LastName !== undefined ? userInfoJson.LastName : null :
-                                        userInfoJson.LastNameEnglish !== null && userInfoJson.LastNameEnglish !== undefined ? userInfoJson.LastNameEnglish:null
+                                        userInfoJson.LastNameEnglish !== null && userInfoJson.LastNameEnglish !== undefined ? userInfoJson.LastNameEnglish : null
 
                                 }
                             </h1>
@@ -269,7 +269,11 @@ export default function Resume(src, options) {
                                 sp.get("lang") === "fa" ?
                                     <p>
 
-                                        {age + " ساله - " + resume.mainJobTittle}
+                                        {
+                                            age !== null && age !== undefined ? age : null
+                                            + " ساله - " +
+                                            resume.mainJobTittle !== null && resume.mainJobTittle !== undefined ? resume.mainJobTittle : null
+                                        }
 
 
                                     </p>
@@ -277,9 +281,11 @@ export default function Resume(src, options) {
 
                                     <p>
 
-                                        {age + " years old - " + resume.mainJobTittleEnglish}
-
-
+                                        {
+                                            age !== null && age !== undefined ? age : null
+                                            + " years old - " +
+                                            resume.mainJobTittle !== null && resume.mainJobTittle !== undefined ? resume.mainJobTittle : null
+                                        }
                                     </p>
                             }
                         </div>
@@ -666,7 +672,7 @@ export default function Resume(src, options) {
                                                         eduction
                                                     </h6>
                                             }
-                                            {educationInfoListJson !== undefined && educationInfoListJson !== [] && educationInfoListJson.map((value, index) => (
+                                            {educationInfoListJson !== null && educationInfoListJson !== undefined && educationInfoListJson !== [] && educationInfoListJson.map((value, index) => (
                                                 <div className={Style1.educationItem + " break"}>
                                                     <ul className={'mb-0'}>
                                                         <li>

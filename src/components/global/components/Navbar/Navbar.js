@@ -55,6 +55,16 @@ export default function Navbar() {
         Logout();
     }
 
+    //// Close Navbar Automatically ///
+    $(document).ready(function () {
+        $(document).click(function (event) {
+            var clickover = $(event.target);
+            var _opened = $(".navbar-collapse").hasClass("show");
+            if (_opened === true && !clickover.hasClass("navbar-toggler")) {
+                $(".navbar-toggler").click();
+            }
+        });
+    });
 
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
@@ -71,10 +81,10 @@ export default function Navbar() {
         <header className={ " position-fixed w-100 change-dir " + Style.zIndex} id={'headerNav'}>
             <nav className={"navbar navbar-expand-lg header-nav " + Style.headerSection}>
                 {sp.get("lang") === "en" ?
-                    <a onClick={onPersianClick} href="javascript:void(0);" className={ " px-3 d-none d-md-block"}>
+                    <a onClick={onPersianClick} href="javascript:void(0);" className={ " px-3 d-none d-lg-block"}>
                         en<span className={'text-danger'}>/فا</span>
                     </a> :
-                    <a onClick={onEnglishClick} href="javascript:void(0);" className={" px-3 d-none d-md-block"}>
+                    <a onClick={onEnglishClick} href="javascript:void(0);" className={" px-3 d-none d-lg-block"}>
                         فا<span className={'text-danger'}>/en</span></a>
                 }
 
@@ -121,10 +131,10 @@ export default function Navbar() {
                                 </Link>
                             </li>
                             {sp.get("lang") === "en" ?
-                                <a onClick={onPersianClick} href="javascript:void(0);" className={Style.itemNav + " navbar-item my-lg-0 my-2 mx-auto mx-lg-2 d-block d-md-none"}>
+                                <a onClick={onPersianClick} href="javascript:void(0);" className={Style.itemNav + " navbar-item my-lg-0 my-2 mx-auto mx-lg-2 d-block d-lg-none"}>
                                     en<span className={'text-danger'}>/فا</span>
                                 </a> :
-                                <a onClick={onEnglishClick} href="javascript:void(0);" className={Style.itemNav + " navbar-item my-lg-0 my-2 mx-auto mx-lg-2 d-block d-md-none"}>
+                                <a onClick={onEnglishClick} href="javascript:void(0);" className={Style.itemNav + " navbar-item my-lg-0 my-2 mx-auto mx-lg-2 d-block d-lg-none"}>
                                     فا<span className={'text-danger'}>/en</span></a>
                             }
                         </ul>
@@ -183,12 +193,12 @@ export default function Navbar() {
                                         {/*                                                alt=""/>*/}
                                         {/*</a>*/}
                                     </div> :
-                                    <div className={ " d-none d-md-block my-0"}>
+                                    <div className={ "text-center my-0"}>
                                         <Link to={{
                                             pathname: getRoutesItems().loginStep1.route,
                                             search: "lang=" + sp.get("lang"),
                                         }}>
-                                            <li className={Style.loginBtn + " nav-item btn my-2 my-lg-0 mx-2 px-4"}>{t("global.navbar.login")}</li>
+                                            <li className={Style.loginBtn + " nav-item btn my-2 my-lg-0 mx-lg-2 mx-auto px-4"}>{t("global.navbar.login")}</li>
                                         </Link>
 
                                     </div>
