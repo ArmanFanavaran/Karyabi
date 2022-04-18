@@ -1,0 +1,64 @@
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./imgs/background.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 80vh;
+}
+
+.main h4 {
+    color: #653394;
+    font-weight: 700;
+    padding: 10px 0;
+    font-size: 23px;
+}
+
+.main p {
+    color: #653394;
+    font-weight: 700;
+    padding: 10px 0;
+}
+
+
+.main h3 {
+    color: #653394;
+}
+
+a:link {
+    text-decoration: none;
+}
+.inputs input[type=password] {
+    width: 350px;
+    height: 40px;
+    margin: 10px auto;
+    box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+}
+
+.inputs input[type=password]:focus {
+    box-shadow: 0px 0px 6px #653394;
+}
+.inputs input::placeholder {
+    font-size: 14px;
+    color: #bebebe;
+}
+
+.form-check-custom {
+    color: rgba(0, 0, 0, 0.61);
+}
+
+.form-link {
+    color: #653394;
+    font-weight: 700;
+    outline-style: none;
+}
+
+.inputs .btn-login {
+    color: #fff;
+    background-color: #653394;
+    width: 280px;
+    margin: 15px auto;
+}

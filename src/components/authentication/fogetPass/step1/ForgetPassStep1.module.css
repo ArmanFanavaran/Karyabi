@@ -1,0 +1,115 @@
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(imgs/background.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 80vh;
+}
+.centerItem {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+
+.main p {
+    color: #653394;
+    font-weight: 700;
+    padding: 20px 0;
+}
+
+.main h3 {
+    color: #653394;
+    font-weight: 700;
+    padding: 20px 0;
+}
+
+a{
+    cursor: pointer;
+}
+
+.passwordBox {
+    margin: 30px auto;
+}
+
+.passwordInput {
+    padding: 20px 0;
+}
+
+.passwordBox input{
+    width: 40px;
+    height: 40px;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+    direction: ltr;
+    text-align: center;
+}
+
+.passwordBox span {
+    color: #D8D8D8;
+}
+
+.passwordBox button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+    background-color: #653394;
+    position: relative;
+    outline: none;
+}
+.passwordBox button:focus {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+    background-color: #653394;
+    position: relative;
+    outline: none;
+}
+
+.passwordBox button img {
+    width: 20px;
+    position: absolute;
+    top: 10px;
+    left: 8px;
+}
+
+
+.passwordHelp .sendAgain{
+    color: #653394;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    /*margin-left: 20px;*/
+}
+
+.passwordHelp .editNumber {
+    color: #7C7777;
+    text-decoration: none;
+    font-size: 14px;
+    /*margin-right: 20px;*/
+
+}

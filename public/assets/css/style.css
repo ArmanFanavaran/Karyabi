@@ -1,0 +1,40 @@
+/*body {*/
+/*    direction: ltr !important;*/
+/*    text-align: left !important;*/
+/*}*/
+* {
+    margin: 0;
+    padding: 0;
+    /*direction: ltr;*/
+}
+.change-text {
+    text-align: left !important;
+}
+.change-text-reverse {
+    text-align: right !important;
+}
+
+.change-mx {
+    margin-right: auto !important;
+    margin-left: unset !important;
+}
+.change-dir {
+    direction: ltr !important;
+}
+.change-dir-reverse {
+    direction: rtl !important;
+}
+
+.change-mx-reverse {
+    margin-left: auto !important;
+    margin-right: unset;
+}
+
+.change-float {
+    float: left !important;
+}
+
+.change-float-reverse {
+    float: right !important;
+}
+

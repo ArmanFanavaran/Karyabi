@@ -1,0 +1,176 @@
+/*********** Hero Section Start ************/
+
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(imgs/background.png);
+    background-position: right;
+    background-repeat: repeat-y;
+    background-size: cover;
+    min-height: 80vh;
+    flex-direction: column;
+}
+
+
+.showPath {
+    margin: 40px 10px 20px;
+}
+
+.showPath .path .pathItem {
+    font-size: 15px;
+    color: #C4C4C4;
+    font-weight: 500;
+}
+
+.pathItem.passPath, .pathItem.passPath {
+    color: #653394 !important;
+}
+
+.showPath .path .pathIcon {
+    font-size: 15px;
+    color: #C4C4C4;
+    position: relative;
+    top: 4px;
+    padding: 0 5px;
+}
+
+.formBox {
+    margin: 30px auto;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+    background-color: white;
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+.formBox .formTitle {
+    color: #653394;
+    font-weight: 700;
+    font-size: 25px;
+    padding: 20px 0;
+
+}
+
+.input input[type=text] {
+    min-width: 200px;
+    max-width: 400px;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+}
+
+.input textarea, form select {
+    min-width: 200px;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+}
+
+.input input[type=text]::placeholder {
+    text-align: center;
+}
+
+
+.formBox label {
+    /*color: #7C7777;*/
+}
+
+.smIds .form-control {
+    position: relative;
+}
+
+.formBox p {
+    /*color: #BEBEBE;*/
+    font-weight: 700;
+}
+
+.smIds i {
+    position: absolute;
+    left: 25px;
+    top: 10px;
+    color: #807e7e;
+    border-right: 2px solid rgb(230, 230, 230);
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.formBox .registerBtn .btn {
+    color: #fff;
+    background-color: #653394;
+    width: 250px;
+    margin-top: 30px;
+}
+
+.calendarInput input {
+    position: relative;
+}
+
+.calendarInput i {
+    position: absolute;
+    left: 30px;
+    top: 10px;
+    color: #807e7e;
+    font-size: 20px;
+}
+
+.selectPart .formSelect {
+    width: 100%;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.40);
+    border: none;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 6px;
+    outline: none;
+    color: #7C7777;
+}
+
+.tipsP {
+    padding: 0;
+}
+
+.iframe {
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+}
+
+.profileImg img {
+    width: 150px;
+    margin: 20px;
+}
+
+.profileImg button {
+    border: 3px solid #C33B00;
+    width: 150px;
+    height: 30px;
+    color: #C33B00;
+    background-color: #fff;
+    transition: all .3s;
+
+}
+
+.proImg {
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover;
+}
+
+.profileInfo label, .EnglishInfo label {
+    color: #666666;
+}
+
+.profileInfo input, .EnglishInfo input {
+    border: none;
+    border-bottom: 2px solid #888888;
+    outline: none;
+}
+
+.profileInfo select, .EnglishInfo select {
+    border: none;
+    border-bottom: 2px solid #888888;
+    outline: none;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 375px) {
+    .smIds i {
+        left: -10px;
+    }
+}

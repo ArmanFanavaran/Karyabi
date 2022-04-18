@@ -1,0 +1,279 @@
+* {
+    font-family: "IRANSansWeb Medium";
+    margin: 0;
+    padding: 0;
+
+}
+
+@media print {
+    body {
+        width: 210mm;
+        height: 297mm;
+        /*margin: 50px 0;*/
+        /*font-size: 10% !important;*/
+    }
+
+
+    @page {
+        size: A4;
+        /*margin: 0 auto;*/
+        width: 210mm;
+        min-height: 297mm;
+        margin: 102px 60px;
+    }
+
+    header {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+}
+
+.maxWidth {
+    max-width: 2480px !important;
+}
+
+.maxHeight {
+    max-height: 3508px !important;
+}
+
+.width55 {
+    width: 55%;
+}
+
+.width75 {
+    width: 75%;
+}
+
+.width85 {
+    width: 85%;
+}
+
+.width90 {
+    width: 90%;
+}
+
+.height100 {
+    min-height: 100vh;
+}
+
+.main {
+    margin: 0 auto;
+    /*border: 3px solid #ddd;*/
+    page-break-after: auto;
+    width: 210mm;
+    min-height: 297mm;
+    /*padding: 50px;*/
+}
+
+.header {
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 3px solid #ddd;
+    padding-bottom: 17px;
+    margin-bottom: 50px;
+}
+
+.header h1 {
+    /*letter-spacing: 3px;*/
+    font-size: 3rem;
+}
+
+.header h1 span {
+    font-weight: 900;
+}
+
+.header p {
+    color: #595A5A;
+    font-weight: 600;
+    /*letter-spacing: 2px;*/
+}
+
+.communication {
+    display: flex;
+
+}
+
+.communication .icon {
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    margin:0 5px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    color: #595A5A;
+}
+
+.communication p {
+    font-weight: 700;
+}
+
+.communication p span ,.communication p a span {
+    color: #595A5A;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.communication a span:hover{
+    color: blueviolet;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+.titlePart {
+    font-weight: 1000;
+    text-transform: uppercase;
+    /*letter-spacing: 3px;*/
+    padding: 20px 0;
+    font-size: 20px;
+}
+
+.skillItem span {
+    color: #595A5A;
+}
+
+.skillItem .progress {
+    margin-top: 5px;
+    height: 7px;
+    border-radius: 0;
+}
+
+.skillItem .progressBar {
+    height: 7px;
+    background-color: #000;
+}
+
+.educationItem {
+    position: relative;
+}
+
+.educationItem::before {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin:0 -58px;
+    top: 7px;
+}
+
+
+.educationItem p {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.educationItem p span {
+    text-transform: capitalize;
+    color: #595A5A;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+}
+
+/* profileInfo */
+
+.lineSecond {
+    border-left: 3px solid #ddd;
+    padding-left: 50px;
+    margin-left: 40px;
+}
+
+.lineSecondPersian {
+    border-right: 3px solid #ddd;
+    padding-right: 50px;
+    margin-right: 40px;
+}
+
+.profileInfo p {
+    color: #595A5A;
+
+}
+
+.languages {
+    /*display: flex;*/
+    justify-content: space-between;
+}
+
+.languages span {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.languageItem .progress {
+    margin-top: 5px;
+    height: 4px;
+    border-radius: 0;
+}
+
+.languageItem .progressBar {
+    height: 4px;
+    background-color: #000;
+}
+
+.languageItem span {
+    font-size: 13px;
+    text-transform: capitalize;
+    color: #595A5A;
+    font-weight: normal;
+}
+
+.col-6 .progress {
+    width: 70px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: -20px;
+    top: 50%;
+}
+
+.experienceItem {
+    position: relative;
+}
+
+.experienceItem::before {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ddd;
+    /*left: -58px;*/
+    margin: 0 -58px;
+    top: 7px;
+}
+
+
+.experienceItem span {
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+}
+
+.experienceItem ul li {
+    text-transform: capitalize;
+    color: #595A5A;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+.referenceItem p {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.referenceItem p span {
+    text-transform: capitalize;
+    color: #595A5A;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+}

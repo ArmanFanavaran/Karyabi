@@ -1,0 +1,340 @@
+/*********** Hero Section Start ************/
+
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero {
+    background: #ECE9F5;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    margin-top: 40px;
+    padding-bottom: 100px;
+}
+
+.main h3 {
+    color: #653394;
+    font-size: 25px;
+    font-weight: 700;
+    padding: 30px 0;
+}
+
+.first-part {
+    background-color: #fff;
+    padding: 40px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);border-radius: 7px;
+}
+
+.first-part-text img {
+    background-image: url(../imgs/prof-border.png);
+    background-position: center;
+    width: 150px;
+    background-size: cover;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+.first-part-text h5 {
+    font-weight: 700;
+    font-style: 20px;
+    line-height: 28px
+}
+
+.first-part-img img{
+    width: 100%;
+}
+
+.first-part-text p {
+    padding: 0 20px;
+    font-size: 15px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+    color: #7C7777;
+}
+
+.description p {
+    font-weight: 700;
+    letter-spacing: .5px;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 26px;
+}
+
+
+.course-register {
+    background-color: #fff;
+    padding: 40px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);border-radius: 7px;
+    position: relative;
+    top: -100px;
+}
+
+.course-register span , .course-register label{
+    line-height: 38px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.course-register input {
+    width: 170px;
+    height: 43px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.course-register .apply-off {
+    background: #653394;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    color: #fff;
+    width: 60px;
+    height: 43px;
+    letter-spacing: 2px;
+}
+
+.course-register .register-btn {
+    background: #F0A059;
+    letter-spacing: 2px;
+    border-radius: 7px;
+    width: 148px;
+    height: 66px;
+    color: #fff;
+}
+
+.more-courses {
+    position: relative;
+    top: -50px;
+}
+
+.more-courses h5{
+    font-weight: 700;
+}
+
+
+.courses h2 {
+    color: #4A246F;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+
+}
+
+.course-odd .container {
+    background-color: #ECE9F5;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.course-even .container {
+    background: #F6F6F6;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+}
+
+.courses-crousel {
+    height: 470px;
+    overflow-y: hidden;
+}
+
+.courses p {
+    color: #8476AA;
+    width: 80%;
+    font-size: 13px;
+    margin-right: 30px;
+}
+
+.courses-text .btn {
+    background-color: #F2994A;
+    color: #fff;
+    width: 120px;
+    margin: 0 0 20px 20px;
+    font-size: 14px;
+}
+
+.course-img img{
+    width: 300px;
+    padding-left: 10px;
+}
+
+.dots .dot {
+    height: 15px;
+    width: 15px;
+    background-color: #C4C4C4;
+    /* background-color: #fff; */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.acitve {
+    background-color: #F0A059;
+}
+
+/* comments */
+
+.comments {
+    background: #F6F6F6;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 80px;
+    margin-bottom: 30px;
+}
+
+.comments h6 {
+    font-size: 24px;
+    font-weight: 700;
+    padding: 20px 0;
+}
+
+.user-name input {
+    width: 300px;
+    height: 50px;
+}
+
+.user-name input , textarea {
+    background: #FFFFFF;
+    border: 1px solid #D8D8D8;
+    box-sizing: border-box;
+    border-radius: 7px;
+}
+
+
+.send-comment button {
+    background: #653394;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    color: #fff;
+    width: 110px;
+    height: 50px;
+}
+
+.comment {
+    background: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 7px;
+}
+
+.comment p {
+    font-size: 14px;
+    line-height: 24px;
+    color: #979797;
+}
+
+
+@media only screen and (max-width : 1024px) {
+    .address-footer {
+        width: 60%;
+        margin: 0 auto;
+        padding-bottom: 5px;
+    }
+
+    .description p {
+        max-width: 700px;
+    }
+
+    .course-img img{
+        width: 250px;
+        padding-left: 18px;
+    }
+
+    .courses-crousel {
+        height: 430px;
+        overflow-y: hidden;
+    }
+
+
+}
+
+@media only screen and (max-width : 786px) {
+
+    .address-footer{
+        width: 60%;
+        margin: 0 auto;
+        font-size: 12px;
+        padding-bottom: 5px;
+    }
+    .address-footer h6 {
+        font-size: 14px;
+    }
+
+    .course-register .apply-off , .course-register input {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .course-register .register-btn {
+        width: 100%;
+        margin: 30px auto;
+    }
+
+
+    .courses-crousel {
+        height: 500px;
+        overflow-y: hidden;
+    }
+
+    .course-img img{
+        width: 300px;
+        padding-right: 30px;
+    }
+
+    .comment img {
+        width: 100px;
+    }
+
+    .user-name input {
+        width: 100%;
+        height: 50px;
+    }
+}
+
+@media only screen and (max-width : 375px) {
+    .inputs input[type=text] {
+        width: 280px;
+        height: 40px;
+        margin: 10px auto;
+        box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .main h3 {
+        color: #653394;
+        font-size: 20px;
+        font-weight: 700;
+        padding: 30px 0;
+    }
+
+    .first-part-text img {
+        width: 100px;
+    }
+    .first-part-text h5 {
+        font-weight: 700;
+        padding: 15px 0;
+        font-size: 16px;
+        line-height: 20px
+    }
+
+    .first-part-text p {
+        padding: 0;
+        font-size: 13px;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        font-weight: normal;
+        color: #7C7777;
+    }
+
+    .course-img img{
+        max-width: 240px;
+        padding-left: 20px;
+    }
+
+
+    .courses-crousel {
+        height: 420px;
+        overflow-y: hidden;
+    }
+}

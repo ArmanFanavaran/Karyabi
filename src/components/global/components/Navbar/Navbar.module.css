@@ -1,0 +1,94 @@
+/*********** Header and Navbar Start ************/
+.zIndex{
+    z-index: 1;
+    box-shadow: none;
+    border: none;
+}
+.headerSection {
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.20);
+}
+
+.navbarBrand img{
+    width: 70px;
+}
+
+.itemNav {
+    padding: 0 30px;
+}
+.itemNav a {
+    color: #653394;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.loginBtn {
+    border: 1.5px solid #653394;
+    color: #653394;
+    min-width: 150px;
+}
+
+.registerBtn {
+    background-color: #653394;
+    min-width: 150px;
+    color: #fff;
+
+}
+
+
+
+
+/* The dropdown container */
+/*.dropdown {*/
+/*    float: left;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*!* Dropdown button *!*/
+/*.dropdown .dropbtn {*/
+/*    font-size: 16px;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*    color: white;*/
+/*    padding: 14px 16px;*/
+/*    background-color: inherit;*/
+/*    font-family: inherit; !* Important for vertical align on mobile phones *!*/
+/*    margin: 0; !* Important for vertical align on mobile phones *!*/
+/*}*/
+
+
+/* Dropdown content (hidden by default) */
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999999;
+}
+
+/* Links inside the dropdown */
+.dropdownContent a {
+    float: none;
+    color: black;
+    padding: 7px 5px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdownContent a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdownContent {
+    display: block;
+    /*z-index: 1;*/
+}
+
+
+
+/*********** Header and Navbar End ************/

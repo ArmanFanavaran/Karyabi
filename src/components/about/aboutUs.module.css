@@ -1,0 +1,85 @@
+/*********** Hero Section Start ************/
+
+.main {
+    padding-top: 100px;
+    min-height: 80vh;
+}
+
+.main h3 {
+    color: #4A246E;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 48px;
+    padding-top: 30px;
+}
+
+.about-box {
+    background-color: #F6F4FB;
+    mix-blend-mode: normal;
+    border-radius: 10px;
+    margin: 30px auto 50px;
+}
+
+.about-box .aboutUs-info h5 {
+    color: #F2994A;
+    font-size: 23px;
+    letter-spacing: .32px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
+.about-box .aboutUs-info p {
+    font-size: 18px;
+    line-height: 25px;
+    color: #313131;
+}
+
+.about-img {
+    background-image: url("imgs/2507786-200 1.png") ;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-position-x: left;
+    background-position-y: top;
+    padding: 20px 0;
+}
+
+.about-img img {
+    max-width: 300px;
+}
+
+.aboutUs-address , .aboutUs-sm{
+    padding: 10px 0;
+}
+
+.aboutUs-address h6{
+    color: #F2994A;
+    font-size: 20px;
+}
+.aboutUs-address p {
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: #653394;
+}
+.aboutUs-sm  a{
+    text-decoration: none;
+    color: #653394;
+}
+
+.aboutUs-sm .sm-icon i{
+    width: 36px;
+    height: 36px;
+    padding: 10px;
+    background: rgba(101, 51, 148, 0.1);
+    border-radius: 30px;
+}
+
+.statistics-item p {
+    color: #8476AA;
+}
+
+.statistics-item h5{
+    font-size: 30px;
+    color: #F0A059;
+    font-weight: bold;
+}

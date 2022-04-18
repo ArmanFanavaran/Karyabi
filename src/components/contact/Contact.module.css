@@ -1,0 +1,70 @@
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../authentication/changePassword/imgs/background.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 80vh;
+}
+
+.passwordInput {
+    padding: 20px 0;
+}
+
+.passwordInput input{
+    width: 40px;
+    height: 40px;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.20);
+}
+
+.passwordInput span {
+    color: #D8D8D8;
+    padding: 0 10px;
+}
+.main p {
+    color: #979797;
+    margin: 0;
+}
+
+.passRules {
+    margin: 40px auto;
+    text-align: right;
+    font-size: 12px;
+    max-width: 400px;
+}
+
+.main h4 {
+    font-weight: 700;
+    padding: 40px 0;
+}
+
+.mark {
+    background-color: initial;
+    padding: 0;
+}
+
+.inputs input {
+    /*width: 350px;*/
+    height: 40px;
+    margin: 10px auto;
+    box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    direction: ltr;
+}
+
+.inputs input:focus {
+    box-shadow: 0px 0px 6px #653394;
+}
+.inputs input::placeholder {
+    font-size: 14px;
+    color: #bebebe;
+}
+.inputs .button {
+    color: #fff;
+    background-color: #653394;
+    width: 280px;
+    margin: 25px auto;
+}

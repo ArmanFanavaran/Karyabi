@@ -1,0 +1,261 @@
+.hero {
+    /* position: relative;
+    top: 100px; */
+    padding-top: 100px;
+}
+
+.hero .hero-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-text {
+    text-align: right;
+}
+
+.hero-text h1 {
+    color: #0d2458;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+.hero-text p {
+    color: #8476AA;
+    padding-bottom: 15px;
+    /*width: 90%;*/
+}
+
+.hero-text button {
+    background-color: #F2994A;
+    color: #fff;
+    width: 170px;
+
+}
+
+.hero-img img{
+    width: 100%;
+}
+
+/*********** Hero Section End ************/
+.clubs {
+    background-image: url("imgs/Group.png");
+    background-repeat: no-repeat;
+    /*background-size: contain;*/
+    z-index: 2;
+}
+.clubs h3 {
+    font-weight: bold;
+}
+
+.clubs .row{
+    overflow-y: hidden;
+    height: 175px;
+}
+.clubs .uni-logo {
+    padding: 20px 0;
+}
+
+.uni-logo img {
+    width: 100px;
+}
+
+.dots .dot {
+    height: 15px;
+    width: 15px;
+    background-color: #C4C4C4;
+    /* background-color: #fff; */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.acitve {
+    background-color: #F0A059;
+}
+
+.more-info {
+    margin-top: -20px;
+}
+
+.more-clubs a {
+    color: #653394;
+    text-decoration: none;
+}
+
+/****** clubs end ******/
+
+/****** Courses Start ******/
+
+.courses {
+    background-color: #ECE9F5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    margin: 10px 0;
+}
+.courses h3 {
+    color: #0d2458;
+    padding-top: 10px;
+    font-weight: bold;
+}
+.courses .courses-btn-group {
+    background: rgba(255, 255, 255, 0.8);
+
+}
+.courses .courses-btn-group .courses-btn {
+    color: #CECECE;
+    font-size: 14px;
+    font-weight: bold;
+    border-right: 1px solid #ECE9F5;
+    border-radius: 0;
+}
+.courses .courses-btn-group .courses-btn.acitve {
+    color: #653394;
+}
+
+.courses h2 {
+    color: #4A246F;
+    font-weight: bold;
+    padding: 20px 0;
+    font-size: 38px;
+    width: 70%;
+}
+
+.courses p {
+    color: #8476AA;
+    width: 80%;
+    padding-bottom: 20px;
+}
+
+.courses-text .courses-text-btn {
+    background-color: #F2994A;
+    color: #fff;
+    width: 170px;
+}
+
+.courses-img img {
+    width: 370px;
+}
+
+/****** Courses End ******/
+
+/****** Advertising Start ******/
+.advertising h3 {
+    color: #0d2458;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.advertising .row {
+    background-image: url("imgs/3.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+
+.advertising .advertising-btn-group {
+    background: #d1c2df;
+}
+
+.advertising .advertising-btn-group .advertising-btn {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-right: 1px solid #ECE9F5;
+    border-radius: 0;
+}
+
+.advertising .advertising-btn-group .advertising-btn.acitve {
+    color: #653394;
+}
+
+.advertising h2 {
+    color: #4A246F;
+    font-weight: bold;
+    padding: 20px 0;
+    font-size: 38px;
+    width: 70%;
+}
+
+.advertising p {
+    color: #8476AA;
+    width: 80%;
+    padding-bottom: 20px;
+}
+
+.advertising-text .advertising-text-btn {
+    background-color: #F2994A;
+    color: #fff;
+    width: 170px;
+}
+
+
+.advertising-img img {
+    width: 370px;
+}
+
+/****** Advertising End ******/
+
+/****** News Start ******/
+
+.news {
+    background-color: #ece9f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.news .row {
+    height: 350px;
+    overflow: hidden;
+}
+.news h3 {
+    color: #F2994A;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+.news-item {
+    height: 350px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.news-item img {
+    width: 200px;
+}
+.news-item h6 {
+    font-weight: 700;
+    color: #4A246F;
+    padding: 20px 0 10px;
+}
+.news-item p {
+    font-size: 14px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: right;
+    color: #653394;
+}
+
+.more-news a {
+    color: #653394;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    top: -25px;
+}
+
+/****** News End ******/
+
+/******** Statistics Start ********/
+.statistics p {
+    color: #8476AA;
+}
+
+.statistics h5{
+    font-size: 30px;
+    color: #F0A059;
+    font-weight: bold;
+}
+
+/******** Statistics End ********/

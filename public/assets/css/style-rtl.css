@@ -1,0 +1,118 @@
+*::-webkit-scrollbar {
+    width: 0.8em !important;
+}
+
+*::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #9c7ac4 !important;
+    border-radius: 5px !important;
+    outline: 1px solid slategrey !important;
+}
+
+@font-face {
+    font-family: 'shabnam';
+    src: url("../font/shabnam-font-v2.4.0/Shabnam.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'shabnam' , sans-serif;
+    box-sizing: border-box;
+}
+
+*, h1, h2, h3, h4, h5, h6, div, button, p, span, body, table, th, td, tr {
+    font-family: 'shabnam';
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important;
+    background-color: unset !important;
+
+}
+
+/*** mouse change pointer ***/
+.pointer-link {
+    cursor: pointer;
+}
+
+.text-align-control {
+    text-align: right;
+}
+
+/* bg-navabar Fixed */
+/*.bg-navbar-fixed{*/
+/*    background: rgba(17, 25, 48 , 0.7) center;*/
+
+/*    transition: box-shadow 2000ms;*/
+/*}*/
+a {
+    text-decoration: none;
+}
+
+.position-absolute {
+    position: absolute;
+
+}
+
+.dir-ltr {
+    direction: ltr !important;
+}
+
+.dir-rtl {
+    direction: rtl !important;
+}
+
+.text-left-control {
+    text-align: left;
+}
+
+.text-right-control {
+    text-align: right;
+}
+
+.border-none {
+    border: none;
+}
+
+.change-text {
+    text-align: right !important;
+}
+
+.change-text-reverse {
+    text-align: left !important;
+}
+
+.change-mx {
+    margin-left: auto !important;
+    margin-right: unset;
+}
+
+.change-dir {
+    direction: rtl !important;
+}
+
+.change-dir-reverse {
+    direction: ltr !important;
+}
+
+.change-mx-reverse {
+    margin-right: auto !important;
+    margin-left: unset;
+}
+
+.change-float {
+    float: right !important;
+}
+
+.change-float-reverse {
+    float: left !important;
+}
