@@ -53,8 +53,8 @@ import ContactAdmin from "./components/contact/ContactAdmin";
 import AboutUs from "./components/about/aboutUs";
 
 /****************** News *****************************/
-import NewsList from "./components/news/list/NewsList";
-import NewsSingle from "./components/news/single/NewsSingle";
+import NewsList from "./components/employmentAdvertisement/list/EmploymentAdvertisementList";
+import EmploymentAdvertisementSingle from "./components/employmentAdvertisement/single/EmploymentAdvertisementSingle";
 
 /****************** Courses *****************************/
 import CoursesList from "./components/courses/list/CoursesList";
@@ -106,8 +106,8 @@ export default function Routes() {
 
 
                 {/****************** News *****************************/}
-                <Route path="/news/list" exact component={NewsList}/>
-                <Route path="/news/single" exact component={NewsSingle}/>
+                <Route path={getRoutesItems().employmentAdvertisementList.route} exact component={NewsList}/>
+                <Route path={getRoutesItems().employmentAdvertisementSingle.route} exact component={EmploymentAdvertisementSingle}/>
 
                 {/****************** Courses *****************************/}
                 <Route path="/courses/list" exact component={CoursesList}/>
@@ -127,6 +127,7 @@ export default function Routes() {
                 </Controller>
 
             </Switch>
+            {/*{window.location.pathname !== "/resume/show" ? <Footer />:null }*/}
             <Footer/>
         </Router>
     )

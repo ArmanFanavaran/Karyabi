@@ -152,6 +152,7 @@
   "global": {
     "navbar": {
       "home": "Home",
+      "employmentAdvertisement": "Employment Advertisement",
       "news": "News",
       "teams": "Teams",
       "contact_us": "Contact Us",

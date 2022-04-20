@@ -3,7 +3,7 @@ import Style2 from "./courses-list2.module.css";
 
 import GridIcon from "../imgs/Group 106.png";
 import ListIcon from "../imgs/Group 107.png";
-import CloseIcon from "../../news/imgs/cancel.png";
+// import CloseIcon from "../../news/imgs/cancel.png";
 
 import {useEffect, useState, useRef} from 'react';
 import {Link} from "react-router-dom";

@@ -4,9 +4,9 @@ var sizeImage = {
     /************** News **************/
     "newsCoverList": {
         "des": "Size for Cover News List",
-        "Heights":350,
-        "Widths": 350,
-        "Qualities":50
+        "Heights":200,
+        "Widths": 200,
+        "Qualities":90
     },
     "newsCoverLastList": {
         "des": "Size for Cover Last News List Done",

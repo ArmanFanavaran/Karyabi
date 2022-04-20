@@ -2,22 +2,26 @@ import {useEffect, useState} from 'react';
 import {generateURL} from "../../global/Requests";
 import Pagination from "react-js-pagination";
 import {Link} from "react-router-dom";
-
-
+import advertisment from "./../imgs/advertisment.png"
+import location from "./../imgs/location.png"
 import $ from "jquery"
 
-import Style from "./news-list.module.css"
-import Style2 from "./news-list2.module.css"
+import Style from "./employmentAdvertisementList.module.css"
+import Style2 from "./employmentAdvertisementList2.module.css"
 
 import GridIcon from "../imgs/Group 106.png";
 import ListIcon from "../imgs/Group 107.png";
 import CloseIcon from "../imgs/cancel.png";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
+import * as React from "react";
+import * as queryString from "query-string";
+import {getRoutesItems} from "../../RoutesList/RoutesList"
 
 var axios = require('axios');
 axios.defaults.withCredentials = false;
 
 
-export default function NewsList() {
+export default function EmploymentAdvertisementList() {
     const [isGrid, setIsGrid] = useState(true);
     const [newsList, setNewsList] = useState([]);
     const [lastNews, setLastNews] = useState([]);
@@ -31,6 +35,8 @@ export default function NewsList() {
     const [order, setOrder] = useState("");
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
+    const queryStringes = queryString.parse(window.location.search);
+    const sp = new URLSearchParams(queryStringes);
     const pageSize = 12;
     const collapsibleContentStyle = {
         display: "block",
@@ -55,7 +61,7 @@ export default function NewsList() {
             setSearchedBranches(branchFilters);
         else {
             let searched = [];
-            $(branchFilters).each((index , item) => {
+            $(branchFilters).each((index, item) => {
                 if (item.subBranchName.includes(value)) {
                     searched.push(item);
                 } //end if
@@ -81,7 +87,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(config)
@@ -119,7 +125,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(config)
@@ -136,7 +142,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(count_config)
@@ -174,7 +180,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(config)
@@ -225,7 +231,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(config)
@@ -244,7 +250,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(count_config)
@@ -266,7 +272,7 @@ export default function NewsList() {
         let selected_branches = [...selectedBranches];
 
         let selected_ids = [];
-        for (let i = 0; i<selected_branches.length; i++) {
+        for (let i = 0; i < selected_branches.length; i++) {
             selected_ids.push(selected_branches[i].id);
         }
         /* changing selected array */
@@ -278,9 +284,7 @@ export default function NewsList() {
             }
             selected_branches.push(item);
             selected_ids.push(id);
-        }
-
-        else {
+        } else {
             for (let i = 0; i < selected_branches.length; i++) {
                 if (selected_branches[i].id === id) {
                     selected_branches.splice(i, 1);
@@ -312,7 +316,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : JSON.stringify(data)
+            data: JSON.stringify(data)
         };
         console.log(data)
 
@@ -332,7 +336,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(count_config)
@@ -352,7 +356,7 @@ export default function NewsList() {
         let selected_branches = [...selectedBranches];
 
         let selected_ids = [];
-        for (let i = 0; i<selected_branches.length; i++) {
+        for (let i = 0; i < selected_branches.length; i++) {
             selected_ids.push(selected_branches[i].id);
         }
 
@@ -385,7 +389,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : JSON.stringify(data)
+            data: JSON.stringify(data)
         };
         console.log(data)
 
@@ -407,7 +411,7 @@ export default function NewsList() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : data
+            data: data
         };
 
         axios(count_config)
@@ -427,35 +431,117 @@ export default function NewsList() {
 
         /*get news list*/
         var list_data = JSON.stringify({
-            "LookingForEntity": [],
-            "SubBranchIds": [],
-            "title": "",
-            "shortDescSearch": "",
-            "orderBy": "",
+            "roleId": 2,
             "page": 1,
-            "pageSize": pageSize
+            "pageSize": 50,
+            "heights": [200],
+            "widths": [200],
+            "qualities": [90],
+            "keyword": null,
+            "ownerId": 1,
+            "owner": "Company",
+            "genderIds": null,
+            "isAdaptiveSalary": false,
+            "minSalaryStatusId": 0,
+            "maxSalaryStatusId": 12,
+            "degreeIds": null,
+            "typeId": 1,
+            "provinceIds": null,
+            "militaryStatusIds": null,
+            "categoryIds": null,
+            "isFullTime": false,
+            "isPartTime": false,
+            "isRemote": false,
+            "isInternship": false,
+            "isPromotionPossible": false,
+            "isInsurancePossible": false,
+            "isCoursePossible": false,
+            "isFlexibleWorkTimePossible": false,
+            "isCommutingServicePossible": false,
+            "isFreeFoodPossible": false,
+            "sortBye": 0
+            // "roleId": 2,
+            // "page": 1,
+            // "pageSize": pageSize,
+            // "heights": [200],
+            // "widths": [200],
+            // "qualities": [90],
+            // "keyword": null,
+            // "ownerId": 1,
+            // "owner": "Company",
+            // "genderIds": null,
+            // "isAdaptiveSalary": false,
+            // "minSalaryStatusId": 0,
+            // "maxSalaryStatusId": 12,
+            // "degreeIds": null,
+            // "typeId": 1,
+            // "provinceIds": null,
+            // "militaryStatusIds": null,
+            // "categoryIds": null,
+            // "isFullTime": false,
+            // "isPartTime": false,
+            // "isRemote": false,
+            // "isInternship": false,
+            // "isPromotionPossible": false,
+            // "isInsurancePossible": false,
+            // "isCoursePossible": false,
+            // "isFlexibleWorkTimePossible": false,
+            // "isCommutingServicePossible": false,
+            // "isFreeFoodPossible": false,
+            // "sortBye": 0
+            // "roleId": 2,
+            // "page": 1,
+            // "pageSize": ,
+            // "heights": [getSizeImageItems().newsCoverList.Heights],
+            // "widths": [getSizeImageItems().newsCoverList.Widths],
+            // "qualities": [getSizeImageItems().newsCoverList.Qualities],
+            // "keyword": null,
+            // "ownerId": 1,
+            // "owner": "Company",
+            // "genderIds": null,
+            // "isAdaptiveSalary": false,
+            // "minSalaryStatusId": 0,
+            // "maxSalaryStatusId": 12,
+            // "degreeIds": null,
+            // "typeId": 1,
+            // "provinceIds": null,
+            // "militaryStatusIds": null,
+            // "categoryIds": null,
+            // "isFullTime": false,
+            // "isPartTime": false,
+            // "isRemote": false,
+            // "isInternship": false,
+            // "isPromotionPossible": false,
+            // "isInsurancePossible": false,
+            // "isCoursePossible": false,
+            // "isFlexibleWorkTimePossible": false,
+            // "isCommutingServicePossible": false,
+            // "isFreeFoodPossible": false,
+            // "sortBye": 0
         });
 
         var list_config = {
             method: 'post',
-            url: generateURL("News/GetNewsListClientSide"),
+            url: generateURL("/JobOffer/GetJobOfferListClientSide"),
             headers: {
                 'Content-Type': 'application/json'
             },
             data: list_data
         };
+        console.log("list client")
 
         axios(list_config)
             .then(function (response) {
+                console.log(response.data.data)
 
                 let data = response.data.data;
-                setNewsList(data);
-                let latest = [];
-                for (let i = 0; i<data.length && i<3; i++) {
-                    latest.push(data[i]);
-                }
-                setLastNews(latest);
-                console.log((response.data));
+                setNewsList(data)
+                // let latest = [];
+                // for (let i = 0; i < data.length && i < 3; i++) {
+                //     latest.push(data[i]);
+                // }
+                // setLastNews(latest);
+                console.log(data[0].company);
             })
             .catch(function (error) {
                 console.log(error);
@@ -464,78 +550,78 @@ export default function NewsList() {
 
         /*get news count*/
 
-        var count_data = JSON.stringify({
-            "LookingForEntity": [],
-            "SubBranchIds": [],
-            "title": "",
-            "shortDescSearch": "",
-            "orderBy": "",
-            "pageSize": pageSize
-        });
-
-        var count_config = {
-            method: 'post',
-            url: generateURL("News/GetNewsListCountClientSide"),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: count_data
-        };
-
-        axios(count_config)
-            .then(function (response) {
-                setCount(response.data.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // var count_data = JSON.stringify({
+        //     "LookingForEntity": [],
+        //     "SubBranchIds": [],
+        //     "title": "",
+        //     "shortDescSearch": "",
+        //     "orderBy": "",
+        //     "pageSize": pageSize
+        // });
+        //
+        // var count_config = {
+        //     method: 'post',
+        //     url: generateURL("News/GetNewsListCountClientSide"),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     data: count_data
+        // };
+        //
+        // axios(count_config)
+        //     .then(function (response) {
+        //         setCount(response.data.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
 
         /* get entity filter*/
-        var entity_config = {
-            method: 'get',
-            url: generateURL("News/getLookingFoEntityFilter"),
-            headers: {}
-        };
-
-        axios(entity_config)
-            .then(function (response) {
-                setEntityFilters(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        /*get order by Filters*/
-        var order_config = {
-            method: 'get',
-            url: generateURL("News/GetNewsListOrderByFilter"),
-            headers: {}
-        };
-
-        axios(order_config)
-            .then(function (response) {
-                setOrderFilters(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // var entity_config = {
+        //     method: 'get',
+        //     url: generateURL("News/getLookingFoEntityFilter"),
+        //     headers: {}
+        // };
+        //
+        // axios(entity_config)
+        //     .then(function (response) {
+        //         setEntityFilters(response.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        //
+        // /*get order by Filters*/
+        // var order_config = {
+        //     method: 'get',
+        //     url: generateURL("News/GetNewsListOrderByFilter"),
+        //     headers: {}
+        // };
+        //
+        // axios(order_config)
+        //     .then(function (response) {
+        //         setOrderFilters(response.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
         /*get branch filters */
-        var config = {
-            method: 'get',
-            url: generateURL("HelpingData/GetBranches"),
-            headers: {}
-        };
-
-        axios(config)
-            .then(function (response) {
-                setBranchFilters(response.data.data);
-                setSearchedBranches(response.data.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // var config = {
+        //     method: 'get',
+        //     url: generateURL("HelpingData/GetBranches"),
+        //     headers: {}
+        // };
+        //
+        // axios(config)
+        //     .then(function (response) {
+        //         setBranchFilters(response.data.data);
+        //         setSearchedBranches(response.data.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
 
     }, []);
@@ -604,7 +690,9 @@ export default function NewsList() {
                             selectedBranches.length > 0 ?
                                 selectedBranches.map((item, index) => (
                                     <div className={Style["branch-tags"] + " px-3 py-2 mx-1"}>
-                                        <span className="ml-2" onClick={() => {onRemoveBranchTag(item.id)}}><img width="10" src={CloseIcon}/></span>
+                                        <span className="ml-2" onClick={() => {
+                                            onRemoveBranchTag(item.id)
+                                        }}><img width="10" src={CloseIcon}/></span>
                                         {item.label}
                                     </div>
                                 )) : null
@@ -612,29 +700,33 @@ export default function NewsList() {
 
                     </div>
                 </div>
-                <div className="row">
+                <div className="row change-dir">
                     <div className="col-md-3">
                         <div className={Style["fields-div"] + " my-3 d-md-block d-none"}>
                             <div className={Style["fields-header"]}>
                                 <span>رشته ها</span>
                                 <input type="text" name="" id="" placeholder="جستجو" onChange={onSearchBranches}/>
                             </div>
-                            <div className={Style["filters-list"] + " collapsible-content"} style={collapsibleContentStyle}>
+                            <div className={Style["filters-list"] + " collapsible-content"}
+                                 style={collapsibleContentStyle}>
                                 {
                                     searchedBranches.length > 0 ?
                                         searchedBranches.map((item, i) => (
-                                        <div className={Style["filter-item"] + " form-check"}>
-                                            <input className="form-check-input branches_select" data-text={item.subBranchName} onChange={onBranchEdit} type="checkbox" value={item.id} id={"branch_" + item.id}/>
-                                            <label className="form-check-label pr-4" htmlFor={"branch_" + item.id}>
-                                                {item.subBranchName}
-                                            </label>
-                                        </div>
-                                    )) : null
+                                            <div className={Style["filter-item"] + " form-check"}>
+                                                <input className="form-check-input branches_select"
+                                                       data-text={item.subBranchName} onChange={onBranchEdit}
+                                                       type="checkbox" value={item.id} id={"branch_" + item.id}/>
+                                                <label className="form-check-label pr-4" htmlFor={"branch_" + item.id}>
+                                                    {item.subBranchName}
+                                                </label>
+                                            </div>
+                                        )) : null
                                 }
 
                             </div>
                             <div className={Style["fields-footer"]}>
-                                <button className={Style["change-height"] + " btn"} onClick={onClickMoreBranches}>بیشتر <img
+                                <button className={Style["change-height"] + " btn"}
+                                        onClick={onClickMoreBranches}>بیشتر <img
                                     src="assets/imgs/Group (1).png" alt=""/>
                                 </button>
                             </div>
@@ -644,7 +736,8 @@ export default function NewsList() {
                                 <span>جستجو در نتایج</span>
                             </div>
                             <div className={Style["search-in-results-div"]}>
-                                <input type="text" onChange={onSearch} className={Style["search-in-results"]} placeholder="جستجو"/>
+                                <input type="text" onChange={onSearch} className={Style["search-in-results"]}
+                                       placeholder="جستجو"/>
                             </div>
                         </div>
                         <div className={Style["fields-div"] + " my-3 d-md-block d-none"}>
@@ -657,7 +750,8 @@ export default function NewsList() {
                                     entityFilters.length > 0 ?
                                         entityFilters.map((item, i) => (
                                             <div className={Style["filter-item"] + " form-check"}>
-                                                <input className="form-check-input" onChange={onEntityEdit} type="checkbox" value={item} id={"entity_" + item}/>
+                                                <input className="form-check-input" onChange={onEntityEdit}
+                                                       type="checkbox" value={item} id={"entity_" + item}/>
                                                 <label className="form-check-label pr-4" htmlFor={"entity_" + item}>
                                                     {item}
                                                 </label>
@@ -674,60 +768,129 @@ export default function NewsList() {
                                 {
                                     newsList.length > 0 ?
                                         newsList.map((item, index) => (
-                                            <div
-                                                className={Style["news-item"] + " " + (index % 2 === 0 ? Style["news-item-even"] : Style["news-item-odd"]) + "  my-3"}>
-                                                <div className="row d-flex justify-content-center align-items-center ">
-                                                    <div className="col-12 col-lg-3 col-md-5">
-                                                        <div className={Style["news-item-img"] + " text-center p-lg-4"}>
-                                                            <img src={item.defImgSource} alt="" className=""/>
+                                            <Link
+                                                to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
+                                                        pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                        search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
+                                                    } :
+                                                    sp.get("lang") === "fa" ? {
+                                                        pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                        search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
+                                                    } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
+                                                        pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                        search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
+
+                                                    } : sp.get("lang") === "en" ? {
+                                                        pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                        search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
+                                                    } : null
+                                                } className={Style.mouse}>
+                                                <div
+                                                    className={Style["news-item"] + " " + (index % 2 === 0 ? Style["news-item-even"] : Style["news-item-odd"]) + "  my-3"}>
+                                                    <div
+                                                        className="row d-flex justify-content-center align-items-center ">
+                                                        <div className="col-12 col-lg-3 col-md-5">
+                                                            <div
+                                                                className={Style["news-item-img"] + " text-center p-lg-4"}>
+                                                                <img src={item.company.logo!==null? item.company.logo:advertisment}
+                                                                     alt={sp.get("lang") === "fa" ?
+                                                                         item.company.name :
+                                                                         item.company.englishName
+                                                                     }
+                                                                     className=""/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="col-12 col-lg-9 col-md-7">
-                                                        <div className={Style["news-item-text"]}>
-                                                            <div className="pl-md-5">
-                                                                <h6 className="text-right">{item.title}</h6>
-                                                                <p className="text-right">{item.shortDesc}</p>
-                                                                <div className="text-left">
-                                                                    <Link to={{
-                                                                        pathname: "/news/single",
-                                                                        search: "id=" + item.id + "&" + "entity=" + item.entity + "&" + "title=" + item.title
-                                                                    }} className="btn">ادامه خبر ...</Link>
+                                                        <div className="col-12 col-lg-9 col-md-7">
+                                                            <div className={Style["news-item-text"]}>
+                                                                <div className="pl-md-5">
+
+
+                                                                    <h6 className="change-text">
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.jobOffer.title :
+                                                                            item.jobOffer.titleEnglish
+                                                                        }
+                                                                    </h6>
+                                                                    <p className={'change-text text-muted'}>
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.company.name :
+                                                                            item.company.englishName
+                                                                        }
+                                                                    </p>
+                                                                    <p className="change-text">
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.jobOffer.shortDesc :
+                                                                            item.jobOffer.shortDescEnglish
+                                                                        }
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         )) : null
                                 }
 
                             </div>
                             :
                             <div className={Style2["news-list"]}>
-                                <div className="row">
+                                <div className="row change-dir">
                                     {
                                         newsList.length > 0 ?
                                             newsList.map((item, index) => (
                                                 <div
                                                     className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12"}>
-                                                    <div className={Style2["container-item"] + " container"}>
-                                                        <div className="row">
-                                                            <div className={Style2["news-img"] + " col-12"}>
-                                                                <img src={item.defImgSource} alt=""/>
-                                                            </div>
-                                                            <div className={Style2["news-text"] + " col-12"}>
-                                                                <h2 className="py-2">{item.title}</h2>
-                                                                <p className="text-right">{item.shortDesc}</p>
-                                                                <div className="text-left">
-                                                                    <Link to={{
-                                                                        pathname: "/news/single",
-                                                                        search: "id=" + item.id + "&" + "entity=" + item.entity + "&" + "title=" + item.title
-                                                                    }}
-                                                                        className="btn">ادامه خبر ...</Link>
+                                                    <Link
+                                                        to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
+                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
+                                                            } :
+                                                            sp.get("lang") === "fa" ? {
+                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
+                                                            } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
+                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
+
+                                                            } : sp.get("lang") === "en" ? {
+                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
+                                                            } : null
+                                                        } className={Style.mouse}>
+                                                        <div className={Style2["container-item"] + " container"}>
+                                                            <div className="row">
+                                                                <div className={Style2["news-img"] + " col-12"}>
+                                                                    <img src={item.company.logo!==null? item.company.logo:advertisment}
+                                                                         alt={sp.get("lang") === "fa" ?
+                                                                             item.company.name :
+                                                                             item.company.englishName
+                                                                         }
+                                                                         className=""/>
+                                                                </div>
+                                                                <div className={Style2["news-text"] + " col-12 mt-2"}>
+                                                                    <h2 className="change-text">
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.jobOffer.title :
+                                                                            item.jobOffer.titleEnglish
+                                                                        }
+                                                                    </h2>
+                                                                    <p className="change-text text-muted">
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.company.name :
+                                                                            item.company.englishName
+                                                                        }
+                                                                    </p>
+                                                                    <p className="change-text">
+                                                                        {sp.get("lang") === "fa" ?
+                                                                            item.jobOffer.shortDesc :
+                                                                            item.jobOffer.shortDescEnglish
+                                                                        }
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </div>
                                             )) : null
                                     }

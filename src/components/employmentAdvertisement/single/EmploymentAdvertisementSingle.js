@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import queryString from "query-string";
 
 
-import Style from "./news-single.module.css";
+import Style from "./employmentAdvertisementSingle.module.css";
 import {generateURL} from "../../global/Requests";
 import HtmlComponent from "../../global/EditorToHTML";
 // import {serverTimeToNewsDate} from "../../global/TimeConverter";
@@ -11,7 +11,7 @@ import {useHistory} from "react-router-dom";
 
 let axios = require("axios");
 
-export default function NewsSingle() {
+export default function EmploymentAdvertisementSingle() {
     const history = useHistory();
     const [title, setTitle] = useState();
     const [shortDesc, setShortDesc] = useState();

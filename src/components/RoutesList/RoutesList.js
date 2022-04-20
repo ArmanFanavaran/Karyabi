@@ -32,15 +32,15 @@ let Routes = {
 
 
    /************** Main Page **************/
-    "newsList": {
-       "des": "لیست خبر ها",
-       "enDes": "News List",
-        "route": "/news/list"
+    "employmentAdvertisementList": {
+       "des": "لیست آگهی ها",
+       "enDes": "employmentAdvertisement List",
+        "route": "/employmentAdvertisement/list"
     },
-    "newsSingle": {
-        "des": "خبر",
-        "enDes": "News",
-        "route": "/news/single"
+    "employmentAdvertisementSingle": {
+        "des": "آگهی",
+        "enDes": "employmentAdvertisement",
+        "route": "/employmentAdvertisement/single"
     },
 
 

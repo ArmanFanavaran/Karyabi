@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.mouse{
+    cursor: pointer
+}
+
 .main h3 {
     color: #653394;
     font-weight: 700;
@@ -20,7 +24,7 @@
 
 .sort-box {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-    padding: 10px;
+    /*padding: 10px;*/
     width: 99%;
     margin: 0 auto;
 }
@@ -30,7 +34,7 @@
     font-weight: 500;
     text-decoration: none;
     background: #F6F6F6;
-    padding: 5px 20px;;
+    /*padding: 5px 20px;;*/
     border-radius: 20px;
 
 }
@@ -73,13 +77,13 @@
 
 .news p {
     color: #8476AA;
-    width: 70%;
+    /*width: 70%;*/
     margin: 5px auto;
 }
 
 .news-text h2 {
-    text-align: right;
-    padding-right: 17%;
+    /*text-align: right;*/
+    /*padding-right: 17%;*/
 }
 .news-text .btn {
     width: 150px;
@@ -89,14 +93,14 @@
 
 .news-img img{
     width: 100%;
-    padding-left: 15%;
+    /*padding-left: 15%;*/
 }
 
 .hero {
     background: #ECE9F5;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     margin: 40px 0;
-    padding: 20px 0;
+    /*padding: 20px 0;*/
 }
 
 .hero p {

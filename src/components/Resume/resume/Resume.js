@@ -589,7 +589,7 @@ export default function Resume(src, options) {
                                             : null
                                         }
                                     </div>
-                                    {skillInfoListJson !== undefined && skillInfoListJson !== [] ?
+                                    {skillInfoListJson !== null && skillInfoListJson !== undefined && skillInfoListJson !== [] ?
                                         <div className={Style1.skills}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -628,7 +628,7 @@ export default function Resume(src, options) {
                                             </div>
                                         </div> : null
                                     }
-                                    {skillInfoListJsonSoftware !== undefined && skillInfoListJsonSoftware !== [] ?
+                                    {skillInfoListJsonSoftware !== null && skillInfoListJsonSoftware !== undefined && skillInfoListJsonSoftware !== [] ?
                                         <div className={Style1.skills}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -661,7 +661,7 @@ export default function Resume(src, options) {
                                             </div>
                                         </div> : null
                                     }
-                                    {educationInfoListJson !== undefined && educationInfoListJson !== [] ?
+                                    {educationInfoListJson !== null && educationInfoListJson !== undefined && educationInfoListJson !== [] ?
                                         <div className={Style1.educations}>
                                             {
                                                 sp.get("lang") === "fa" ?
@@ -725,7 +725,7 @@ export default function Resume(src, options) {
                                                     </p>
                                                 </div> : null
                                         }
-                                        {languageInfoListJson !== undefined && languageInfoListJson !== [] ?
+                                        {languageInfoListJson !== null && languageInfoListJson !== undefined && languageInfoListJson !== [] ?
                                             <div className={Style1.languages + " pt-2"}>
                                                 <h6 className={Style1.titlePart}>
                                                     {
@@ -762,7 +762,7 @@ export default function Resume(src, options) {
                                             </div> : null
                                         }
                                     </div>
-                                    {projectInfoListJson !== undefined && projectInfoListJson !== [] ?
+                                    {projectInfoListJson !== null && projectInfoListJson !== undefined && projectInfoListJson !== [] ?
                                         <div className={Style1.experiences + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -812,7 +812,7 @@ export default function Resume(src, options) {
                                             }
                                         </div> : null
                                     }
-                                    {workInfoListJson !== undefined && workInfoListJson !== [] ?
+                                    {workInfoListJson !== null && workInfoListJson !== undefined && workInfoListJson !== [] ?
                                         <div className={Style1.experiences + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -860,7 +860,7 @@ export default function Resume(src, options) {
                                             }
                                         </div> : null
                                     }
-                                    {articleInfoListJson !== undefined && articleInfoListJson !== [] ?
+                                    {articleInfoListJson !== null && articleInfoListJson !== undefined && articleInfoListJson !== [] ?
                                         <div className={Style1.references + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -901,7 +901,7 @@ export default function Resume(src, options) {
                                             ))}
                                         </div> : null
                                     }
-                                    {honerInfoListJson !== undefined && honerInfoListJson !== [] ?
+                                    {honerInfoListJson !== null && honerInfoListJson !== undefined && honerInfoListJson !== [] ?
                                         <div className={Style1.references + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
