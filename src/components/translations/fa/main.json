@@ -378,7 +378,9 @@
       "addProvince": "افزودن استان",
       "provinceTitle": "استانی که میخواهید در آن کار بیابید را انتخاب کنید",
       "jobCategory": "دسته بندی شغلی",
-      "addJobCategory": "افزودن دسته بندی شغلی"
+      "addJobCategory": "افزودن دسته بندی شغلی",
+      "nextStep": "صفحه اصلی ->",
+      "previousStep": "<- مرحله قبل"
     }
   },
   "index": {
@@ -421,5 +423,31 @@
     "Name": "نام",
     "send": "ارسال",
     "messageUs": "مشکل یا سوال خود را با ما به اشتراک بگذارید. کارشناسان ما در اسرع وقت با شما تماس می گیرند."
+  },
+  "employmentAdvertisement": {
+    "list": {
+      "isFullTime": "تمام وقت",
+      "isPartTime": "پاره وقت",
+      "isRemote": "دورکاری",
+      "isInternship": "کاراموزی",
+      "isNewComer": "تازه کار",
+      "isExpert": "متخصص",
+      "isManager": "مدیر",
+      "isChief": "مدیر ارشد",
+      "isPromotionPossible": "امکان ترفیع شغلی",
+      "isInsurancePossible": "بیمه",
+      "isCoursePossible": "برگزاری دوره",
+      "isFlexibleWorkTimePossible": "زمان کاری منعطف",
+      "isCommutingServicePossible": "سرویس رفت امد رایگان",
+      "isFreeFoodPossible": "غذا با شرکت",
+      "advantages": "مزایا",
+      "typeOfCooperation": "نوع همکاری",
+      "selectYourSeniorityLevel": "سطح ارشدیت",
+      "salaryStatus": "وضعیت حقوق",
+      "minSalary": "حداقل حقوق",
+      "maxSalary": "حداکثر حقوق",
+      "consensusSalary": "حقوق توافقی"
+
+    }
   }
 }

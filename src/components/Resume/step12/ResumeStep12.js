@@ -16,6 +16,7 @@ import {MoonLoader} from "react-spinners";
 import addImg from "./imgs/add.svg";
 import minus from "./imgs/minus.svg";
 import Modal from "react-modal";
+import Delete from "./imgs/delete.png";
 
 export default function ResumeStep12() {
     var moment = require("moment-jalaali");
@@ -233,9 +234,9 @@ export default function ResumeStep12() {
                     $('#open').removeClass('d-none')
                     $('#close').addClass('d-none')
                     $('#skillName').val("")
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: 0
-                    }, 1000);
+                    // $([document.documentElement, document.body]).animate({
+                    //     scrollTop: 0
+                    // }, 1000);
                 })
                 .catch(function (error) {
                     setLoading(false)
@@ -279,9 +280,9 @@ export default function ResumeStep12() {
                     $('#form').addClass('d-none')
                     $('#open').removeClass('d-none')
                     $('#close').addClass('d-none')
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: 0
-                    }, 1000);
+                    // $([document.documentElement, document.body]).animate({
+                    //     scrollTop: 0
+                    // }, 1000);
                 })
                 .catch(function (error) {
                     setLoading(false)
@@ -486,9 +487,9 @@ export default function ResumeStep12() {
                 $('#form').addClass('d-none')
                 $('#openProvince').removeClass('d-none')
                 $('#closeProvince').addClass('d-none')
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: 0
-                }, 1000);
+                // $([document.documentElement, document.body]).animate({
+                //     scrollTop: 0
+                // }, 1000);
             })
             .catch(function (error) {
                 setLoading(false)
@@ -622,7 +623,7 @@ export default function ResumeStep12() {
                                     <hr/>
                                     <h6 className={' mx-3'}>{t("resume.step12.selectYourSeniorityLevel")}</h6>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsChief ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -638,7 +639,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isChief")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsManager ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -654,7 +655,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isManager")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsExpert ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -670,7 +671,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isExpert")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsNewComer ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -686,7 +687,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isNewComer")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsInternship ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -706,7 +707,7 @@ export default function ResumeStep12() {
                                     <hr/>
                                     <h6 className={' mx-3'}>{t("resume.step12.typeOfCooperation")}</h6>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsRemote ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -722,7 +723,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isRemote")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsPartTime ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -738,7 +739,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isPartTime")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 mt-2 col-md-4 mt-2'}>
                                     {
                                         resume.IsFullTime ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -758,7 +759,7 @@ export default function ResumeStep12() {
                                     <hr/>
                                     <h6 className={' mx-3'}>{t("resume.step12.advantages")}</h6>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsPromotionPossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -774,7 +775,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isPromotionPossible")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsInsurancePossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -790,7 +791,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isInsurancePossible")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsFreeFoodPossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -806,7 +807,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isFreeFoodPossible")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsFlexibleWorkTimePossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -822,7 +823,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isFlexibleWorkTimePossible")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsCoursePossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -838,7 +839,7 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isCoursePossible")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4'}>
+                                <div className={'col-12 col-md-4 mt-2'}>
                                     {
                                         resume.IsCommutingServicePossible ?
                                             <button className="mx-3 btn btn-primary text-white"
@@ -910,7 +911,7 @@ export default function ResumeStep12() {
                                                                         className={'btn btn-default change-float mx-3'}
                                                                         onClick={function () {
                                                                             onDelete(item.Id, "province")
-                                                                        }}>X
+                                                                        }}><img src={Delete} width={10}/>
                                                                     </button>
                                                                     {item.ProvinceString}
                                                                 </div>
@@ -970,12 +971,12 @@ export default function ResumeStep12() {
 
                                 <div className="col-12">
                                     <button onClick={() => history.push({
-                                        pathname: getRoutesItems().resumeStep4.route,
+                                        pathname: getRoutesItems().mainPage.route,
                                         search: "lang=" + sp.get("lang"),
 
                                     })}
                                             className="btn change-float-reverse my-3 mx-3 btn-info">
-                                        {t("resume.step11.nextStep")}
+                                        {t("resume.step12.nextStep")}
 
                                     </button>
                                     <button onClick={() => history.push({
@@ -983,7 +984,7 @@ export default function ResumeStep12() {
                                         search: "lang=" + sp.get("lang"),
 
                                     })} className="btn change-float my-3 mx-3 btn-danger">
-                                        {t("resume.step11.previousStep")}
+                                        {t("resume.step12.previousStep")}
 
                                     </button>
                                 </div>

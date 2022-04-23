@@ -685,7 +685,7 @@ export default function ResumeStep10() {
                             <div className="row">
                                 <div className="col-12">
                                     <button onClick={() => history.push({
-                                        pathname: getRoutesItems().resumeStep4.route,
+                                        pathname: getRoutesItems().resumeStep11.route,
                                         search: "lang=" + sp.get("lang"),
 
                                     })}

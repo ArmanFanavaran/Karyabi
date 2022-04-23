@@ -383,7 +383,9 @@
       "addProvince": "Add province",
       "provinceTitle": "Select the province in which you want to find work",
       "jobCategory": "jobCategory",
-      "addJobCategory": "Add Job Category"
+      "addJobCategory": "Add Job Category",
+      "nextStep": "Main Page ->",
+      "previousStep": "<- previous"
     }
   },
   "index": {
@@ -426,5 +428,32 @@
     "Name": "Name",
     "send": "send",
     "messageUs": "Share your problem or question with us. Our experts will contact you as soon as possible."
+  },
+  "employmentAdvertisement": {
+    "list": {
+      "isFullTime": "Full Time",
+      "isPartTime": "Part Time",
+      "isRemote": "Remote",
+      "isInternship": "Internship",
+      "isNewComer": "New Comer",
+      "isExpert": "Expert",
+      "isManager": "Manager",
+      "isChief": "Chief",
+      "isPromotionPossible": "Promotion Possible",
+      "isInsurancePossible": "Insurance Possible",
+      "isCoursePossible": "Course Possible",
+      "isFlexibleWorkTimePossible": "Flexible Work Time Possible",
+      "isCommutingServicePossible": "Commuting Service Possible",
+      "isFreeFoodPossible": "Free Food Possible",
+      "advantages": "Advantages",
+      "typeOfCooperation": "Type Of Cooperation",
+      "selectYourSeniorityLevel": "seniority level",
+      "salaryStatus": "salary Status",
+      "minSalary": "Minimum Salary",
+      "maxSalary": "maximum Salary",
+      "consensusSalary": "Consensus Salary"
+
+
+    }
   }
 }

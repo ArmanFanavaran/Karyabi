@@ -142,7 +142,7 @@ export default function RegisterStep3() {
         <div>
             <main className={Style.main + " text-center"} onKeyUp={(e) => enterKey(e)}>
                 <div className="container">
-                    <h4>{t("signup.enter_your_information_step4")}</h4>
+                    <h4>{t("authentication.reset_pass2.enter_your_new_password")}</h4>
                     <div className={Style.inputs + " change-dir change-text"}>
                         <input type="password" id={'newPassword'} className="form-control"
                                placeholder={t("authentication.change-pass.new_password")}/>
@@ -152,7 +152,7 @@ export default function RegisterStep3() {
                                 className={Style.button + " btn d-block"}>{t("authentication.change-pass.send")}</button>
                         <div className={Style.passRules + " change-dir change-text"}>
 
-                            <p>* {t("signup.password_contain1")}</p>
+                            <p>* {t("authentication.signup.password_contain1")}</p>
                         </div>
                         <div className={'row'}>
                             <div className={'col-12 col-md-4 mx-auto'}>

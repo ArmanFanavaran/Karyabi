@@ -29,6 +29,7 @@
 
 .inputs input[type=password] {
     width: 350px;
+    max-width: 90%;
     height: 40px;
     margin: 10px auto;
     box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.25);
@@ -45,5 +46,6 @@
     color: #fff;
     background-color: #653394;
     width: 280px;
+    max-width: 90%;
     margin: 25px auto 10px auto;
 }
