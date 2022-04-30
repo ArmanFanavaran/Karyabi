@@ -144,6 +144,11 @@ let Routes = {
         "enDes": "Resume",
         "route": "/resume/show"
     },
+    "resumeType2": {
+        "des": "رزومه",
+        "enDes": "Resume",
+        "route": "/resume/show2"
+    },
     "resumeStep1": {
         "des": "اطلاعات شخصی",
         "enDes": "Personal Information",

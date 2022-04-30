@@ -184,14 +184,10 @@ export default function EmploymentAdvertisementList() {
     /* search in branch */
     const onSearchMilatery = (event) => {
         let value = $(event.target).val().trim();
-        console.log(value)
-        console.log(selectedBranches)
-
         if (value === "") {
             setSearchedMilatery(branchFilters);
         } else {
             let searched = [];
-            console.log(milateryFilters)
             $(milateryFilters).each((indexes, item) => {
                 // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
@@ -206,7 +202,6 @@ export default function EmploymentAdvertisementList() {
                 }
             });
             setSearchedMilatery(searched);
-            console.log(searched)
         } //end else
     }
     /* checked in branch */
@@ -303,14 +298,11 @@ export default function EmploymentAdvertisementList() {
     /* search in branch */
     const onSearchBranches = (event) => {
         let value = $(event.target).val().trim();
-        console.log(value)
-        console.log(selectedBranches)
 
         if (value === "") {
             setSearchedBranches(branchFilters);
         } else {
             let searched = [];
-            console.log(branchFilters)
             $(branchFilters).each((indexes, item) => {
                 // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
@@ -325,7 +317,6 @@ export default function EmploymentAdvertisementList() {
                 }
             });
             setSearchedBranches(searched);
-            console.log(searched)
         } //end else
     }
     /* checked in branch */
@@ -425,14 +416,11 @@ export default function EmploymentAdvertisementList() {
     /* search in Province */
     const onSearchProvince = (event) => {
         let value = $(event.target).val().trim();
-        console.log(value)
-        console.log(selectedProvince)
 
         if (value === "") {
             setSearchedProvince(provinceFilters);
         } else {
             let searched = [];
-            console.log(provinceFilters)
             $(provinceFilters).each((indexes, item) => {
                 // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
@@ -447,7 +435,6 @@ export default function EmploymentAdvertisementList() {
                 }
             });
             setSearchedProvince(searched);
-            console.log(searched)
         } //end else
     }
     /* checked in branch */
@@ -546,14 +533,11 @@ export default function EmploymentAdvertisementList() {
     /* search in Category */
     const onSearchCategory = (event) => {
         let value = $(event.target).val().trim();
-        console.log(value)
-        console.log(selectedCategory)
 
         if (value === "") {
             setSearchedCategory(categoryFilters);
         } else {
             let searched = [];
-            console.log(categoryFilters)
             $(categoryFilters).each((indexes, item) => {
                 // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
@@ -568,7 +552,6 @@ export default function EmploymentAdvertisementList() {
                 }
             });
             setSearchedCategory(searched);
-            console.log(searched)
         } //end else
     }
     /* checked in Category */
@@ -702,7 +685,6 @@ export default function EmploymentAdvertisementList() {
                 //     latest.push(data[i]);
                 // }
                 // setLastNews(latest);
-                console.log(data[0].company);
             })
             .catch(function (error) {
                 console.log(error);
@@ -712,9 +694,13 @@ export default function EmploymentAdvertisementList() {
 
     /************** Scroll Filter *************/
     $(window).scroll(function () {
-        if ($(this).scrollTop() > $('#fixed-class').outerHeight()) {
+        if ($(this).scrollTop() > $('#fixed-class').outerHeight()+200) {
             $('#fixed-class').addClass(Style["fixed-content"])
             $('#filter').css("max-height", " 90vh ")
+            if( $(this).scrollTop()<= $('#advertisementList').outerHeight()-100){
+                // $('#fixed-class').addClass(Style["fixed-content"])
+                $(Style["fixed-content"]).animate({ scrollTop: $('#fixed-class').height()}, 1000);
+            }
 
         } else {
             $('#fixed-class').removeClass(Style["fixed-content"])
@@ -799,7 +785,6 @@ export default function EmploymentAdvertisementList() {
                 //     latest.push(data[i]);
                 // }
                 // setLastNews(latest);
-                console.log(data[0].company);
             })
             .catch(function (error) {
                 console.log(error);
@@ -950,7 +935,6 @@ export default function EmploymentAdvertisementList() {
         };
         axios(gender_config)
             .then(function (response) {
-                console.log(response.data.data)
                 setGenderList(response.data.data);
             })
             .catch(function (error) {
@@ -965,7 +949,6 @@ export default function EmploymentAdvertisementList() {
         };
         axios(salary_config)
             .then(function (response) {
-                console.log(response.data.data)
                 setSalaryList(response.data.data);
             })
             .catch(function (error) {
@@ -2362,7 +2345,7 @@ export default function EmploymentAdvertisementList() {
 
 
                     </div>
-                    <div className="col-xl-9">
+                    <div className="col-xl-9" id={'advertisementList'}>
                         {!isGrid ?
                             <div className={Style["news-list"]}>
 

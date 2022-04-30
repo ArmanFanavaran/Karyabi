@@ -32,7 +32,8 @@ import ForgetPassStep1 from "./components/authentication/fogetPass/step1/ForgetP
 import ForgetPassStep2 from "./components/authentication/fogetPass/step2/ForgetPassStep2";
 
 /****************** Resume *****************************/
-import Resume from "./components/Resume/resume/Resume";
+import Resume from "./components/Resume/resume/type1/Resume";
+import ResumeType2 from "./components/Resume/resume/type2/ResumeType2";
 import ResumeStep1 from "./components/Resume/step1/ResumeStep1";
 import ResumeStep2 from "./components/Resume/step2/ResumeStep2";
 import ResumeStep3 from "./components/Resume/step3/ResumeStep3";
@@ -91,6 +92,7 @@ export default function Routes() {
 
                 {/****************** Resume *****************************/}
                 <Route path={getRoutesItems().resume.route} exact component={Resume}/>
+                <Route path={getRoutesItems().resumeType2.route} exact component={ResumeType2}/>
                 <Route path={getRoutesItems().resumeStep1.route} exact component={ResumeStep1}/>
                 <Route path={getRoutesItems().resumeStep2.route} exact component={ResumeStep2}/>
                 <Route path={getRoutesItems().resumeStep3.route} exact component={ResumeStep3}/>

@@ -1,31 +1,28 @@
 import $ from 'jquery';
 import {useEffect, useState} from "react";
-import Style1 from "./ResumeType1.module.css"
-import Style2 from "./ResumeType2.module.css"
-import Style3 from "./ResumeType3.module.css"
-import Style4 from "./ResumeType4.module.css"
-import NavbarResume from "../navbar/NavbarResume"
-import {generateURL} from "../../global/Requests";
-import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
+import Style1 from "./ResumeType2.module.css"
+
+import {generateURL} from "../../../global/Requests";
+import {getSizeImageItems} from "../../../SizeImageList/SizeImageList";
 import {useTranslation} from "react-i18next";
 import * as queryString from "query-string";
 import * as React from "react";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {initializeTitlesWithValue} from "../../global/Titles";
-import {getRoutesItems} from "../../RoutesList/RoutesList";
+import {initializeTitlesWithValue} from "../../../global/Titles";
+import {getRoutesItems} from "../../../RoutesList/RoutesList";
 import {useHistory} from "react-router";
 
 
 ///// Image Type 1 /////////
-import bitbucketType1 from "./imgsType1/bitbucket.svg"
-import gitLabType1 from "./imgsType1/gitlab.svg"
-import gitHubType1 from "./imgsType1/github.svg"
-import linkedinType1 from "./imgsType1/linkedin.svg"
-import telegramType1 from "./imgsType1/telegram.svg"
-import instagramType1 from "./imgsType1/instagram.svg"
+import bitbucketType1 from "./imgsType2/bitbucket.svg"
+import gitLabType1 from "./imgsType2/gitlab.svg"
+import gitHubType1 from "./imgsType2/github.svg"
+import linkedinType1 from "./imgsType2/linkedin.svg"
+import telegramType1 from "./imgsType2/telegram.svg"
+import instagramType1 from "./imgsType2/instagram.svg"
 import {RatingStar} from "rating-star";
 
-export default function Resume(src, options) {
+export default function ResumeType2(src, options) {
     var moment = require("moment-jalaali");
     const history = useHistory();
     const [resumeId, setResumeId] = useState([]);
@@ -240,6 +237,36 @@ export default function Resume(src, options) {
 
     }
 
+    function download() {
+        var axios = require('axios');
+        var data = JSON.stringify({
+            "isReadyTodownload": true,
+            "styleSheet": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
+            "isStyleSheetInWeb": true,
+            "HtmlContent": "<div><p class='text-danger'>Hello<span>My baby</span></p></div>",
+            "culture ": "fa"
+        });
+        let url='/VisualOutPutGenerator/GetPdfFromHtmlString?'+ "isReadyTodownload="+false+"&"+"styleSheet="+ "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"+"&"+"isStyleSheetInWeb="+true+"&"+"HtmlContent="+"<div><p class='text-danger'>Hello<span>My baby</span></p></div>"
+        var config = {
+            method: 'get',
+            url: generateURL(url),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // data: data
+        };
+        let information;
+        axios(config)
+            .then(function (response) {
+                // alert("success")
+                console.log(generateURL(url))
+                window.open(generateURL(url), '_blank')
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
 
     return (
         <div className={'container'}>
@@ -955,7 +982,7 @@ export default function Resume(src, options) {
             <div className={'row'}>
                 <div className={'col-12 change-text-reverse my-3'}>
 
-                    <button id={'print'} className="btn btn-primary" onClick={generatePDF}>
+                    <button id={'print'} className="btn btn-primary" onClick={download}>
                         {
                             sp.get("lang") === "fa" ?
                                 "PDF خروجی" :
