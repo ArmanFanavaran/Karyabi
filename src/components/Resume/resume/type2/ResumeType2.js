@@ -238,24 +238,29 @@ export default function ResumeType2(src, options) {
     }
 
     function download() {
+        let component = $("#export-component").prop('outerHTML');
+        component = "<!DOCTYPE html><html lang=\"ar\"><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\"></head><body>"+component +"</body></html>"
+        console.log(component)
         var axios = require('axios');
+        axios.defaults.withCredentials = true;
+
         var data = JSON.stringify({
-            "isReadyTodownload": true,
+            "isReadyToDownload": true,
             "styleSheet": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
             "isStyleSheetInWeb": true,
-            "HtmlContent": "<div><p class='text-danger'>Hello<span>My baby</span></p></div>",
-            "culture ": "fa"
+            "htmlContent": component,
+            // "culture ": "fa"
         });
-        let url='/VisualOutPutGenerator/GetPdfFromHtmlString?'+ "isReadyTodownload="+false+"&"+"styleSheet="+ "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"+"&"+"isStyleSheetInWeb="+true+"&"+"HtmlContent="+"<div><p class='text-danger'>Hello<span>My baby</span></p></div>"
+        // let url='/VisualOutPutGenerator/GetPdfFromHtmlString?'+ "isReadyTodownload="+false+"&"+"styleSheet="+ "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"+"&"+"isStyleSheetInWeb="+true+"&"+"HtmlContent="+component + "&"+"culture=fa"
+        let url='/VisualOutPutGenerator/GetPdfFromHtmlStringWithPost'
         var config = {
-            method: 'get',
+            method: 'post',
             url: generateURL(url),
             headers: {
                 'Content-Type': 'application/json'
             },
-            // data: data
+            data : data
         };
-        let information;
         axios(config)
             .then(function (response) {
                 // alert("success")
@@ -269,8 +274,11 @@ export default function ResumeType2(src, options) {
     }
 
     return (
-        <div className={'container'}>
-            <div className={'row'}>
+        <div  className={'container'}>
+            <div  className={'row'}>
+                <div id="export-component" style={{fontFamily: "Arial"}}>
+                    <div> متن نمونه</div>
+                </div>
                 <div id={'firstDiv'} className={'mx-auto mt-5 pt-5'}>
                     <div id="test" className={Style1.main + " " + Style1.maxWidth + " " + Style1.maxHeight}>
                         <div className={Style1.header + " change-dir"}>
@@ -285,6 +293,7 @@ export default function ResumeType2(src, options) {
                                 }
 
                         </span>
+                                <span> </span>
                                 {
                                     sp.get("lang") === "fa" ?
                                         userInfoJson.LastName !== null && userInfoJson.LastName !== undefined ? userInfoJson.LastName : null :
