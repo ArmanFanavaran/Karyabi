@@ -239,32 +239,87 @@ export default function ResumeType2(src, options) {
 
     function download() {
         var axios = require('axios');
-        var data = JSON.stringify({
-            "isReadyTodownload": true,
-            "styleSheet": "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
-            "isStyleSheetInWeb": true,
-            "HtmlContent": "<div><p class='text-danger'>Hello<span>My baby</span></p></div>",
-            "culture ": "fa"
+        $('header').hide()
+        $('footer').hide()
+        $('#print').hide()
+        $('#firstDiv').removeClass("mt-5")
+        var prevRowHeight = 0;
+        $(".break").each(function () {
+            // console.log($(this).height());
+            var maxHeight = 1356 * sizeBreak;
+            // console.log("position: " + $(this).offset().top + " Height: " + $(this).height())
+
+            var eachRowHeight = $(this).offset().top + $(this).height();
+            // console.log("sub: " + eachRowHeight)
+
+            if ((prevRowHeight + eachRowHeight) > maxHeight) {
+                sizeBreak += 1;
+                $(this).before('<div style="page-break-before: always;" ></div><div class="mt-5 pt-3"></div>');
+                // $(this).before('<div style="border: 2px solid" ></div>');
+                console.log("add page break before");
+            }
+            console.log("==============================================")
+            prevRowHeight = $(this).height();
         });
-        let url='/VisualOutPutGenerator/GetPdfFromHtmlString?'+ "isReadyTodownload="+false+"&"+"styleSheet="+ "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"+"&"+"isStyleSheetInWeb="+true+"&"+"HtmlContent="+"<div><p class='text-danger'>Hello<span>My baby</span></p></div>"
+        var x =  "<html>"+document.getElementsByTagName('html')[0].outerHTML+"</html>";
+let xy="<div class=\"row\">\n" +
+    "\t<div class=\"col-12\">\n" +
+    "\t\t<div class=\"text-right\">\n" +
+    "\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n" +
+    "\t\t</div>\n" +
+    "\t</div>\n" +
+    "</div>"
+console.log(x)
+        var data = JSON.stringify({
+            "requestLanguage": "string",
+            "entity": "string",
+            "entityId": 0,
+            "isClientSide": true,
+            "serviceTypeName": 0,
+            "htmlContent": x,
+            "styleSheet": "https://karyabi.ceunion.ir/",
+            "isStyleSheetInWeb": true,
+            "isReadyToDownload": true
+        })
+
         var config = {
-            method: 'get',
-            url: generateURL(url),
+            method: 'post',
+            url: generateURL('/VisualOutPutGenerator/GetByteArrayFromHtmlStringViaSelectPdf'),
             headers: {
                 'Content-Type': 'application/json'
             },
-            // data: data
+            data: data
         };
         let information;
         axios(config)
             .then(function (response) {
-                // alert("success")
-                console.log(generateURL(url))
-                window.open(generateURL(url), '_blank')
+                const linkSource = `data:application/pdf;base64,`+response.data;
+                const downloadLink = document.createElement("a");
+                const fileName = "abc.pdf";
+                downloadLink.href = linkSource;
+                downloadLink.download = fileName;
+                downloadLink.click()
             })
             .catch(function (error) {
-                console.log(error);
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i]);
+                        }
+                    });
+
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message);
+                } else {
+                    NotificationManager.error(error.response.data.Message);
+
+                }
             });
+        $('header').show()
+        $('footer').show()
+        $('#print').show()
+        $('#firstDiv').addClass("mt-5")
 
     }
 
@@ -992,6 +1047,7 @@ export default function ResumeType2(src, options) {
                     </button>
                 </div>
             </div>
+            <NotificationContainer/>
         </div>
     )
 
