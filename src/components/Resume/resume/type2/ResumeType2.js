@@ -233,16 +233,16 @@ export default function ResumeType2(src, options) {
             prevRowHeight = $(this).height();
         });
         var x = "<html>" + document.getElementsByTagName('html')[0].outerHTML + "</html>";
-            // console.log($(this).height());
-            $(".break-before").remove()
+        // console.log($(this).height());
+        $(".break-before").remove()
 
         let xy = "<div class=\"row\">\n" +
-        "\t<div class=\"col-12\">\n" +
-        "\t\t<div class=\"text-right\" style=\"text-align:center;padding-top:25px\">\n" +
-        "\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n" +
-        "\t\t</div>\n" +
-        "\t</div>\n" +
-        "</div>"
+            "\t<div class=\"col-12\">\n" +
+            "\t\t<div class=\"text-right\" style=\"text-align:center;padding-top:25px\">\n" +
+            "\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n" +
+            "\t\t</div>\n" +
+            "\t</div>\n" +
+            "</div>"
         console.log(x)
         var data = JSON.stringify({
             "requestLanguage": "string",
