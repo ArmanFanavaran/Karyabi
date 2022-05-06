@@ -207,35 +207,6 @@ export default function ResumeType2(src, options) {
         // return age;
     }
 
-    function generatePDF(src, options) {
-        $('#firstDiv').removeClass("pt-5")
-        $('#firstDiv').removeClass("mt-5")
-        $('#print').addClass("d-none")
-        document.title = 'My new title'
-        var prevRowHeight = 0;
-        $(".break").each(function () {
-            // console.log($(this).height());
-            var maxHeight = 1356 * sizeBreak;
-            // console.log("position: " + $(this).offset().top + " Height: " + $(this).height())
-
-            var eachRowHeight = $(this).offset().top + $(this).height();
-            // console.log("sub: " + eachRowHeight)
-
-            if ((prevRowHeight + eachRowHeight) > maxHeight) {
-                sizeBreak += 1;
-                $(this).before('<div style="page-break-before: always;" ></div>');
-                // $(this).before('<div style="border: 2px solid" ></div>');
-                console.log("add page break before");
-            }
-            console.log("==============================================")
-            prevRowHeight = $(this).height();
-        });
-        window.print()
-        $('#firstDiv').addClass("pt-5")
-        $('#firstDiv').addClass("mt-5")
-        $('#print').removeClass("d-none")
-
-    }
 
     function download() {
         var axios = require('axios');
@@ -254,22 +225,25 @@ export default function ResumeType2(src, options) {
 
             if ((prevRowHeight + eachRowHeight) > maxHeight) {
                 sizeBreak += 1;
-                $(this).before('<div style="page-break-before: always;" ></div><div class="mt-5 pt-3"></div>');
+                $(this).before('<div style="page-break-before: always;" class="break-before"></div><div class="mt-5 pt-3"></div>');
                 // $(this).before('<div style="border: 2px solid" ></div>');
                 console.log("add page break before");
             }
             console.log("==============================================")
             prevRowHeight = $(this).height();
         });
-        var x =  "<html>"+document.getElementsByTagName('html')[0].outerHTML+"</html>";
-let xy="<div class=\"row\">\n" +
-    "\t<div class=\"col-12\">\n" +
-    "\t\t<div class=\"text-right\">\n" +
-    "\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n" +
-    "\t\t</div>\n" +
-    "\t</div>\n" +
-    "</div>"
-console.log(x)
+        var x = "<html>" + document.getElementsByTagName('html')[0].outerHTML + "</html>";
+            // console.log($(this).height());
+            $(".break-before").remove()
+
+        let xy = "<div class=\"row\">\n" +
+        "\t<div class=\"col-12\">\n" +
+        "\t\t<div class=\"text-right\" style=\"text-align:center;padding-top:25px\">\n" +
+        "\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n" +
+        "\t\t</div>\n" +
+        "\t</div>\n" +
+        "</div>"
+        console.log(x)
         var data = JSON.stringify({
             "requestLanguage": "string",
             "entity": "string",
@@ -281,7 +255,10 @@ console.log(x)
             "isStyleSheetInWeb": true,
             "isReadyToDownload": true
         })
-
+        $('header').show()
+        $('footer').show()
+        $('#print').show()
+        $('#firstDiv').addClass("mt-5")
         var config = {
             method: 'post',
             url: generateURL('/VisualOutPutGenerator/GetByteArrayFromHtmlStringViaSelectPdf'),
@@ -293,7 +270,7 @@ console.log(x)
         let information;
         axios(config)
             .then(function (response) {
-                const linkSource = `data:application/pdf;base64,`+response.data;
+                const linkSource = `data:application/pdf;base64,` + response.data;
                 const downloadLink = document.createElement("a");
                 const fileName = "abc.pdf";
                 downloadLink.href = linkSource;
@@ -316,10 +293,7 @@ console.log(x)
 
                 }
             });
-        $('header').show()
-        $('footer').show()
-        $('#print').show()
-        $('#firstDiv').addClass("mt-5")
+
 
     }
 
