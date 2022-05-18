@@ -6,13 +6,21 @@ import * as React from "react";
 import Style from './DashboardParent.module.css'
 
 import SentResumes from "../sentResumes/SentResumes";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {generateURL} from "../../global/Requests";
 import {NotificationManager} from "react-notifications";
+import queryString from "query-string";
+import ProfileImage from '../../../assets/img/default-profile.jpg';
 
 
 export default function Dashboard() {
+    const[user, setUser] = useState();
+    const [language, setLanguage] = useState();
+
+
     useEffect(function (){
+        const url = queryString.parse(window.location.search);
+        setLanguage(url.lang);
         let axios = require('axios');
         axios.defaults.withCredentials = true;
 
@@ -39,7 +47,10 @@ export default function Dashboard() {
         console.log(config_data)
 
         axios(config).then(function (response) {
-            console.log(response.data)
+            let userInfo = JSON.parse(response.data.data.userInfoJson);
+            setUser(userInfo);
+            console.log(userInfo)
+
             // setResumes(response.data.data);
         }).catch(function (error) {
             console.log(error);
@@ -65,12 +76,21 @@ export default function Dashboard() {
                 <div className={"row w-100 change-dir"}>
                     <div className={"col-xl-3 col-12"}>
                         <div className={Style.nav + " p-3"}>
-                            <div className={""}>
+                            <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
-                                    <img className={Style.profileImage}/>
+                                    <img className={Style.profileImage} src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
+                                        : ProfileImage}/>
                                 </div>
-                                <h6 className={Style.profileName + " mt-3"}>سیده مرضیه مهدوی مرتضوی</h6>
-                                <p className={"text-center text-secondary"}>09223763054</p>
+                                { user!== undefined  &&
+                                    <h6 className={Style.profileName + " mt-3"}>
+                                        { language==='fa'  ? user.FirstName + " " + user.LastName :
+                                            user.FirstNameEnglish + " " + user.LastNameEnglish}
+                                    </h6>
+
+                                }
+
+                                <p className={"text-center text-secondary"}>{user !== undefined && user.ResumePhone}</p>
+                                {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
                             </div>
                             <hr/>
                             <ul className={"nav flex-column"}>
