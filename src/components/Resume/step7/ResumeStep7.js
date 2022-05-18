@@ -689,11 +689,13 @@ export default function ResumeStep7() {
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-left mt-3 text-muted">
-                                                                            {value.AreaOfInterestEnglish.Name}
+                                                                            {value.AreaOfInterestEnglish!==null?value.AreaOfInterestEnglish.Name:null}
+
                                                                         </p>
                                                                         :
                                                                         <p className="text-right mt-3 text-muted">
-                                                                            {value.AreaOfInterestPersian.Name}
+                                                                            {value.AreaOfInterestPersian!==null?value.AreaOfInterestPersian.Name:null}
+
                                                                         </p>
                                                                 }
 
@@ -707,11 +709,12 @@ export default function ResumeStep7() {
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-right mt-3 text-muted">
-                                                                            {value.AreaOfInterestPersian.Name}
+                                                                            {value.AreaOfInterestPersian!==null?value.AreaOfInterestPersian.Name:null}
                                                                         </p>
                                                                         :
                                                                         <p className="text-left mt-3 text-muted">
-                                                                            {value.AreaOfInterestEnglish.Name}
+                                                                            {value.AreaOfInterestEnglish!==null?value.AreaOfInterestEnglish.Name:null}
+
                                                                         </p>
                                                                 }
                                                             </div>
