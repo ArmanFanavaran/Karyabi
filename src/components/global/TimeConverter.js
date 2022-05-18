@@ -15,10 +15,10 @@ var moment = require("moment-jalaali");
 //     return shamsi;
 // }
 
-// export function serverTimeToNewsDate(time) {
-//     let shamsi = moment(time, 'YYYY-MM-DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm')
-//     return shamsi;
-// }
+export function serverTimeToNewsDate(time) {
+    let shamsi = moment(time, 'YYYY-MM-DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm')
+    return shamsi;
+}
 //
 // export function datepickerToStandardMildaiDateForServer(date) {
 //     date = date.slice(0, -3);

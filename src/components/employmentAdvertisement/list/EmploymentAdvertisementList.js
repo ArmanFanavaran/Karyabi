@@ -1035,7 +1035,7 @@ export default function EmploymentAdvertisementList() {
     return (
         <main className={Style.main + " text-center"}>
             <div className="container-fluid pb-5">
-                <h3>اخبار</h3>
+                <h3>آگهی‌ها</h3>
                 <div className={Style.hero + " px-5"}>
                     <div className="container">
                         {

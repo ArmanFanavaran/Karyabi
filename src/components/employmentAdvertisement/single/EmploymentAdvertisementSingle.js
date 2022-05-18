@@ -277,7 +277,7 @@ export default function EmploymentAdvertisementSingle() {
 
     return (
         <main className={Style.main}>
-            <div className="w-100">
+            <div className="w-100 mb-5">
 
                 <div className={"container"}>
                     <div className={"row justify-content-center change-dir"}>

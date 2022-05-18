@@ -93,6 +93,7 @@ let Routes = {
     //     "route": "/staff/single"
     // },
     /************** Profile **************/
+
     "profileSingle": {
         "des": "پروفایل",
         "enDes": "profile Single",
@@ -107,6 +108,18 @@ let Routes = {
         "des": "عکس پروفایل",
         "enDes": "profile picture",
         "route": "/profile/edit/pic"
+    },
+
+    /************* Dashboard **************/
+    "DashboardParent": {
+        "des": "داشبورد",
+        "enDes": "dashboard",
+        "route": "/dashboard"
+    },
+    "sentResumes": {
+        "des": "رزومه‌های ارسال شده",
+        "enDes": "Sent Resumes",
+        "route": "/dashboard/sentResumes"
     },
 
     /************** Change Password **************/

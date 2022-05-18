@@ -156,7 +156,7 @@ export default function Navbar() {
                                         </a>
                                         <div className={Style.dropdownContent + "  text-center"} aria-labelledby="navbarDropdownProfile">
                                             <Link to={{
-                                                pathname: getRoutesItems().profileSingle.route,
+                                                pathname: getRoutesItems().DashboardParent.route + "/",
                                                 search: "lang=" + sp.get("lang"),
                                             }}
                                                   className={" dropdown-item text-dark"}>{t("global.navbar.profileSingle")}

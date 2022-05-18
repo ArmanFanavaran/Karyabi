@@ -1,0 +1,21 @@
+.pageTitle {
+    color: #653394;
+}
+.table tbody{
+    height: 100%;
+    overflow-y: auto;
+}
+.editBtn img {
+    width: 15px;
+    height: 15px;
+}
+.tableBtn {
+    width: fit-content;
+}
+.editBtn {
+    width: fit-content;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
