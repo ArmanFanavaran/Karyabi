@@ -82,6 +82,7 @@ export function initLanguage() {
     } else {
         const queryStringes = queryString.parse(window.location.search);
         const sp = new URLSearchParams(queryStringes);
+        // TODO End Slash OF Dashboard URL
         sp.set("lang", "fa");
         localStorage.setItem("language", "fa");
         window.location.search = sp.toString();

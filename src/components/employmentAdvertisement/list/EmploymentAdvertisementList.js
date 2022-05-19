@@ -40,6 +40,8 @@ export default function EmploymentAdvertisementList() {
     const [t, i18n] = useTranslation('main');
 
 
+
+
     /**************** Filter ***********/
     const [isFullTime, setIsFullTime] = useState(false);
     const [isPartTime, setIsPartTime] = useState(false);
@@ -87,6 +89,11 @@ export default function EmploymentAdvertisementList() {
     /**************** Gender ***********/
     const [genderList, setGenderList] = useState([]);
     const [gender, setGender] = useState([]);
+
+    const filters = [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
+        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
+        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
+        isRemote,isPartTime,isFullTime]
 
     const [selectedEntity, setSelectedEntity] = useState([]);
     const [order, setOrder] = useState("");
@@ -789,7 +796,10 @@ export default function EmploymentAdvertisementList() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [isFreeFoodPossible,isCommutingServicePossible,isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible])
+    }, [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
+        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
+        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
+        isRemote,isPartTime,isFullTime])
 
     const onGridClick = () => {
         setIsGrid(true);
@@ -2351,6 +2361,7 @@ export default function EmploymentAdvertisementList() {
 
                                 <InfiniteScroll
                                     dataLength={newsList.length}
+                                    scrollThreshold={0.4}
                                     next={getNewsList}
                                     hasMore={true}
                                     loader={<h4>Loading...</h4>}
@@ -2426,67 +2437,75 @@ export default function EmploymentAdvertisementList() {
                             </div>
                             :
                             <div className={Style2["news-list"]}>
-                                <div className="row change-dir px-2">
-                                    {
-                                        newsList.length > 0 ?
-                                            newsList.map((item, index) => (
-                                                <div
-                                                    className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
-                                                    <Link
-                                                        to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
-                                                            } :
-                                                            sp.get("lang") === "fa" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
-                                                            } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
+                                <InfiniteScroll
+                                    dataLength={newsList.length}
+                                    scrollThreshold={0.4}
+                                    next={getNewsList}
+                                    hasMore={true}
+                                    loader={<h4>Loading...</h4>}
+                                >
+                                    <div className="row change-dir px-2">
+                                        {
+                                            newsList.length > 0 ?
+                                                newsList.map((item, index) => (
+                                                    <div
+                                                        className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
+                                                        <Link
+                                                            to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
+                                                                } :
+                                                                sp.get("lang") === "fa" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
+                                                                } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
 
-                                                            } : sp.get("lang") === "en" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
-                                                            } : null
-                                                        } className={Style.mouse}>
-                                                        <div className={Style2["container-item"] + " container"}>
-                                                            <div className="row">
-                                                                <div className={Style2["news-img"] + " col-12"}>
-                                                                    <img
-                                                                        src={item.company.logo !== null ? item.company.logo : advertisment}
-                                                                        alt={sp.get("lang") === "fa" ?
-                                                                            item.company.name :
-                                                                            item.company.englishName
-                                                                        }
-                                                                        className=""/>
-                                                                </div>
-                                                                <div className={Style2["news-text"] + " col-12 mt-2"}>
-                                                                    <h2 className="change-text">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.jobOffer.title :
-                                                                            item.jobOffer.titleEnglish
-                                                                        }
-                                                                    </h2>
-                                                                    <p className="change-text text-muted">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.company.name :
-                                                                            item.company.englishName
-                                                                        }
-                                                                    </p>
-                                                                    <p className="change-text">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.jobOffer.shortDesc :
-                                                                            item.jobOffer.shortDescEnglish
-                                                                        }
-                                                                    </p>
+                                                                } : sp.get("lang") === "en" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
+                                                                } : null
+                                                            } className={Style.mouse}>
+                                                            <div className={Style2["container-item"] + " container"}>
+                                                                <div className="row">
+                                                                    <div className={Style2["news-img"] + " col-12"}>
+                                                                        <img
+                                                                            src={item.company.logo !== null ? item.company.logo : advertisment}
+                                                                            alt={sp.get("lang") === "fa" ?
+                                                                                item.company.name :
+                                                                                item.company.englishName
+                                                                            }
+                                                                            className=""/>
+                                                                    </div>
+                                                                    <div className={Style2["news-text"] + " col-12 mt-2"}>
+                                                                        <h2 className="change-text">
+                                                                            {sp.get("lang") === "fa" ?
+                                                                                item.jobOffer.title :
+                                                                                item.jobOffer.titleEnglish
+                                                                            }
+                                                                        </h2>
+                                                                        <p className="change-text text-muted">
+                                                                            {sp.get("lang") === "fa" ?
+                                                                                item.company.name :
+                                                                                item.company.englishName
+                                                                            }
+                                                                        </p>
+                                                                        <p className="change-text">
+                                                                            {sp.get("lang") === "fa" ?
+                                                                                item.jobOffer.shortDesc :
+                                                                                item.jobOffer.shortDescEnglish
+                                                                            }
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            )) : null
-                                    }
-                                </div>
+                                                        </Link>
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div></InfiniteScroll>
+
                             </div>
                         }
 

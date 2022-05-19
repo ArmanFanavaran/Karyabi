@@ -11,11 +11,29 @@ import {generateURL} from "../../global/Requests";
 import {NotificationManager} from "react-notifications";
 import queryString from "query-string";
 import ProfileImage from '../../../assets/img/default-profile.jpg';
+import $ from "jquery";
 
 
 export default function Dashboard() {
     const[user, setUser] = useState();
     const [language, setLanguage] = useState();
+
+    /************** Scroll Filter *************/
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > $('#fixed-class').outerHeight()+200) {
+            $('#fixed-class').addClass(Style["fixed-content"])
+            $('#filter').css("max-height", " 90vh ")
+            if( $(this).scrollTop()<= $('#advertisementList').outerHeight()-100){
+                // $('#fixed-class').addClass(Style["fixed-content"])
+                $(Style["fixed-content"]).animate({ scrollTop: $('#fixed-class').height()}, 1000);
+            }
+
+        } else {
+            $('#fixed-class').removeClass(Style["fixed-content"])
+            $('#filter').css("max-height", " unset ")
+
+        }
+    })
 
 
     useEffect(function (){
@@ -75,7 +93,7 @@ export default function Dashboard() {
             <div className={"container my-4"}>
                 <div className={"row w-100 change-dir"}>
                     <div className={"col-xl-3 col-12"}>
-                        <div className={Style.nav + " p-3"}>
+                        <div id={"fixed-class"} className={Style.nav + " p-3"}>
                             <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
                                     <img className={Style.profileImage} src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]

@@ -128,7 +128,7 @@ export default function Routes() {
                     {/****************** Dashboard *****************************/}
 
                     <Route path={"/"} strict={true} exact component={"<div></div>"}/>
-                    <Route path={getRoutesItems().DashboardParent.route + "/*" } strict={true} exact  component={Dashboard}/>
+                    <Route path={getRoutesItems().DashboardParent.route + "/*" }  exact  component={Dashboard}/>
 
 
                 </Controller>

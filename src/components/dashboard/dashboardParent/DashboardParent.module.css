@@ -13,7 +13,8 @@
     border-radius: 4px;
 }
 .nav {
-    height: calc(100vh - 150px);
+    /*height: calc(100vh - 200px);*/
+    height: calc(80vh - 200px);
     width: 100%;
     /*background: #F6F6F6;*/
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
