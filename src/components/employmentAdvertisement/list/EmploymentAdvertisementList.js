@@ -1,9 +1,8 @@
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {generateURL} from "../../global/Requests";
-import Pagination from "react-js-pagination";
 import {Link} from "react-router-dom";
 import advertisment from "./../imgs/advertisment.png"
-import location from "./../imgs/location.png"
 import $ from "jquery"
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -13,17 +12,14 @@ import Style2 from "./employmentAdvertisementList2.module.css"
 import GridIcon from "../imgs/Group 106.png";
 import ListIcon from "../imgs/Group 107.png";
 import Delete from "../imgs/delete.png";
-import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
-import * as React from "react";
 import * as queryString from "query-string";
 import {getRoutesItems} from "../../RoutesList/RoutesList"
 import Modal from "react-modal";
-import {RatingStar} from "rating-star";
 import filterImage from "../imgs/filter.png"
-import addImg from "../../Resume/step5/imgs/add.svg";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 /************ Float button ************/
-import FloatingButtons from 'react-floating-buttons'
 import {useTranslation} from "react-i18next";
 
 
@@ -627,11 +623,31 @@ export default function EmploymentAdvertisementList() {
 
     /************** Get Data *************/
     const getNewsList = () => {
-        /*get news list*/
         console.log("scroll")
-        let size = newsList.length / pageSize;
-        // if()
+
+        let size = count / pageSize;
         setPage(newsList.length)
+
+        let categoryListSelect = [];
+        let provinceListSelect = [];
+        let branchListSelect = [];
+        let genderList = [];
+        let milateryList = [];
+        selectedCategory.map((item, index) => (
+            categoryListSelect.push(item.id)
+        ))
+        selectedProvince.map((item, index) => (
+            provinceListSelect.push(item.id)
+        ))
+        selectedBranches.map((item, index) => (
+            branchListSelect.push(item.id)
+        ))
+        gender.map((item, index) => (
+            genderList.push(item.id)
+        ))
+        selectedMilatery.map((item, index) => (
+            milateryList.push(item.id)
+        ))
         var list_data = JSON.stringify({
             "roleId": 2,
             "page": size + 1,
@@ -639,28 +655,28 @@ export default function EmploymentAdvertisementList() {
             "heights": [200],
             "widths": [200],
             "qualities": [90],
-            "keyword": null,
+            "keyword": keyword,
             "ownerId": 1,
             "owner": "Company",
-            "genderIds": null,
-            "isAdaptiveSalary": false,
-            "minSalaryStatusId": 0,
-            "maxSalaryStatusId": 12,
-            "degreeIds": null,
+            "genderIds": genderList,
+            "isAdaptiveSalary": isAdaptiveSalary,
+            "minSalaryStatusId": parseInt(minSalary[0].id),
+            "maxSalaryStatusId": parseInt(maxSalary[0].id),
+            "degreeIds": branchListSelect,
             "typeId": 1,
-            "provinceIds": null,
-            "militaryStatusIds": null,
-            "categoryIds": null,
-            "isFullTime": false,
-            "isPartTime": false,
-            "isRemote": false,
-            "isInternship": false,
-            "isPromotionPossible": false,
-            "isInsurancePossible": false,
-            "isCoursePossible": false,
-            "isFlexibleWorkTimePossible": false,
-            "isCommutingServicePossible": false,
-            "isFreeFoodPossible": false,
+            "provinceIds": provinceListSelect,
+            "militaryStatusIds": milateryList,
+            "categoryIds": categoryListSelect,
+            "isFullTime": isFullTime,
+            "isPartTime": isPartTime,
+            "isRemote": isRemote,
+            "isInternship": isIntership,
+            "isPromotionPossible": isPremotionPossible,
+            "isInsurancePossible": isInsurancePossible,
+            "isCoursePossible": isCoursePossible,
+            "isFlexibleWorkTimePossible": isFlexibleWorkTimePossible,
+            "isCommutingServicePossible": isCommutingServicePossible,
+            "isFreeFoodPossible": isFreeFoodPossible,
             "sortBye": 0
         });
 
@@ -796,6 +812,37 @@ export default function EmploymentAdvertisementList() {
             .catch(function (error) {
                 console.log(error);
             });
+
+        var count_config = {
+            method: 'post',
+            url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: list_data
+        };
+
+        axios(count_config)
+            .then(function (response) {
+                console.log(response.data)
+                setCount(response.data.data);
+            })
+            .catch(function (error) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i]);
+                        }
+                    });
+
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message);
+                } else {
+                    NotificationManager.error(error.response.data.Message);
+
+                }
+            });
     }, [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
         keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
         isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
@@ -823,7 +870,7 @@ export default function EmploymentAdvertisementList() {
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
-            "roleId": 2,
+            "roleId": 5,
             "page": 1,
             "pageSize": 6,
             "heights": [200],
@@ -967,30 +1014,74 @@ export default function EmploymentAdvertisementList() {
         /*get news count*/
 
         // var count_data = JSON.stringify({
-        //     "LookingForEntity": [],
-        //     "SubBranchIds": [],
-        //     "title": "",
-        //     "shortDescSearch": "",
-        //     "orderBy": "",
-        //     "pageSize": pageSize
+        //     "roleId": 2,
+        //     "page": 1,
+        //     "pageSize": 50,
+        //     "heights": [
+        //         200
+        //     ],
+        //     "widths": [
+        //         200
+        //     ],
+        //     "qualities": [
+        //         90
+        //     ],
+        //     "keyword": null,
+        //     "ownerId": 1,
+        //     "owner": "Company",
+        //     "genderIds": null,
+        //     "isAdaptiveSalary": false,
+        //     "minSalaryStatusId": 0,
+        //     "maxSalaryStatusId": 12,
+        //     "degreeIds": null,
+        //     "typeId": 1,
+        //     "provinceIds": null,
+        //     "militaryStatusIds": null,
+        //     "categoryIds": null,
+        //     "isFullTime": false,
+        //     "isPartTime": false,
+        //     "isRemote": false,
+        //     "isInternship": false,
+        //     "isPromotionPossible": false,
+        //     "isInsurancePossible": false,
+        //     "isCoursePossible": false,
+        //     "isFlexibleWorkTimePossible": false,
+        //     "isCommutingServicePossible": false,
+        //     "isFreeFoodPossible": false,
+        //     "sortBye": 0,
+        //
         // });
-        //
-        // var count_config = {
-        //     method: 'post',
-        //     url: generateURL("News/GetNewsListCountClientSide"),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     data: count_data
-        // };
-        //
-        // axios(count_config)
-        //     .then(function (response) {
-        //         setCount(response.data.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+
+        var count_config = {
+            method: 'post',
+            url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: list_data
+        };
+
+        axios(count_config)
+            .then(function (response) {
+                console.log(response.data)
+                setCount(response.data.data);
+            })
+            .catch(function (error) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i]);
+                        }
+                    });
+
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message);
+                } else {
+                    NotificationManager.error(error.response.data.Message);
+
+                }
+            });
 
 
         /* get entity filter*/
@@ -2517,6 +2608,7 @@ export default function EmploymentAdvertisementList() {
                 <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>
+            <NotificationContainer/>
         </main>
     )
 }
