@@ -21,6 +21,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 /************ Float button ************/
 import {useTranslation} from "react-i18next";
+import {serverTimeToDaysAgo} from "../../global/TimeConverter";
 
 
 var axios = require('axios');
@@ -917,6 +918,7 @@ export default function EmploymentAdvertisementList() {
                 //     latest.push(data[i]);
                 // }
                 // setLastNews(latest);
+                console.log(response.data.data)
             })
             .catch(function (error) {
                 console.log(error);
@@ -1137,44 +1139,7 @@ export default function EmploymentAdvertisementList() {
         <main className={Style.main + " text-center"}>
             <div className="container-fluid pb-5">
                 <h3>آگهی‌ها</h3>
-                <div className={Style.hero + " px-5"}>
-                    <div className="container">
-                        {
-                            lastNews.length > 0 ?
-                                <div className="row d-flex justify-content-center align-items-center">
-                                    <div className="col-lg-6 pt-lg-4">
-                                        <img src={lastNews[0].defImgSource} alt="" className="w-100"/>
-                                    </div>
-                                    <div className="col-lg-6 text-right">
-                                        {
-                                            lastNews.map((item, index) => (
-                                                <div
-                                                    className={Style["importent-news"] + " row py-2 d-flex justify-content-center align-items-center"}>
-                                                    <div className="col-md-3 p-md-0 p-2">
-                                                        <img src={item.defImgSource} alt="" className="rounded"/>
-                                                    </div>
-                                                    <div className="col-md-9 p-md-0 p-2">
-                                                        <Link to={{
-                                                            pathname: "/news/single",
-                                                            search: "id=" + item.id + "&" + "entity=" + item.entity + "&" + "title=" + item.title
-                                                        }}>
-                                                            <p className="pr-md-4"><b>{item.title}</b>
-                                                                <br/>{item.shortDesc}
-                                                            </p>
-                                                        </Link>
 
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
-
-                                    </div>
-
-                                </div> : null
-                        }
-
-                    </div>
-                </div>
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <Modal
@@ -2504,17 +2469,25 @@ export default function EmploymentAdvertisementList() {
                                                                                 item.jobOffer.titleEnglish
                                                                             }
                                                                         </h6>
-                                                                        <p className={'change-text text-muted'}>
+                                                                        <p className={'change-text text-muted d-flex change-dir justify-content-between'}>
                                                                             {sp.get("lang") === "fa" ?
                                                                                 item.company.name :
                                                                                 item.company.englishName
                                                                             }
                                                                         </p>
-                                                                        <p className="change-text">
-                                                                            {sp.get("lang") === "fa" ?
-                                                                                item.jobOffer.shortDesc :
-                                                                                item.jobOffer.shortDescEnglish
-                                                                            }
+                                                                        <p className="change-text d-flex change-dir">
+                                                                            <span className={Style.locationSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                }
+                                                                            </span>
+                                                                            <span className={Style.dateSpan + " mx-2"}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                            </span>
+
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -2582,11 +2555,19 @@ export default function EmploymentAdvertisementList() {
                                                                                 item.company.englishName
                                                                             }
                                                                         </p>
-                                                                        <p className="change-text">
-                                                                            {sp.get("lang") === "fa" ?
-                                                                                item.jobOffer.shortDesc :
-                                                                                item.jobOffer.shortDescEnglish
-                                                                            }
+                                                                        <p className="change-text d-flex change-dir justify-content-between mt-3 pb-3">
+                                                                            <span className={Style.locationSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                }
+                                                                            </span>
+                                                                            <span className={Style.dateSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                            </span>
+
                                                                         </p>
                                                                     </div>
                                                                 </div>
