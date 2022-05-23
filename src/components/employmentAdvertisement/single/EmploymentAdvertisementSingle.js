@@ -16,12 +16,14 @@ import {getResumeTemplates} from "../../global/resume/ResumeTemplates";
 import {getResumeColors} from "../../global/resume/ResumeColors";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {useTranslation} from "react-i18next";
 
 
 
 
 export default function EmploymentAdvertisementSingle() {
-    const history = useHistory();
+    const [t, i18n] = useTranslation('main');
+
     const [accessExpire, setAccessExpire] = useState();
 
 
@@ -40,6 +42,10 @@ export default function EmploymentAdvertisementSingle() {
     const [jobSkills, setJobSkills] = useState([]);
     const [gender, setGender] = useState({fa: "", eng:""});
     const [advertisementId, setAdvertisementId] = useState();
+    const [militaryStatus, setMilitaryStatus] = useState([]);
+    const [advantages, setAdvantages] = useState([]);
+    const [cooperationTypes, setCooperationTypes] = useState([]);
+
 
     /* Modal */
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -231,6 +237,7 @@ export default function EmploymentAdvertisementSingle() {
             .then(function (response) {
                 let data = response.data.data;
                 console.log(data);
+                // setJobOffer(data.jobOffer)
                 setCompanyName({fa:data.company.name, eng:data.company.englishName});
                 setCompanyDescription({fa:data.company.introduction, eng:data.company.introductionEnglish});
                 setCompanyShortDesc({fa:data.company.companyCategory.name, eng:data.company.companyCategory.englishName});
@@ -259,7 +266,44 @@ export default function EmploymentAdvertisementSingle() {
                     skills_array.push({fa:item.AreaOfInterestPersian.Name, eng:item.AreaOfInterestEnglish.Name});
                 })
                 setJobSkills(skills_array);
-                console.log(skills_array)
+
+                let military_array = [];
+                if (data.jobOffer.miltaryStatus1Json !== "")
+                    military_array.push(JSON.parse(data.jobOffer.miltaryStatus1Json));
+                if (data.jobOffer.miltaryStatus2Json !== "")
+                    military_array.push(JSON.parse(data.jobOffer.miltaryStatus2Json));
+                if (data.jobOffer.miltaryStatus3Json !== "")
+                    military_array.push(JSON.parse(data.jobOffer.miltaryStatus3Json));
+                setMilitaryStatus(military_array);
+
+                let advantages_array = [];
+                if (data.jobOffer.isPromotionPossible)
+                    advantages_array.push({fa:"امکان ترفیع شغلی", eng:"Promotion possible"});
+                if (data.jobOffer.isInsurancePossible)
+                    advantages_array.push({fa:"بیمه", eng:"Insurance possible"});
+                if (data.jobOffer.isCoursePossible)
+                    advantages_array.push({fa:"برگزاری دوره", eng:"Courses"});
+                if (data.jobOffer.isFlexibleWorkTimePossible)
+                    advantages_array.push({fa:"زمان کاری منعطف", eng:"Flexible work time"});
+                if (data.jobOffer.isCommutingServicePossible)
+                    advantages_array.push({fa:"سرویس رفت و آمد رایگان", eng:"Shuttle service"});
+                if (data.jobOffer.isFreeFoodPossible)
+                    advantages_array.push({fa:"غدا با شرکت", eng:"Free Meal"});
+                setAdvantages(advantages_array);
+
+                let cooperation_array = [];
+                if (data.jobOffer.isFullTime)
+                    cooperation_array.push({fa:"تمام وقت", eng:"Full Time"});
+                if (data.jobOffer.isPartTime)
+                    cooperation_array.push({fa:"پاره وقت", eng:"Part Time"});
+                if (data.jobOffer.isRemote)
+                    cooperation_array.push({fa:"دورکاری", eng:"Remote"});
+                if (data.jobOffer.isInternship)
+                    cooperation_array.push({fa:"کاراموزی", eng:"Internship"});
+                setCooperationTypes(cooperation_array)
+
+
+
 
 
 
@@ -277,26 +321,26 @@ export default function EmploymentAdvertisementSingle() {
 
     return (
         <main className={Style.main}>
-            <div className="w-100 mb-5">
+            <div className="w-100 mb-5 pt-3">
 
                 <div className={"container"}>
                     <div className={"row justify-content-center change-dir"}>
-                        <div className={"col-7 col-xl-2"}>
-                            <img className={Style.companyImg } src={companyLogo}/>
+                        <div className={"col-7 col-xl-2 justify-content-center d-flex"}>
+                            <img className={Style.companyImg  + " mx-auto"} src={companyLogo}/>
                         </div>
                         <div className={"col-xl-10 col-12"}>
                             <div className={"w-100"}>
-                                <h3 className={"  display-block change-text pt-3"}>{companyName.fa} | {companyName.eng}</h3>
-                                <div className={"d-flex w-100 pt-2 row"}>
+                                <h3 className={"mt-2 text-sm-center display-block change-text pt-3"}>{language === 'fa' ?companyName.fa : companyName.eng} </h3>
+                                <div className={"d-flex w-100 pt-2 row justify-content-center justify-content-xl-start"}>
                                     <h6 className={"mx-2"}>{language ==='fa'? companyShortDesc.fa : companyShortDesc.eng}</h6>
-                                    <div className={ " mx-2"}>{jobCapacity} نفر </div>
+                                    <div className={ " mx-2"}>{jobCapacity} {t("employmentAdvertisement.single.person")} </div>
                                     <a className={ " mx-2"} href={"#"}>{websiteLink}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={"container w-100 mt-5"}>
+                <div className={"container w-100 mt-4"}>
                     <div className={"row w-100 change-dir change-text mx-0"}>
                         <div className={ " col-12 col-xl-8 p-2"}>
                             <div className={Style.hero + " p-4"}>
@@ -304,31 +348,59 @@ export default function EmploymentAdvertisementSingle() {
                                 <hr/>
                                 <div className={"row"}>
                                     <div className={"col-6 mt-4"}>
-                                        <div className={Style.jobFieldTitle}>دسته‌بندی شغلی</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.jobCategory")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobCategory.fa : jobCategory.eng}</div>
                                     </div>
                                     <div className={"col-6  mt-4"}>
-                                        <div className={Style.jobFieldTitle}>موقعیت مکانی</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.location")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobLocation.fa : jobLocation.eng}</div>
                                     </div>
                                     <div className={"col-6  mt-4"}>
-                                        <div className={Style.jobFieldTitle}>نوع همکاری</div>
-                                        <div className={Style.jobField + " mt-2"}>فروش و بازاریابی</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.militaryStatus")}</div>
+                                        <div className={"d-flex row w-100 mx-0"}>
+                                            {
+                                                militaryStatus.length > 0 && militaryStatus.map((item, index) => (
+                                                    <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.name : item.englishName}</div>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
                                     <div className={"col-6  mt-4"}>
-                                        <div className={Style.jobFieldTitle}>حقوق</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.cooperationType")}</div>
+                                        <div className={"d-flex row w-100 mx-0"}>
+                                            {
+                                                cooperationTypes.length > 0 && cooperationTypes.map((item, index) => (
+                                                    <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.fa : item.eng}</div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={"col-6  mt-4"}>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.salary")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobSalary.fa : jobSalary.eng}</div>
                                     </div>
                                 </div>
-                                <h5 className={"mt-5"}>شرح موقعیت شغلی</h5>
+                                <h5 className={"mt-5"}>{t("employmentAdvertisement.single.jobDescription")}</h5>
                                 <HtmlComponent className={Style.jobDesc + " mt-4"} val={language ==='fa'? jobDescription.fa : jobDescription.eng}/>
 
-                                <h5 className={"mt-5"}>معرفی شرکت</h5>
+                                <div className={"col-12  mt-4 px-0"}>
+                                    {advantages.length > 0 && <h5>{t("employmentAdvertisement.single.advantages")}</h5>}
+                                    <div className={"d-flex row w-100 mx-0"}>
+                                        {
+                                            advantages.length > 0 && advantages.map((item, index) => (
+                                                <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.fa : item.eng}</div>
+                                            ))
+                                        }
+
+                                    </div>
+                                </div>
+
+                                <h5 className={"mt-5"}>{t("employmentAdvertisement.single.companyIntroduction")}</h5>
                                 <HtmlComponent className={Style.jobDesc + " mt-4"} val={language ==='fa'? companyDescription.fa : companyDescription.eng}/>
 
                                 <div className={"row"}>
                                     <div className={"col-6 mt-4"}>
-                                        <div className={Style.jobFieldTitle}>مهارت‌های مورد نیاز</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
                                         <div className={"d-flex row"}>
                                             {
                                                 jobSkills.length > 0 && jobSkills.map((item, index) => (
@@ -339,7 +411,7 @@ export default function EmploymentAdvertisementSingle() {
                                         </div>
                                     </div>
                                     <div className={"col-6  mt-4"}>
-                                        <div className={Style.jobFieldTitle}>جنسیت</div>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.gender")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? gender.fa : gender.eng}</div>
                                     </div>
 
@@ -348,8 +420,8 @@ export default function EmploymentAdvertisementSingle() {
                         </div>
                         <div className={ " col-12 col-xl-4 p-2"}>
                             <div className={"card w-100 p-4 " + Style.modalParent}>
-                                <h5 className={"text-center "}>همین حالا شروع کنید</h5>
-                                <button className={Style.shareResumeBtn + " py-2 mt-4"} onClick={onOpenModal}>ارسال رزومه</button>
+                                <h5 className={"text-center "}>{t("employmentAdvertisement.single.joinNow")}</h5>
+                                <button className={Style.shareResumeBtn + " py-2 mt-4"} onClick={onOpenModal}>{t("employmentAdvertisement.single.sendResume")}</button>
                                 <Modal
                                     isOpen={isModalOpen}
                                     // onAfterOpen={afterOpenModal}

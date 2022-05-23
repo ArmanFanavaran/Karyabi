@@ -447,7 +447,21 @@
       "minSalary": "حداقل حقوق",
       "maxSalary": "حداکثر حقوق",
       "consensusSalary": "حقوق توافقی"
-
+    },
+    "single": {
+      "person": "نفر",
+      "jobCategory": "دسته‌بندی شغلی",
+      "location": "موقعیت مکانی",
+      "militaryStatus": "وضعیت نظام وظیفه",
+      "cooperationType": "نوع همکاری",
+      "salary": "حقوق",
+      "jobDescription": "شرح موقعیت شغلی",
+      "advantages": "مزایا",
+      "companyIntroduction": "معرفی شرکت",
+      "neededSkills": "مهارت‌های مورد نیاز",
+      "gender": "جنسیت",
+      "joinNow": "همین حالا شروع کنید",
+      "sendResume": "ارسال رزومه"
     }
   }
 }

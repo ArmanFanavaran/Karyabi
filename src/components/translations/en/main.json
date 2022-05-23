@@ -454,6 +454,21 @@
       "consensusSalary": "Consensus Salary"
 
 
+    },
+    "single": {
+      "person": "person",
+      "jobCategory": "Job Category",
+      "location": "Location",
+      "militaryStatus": "Military Status",
+      "cooperationType": "Cooperation Type",
+      "salary": "Salary",
+      "jobDescription": "Job Description",
+      "advantages": "Advantages",
+      "companyIntroduction": "Company Introduction",
+      "neededSkills": "Needed Skills",
+      "gender": "Gender",
+      "joinNow": "Join Now",
+      "sendResume": "Send Resume"
     }
   }
 }
