@@ -6,7 +6,7 @@ import Style from "./employmentAdvertisementSingle.module.css";
 import {generateURL} from "../../global/Requests";
 import HtmlComponent from "../../global/EditorToHTML";
 import CloseIcon from "../imgs/cancel.png";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import * as $ from 'jquery';
 import {isAccessTokenExpired} from "../../authentication/Helper/Auth";
 import {RatingStar} from "rating-star";
@@ -17,11 +17,20 @@ import {getResumeColors} from "../../global/resume/ResumeColors";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {useTranslation} from "react-i18next";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion';
+import {getRoutesItems} from "../../RoutesList/RoutesList";
 
 
 
 
 export default function EmploymentAdvertisementSingle() {
+    const history = useHistory();
     const [t, i18n] = useTranslation('main');
 
     const [accessExpire, setAccessExpire] = useState();
@@ -59,8 +68,23 @@ export default function EmploymentAdvertisementSingle() {
     const resumeColors = getResumeColors();
     const modalStyle = {
         content: {
-            inset: "110px 20% auto 20%",
-            direction: "rtl"
+            direction: "rtl",
+            top: '56%',
+            left: '50%',
+            width: '90%',
+            maxWidth: '700px',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            zIndex: '1',
+            borderRadius: '15px',
+            padding: '20px',
+            // marginTop:'30px',
+            overflowY: 'auto',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#6969dd #e0e0e0',
+            maxHeight: '85vh',
+            transform: 'translate(-50%, -50%)',
         }
 
     }
@@ -106,9 +130,9 @@ export default function EmploymentAdvertisementSingle() {
         $("#step0_submit").removeClass("d-none");
     }
 
-    const onTemplateSelect = (id) => {
-        setTemplateId(id);
-        console.log(id)
+    const onTemplateSelect = (category, template) => {
+        setTemplateId(template);
+        setResumeCatId(category);
         $("#step1_submit").addClass("d-block");
         $("#step1_submit").removeClass("d-none");
     }
@@ -120,12 +144,6 @@ export default function EmploymentAdvertisementSingle() {
         $("#step2_submit").addClass("d-block");
         $("#step2_submit").removeClass("d-none");
 
-    }
-
-    const onselectResumeCat = (e) => {
-        setResumeCatId(parseInt(e.target.value));
-        $("#step3_submit").addClass("d-block");
-        $("#step3_submit").removeClass("d-none");
     }
 
     const submitModal = () => {
@@ -149,6 +167,7 @@ export default function EmploymentAdvertisementSingle() {
             },
             data : JSON.stringify(data)
         };
+        console.log(data)
         axios(config).then(function (response) {
             console.log(response.data)
             NotificationManager.success(response.data.message);
@@ -160,10 +179,10 @@ export default function EmploymentAdvertisementSingle() {
             $("#step1_submit").removeClass("d-block");
             $("#step2_submit").addClass("d-none");
             $("#step2_submit").removeClass("d-block");
-            $("#step3_submit").addClass("d-none");
-            $("#step3_submit").removeClass("d-block");
 
-            NotificationManager.success(response.data.message);
+            NotificationManager.success(response.data.message, "", 2000);
+
+            history.push(getRoutesItems().sentResumes.route + "/");
 
 
         }).catch(function (error) {
@@ -173,14 +192,15 @@ export default function EmploymentAdvertisementSingle() {
             if (errors != null) {
                 Object.keys(errors).map((key, i) => {
                     for (var i = 0; i < errors[key].length; i++) {
-                        NotificationManager.error(errors[key][i]);
+                        NotificationManager.error(errors[key][i], "", 2000);
                     }
                 });
 
             } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                NotificationManager.error(error.response.data.message);
+                NotificationManager.error(error.response.data.message , "", 2000);
             } else {
-                NotificationManager.error(error.response.data.Message);
+                NotificationManager.error(error.response.data.Message, "", 2000);
+                history.push(getRoutesItems().sentResumes.route + "/")
 
             }
         });
@@ -302,18 +322,10 @@ export default function EmploymentAdvertisementSingle() {
                     cooperation_array.push({fa:"کاراموزی", eng:"Internship"});
                 setCooperationTypes(cooperation_array)
 
-
-
-
-
-
-
-
             })
             .catch(function (error) {
                 console.log(error);
             });
-
 
         setAccessExpire(!isAccessTokenExpired())
 
@@ -465,16 +477,41 @@ export default function EmploymentAdvertisementSingle() {
                                                     <div>
                                                         <div className="modal-body">
                                                             <h6 className={"text-right my-4"}>انتخاب قالب</h6>
-                                                            <div className={"row w-100"}>
-                                                                {
-                                                                    resumeTemplates.map((item, index) => (
-                                                                        <div className={"col-6 col-xl-3"}>
-                                                                            <img id={"template_" + item.id} className={item.id === templateId ? Style.resumeTemplateImage + " " + Style.focusedTemplate : Style.resumeTemplateImage} onClick={()=> {onTemplateSelect(item.id)}}/>
-                                                                        </div>
-                                                                    ))
-                                                                }
+
+                                                            <div className={Style.templatesContainer}>
+                                                                <Accordion allowZeroExpanded>
+                                                                    {resumeTemplates.map((category) => (
+                                                                        <AccordionItem key={category.id}>
+                                                                            <AccordionItemHeading>
+                                                                                <AccordionItemButton>
+                                                                                    <h6 className={"change-text py-2 px-3 " + Style.categoryTitle}>{language === 'fa' ? category.categoryName  : category.categoryNameEng}</h6>
+                                                                                </AccordionItemButton>
+                                                                            </AccordionItemHeading>
+                                                                            <AccordionItemPanel>
+                                                                                <div className={"row w-100 mb-4"}>
+                                                                                    {
+                                                                                        category.templates.map((item, index) => (
+                                                                                            <div
+                                                                                                className={"col-12 col-xl-3 my-3"}>
+                                                                                                <div>{category.id}</div>
+                                                                                                <img
+                                                                                                    id={"template_" + item.id}
+                                                                                                    className={item.id === templateId ? Style.resumeTemplateImage + " " + Style.focusedTemplate : Style.resumeTemplateImage}
+                                                                                                    onClick={() => {
+                                                                                                        onTemplateSelect(category.id , item.id)
+                                                                                                    }}/>
+                                                                                            </div>
+                                                                                        ))
+                                                                                    }
+
+                                                                                </div>
+                                                                            </AccordionItemPanel>
+                                                                        </AccordionItem>
+                                                                    ))}
+                                                                </Accordion>
 
                                                             </div>
+
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary"
@@ -521,28 +558,6 @@ export default function EmploymentAdvertisementSingle() {
                                                     { modalStep === 3 &&
                                                     <div>
                                                         <div className="modal-body">
-                                                            <h6 className={"text-right my-4"}>انتخاب دسته بندی رزومه</h6>
-                                                            <select className={"form-control mb-4"} onChange={onselectResumeCat}>
-                                                                <option selected={true} disabled={true} >انتخاب ...</option>
-                                                                <option value={0} >کاراموزی</option>
-                                                                <option value={1} >دانشجویی</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-secondary"
-                                                                    data-dismiss="modal"
-                                                                    onClick={function () {
-                                                                        if (modalStep !== 0)
-                                                                            setModalStep(modalStep-1)
-                                                                    }}>قبلی
-                                                            </button>
-                                                            <button type="button" className="btn btn-primary d-none"  id={"step3_submit"}
-                                                                    onClick={() => {setModalStep(modalStep + 1);}}>مرحله بعد</button>
-                                                        </div>
-                                                    </div>}
-                                                    { modalStep === 4 &&
-                                                    <div>
-                                                        <div className="modal-body">
                                                             <h6 className={"text-right my-4"}>افزودن توضیحات</h6>
                                                             <textarea className={"form-control " + Style.resumeDescription} id={"resume_description"}></textarea>
 
@@ -555,7 +570,7 @@ export default function EmploymentAdvertisementSingle() {
                                                                             setModalStep(modalStep-1)
                                                                     }}>قبلی
                                                             </button>
-                                                            <button type="button" className="btn btn-primary"  id={"step4_submit"}
+                                                            <button type="button" className="btn btn-primary"
                                                                     onClick={submitModal}>ارسال رزومه</button>
                                                         </div>
                                                     </div>}
@@ -573,7 +588,7 @@ export default function EmploymentAdvertisementSingle() {
                                                         <button type="button" className="btn btn-secondary"
                                                                 data-dismiss="modal">لغو
                                                         </button>
-                                                        <button type="button" className="btn btn-primary">‌ثبت نام</button>
+                                                        <Link to={getRoutesItems().loginStep1.route} className="btn btn-primary">‌ثبت نام</Link>
                                                     </div>
                                                 </div>
                                         }

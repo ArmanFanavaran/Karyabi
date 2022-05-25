@@ -76,3 +76,12 @@
 .resumeDescription {
     height: 150px !important;
 }
+.templatesContainer {
+    max-height: 40vh;
+    overflow-y: auto;
+}
+.categoryTitle {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #575757;
+}

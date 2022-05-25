@@ -34,6 +34,7 @@
     "query-string": "^7.0.0",
     "rating-star": "^1.1.0",
     "react": "^17.0.2",
+    "react-accessible-accordion": "^5.0.0",
     "react-autosuggest-ui": "^1.0.1",
     "react-countdown": "^2.3.2",
     "react-countdown-circle-timer": "^2.5.3",
