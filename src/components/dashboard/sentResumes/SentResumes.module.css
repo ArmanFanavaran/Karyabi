@@ -19,3 +19,37 @@
     margin-right: auto;
     margin-left: auto;
 }
+.resumeTemplateImage {
+    cursor: pointer;
+    width: 100%;
+    border: 2px solid #8a8a8d;
+    border-radius: 5px;
+    height: 150px;
+}
+.focusedTemplate {
+    border: 4px solid #88d7fc;
+}
+.templateColorBarLeft, .templateColorBarRight {
+    height: 30px;
+}
+.templateColorBarLeft {
+    border-radius: 4px 0 0 4px;
+}
+.templateColorBarRight {
+    border-radius: 0 4px 4px 0;
+}
+.templateColorBarParent {
+    cursor: pointer;
+}
+.resumeDescription {
+    height: 150px !important;
+}
+.templatesContainer {
+    max-height: 40vh;
+    overflow-y: auto;
+}
+.categoryTitle {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #575757;
+}
