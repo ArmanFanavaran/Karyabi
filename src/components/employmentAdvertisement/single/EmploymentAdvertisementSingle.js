@@ -359,15 +359,15 @@ export default function EmploymentAdvertisementSingle() {
                                 <h4 className={Style.jobTitle + " d-block change-text"}>{language ==='fa'? jobTitle.fa : jobTitle.eng}</h4>
                                 <hr/>
                                 <div className={"row"}>
-                                    <div className={"col-6 mt-4"}>
+                                    <div className={"col-12 col-xl-6 mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.jobCategory")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobCategory.fa : jobCategory.eng}</div>
                                     </div>
-                                    <div className={"col-6  mt-4"}>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.location")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobLocation.fa : jobLocation.eng}</div>
                                     </div>
-                                    <div className={"col-6  mt-4"}>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.militaryStatus")}</div>
                                         <div className={"d-flex row w-100 mx-0"}>
                                             {
@@ -377,7 +377,7 @@ export default function EmploymentAdvertisementSingle() {
                                             }
                                         </div>
                                     </div>
-                                    <div className={"col-6  mt-4"}>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.cooperationType")}</div>
                                         <div className={"d-flex row w-100 mx-0"}>
                                             {
@@ -387,7 +387,7 @@ export default function EmploymentAdvertisementSingle() {
                                             }
                                         </div>
                                     </div>
-                                    <div className={"col-6  mt-4"}>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.salary")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobSalary.fa : jobSalary.eng}</div>
                                     </div>
@@ -411,7 +411,7 @@ export default function EmploymentAdvertisementSingle() {
                                 <HtmlComponent className={Style.jobDesc + " mt-4"} val={language ==='fa'? companyDescription.fa : companyDescription.eng}/>
 
                                 <div className={"row"}>
-                                    <div className={"col-6 mt-4"}>
+                                    <div className={"col-12 col-xl-6 mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
                                         <div className={"d-flex row"}>
                                             {
@@ -422,7 +422,7 @@ export default function EmploymentAdvertisementSingle() {
 
                                         </div>
                                     </div>
-                                    <div className={"col-6  mt-4"}>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.gender")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? gender.fa : gender.eng}</div>
                                     </div>

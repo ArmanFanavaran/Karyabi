@@ -18,6 +18,25 @@ export default function SentResumes() {
     const [pageSize, setPageSize] = useState(10);
     const [count, setCount] = useState(0);
 
+    // const tableCols = [
+    //     {
+    //         cellRenderer: ({ columnIndex, column, rowData, rowIndex, className }) => {
+    //             return (
+    //                 <td>
+    //                     {rowData.xxx}
+    //                 </td>
+    //             )
+    //         },
+    //         headerRenderer: ({ columnIndex, column, className }) => {
+    //             return (
+    //                 <tr>
+    //                     {column.name}
+    //                 </tr>
+    //             )
+    //         }
+    //     }
+    // ]
+
     const getMoreResumes = () => {
         console.log("morrrrrrrrrrrrrrrrre")
         let axios = require('axios');
@@ -114,7 +133,7 @@ export default function SentResumes() {
                 90
             ],
             "page": 1,
-            "pageSize": pageSize,
+            "pageSize": 100,
             "jobOfferOwner": "Company",
             "jobOfferOwnerId": 0,
             "jobofferId": 0,
@@ -227,6 +246,7 @@ export default function SentResumes() {
                     }
                     </tbody>
                 </table>
+                {/*<Table/>*/}
             </div>
             <NotificationContainer/>
         </div>

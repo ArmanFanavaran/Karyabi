@@ -31,3 +31,10 @@
     color: #653394;
 
 }
+.filterButton:hover {
+    transform: rotate(360deg);
+
+}
+.filterButton{
+    transition: transform .7s ease-in-out;
+}
