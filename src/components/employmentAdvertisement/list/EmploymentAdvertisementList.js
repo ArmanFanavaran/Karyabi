@@ -1250,7 +1250,7 @@ export default function EmploymentAdvertisementList() {
 
     return (
         <main className={Style.main + " text-center"}>
-            <div className="container-fluid pb-5">
+            <div className="container-fluid pb-5 pt-5">
                 <h3>{t("employmentAdvertisement.title.advertising")}</h3>
 
                 <div className={'row d-xl-none'}>

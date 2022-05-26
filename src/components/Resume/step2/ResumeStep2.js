@@ -155,7 +155,7 @@ export default function ResumeStep2() {
                         </h2>
                         <div className="mx-auto">
                             <div className={"row "+ Style.input}>
-                                <div className={'col-12 col-lg-6 text-center'}>
+                                <div className={'col-12 col-lg-7 text-center'}>
                                     <img className={Style.proImg + " rounded-circle mx-auto"}
                                          src={picFullAddress.length > 0 ? picFullAddress[0] : resume.GenderId === 1 ? profileImgMan : profileImgWoman}/>
                                     <br/>
@@ -170,8 +170,8 @@ export default function ResumeStep2() {
                                            className="d-none"
                                            onChange={onSetPicture}/>
                                 </div>
-                                <div className={'col-12 col-lg-6 d-none d-lg-block embed-responsive-16by9'}>
-                                    <FrameResume/>
+                                <div className={'col-12 col-lg-5 d-none d-lg-block'}>
+                                    <FrameResume step={2}/>
                                 </div>
 
                             </div>

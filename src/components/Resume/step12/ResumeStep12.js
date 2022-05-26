@@ -17,7 +17,7 @@ import addImg from "./imgs/add.svg";
 import minus from "./imgs/minus.svg";
 import Modal from "react-modal";
 import Delete from "./imgs/delete.png";
-
+import trash from "./imgs/trash.svg"
 export default function ResumeStep12() {
     var moment = require("moment-jalaali");
     const history = useHistory();
@@ -951,12 +951,12 @@ export default function ResumeStep12() {
                                         {
                                             resume.UserJobInJobCategories !== undefined && resume.UserJobInJobCategories !==null ?
                                                 resume.UserJobInJobCategories.map((item, i) => (
-                                                    <div className={'col-12 col-md-4 mt-3 '}>
+                                                    <div className={'col-12 col-md-3 mt-3 '}>
                                                         <div className={Style.borderProvince}>
-                                                            <button className={'btn btn-default change-float mx-3'}
+                                                            <button className={'btn btn-default change-float mx-1'}
                                                                     onClick={function () {
                                                                         onDelete(item.Id, "category")
-                                                                    }}>X
+                                                                    }}><img src={trash}/>
                                                             </button>
                                                             {item.JobCategoryString}
                                                         </div>

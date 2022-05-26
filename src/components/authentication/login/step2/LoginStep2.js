@@ -247,17 +247,16 @@ function LoginComponent2() {
                     <div className={Style.inputs}>
                         <input id="password" type="password" className="form-control text-center"
                                placeholder={t("authentication.login.password")}/>
-                        <div className={'change-dir pt-1'}>
+                        <div className={'change-dir '}>
                             <input id={"show_pass"} className={' mx-1'} type="checkbox" onClick={showPass}/>
-                            <label htmlFor={"show_pass"}> {t("authentication.login.show_password")}</label>
+                            <label htmlFor={"show_pass"} style={{fontSize:"14px"}}> {t("authentication.login.show_password")}</label>
                         </div>
                         <button className={Style["btn-login"] + " btn d-block"} type="button"
                                 onClick={onSubmitWithReCAPTCHA}>{t("authentication.login.login")}
                         </button>
-                        <div className={" pt-2"}>
-
+                        <div className={" "}>
                             <button onClick={onResendCode}
-                                className={"btn btn-default change-dir change-text mx-auto"}>{t("authentication.login.forgot_password")}</button>
+                                className={"btn btn-default change-dir change-text mx-auto"} style={{fontSize:"14px"}}>{t("authentication.login.forgot_password")}</button>
                         </div>
                         <div className={'row'}>
                             <div className={'col-12 col-md-4 mx-auto'}>
