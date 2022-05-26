@@ -61,6 +61,9 @@ import EmploymentAdvertisementSingle from "./components/employmentAdvertisement/
 import CoursesList from "./components/courses/list/CoursesList";
 import CoursesSingle from "./components/courses/single/CoursesSingle";
 
+/************** Dashboard **************/
+import Dashboard from "./components/dashboard/dashboardParent/DashboardParent";
+
 
 export default function Routes() {
     return (
@@ -122,8 +125,10 @@ export default function Routes() {
 
                 {/****************** Controller *****************************/}
                 <Controller>
-                    {/****************** Authentication *****************************/}
-                    <Route path="/profile" exact component={ChangePassword}/>
+                    {/****************** Dashboard *****************************/}
+
+                    <Route path={"/"} strict={true} exact component={"<div></div>"}/>
+                    <Route path={getRoutesItems().DashboardParent.route + "/*" }  exact  component={Dashboard}/>
 
 
                 </Controller>

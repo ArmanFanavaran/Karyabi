@@ -22,8 +22,8 @@
 .companyImg {
     border-radius: 3px;
     border: 1px solid #d2d2d2;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
 }
 
 .jobTitle {
@@ -32,7 +32,7 @@
 .jobField {
     background-color: #723fa1;
     color: white;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     border-radius: 3px;
     padding: 5px 10px;
     width: fit-content;
@@ -75,4 +75,13 @@
 }
 .resumeDescription {
     height: 150px !important;
+}
+.templatesContainer {
+    max-height: 40vh;
+    overflow-y: auto;
+}
+.categoryTitle {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #575757;
 }

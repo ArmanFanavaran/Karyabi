@@ -1,9 +1,8 @@
+import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {generateURL} from "../../global/Requests";
-import Pagination from "react-js-pagination";
 import {Link} from "react-router-dom";
 import advertisment from "./../imgs/advertisment.png"
-import location from "./../imgs/location.png"
 import $ from "jquery"
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -13,18 +12,16 @@ import Style2 from "./employmentAdvertisementList2.module.css"
 import GridIcon from "../imgs/Group 106.png";
 import ListIcon from "../imgs/Group 107.png";
 import Delete from "../imgs/delete.png";
-import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
-import * as React from "react";
 import * as queryString from "query-string";
 import {getRoutesItems} from "../../RoutesList/RoutesList"
 import Modal from "react-modal";
-import {RatingStar} from "rating-star";
 import filterImage from "../imgs/filter.png"
-import addImg from "../../Resume/step5/imgs/add.svg";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 /************ Float button ************/
-import FloatingButtons from 'react-floating-buttons'
 import {useTranslation} from "react-i18next";
+import {serverTimeToDaysAgo} from "../../global/TimeConverter";
 
 
 var axios = require('axios');
@@ -38,6 +35,8 @@ export default function EmploymentAdvertisementList() {
     const [entityFilters, setEntityFilters] = useState([]);
     const [orderFilters, setOrderFilters] = useState([]);
     const [t, i18n] = useTranslation('main');
+
+
 
 
     /**************** Filter ***********/
@@ -56,7 +55,7 @@ export default function EmploymentAdvertisementList() {
     /**************** Salary ***********/
     const [salaryList, setSalaryList] = useState([]);
     const [minSalary, setMinSalary] = useState([{id: 0}]);
-    const [maxSalary, setMaxSalary] = useState([{id: 0}]);
+    const [maxSalary, setMaxSalary] = useState([{id: 11}]);
 
     /**************** Keyword ***********/
     const [keyword, setKeyword] = React.useState("");
@@ -69,7 +68,7 @@ export default function EmploymentAdvertisementList() {
     const [searchedMilatery, setSearchedMilatery] = useState([]);
     const [selectedMilatery, setSelectedMilatery] = useState([]);
 
-    /**************** Branch ***********/
+    /**************** Degree ***********/
     const [branchFilters, setBranchFilters] = useState([]);
     const [searchedBranches, setSearchedBranches] = useState([]);
     const [selectedBranches, setSelectedBranches] = useState([]);
@@ -87,6 +86,11 @@ export default function EmploymentAdvertisementList() {
     /**************** Gender ***********/
     const [genderList, setGenderList] = useState([]);
     const [gender, setGender] = useState([]);
+
+    const filters = [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
+        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
+        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
+        isRemote,isPartTime,isFullTime]
 
     const [selectedEntity, setSelectedEntity] = useState([]);
     const [order, setOrder] = useState("");
@@ -620,40 +624,60 @@ export default function EmploymentAdvertisementList() {
 
     /************** Get Data *************/
     const getNewsList = () => {
-        /*get news list*/
         console.log("scroll")
-        let size = newsList.length / pageSize;
-        // if()
-        setPage(newsList.length)
+
+        let lastPage = Math.ceil(count / pageSize); // the last page
+        let next_page = page + 1;
+
+        let categoryListSelect = [];
+        let provinceListSelect = [];
+        let branchListSelect = [];
+        let genderList = [];
+        let milateryList = [];
+        selectedCategory.map((item, index) => (
+            categoryListSelect.push(item.id)
+        ))
+        selectedProvince.map((item, index) => (
+            provinceListSelect.push(item.id)
+        ))
+        selectedBranches.map((item, index) => (
+            branchListSelect.push(item.id)
+        ))
+        // gender.map((item, index) => (
+        //     genderList.push(item.id)
+        // ))
+        selectedMilatery.map((item, index) => (
+            milateryList.push(item.id)
+        ))
         var list_data = JSON.stringify({
             "roleId": 2,
-            "page": size + 1,
+            "page": page + 1,
             "pageSize": pageSize,
             "heights": [200],
             "widths": [200],
             "qualities": [90],
-            "keyword": null,
+            "keyword": keyword,
             "ownerId": 1,
             "owner": "Company",
-            "genderIds": null,
-            "isAdaptiveSalary": false,
-            "minSalaryStatusId": 0,
-            "maxSalaryStatusId": 12,
-            "degreeIds": null,
+            "genderIds": gender,
+            "isAdaptiveSalary": isAdaptiveSalary,
+            "minSalaryStatusId": parseInt(minSalary[0].id),
+            "maxSalaryStatusId": parseInt(maxSalary[0].id),
+            "degreeIds": branchListSelect,
             "typeId": 1,
-            "provinceIds": null,
-            "militaryStatusIds": null,
-            "categoryIds": null,
-            "isFullTime": false,
-            "isPartTime": false,
-            "isRemote": false,
-            "isInternship": false,
-            "isPromotionPossible": false,
-            "isInsurancePossible": false,
-            "isCoursePossible": false,
-            "isFlexibleWorkTimePossible": false,
-            "isCommutingServicePossible": false,
-            "isFreeFoodPossible": false,
+            "provinceIds": provinceListSelect,
+            "militaryStatusIds": milateryList,
+            "categoryIds": categoryListSelect,
+            "isFullTime": isFullTime,
+            "isPartTime": isPartTime,
+            "isRemote": isRemote,
+            "isInternship": isIntership,
+            "isPromotionPossible": isPremotionPossible,
+            "isInsurancePossible": isInsurancePossible,
+            "isCoursePossible": isCoursePossible,
+            "isFlexibleWorkTimePossible": isFlexibleWorkTimePossible,
+            "isCommutingServicePossible": isCommutingServicePossible,
+            "isFreeFoodPossible": isFreeFoodPossible,
             "sortBye": 0
         });
 
@@ -667,28 +691,34 @@ export default function EmploymentAdvertisementList() {
         };
         console.log("list client")
 
-        axios(list_config)
-            .then(function (response) {
-                console.log(response.data.data)
+        if (lastPage >= next_page) {
+            axios(list_config)
+                .then(function (response) {
+                    console.log(response.data.data)
 
-                let data = response.data.data;
-                let newsData = [...newsList]
-                for (let i = 0; i < data.length; i++) {
-                    newsData.push(data[i])
+                    let data = response.data.data;
+                    let newsData = [...newsList]
+                    for (let i = 0; i < data.length; i++) {
+                        newsData.push(data[i])
 
-                }//end for
-                console.log(newsData)
-                setNewsList(newsData)
-                // setNewsList(newsData)
-                // let latest = [];
-                // for (let i = 0; i < data.length && i < 3; i++) {
-                //     latest.push(data[i]);
-                // }
-                // setLastNews(latest);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                    }//end for
+                    console.log(newsData)
+                    setNewsList(newsData)
+                    // setNewsList(newsData)
+                    // let latest = [];
+                    // for (let i = 0; i < data.length && i < 3; i++) {
+                    //     latest.push(data[i]);
+                    // }
+                    // setLastNews(latest);
+
+                    setPage(next_page);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+
 
     }
 
@@ -714,7 +744,7 @@ export default function EmploymentAdvertisementList() {
         let categoryListSelect = [];
         let provinceListSelect = [];
         let branchListSelect = [];
-        let genderList = [];
+        // let genderList = [];
         let milateryList = [];
         selectedCategory.map((item, index) => (
             categoryListSelect.push(item.id)
@@ -725,16 +755,18 @@ export default function EmploymentAdvertisementList() {
         selectedBranches.map((item, index) => (
             branchListSelect.push(item.id)
         ))
-        gender.map((item, index) => (
-            genderList.push(item.id)
-        ))
+        // gender.map((item, index) => (
+        //     genderList.push(item.id)
+        // ))
         selectedMilatery.map((item, index) => (
             milateryList.push(item.id)
         ))
+        console.log("minsalary")
+        console.log(minSalary[0])
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
-            "roleId": 2,
+            "roleId": 5,
             "page": 1,
             "pageSize": 6,
             "heights": [200],
@@ -743,7 +775,7 @@ export default function EmploymentAdvertisementList() {
             "keyword": keyword,
             "ownerId": 1,
             "owner": "Company",
-            "genderIds": genderList,
+            "genderIds": gender,
             "isAdaptiveSalary": isAdaptiveSalary,
             "minSalaryStatusId": parseInt(minSalary[0].id),
             "maxSalaryStatusId": parseInt(maxSalary[0].id),
@@ -778,6 +810,8 @@ export default function EmploymentAdvertisementList() {
             .then(function (response) {
                 console.log(response.data.data)
 
+                setPage(1);
+
                 let data = response.data.data;
                 setNewsList(data)
                 // let latest = [];
@@ -789,7 +823,41 @@ export default function EmploymentAdvertisementList() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [isFreeFoodPossible,isCommutingServicePossible,isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible])
+
+        var count_config = {
+            method: 'post',
+            url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: list_data
+        };
+
+        axios(count_config)
+            .then(function (response) {
+                console.log(response.data)
+                setCount(response.data.data);
+            })
+            .catch(function (error) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i]);
+                        }
+                    });
+
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message);
+                } else {
+                    NotificationManager.error(error.response.data.Message);
+
+                }
+            });
+    }, [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
+        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
+        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
+        isRemote,isPartTime,isFullTime])
 
     const onGridClick = () => {
         setIsGrid(true);
@@ -813,7 +881,7 @@ export default function EmploymentAdvertisementList() {
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
-            "roleId": 2,
+            "roleId": 5,
             "page": 1,
             "pageSize": 6,
             "heights": [200],
@@ -860,6 +928,7 @@ export default function EmploymentAdvertisementList() {
                 //     latest.push(data[i]);
                 // }
                 // setLastNews(latest);
+                console.log(response.data.data)
             })
             .catch(function (error) {
                 console.log(error);
@@ -896,11 +965,11 @@ export default function EmploymentAdvertisementList() {
                 console.log(error);
             });
 
-        /************** Branch List *************/
+        /************** Degree List *************/
         /* Get Branch List */
         var entity_config = {
             method: 'get',
-            url: generateURL("/Side/GetMajorList"),
+            url: generateURL("/Side/GetDegreeList"),
             headers: {}
         };
         axios(entity_config)
@@ -957,30 +1026,74 @@ export default function EmploymentAdvertisementList() {
         /*get news count*/
 
         // var count_data = JSON.stringify({
-        //     "LookingForEntity": [],
-        //     "SubBranchIds": [],
-        //     "title": "",
-        //     "shortDescSearch": "",
-        //     "orderBy": "",
-        //     "pageSize": pageSize
+        //     "roleId": 2,
+        //     "page": 1,
+        //     "pageSize": 50,
+        //     "heights": [
+        //         200
+        //     ],
+        //     "widths": [
+        //         200
+        //     ],
+        //     "qualities": [
+        //         90
+        //     ],
+        //     "keyword": null,
+        //     "ownerId": 1,
+        //     "owner": "Company",
+        //     "genderIds": null,
+        //     "isAdaptiveSalary": false,
+        //     "minSalaryStatusId": 0,
+        //     "maxSalaryStatusId": 12,
+        //     "degreeIds": null,
+        //     "typeId": 1,
+        //     "provinceIds": null,
+        //     "militaryStatusIds": null,
+        //     "categoryIds": null,
+        //     "isFullTime": false,
+        //     "isPartTime": false,
+        //     "isRemote": false,
+        //     "isInternship": false,
+        //     "isPromotionPossible": false,
+        //     "isInsurancePossible": false,
+        //     "isCoursePossible": false,
+        //     "isFlexibleWorkTimePossible": false,
+        //     "isCommutingServicePossible": false,
+        //     "isFreeFoodPossible": false,
+        //     "sortBye": 0,
+        //
         // });
-        //
-        // var count_config = {
-        //     method: 'post',
-        //     url: generateURL("News/GetNewsListCountClientSide"),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     data: count_data
-        // };
-        //
-        // axios(count_config)
-        //     .then(function (response) {
-        //         setCount(response.data.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+
+        var count_config = {
+            method: 'post',
+            url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: list_data
+        };
+
+        axios(count_config)
+            .then(function (response) {
+                console.log(response.data)
+                setCount(response.data.data);
+            })
+            .catch(function (error) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i]);
+                        }
+                    });
+
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message);
+                } else {
+                    NotificationManager.error(error.response.data.Message);
+
+                }
+            });
 
 
         /* get entity filter*/
@@ -1035,45 +1148,8 @@ export default function EmploymentAdvertisementList() {
     return (
         <main className={Style.main + " text-center"}>
             <div className="container-fluid pb-5">
-                <h3>اخبار</h3>
-                <div className={Style.hero + " px-5"}>
-                    <div className="container">
-                        {
-                            lastNews.length > 0 ?
-                                <div className="row d-flex justify-content-center align-items-center">
-                                    <div className="col-lg-6 pt-lg-4">
-                                        <img src={lastNews[0].defImgSource} alt="" className="w-100"/>
-                                    </div>
-                                    <div className="col-lg-6 text-right">
-                                        {
-                                            lastNews.map((item, index) => (
-                                                <div
-                                                    className={Style["importent-news"] + " row py-2 d-flex justify-content-center align-items-center"}>
-                                                    <div className="col-md-3 p-md-0 p-2">
-                                                        <img src={item.defImgSource} alt="" className="rounded"/>
-                                                    </div>
-                                                    <div className="col-md-9 p-md-0 p-2">
-                                                        <Link to={{
-                                                            pathname: "/news/single",
-                                                            search: "id=" + item.id + "&" + "entity=" + item.entity + "&" + "title=" + item.title
-                                                        }}>
-                                                            <p className="pr-md-4"><b>{item.title}</b>
-                                                                <br/>{item.shortDesc}
-                                                            </p>
-                                                        </Link>
+                <h3>آگهی‌ها</h3>
 
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
-
-                                    </div>
-
-                                </div> : null
-                        }
-
-                    </div>
-                </div>
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <Modal
@@ -1155,9 +1231,9 @@ export default function EmploymentAdvertisementList() {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className={Style["fields-div"] + " my-3"}>
+                                        <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>رشته ها</span>
+                                                <span>مقاطع</span>
                                                 <input type="text" name="" id="" placeholder="جستجو"
                                                        onChange={onSearchBranches}/>
                                             </div>
@@ -1179,6 +1255,24 @@ export default function EmploymentAdvertisementList() {
                                             </div>
                                             <div className={Style["filters-list"] + " collapsible-content-branch"}
                                                  style={collapsibleContentStyle}>
+                                                <div
+                                                    className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
+                                                    <input className="form-check-input branches_select"
+                                                           data-text={sp.get("lang") === "fa" ?
+                                                               "مهم نیست"
+                                                               : "Not Important"
+                                                           } onChange={onBranchEdit}
+                                                           checked={selectedBranches.some(e => e.id === -1)}
+                                                           type="checkbox" value={-1}
+                                                           id={"branch_" + -1}/>
+                                                    <label className="form-check-label px-4"
+                                                           htmlFor={"branch_" + -1}>
+                                                        {sp.get("lang") === "fa" ?
+                                                            "مهم نیست"
+                                                            : "Not Important"
+                                                        }
+                                                    </label>
+                                                </div>
                                                 {
                                                     searchedBranches.length > 0 ?
                                                         searchedBranches.map((item, i) => (
@@ -1440,7 +1534,7 @@ export default function EmploymentAdvertisementList() {
                                             </div>
 
                                         </div>
-                                        <div className={Style["fields-div"] + " my-3"}>
+                                        <div className={Style["fields-div"] +" change-dir change-text"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>جنسیت</span>
                                             </div>
@@ -1450,30 +1544,40 @@ export default function EmploymentAdvertisementList() {
                                                     className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
                                                     <input className="form-check-input milatery_select"
                                                            data-text={sp.get("lang") === "fa" ?
-                                                               "هردو"
-                                                               : "Both"
-                                                           } onChange={function () {
-                                                        if (gender[0].id !== 0) {
-                                                            setGender(
-                                                                [{
-                                                                    id: 0
-                                                                }])
-                                                        } else {
-                                                            setGender(
-                                                                [{
-                                                                    id: -1
-                                                                }])
+                                                               "مهم نیست"
+                                                               : "Not Important"
+                                                           } onChange={function (event) {
+
+                                                        let gender_list = [...gender]
+                                                        if (event.target.checked) { // add value to the array
+                                                            let contains = false;
+                                                            for (let i = 0; i < gender_list.length; i++) {
+                                                                if (gender_list[i].id === 0) {
+                                                                    contains = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if(!contains) gender_list.push(0);
+                                                        }
+                                                        else { //remove value from the array
+                                                            for (let i = 0; i < gender_list.length; i++) {
+                                                                if (gender_list[i].id === 0) {
+                                                                    gender_list.splice(i,1);
+                                                                }
+                                                            }
                                                         }
 
+                                                        setGender(gender_list);
+
                                                     }}
-                                                           checked={gender.some(e => e.id === 0)}
+                                                           checked={gender.some(e => e === 0)}
                                                            type="checkbox" value={0}
                                                            id={"gender_" + 0}/>
                                                     <label className="form-check-label px-4"
                                                            htmlFor={"gender_" + 0}>
                                                         {sp.get("lang") === "fa" ?
-                                                            "هردو"
-                                                            : "Both"
+                                                            "مهم نیست"
+                                                            : "Not Important"
                                                         }
                                                     </label>
                                                 </div>
@@ -1486,21 +1590,32 @@ export default function EmploymentAdvertisementList() {
                                                                        data-text={sp.get("lang") === "fa" ?
                                                                            item.name
                                                                            : item.englishName
-                                                                       } onChange={function () {
-
-                                                                    if (gender[0].id !== item.id) {
-                                                                        setGender(
-                                                                            [{
-                                                                                id: item.id
-                                                                            }])
-                                                                    } else {
-                                                                        setGender(
-                                                                            [{
-                                                                                id: -1
-                                                                            }])
+                                                                       } onChange={function (event) {
+                                                                    console.log("CHECKED HIII");
+                                                                    let gender_list = [...gender]
+                                                                    if (event.target.checked) { // add value to the array
+                                                                        console.log("CHECKED HIII");
+                                                                        let contains = false;
+                                                                        for (let i = 0; i < gender_list.length; i++) {
+                                                                            if (gender_list[i].id === item.id) {
+                                                                                contains = true;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                        if(!contains) gender_list.push(item.id);
                                                                     }
+                                                                    else { //remove value from the array
+                                                                        for (let i = 0; i < gender_list.length; i++) {
+                                                                            if (gender_list[i].id === item.id) {
+                                                                                gender_list.splice(i,1);
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    setGender(gender_list);
+
                                                                 }}
-                                                                       checked={gender.some(e => e.id === item.id)}
+                                                                       checked={gender.some(e => e === item.id)}
                                                                        type="checkbox" value={item.id}
                                                                        id={"gender_" + item.id}/>
                                                                 <label className="form-check-label px-4"
@@ -1565,11 +1680,6 @@ export default function EmploymentAdvertisementList() {
                                                 }
                                                 <label>{t("employmentAdvertisement.list.isRemote")}  </label>
                                             </div>
-                                        </div>
-                                        <div className={Style["fields-div"] + " my-3"}>
-                                            <div className={Style["fields-header"]}>
-                                                <span>{t("employmentAdvertisement.list.selectYourSeniorityLevel")}</span>
-                                            </div>
                                             <div className={'mt-2'}>
                                                 {
                                                     isIntership ?
@@ -1585,8 +1695,28 @@ export default function EmploymentAdvertisementList() {
                                                 <label>{t("employmentAdvertisement.list.isInternship")}  </label>
                                                 <br/>
                                             </div>
-
                                         </div>
+                                        {/*<div className={Style["fields-div"] + " my-3"}>*/}
+                                        {/*    <div className={Style["fields-header"]}>*/}
+                                        {/*        <span>{t("employmentAdvertisement.list.selectYourSeniorityLevel")}</span>*/}
+                                        {/*    </div>*/}
+                                        {/*    <div className={'mt-2'}>*/}
+                                        {/*        {*/}
+                                        {/*            isIntership ?*/}
+                                        {/*                <button className="mx-3 btn btn-primary text-white"*/}
+                                        {/*                        onClick={() => {*/}
+                                        {/*                            setIsIntership(false)*/}
+                                        {/*                        }}><i className="fas fa-toggle-on"></i></button>*/}
+                                        {/*                : <button className=" mx-3 btn btn-secondary text-white"*/}
+                                        {/*                          onClick={() => {*/}
+                                        {/*                              setIsIntership(true)*/}
+                                        {/*                          }}><i className="fas fa-toggle-off"></i></button>*/}
+                                        {/*        }*/}
+                                        {/*        <label>{t("employmentAdvertisement.list.isInternship")}  </label>*/}
+                                        {/*        <br/>*/}
+                                        {/*    </div>*/}
+
+                                        {/*</div>*/}
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <h6 className={' mx-3'}></h6>
                                             <div className={Style["fields-header"]}>
@@ -1783,7 +1913,7 @@ export default function EmploymentAdvertisementList() {
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>رشته ها</span>
+                                        <span>مقاطع</span>
                                         <input type="text" name="" id="" placeholder="جستجو"
                                                onChange={onSearchBranches}/>
                                     </div>
@@ -1795,7 +1925,9 @@ export default function EmploymentAdvertisementList() {
                                                         <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                             <span className={"mx-1 " + Style["pointer"]}
                                                                   onClick={() => {
+                                                                      if (item.id !== null)
                                                                       onRemoveBranchTag(item.id)
+                                                                      else onRemoveBranchTag(-1)
                                                                   }}><img src={Delete} width={10}/></span>
                                                             {item.label}
                                                         </div>
@@ -1815,7 +1947,7 @@ export default function EmploymentAdvertisementList() {
                                                                    item.name
                                                                    : item.englishName
                                                                } onChange={onBranchEdit}
-                                                               checked={selectedBranches.some(e => e.id === item.id)}
+                                                               checked={item.id !== -1 ? selectedBranches.some(e => e.id === item.id): selectedBranches.some(e => e.id === null)}
                                                                type="checkbox" value={item.id}
                                                                id={"branch_" + item.id}/>
                                                         <label className="form-check-label px-4"
@@ -2079,30 +2211,39 @@ export default function EmploymentAdvertisementList() {
                                             className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
                                             <input className="form-check-input milatery_select"
                                                    data-text={sp.get("lang") === "fa" ?
-                                                       "هردو"
-                                                       : "Both"
-                                                   } onChange={function () {
-                                                if (gender[0].id !== 0) {
-                                                    setGender(
-                                                        [{
-                                                            id: 0
-                                                        }])
-                                                } else {
-                                                    setGender(
-                                                        [{
-                                                            id: -1
-                                                        }])
+                                                       "مهم نیست"
+                                                       : "Not Important"
+                                                   } onChange={function (event) {
+                                                let gender_list = [...gender]
+                                                if (event.target.checked) { // add value to the array
+                                                    let contains = false;
+                                                    for (let i = 0; i < gender_list.length; i++) {
+                                                        if (gender_list[i].id === 0) {
+                                                            contains = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if(!contains) gender_list.push(0);
+                                                }
+                                                else { //remove value from the array
+                                                    for (let i = 0; i < gender_list.length; i++) {
+                                                        if (gender_list[i].id === 0) {
+                                                            gender_list.splice(i,1);
+                                                        }
+                                                    }
                                                 }
 
+                                                setGender(gender_list);
+
                                             }}
-                                                   checked={gender.some(e => e.id === 0)}
+                                                    checked={gender.some(e => e === 0)}
                                                    type="checkbox" value={0}
                                                    id={"gender_" + 0}/>
                                             <label className="form-check-label px-4"
                                                    htmlFor={"gender_" + 0}>
                                                 {sp.get("lang") === "fa" ?
-                                                    "هردو"
-                                                    : "Both"
+                                                    "مهم نیست"
+                                                    : "Not Important"
                                                 }
                                             </label>
                                         </div>
@@ -2115,21 +2256,30 @@ export default function EmploymentAdvertisementList() {
                                                                data-text={sp.get("lang") === "fa" ?
                                                                    item.name
                                                                    : item.englishName
-                                                               } onChange={function () {
-
-                                                            if (gender[0].id !== item.id) {
-                                                                setGender(
-                                                                    [{
-                                                                        id: item.id
-                                                                    }])
-                                                            } else {
-                                                                setGender(
-                                                                    [{
-                                                                        id: -1
-                                                                    }])
+                                                               } onChange={function (event) {
+                                                            let gender_list = [...gender]
+                                                            if (event.target.checked) { // add value to the array
+                                                                let contains = false;
+                                                                for (let i = 0; i < gender_list.length; i++) {
+                                                                    if (gender_list[i].id === item.id) {
+                                                                        contains = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                if(!contains) gender_list.push(item.id);
                                                             }
+                                                            else { //remove value from the array
+                                                                for (let i = 0; i < gender_list.length; i++) {
+                                                                    if (gender_list[i].id === item.id) {
+                                                                        gender_list.splice(i,1);
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            setGender(gender_list);
+
                                                         }}
-                                                               checked={gender.some(e => e.id === item.id)}
+                                                               checked={gender.some(e => e === item.id)}
                                                                type="checkbox" value={item.id}
                                                                id={"gender_" + item.id}/>
                                                         <label className="form-check-label px-4"
@@ -2195,12 +2345,6 @@ export default function EmploymentAdvertisementList() {
                                         }
                                         <label>{t("employmentAdvertisement.list.isRemote")}  </label>
                                     </div>
-                                </div>
-                                <div
-                                    className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
-                                    <div className={Style["fields-header"]}>
-                                        <span>{t("employmentAdvertisement.list.selectYourSeniorityLevel")}</span>
-                                    </div>
                                     <div className={'mt-2'}>
                                         {
                                             isIntership ?
@@ -2216,8 +2360,15 @@ export default function EmploymentAdvertisementList() {
                                         <label>{t("employmentAdvertisement.list.isInternship")}  </label>
                                         <br/>
                                     </div>
-
                                 </div>
+                                {/*<div*/}
+                                {/*    className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>*/}
+                                {/*    <div className={Style["fields-header"]}>*/}
+                                {/*        <span>{t("employmentAdvertisement.list.selectYourSeniorityLevel")}</span>*/}
+                                {/*    </div>*/}
+                                {/*    */}
+
+                                {/*</div>*/}
                                 <div
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
                                     <h6 className={' mx-3'}></h6>
@@ -2351,6 +2502,7 @@ export default function EmploymentAdvertisementList() {
 
                                 <InfiniteScroll
                                     dataLength={newsList.length}
+                                    scrollThreshold={0.4}
                                     next={getNewsList}
                                     hasMore={true}
                                     loader={<h4>Loading...</h4>}
@@ -2402,17 +2554,25 @@ export default function EmploymentAdvertisementList() {
                                                                                 item.jobOffer.titleEnglish
                                                                             }
                                                                         </h6>
-                                                                        <p className={'change-text text-muted'}>
+                                                                        <p className={'change-text text-muted d-flex change-dir justify-content-between'}>
                                                                             {sp.get("lang") === "fa" ?
                                                                                 item.company.name :
                                                                                 item.company.englishName
                                                                             }
                                                                         </p>
-                                                                        <p className="change-text">
-                                                                            {sp.get("lang") === "fa" ?
-                                                                                item.jobOffer.shortDesc :
-                                                                                item.jobOffer.shortDescEnglish
-                                                                            }
+                                                                        <p className="change-text d-flex change-dir">
+                                                                            <span className={Style.locationSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                }
+                                                                            </span>
+                                                                            <span className={Style.dateSpan + " mx-2"}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                            </span>
+
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -2426,67 +2586,83 @@ export default function EmploymentAdvertisementList() {
                             </div>
                             :
                             <div className={Style2["news-list"]}>
-                                <div className="row change-dir px-2">
-                                    {
-                                        newsList.length > 0 ?
-                                            newsList.map((item, index) => (
-                                                <div
-                                                    className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
-                                                    <Link
-                                                        to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
-                                                            } :
-                                                            sp.get("lang") === "fa" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
-                                                            } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
+                                <InfiniteScroll
+                                    dataLength={newsList.length}
+                                    scrollThreshold={0.4}
+                                    next={getNewsList}
+                                    hasMore={true}
+                                    loader={<h4>Loading...</h4>}
+                                >
+                                    <div className="row change-dir px-2">
+                                        {
+                                            newsList.length > 0 ?
+                                                newsList.map((item, index) => (
+                                                    <div
+                                                        className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
+                                                        <Link
+                                                            to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title.replace(/\s+/g, '-').toLowerCase()
+                                                                } :
+                                                                sp.get("lang") === "fa" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.title
+                                                                } : item.jobOffer.titleEnglish !== null && sp.get("lang") === "en" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish.replace(/\s+/g, '-').toLowerCase()
 
-                                                            } : sp.get("lang") === "en" ? {
-                                                                pathname: getRoutesItems().employmentAdvertisementSingle.route,
-                                                                search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
-                                                            } : null
-                                                        } className={Style.mouse}>
-                                                        <div className={Style2["container-item"] + " container"}>
-                                                            <div className="row">
-                                                                <div className={Style2["news-img"] + " col-12"}>
-                                                                    <img
-                                                                        src={item.company.logo !== null ? item.company.logo : advertisment}
-                                                                        alt={sp.get("lang") === "fa" ?
-                                                                            item.company.name :
-                                                                            item.company.englishName
-                                                                        }
-                                                                        className=""/>
-                                                                </div>
-                                                                <div className={Style2["news-text"] + " col-12 mt-2"}>
-                                                                    <h2 className="change-text">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.jobOffer.title :
-                                                                            item.jobOffer.titleEnglish
-                                                                        }
-                                                                    </h2>
-                                                                    <p className="change-text text-muted">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.company.name :
-                                                                            item.company.englishName
-                                                                        }
-                                                                    </p>
-                                                                    <p className="change-text">
-                                                                        {sp.get("lang") === "fa" ?
-                                                                            item.jobOffer.shortDesc :
-                                                                            item.jobOffer.shortDescEnglish
-                                                                        }
-                                                                    </p>
+                                                                } : sp.get("lang") === "en" ? {
+                                                                    pathname: getRoutesItems().employmentAdvertisementSingle.route,
+                                                                    search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
+                                                                } : null
+                                                            } className={Style.mouse}>
+                                                            <div className={Style2["container-item"] + " container"}>
+                                                                <div className="row">
+                                                                    <div className={Style2["news-img"] + " col-12"}>
+                                                                        <img
+                                                                            src={item.company.logo !== null ? item.company.logo : advertisment}
+                                                                            alt={sp.get("lang") === "fa" ?
+                                                                                item.company.name :
+                                                                                item.company.englishName
+                                                                            }
+                                                                            className=""/>
+                                                                    </div>
+                                                                    <div className={Style2["news-text"] + " col-12 mt-2"}>
+                                                                        <h2 className="change-text">
+                                                                            {sp.get("lang") === "fa" ?
+                                                                                item.jobOffer.title :
+                                                                                item.jobOffer.titleEnglish
+                                                                            }
+                                                                        </h2>
+                                                                        <p className="change-text text-muted">
+                                                                            {sp.get("lang") === "fa" ?
+                                                                                item.company.name :
+                                                                                item.company.englishName
+                                                                            }
+                                                                        </p>
+                                                                        <p className="change-text d-flex change-dir justify-content-between mt-3 pb-3">
+                                                                            <span className={Style.locationSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                }
+                                                                            </span>
+                                                                            <span className={Style.dateSpan}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                            </span>
+
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            )) : null
-                                    }
-                                </div>
+                                                        </Link>
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div></InfiniteScroll>
+
                             </div>
                         }
 
@@ -2498,6 +2674,7 @@ export default function EmploymentAdvertisementList() {
                 <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>
+            <NotificationContainer/>
         </main>
     )
 }

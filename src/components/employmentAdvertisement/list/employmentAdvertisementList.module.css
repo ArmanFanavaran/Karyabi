@@ -349,3 +349,19 @@
     border-radius: 20px;
     display: inline-block;
 }
+.locationSpan {
+    background-color: #ad6fe5;
+    color: white;
+    border-radius: 3px;
+    font-size: 0.8em;
+    padding: 5px 10px;
+}
+.dateSpan {
+    /*font-weight: bolder;*/
+    background-color: #959595;
+    color: white;
+    border-radius: 3px;
+
+    font-size: 0.8em;
+    padding: 5px 20px;
+}

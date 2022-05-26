@@ -15,10 +15,10 @@ var moment = require("moment-jalaali");
 //     return shamsi;
 // }
 
-// export function serverTimeToNewsDate(time) {
-//     let shamsi = moment(time, 'YYYY-MM-DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm')
-//     return shamsi;
-// }
+export function serverTimeToNewsDate(time) {
+    let shamsi = moment(time, 'YYYY-MM-DD HH:mm:ss').format('jYYYY/jMM/jDD HH:mm')
+    return shamsi;
+}
 //
 // export function datepickerToStandardMildaiDateForServer(date) {
 //     date = date.slice(0, -3);
@@ -67,5 +67,14 @@ var moment = require("moment-jalaali");
 export function convertToMiladi(date){
     let converted = moment('1396/7/6', 'jYYYY/jM/jD').format('YYYY-MM-DD');
 
-    return converted
+    return converted;
+}
+
+export function serverTimeToDaysAgo(date) {
+    let serverTime = new Date(date);
+    let now = new Date();
+    let difference = now - serverTime; // time is milliseconds
+    let days = Math.ceil(difference / (1000 * 3600 * 24));
+    return days;
+
 }
