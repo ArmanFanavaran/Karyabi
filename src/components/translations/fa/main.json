@@ -425,6 +425,9 @@
     "messageUs": "مشکل یا سوال خود را با ما به اشتراک بگذارید. کارشناسان ما در اسرع وقت با شما تماس می گیرند."
   },
   "employmentAdvertisement": {
+    "title": {
+      "advertising": "لیست آگهی ها"
+    },
     "list": {
       "isFullTime": "تمام وقت",
       "isPartTime": "پاره وقت",
@@ -446,7 +449,16 @@
       "salaryStatus": "وضعیت حقوق",
       "minSalary": "حداقل حقوق",
       "maxSalary": "حداکثر حقوق",
-      "consensusSalary": "حقوق توافقی"
+      "consensusSalary": "حقوق توافقی",
+      "gender": "جنسیت",
+      "search": "جستجو",
+      "category": "دسته بندی",
+      "grade": "مقطع تحصیلی",
+      "province": "استان ها",
+      "militaryStatus": "نظام وظیفه",
+      "more": "بیشتر",
+      "less": "کمتر",
+      "sortBy": "مرتب سازی"
     },
     "single": {
       "person": "نفر",
