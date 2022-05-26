@@ -129,7 +129,7 @@ export default function ResumeStep3() {
                         </h2>
                         <div className="mx-auto">
                             <div className={"row "+ Style.input}>
-                                <div className={'col-12 col-lg-6'}>
+                                <div className={'col-12 col-lg-7'}>
                                     <div className={'row'}>
                                         <div className="col-md-6 col-12 py-2 change-dir change-text">
                                             <div className="col-12">
@@ -175,8 +175,8 @@ export default function ResumeStep3() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={'col-12 col-lg-6 d-none d-lg-block embed-responsive-16by9'}>
-                                    <FrameResume/>
+                                <div className={'col-12 col-lg-5 d-none d-lg-block embed-responsive-16by9'}>
+                                    <FrameResume step={3}/>
                                 </div>
 
                             </div>

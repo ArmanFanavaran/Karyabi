@@ -32,11 +32,9 @@ export default function EmploymentAdvertisementList() {
     const [isGrid, setIsGrid] = useState(true);
     const [newsList, setNewsList] = useState([]);
     const [lastNews, setLastNews] = useState([]);
-    const [entityFilters, setEntityFilters] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
     const [orderFilters, setOrderFilters] = useState([]);
     const [t, i18n] = useTranslation('main');
-
-
 
 
     /**************** Filter ***********/
@@ -68,6 +66,11 @@ export default function EmploymentAdvertisementList() {
     const [searchedMilatery, setSearchedMilatery] = useState([]);
     const [selectedMilatery, setSelectedMilatery] = useState([]);
 
+    /**************** Gender ***********/
+    const [genderFilters, setGenderFilters] = useState([]);
+    const [searchedGender, setSearchedGender] = useState([]);
+    const [selectedGender, setSelectedGender] = useState([]);
+
     /**************** Degree ***********/
     const [branchFilters, setBranchFilters] = useState([]);
     const [searchedBranches, setSearchedBranches] = useState([]);
@@ -84,13 +87,13 @@ export default function EmploymentAdvertisementList() {
     const [selectedCategory, setSelectedCategory] = useState([]);
 
     /**************** Gender ***********/
-    const [genderList, setGenderList] = useState([]);
-    const [gender, setGender] = useState([]);
+        // const [genderList, setGenderList] = useState([]);
+        // const [gender, setGender] = useState([]);
 
-    const filters = [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
-        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
-        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
-        isRemote,isPartTime,isFullTime]
+    const filters = [selectedGender, selectedCategory, selectedProvince, selectedBranches, selectedMilatery,
+            keyword, maxSalary, minSalary, isAdaptiveSalary, isFreeFoodPossible, isCommutingServicePossible,
+            isFlexibleWorkTimePossible, isCoursePossible, isInsurancePossible, isPremotionPossible, isIntership,
+            isRemote, isPartTime, isFullTime]
 
     const [selectedEntity, setSelectedEntity] = useState([]);
     const [order, setOrder] = useState("");
@@ -159,7 +162,7 @@ export default function EmploymentAdvertisementList() {
 
     }
 
-    /************** Branch *************/
+    /************** Milatery *************/
     /* change Height when search in branch */
     const onClickMoreMilatery = () => {
         if ($('.collapsible-content-milatery').css("height") === "180px") {
@@ -193,12 +196,11 @@ export default function EmploymentAdvertisementList() {
         } else {
             let searched = [];
             $(milateryFilters).each((indexes, item) => {
-                // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
                     searched.push(item);
                     $(selectedMilatery).each((index, num) => {
                         if (index.id === indexes.id)
-                            $("#branch_" + index.id).prop('checked', true); // Unchecks it
+                            $("#milatery_" + index.id).prop('checked', true); // Unchecks it
                     })
                 } //end if
                 else if (sp.get("lang") === "en" && item.englishName.includes(value)) {
@@ -273,6 +275,119 @@ export default function EmploymentAdvertisementList() {
         setSelectedMilatery(selected_milatery);
     }
 
+    /************** Gender *************/
+    /* change Height when search in branch */
+    const onClickMoreGender = () => {
+        if ($('.collapsible-content-milatery').css("height") === "180px") {
+            $('.collapsible-content-milatery').css("height", "250px")
+            $(this).text("close");
+            if (sp.get("lang") === "fa") {
+                $('#more-milatery').html("بسته")
+                $('#more-milatery').addClass("text-danger").removeClass("text-success")
+            } else {
+                $('#more-milatery').html("close")
+                $('#more-milatery').addClass("text-danger").removeClass("text-success")
+
+            }
+        } else {
+            $('.collapsible-content-branch').css("height", "180px")
+            if (sp.get("lang") === "fa") {
+                $('#more-milatery').html("بیشتر")
+                $('#more-milatery').removeClass("text-danger").addClass("text-success")
+            } else {
+                $('#more-milatery').html("open")
+                $('#more-milatery').removeClass("text-danger").addClass("text-success")
+
+            }
+        }
+    }
+    /* search in branch */
+    const onSearchGender = (event) => {
+        let value = $(event.target).val().trim();
+        if (value === "") {
+            setSearchedGender(genderFilters);
+        } else {
+            let searched = [];
+            $(genderFilters).each((indexes, item) => {
+                if (sp.get("lang") === "fa" && item.name.includes(value)) {
+                    searched.push(item);
+                    $(selectedGender).each((index, num) => {
+                        if (index.id === indexes.id)
+                            $("#gender_" + index.id).prop('checked', true); // Unchecks it
+                    })
+                } //end if
+                else if (sp.get("lang") === "en" && item.englishName.includes(value)) {
+                    searched.push(item);
+                }
+            });
+            setSearchedGender(searched);
+        } //end else
+    }
+    /* checked in branch */
+    const onGenderEdit = (event) => {
+        let id = parseInt($(event.target).val());
+        let checked = $(event.target).prop("checked");
+
+        let selected_gender = [...selectedGender];
+
+        let selected_ids = [];
+        for (let i = 0; i < selected_gender.length; i++) {
+            selected_ids.push(selected_gender[i].id);
+        }
+        /* changing selected array */
+        if (checked) {
+            let label = $(event.target).attr("data-text");
+            let item = {
+                id: id,
+                label: label
+            }
+            selected_gender.push(item);
+            selected_ids.push(id);
+        } else {
+            for (let i = 0; i < selected_gender.length; i++) {
+                if (selected_gender[i].id === id) {
+                    selected_gender.splice(i, 1);
+                    break;
+                } //end if
+            }//end for
+            for (let i = 0; i < selected_ids.length; i++) {
+                if (selected_ids[i].id === id) {
+                    selected_ids.splice(i, 1);
+                    break;
+                } //end if
+            }//end for
+        }//end else
+
+        setSelectedGender(selected_gender);
+
+    }
+    /* Remove Tag in branch */
+    const onRemoveGenderTag = (id) => {
+        let selected_gender = [...selectedGender];
+
+        let selected_ids = [];
+        for (let i = 0; i < selected_gender.length; i++) {
+            selected_ids.push(selected_gender[i].id);
+        }
+
+        for (let i = 0; i < selected_gender.length; i++) {
+            if (selected_gender[i].id === id) {
+                selected_gender.splice(i, 1);
+                break;
+            } //end if
+        }//end for
+        for (let i = 0; i < selected_ids.length; i++) {
+            if (selected_ids[i] === id) {
+                selected_ids.splice(i, 1);
+                break;
+            } //end if
+        }//end for
+
+        $("#gender_" + id).prop('checked', false); // Unchecks it
+
+        setSelectedGender(selected_gender);
+    }
+
     /************** Branch *************/
     /* change Height when search in branch */
     const onClickMoreBranches = () => {
@@ -308,7 +423,6 @@ export default function EmploymentAdvertisementList() {
         } else {
             let searched = [];
             $(branchFilters).each((indexes, item) => {
-                // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
                     searched.push(item);
                     $(selectedBranches).each((index, num) => {
@@ -426,7 +540,6 @@ export default function EmploymentAdvertisementList() {
         } else {
             let searched = [];
             $(provinceFilters).each((indexes, item) => {
-                // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
                     searched.push(item);
                     $(selectedProvince).each((index, num) => {
@@ -543,7 +656,6 @@ export default function EmploymentAdvertisementList() {
         } else {
             let searched = [];
             $(categoryFilters).each((indexes, item) => {
-                // console.log(index)
                 if (sp.get("lang") === "fa" && item.name.includes(value)) {
                     searched.push(item);
                     $(selectedCategory).each((index, num) => {
@@ -624,7 +736,7 @@ export default function EmploymentAdvertisementList() {
 
     /************** Get Data *************/
     const getNewsList = () => {
-        console.log("scroll")
+
 
         let lastPage = Math.ceil(count / pageSize); // the last page
         let next_page = page + 1;
@@ -643,15 +755,15 @@ export default function EmploymentAdvertisementList() {
         selectedBranches.map((item, index) => (
             branchListSelect.push(item.id)
         ))
-        // gender.map((item, index) => (
-        //     genderList.push(item.id)
-        // ))
+        selectedGender.map((item, index) => (
+            genderList.push(item.id)
+        ))
         selectedMilatery.map((item, index) => (
             milateryList.push(item.id)
         ))
         var list_data = JSON.stringify({
             "roleId": 2,
-            "page": page + 1,
+            "page": next_page,
             "pageSize": pageSize,
             "heights": [200],
             "widths": [200],
@@ -659,7 +771,7 @@ export default function EmploymentAdvertisementList() {
             "keyword": keyword,
             "ownerId": 1,
             "owner": "Company",
-            "genderIds": gender,
+            "genderIds": genderList,
             "isAdaptiveSalary": isAdaptiveSalary,
             "minSalaryStatusId": parseInt(minSalary[0].id),
             "maxSalaryStatusId": parseInt(maxSalary[0].id),
@@ -689,12 +801,10 @@ export default function EmploymentAdvertisementList() {
             },
             data: list_data
         };
-        console.log("list client")
+        if (next_page <= lastPage) {
 
-        if (lastPage >= next_page) {
             axios(list_config)
                 .then(function (response) {
-                    console.log(response.data.data)
 
                     let data = response.data.data;
                     let newsData = [...newsList]
@@ -702,7 +812,6 @@ export default function EmploymentAdvertisementList() {
                         newsData.push(data[i])
 
                     }//end for
-                    console.log(newsData)
                     setNewsList(newsData)
                     // setNewsList(newsData)
                     // let latest = [];
@@ -714,22 +823,22 @@ export default function EmploymentAdvertisementList() {
                     setPage(next_page);
                 })
                 .catch(function (error) {
-                    console.log(error);
                 });
+        }else {
+            setHasMore(false)
         }
-
 
 
     }
 
     /************** Scroll Filter *************/
     $(window).scroll(function () {
-        if ($(this).scrollTop() > $('#fixed-class').outerHeight()+200) {
+        if ($(this).scrollTop() > $('#fixed-class').outerHeight() + 200) {
             $('#fixed-class').addClass(Style["fixed-content"])
             $('#filter').css("max-height", " 90vh ")
-            if( $(this).scrollTop()<= $('#advertisementList').outerHeight()-100){
+            if ($(this).scrollTop() <= $('#advertisementList').outerHeight() - 100) {
                 // $('#fixed-class').addClass(Style["fixed-content"])
-                $(Style["fixed-content"]).animate({ scrollTop: $('#fixed-class').height()}, 1000);
+                $(Style["fixed-content"]).animate({scrollTop: $('#fixed-class').height()}, 1000);
             }
 
         } else {
@@ -744,7 +853,7 @@ export default function EmploymentAdvertisementList() {
         let categoryListSelect = [];
         let provinceListSelect = [];
         let branchListSelect = [];
-        // let genderList = [];
+        let genderList = [];
         let milateryList = [];
         selectedCategory.map((item, index) => (
             categoryListSelect.push(item.id)
@@ -755,14 +864,13 @@ export default function EmploymentAdvertisementList() {
         selectedBranches.map((item, index) => (
             branchListSelect.push(item.id)
         ))
-        // gender.map((item, index) => (
-        //     genderList.push(item.id)
-        // ))
+        selectedGender.map((item, index) => (
+            genderList.push(item.id)
+        ))
         selectedMilatery.map((item, index) => (
             milateryList.push(item.id)
         ))
-        console.log("minsalary")
-        console.log(minSalary[0])
+
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
@@ -775,7 +883,7 @@ export default function EmploymentAdvertisementList() {
             "keyword": keyword,
             "ownerId": 1,
             "owner": "Company",
-            "genderIds": gender,
+            "genderIds": genderList,
             "isAdaptiveSalary": isAdaptiveSalary,
             "minSalaryStatusId": parseInt(minSalary[0].id),
             "maxSalaryStatusId": parseInt(maxSalary[0].id),
@@ -796,7 +904,6 @@ export default function EmploymentAdvertisementList() {
             "isFreeFoodPossible": isFreeFoodPossible,
             "sortBye": 0
         });
-        console.log(list_data)
         var list_config = {
             method: 'post',
             url: generateURL("/JobOffer/GetJobOfferListClientSide"),
@@ -805,10 +912,8 @@ export default function EmploymentAdvertisementList() {
             },
             data: list_data
         };
-        console.log("list client")
         axios(list_config)
             .then(function (response) {
-                console.log(response.data.data)
 
                 setPage(1);
 
@@ -821,7 +926,6 @@ export default function EmploymentAdvertisementList() {
                 // setLastNews(latest);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         var count_config = {
@@ -835,7 +939,6 @@ export default function EmploymentAdvertisementList() {
 
         axios(count_config)
             .then(function (response) {
-                console.log(response.data)
                 setCount(response.data.data);
             })
             .catch(function (error) {
@@ -854,10 +957,10 @@ export default function EmploymentAdvertisementList() {
 
                 }
             });
-    }, [gender,selectedCategory, selectedProvince ,selectedBranches, selectedMilatery,
-        keyword,maxSalary,minSalary,isAdaptiveSalary,isFreeFoodPossible,isCommutingServicePossible,
-        isFlexibleWorkTimePossible,isCoursePossible,isInsurancePossible,isPremotionPossible,isIntership,
-        isRemote,isPartTime,isFullTime])
+    }, [selectedGender, selectedCategory, selectedProvince, selectedBranches, selectedMilatery,
+        keyword, maxSalary, minSalary, isAdaptiveSalary, isFreeFoodPossible, isCommutingServicePossible,
+        isFlexibleWorkTimePossible, isCoursePossible, isInsurancePossible, isPremotionPossible, isIntership,
+        isRemote, isPartTime, isFullTime])
 
     const onGridClick = () => {
         setIsGrid(true);
@@ -928,10 +1031,8 @@ export default function EmploymentAdvertisementList() {
                 //     latest.push(data[i]);
                 // }
                 // setLastNews(latest);
-                console.log(response.data.data)
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** Category List *************/
@@ -946,7 +1047,6 @@ export default function EmploymentAdvertisementList() {
                 setSearchedCategory(response.data.data);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** Province List *************/
@@ -962,7 +1062,6 @@ export default function EmploymentAdvertisementList() {
                 setSearchedProvince(response.data.data);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** Degree List *************/
@@ -974,11 +1073,13 @@ export default function EmploymentAdvertisementList() {
         };
         axios(entity_config)
             .then(function (response) {
-                setBranchFilters(response.data.data);
-                setSearchedBranches(response.data.data);
+                let tmp = response.data.data
+                // const newArray = [{id: -1, name: 'مهم نیست', englishName: 'Not important'},...tmp] // [ 4, 3, 2, 1 ]
+                // console.log(newArray)
+                setBranchFilters(tmp);
+                setSearchedBranches(tmp);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** Milatery List *************/
@@ -993,7 +1094,6 @@ export default function EmploymentAdvertisementList() {
                 setSearchedMilatery(response.data.data);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** gender List *************/
@@ -1004,10 +1104,14 @@ export default function EmploymentAdvertisementList() {
         };
         axios(gender_config)
             .then(function (response) {
-                setGenderList(response.data.data);
+                let tmp = response.data.data
+                tmp.push({id: 0, name: 'مهم نیست', englishName: 'Not important'})
+                console.log(response.data.data);
+                setGenderFilters(response.data.data);
+                setSearchedGender(response.data.data);
+
             })
             .catch(function (error) {
-                console.log(error);
             });
 
         /************** salary List *************/
@@ -1021,7 +1125,6 @@ export default function EmploymentAdvertisementList() {
                 setSalaryList(response.data.data);
             })
             .catch(function (error) {
-                console.log(error);
             });
         /*get news count*/
 
@@ -1075,8 +1178,8 @@ export default function EmploymentAdvertisementList() {
 
         axios(count_config)
             .then(function (response) {
-                console.log(response.data)
                 setCount(response.data.data);
+                console.log(response.data.data)
             })
             .catch(function (error) {
                 let errors = error.response.data.errors;
@@ -1147,10 +1250,10 @@ export default function EmploymentAdvertisementList() {
 
     return (
         <main className={Style.main + " text-center"}>
-            <div className="container-fluid pb-5">
-                <h3>آگهی‌ها</h3>
+            <div className="container-fluid pb-5 pt-5">
+                <h3>{t("employmentAdvertisement.title.advertising")}</h3>
 
-                <div className={'row'}>
+                <div className={'row d-xl-none'}>
                     <div className={'col-12'}>
                         <Modal
                             isOpen={modalIsOpen}
@@ -1166,17 +1269,19 @@ export default function EmploymentAdvertisementList() {
                                     <div className={"col-12 change-dir " + Style.input} id={'form'}>
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>جستجو در نتایج</span>
+                                                <span>{t("employmentAdvertisement.list.search")}</span>
                                             </div>
                                             <div className={Style["search-in-results-div"]}>
-                                                <input type="text" onChange={function (e){setKeyword(e.target.value)}} className={Style["search-in-results"]}
-                                                       placeholder="جستجو"/>
+                                                <input type="text" onChange={function (e) {
+                                                    setKeyword(e.target.value)
+                                                }} className={Style["search-in-results"]}
+                                                       placeholder={t("employmentAdvertisement.list.search")}/>
                                             </div>
                                         </div>
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>دسته بندی</span>
-                                                <input type="text" name="" id="" placeholder="جستجو"
+                                                <span>{t("employmentAdvertisement.list.category")}</span>
+                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchCategory}/>
                                             </div>
                                             <div className={'row '}>
@@ -1224,17 +1329,18 @@ export default function EmploymentAdvertisementList() {
                                                 }
 
                                             </div>
-                                            <div className={Style["fields-footer"]}>
-                                                <button className={Style["change-height"] + " btn text-success"}
-                                                        id={'more-category'} onClick={onClickMoreCategory}>بیشتر <img
-                                                    src="assets/imgs/Group (1).png" alt=""/>
-                                                </button>
-                                            </div>
+                                            {/*<div className={Style["fields-footer"]}>*/}
+                                            {/*    <button className={Style["change-height"] + " btn text-success"}*/}
+                                            {/*            id={'more-category'} onClick={onClickMoreCategory}>بیشتر <img*/}
+                                            {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                            {/*    </button>*/}
+                                            {/*</div>*/}
                                         </div>
-                                        <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
+                                        <div
+                                            className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>مقاطع</span>
-                                                <input type="text" name="" id="" placeholder="جستجو"
+                                                <span>{t("employmentAdvertisement.list.grade")}</span>
+                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchBranches}/>
                                             </div>
                                             <div className={'row'}>
@@ -1242,7 +1348,8 @@ export default function EmploymentAdvertisementList() {
                                                     {
                                                         selectedBranches.length > 0 ?
                                                             selectedBranches.map((item, index) => (
-                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                             <span className={"mx-1 " + Style["pointer"]}
                                                                   onClick={() => {
                                                                       onRemoveBranchTag(item.id)
@@ -1255,24 +1362,24 @@ export default function EmploymentAdvertisementList() {
                                             </div>
                                             <div className={Style["filters-list"] + " collapsible-content-branch"}
                                                  style={collapsibleContentStyle}>
-                                                <div
-                                                    className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                    <input className="form-check-input branches_select"
-                                                           data-text={sp.get("lang") === "fa" ?
-                                                               "مهم نیست"
-                                                               : "Not Important"
-                                                           } onChange={onBranchEdit}
-                                                           checked={selectedBranches.some(e => e.id === -1)}
-                                                           type="checkbox" value={-1}
-                                                           id={"branch_" + -1}/>
-                                                    <label className="form-check-label px-4"
-                                                           htmlFor={"branch_" + -1}>
-                                                        {sp.get("lang") === "fa" ?
-                                                            "مهم نیست"
-                                                            : "Not Important"
-                                                        }
-                                                    </label>
-                                                </div>
+                                                {/*<div*/}
+                                                {/*    className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>*/}
+                                                {/*    <input className="form-check-input branches_select"*/}
+                                                {/*           data-text={sp.get("lang") === "fa" ?*/}
+                                                {/*               "مهم نیست"*/}
+                                                {/*               : "Not Important"*/}
+                                                {/*           } onChange={onBranchEdit}*/}
+                                                {/*           checked={selectedBranches.some(e => e.id === -1)}*/}
+                                                {/*           type="checkbox" value={-1}*/}
+                                                {/*           id={"branch_" + -1}/>*/}
+                                                {/*    <label className="form-check-label px-4"*/}
+                                                {/*           htmlFor={"branch_" + -1}>*/}
+                                                {/*        {sp.get("lang") === "fa" ?*/}
+                                                {/*            "مهم نیست"*/}
+                                                {/*            : "Not Important"*/}
+                                                {/*        }*/}
+                                                {/*    </label>*/}
+                                                {/*</div>*/}
                                                 {
                                                     searchedBranches.length > 0 ?
                                                         searchedBranches.map((item, i) => (
@@ -1298,18 +1405,18 @@ export default function EmploymentAdvertisementList() {
                                                 }
 
                                             </div>
-                                            <div className={Style["fields-footer"]}>
-                                                <button id={'more-branch'}
-                                                        className={Style["change-height"] + " btn text-success"}
-                                                        onClick={onClickMoreBranches}>بیشتر <img
-                                                    src="assets/imgs/Group (1).png" alt=""/>
-                                                </button>
-                                            </div>
+                                            {/*<div className={Style["fields-footer"]}>*/}
+                                            {/*    <button id={'more-branch'}*/}
+                                            {/*            className={Style["change-height"] + " btn text-success"}*/}
+                                            {/*            onClick={onClickMoreBranches}>بیشتر <img*/}
+                                            {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                            {/*    </button>*/}
+                                            {/*</div>*/}
                                         </div>
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>استان ها</span>
-                                                <input type="text" name="" id="" placeholder="جستجو"
+                                                <span>{t("employmentAdvertisement.list.province")}</span>
+                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchProvince}/>
                                             </div>
                                             <div className={'row'}>
@@ -1317,7 +1424,8 @@ export default function EmploymentAdvertisementList() {
                                                     {
                                                         selectedProvince.length > 0 ?
                                                             selectedProvince.map((item, index) => (
-                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                             <span className={"mx-1 " + Style["pointer"]}
                                                                   onClick={() => {
                                                                       onRemoveProvinceTag(item.id)
@@ -1357,13 +1465,13 @@ export default function EmploymentAdvertisementList() {
                                                 }
 
                                             </div>
-                                            <div className={Style["fields-footer"]}>
-                                                <button id={'more-province'}
-                                                        className={Style["change-height"] + " btn text-success"}
-                                                        onClick={onClickMoreProvince}>بیشتر <img
-                                                    src="assets/imgs/Group (1).png" alt=""/>
-                                                </button>
-                                            </div>
+                                            {/*<div className={Style["fields-footer"]}>*/}
+                                            {/*    <button id={'more-province'}*/}
+                                            {/*            className={Style["change-height"] + " btn text-success"}*/}
+                                            {/*            onClick={onClickMoreProvince}>بیشتر <img*/}
+                                            {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                            {/*    </button>*/}
+                                            {/*</div>*/}
                                         </div>
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
@@ -1486,8 +1594,8 @@ export default function EmploymentAdvertisementList() {
                                         </div>
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>نظام وظیفه</span>
-                                                <input type="text" name="" id="" placeholder="جستجو"
+                                                <span>{t("employmentAdvertisement.list.militaryStatus")}</span>
+                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchMilatery}/>
                                             </div>
                                             <div className={'row'}>
@@ -1495,7 +1603,8 @@ export default function EmploymentAdvertisementList() {
                                                     {
                                                         selectedMilatery.length > 0 ?
                                                             selectedMilatery.map((item, index) => (
-                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                             <span className={"mx-1 " + Style["pointer"]}
                                                                   onClick={() => {
                                                                       onRemoveMilateryTag(item.id)
@@ -1534,88 +1643,41 @@ export default function EmploymentAdvertisementList() {
                                             </div>
 
                                         </div>
-                                        <div className={Style["fields-div"] +" change-dir change-text"}>
+                                        <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
-                                                <span>جنسیت</span>
+                                                <span>{t("employmentAdvertisement.list.gender")}</span>
+                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                       onChange={onSearchGender}/>
                                             </div>
-                                            <div className={Style["filters-list"] + " " + Style["overflow-hidden"]}
-                                            >
-                                                <div
-                                                    className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                    <input className="form-check-input milatery_select"
-                                                           data-text={sp.get("lang") === "fa" ?
-                                                               "مهم نیست"
-                                                               : "Not Important"
-                                                           } onChange={function (event) {
-
-                                                        let gender_list = [...gender]
-                                                        if (event.target.checked) { // add value to the array
-                                                            let contains = false;
-                                                            for (let i = 0; i < gender_list.length; i++) {
-                                                                if (gender_list[i].id === 0) {
-                                                                    contains = true;
-                                                                    break;
-                                                                }
-                                                            }
-                                                            if(!contains) gender_list.push(0);
-                                                        }
-                                                        else { //remove value from the array
-                                                            for (let i = 0; i < gender_list.length; i++) {
-                                                                if (gender_list[i].id === 0) {
-                                                                    gender_list.splice(i,1);
-                                                                }
-                                                            }
-                                                        }
-
-                                                        setGender(gender_list);
-
-                                                    }}
-                                                           checked={gender.some(e => e === 0)}
-                                                           type="checkbox" value={0}
-                                                           id={"gender_" + 0}/>
-                                                    <label className="form-check-label px-4"
-                                                           htmlFor={"gender_" + 0}>
-                                                        {sp.get("lang") === "fa" ?
-                                                            "مهم نیست"
-                                                            : "Not Important"
-                                                        }
-                                                    </label>
+                                            <div className={'row'}>
+                                                <div className={'col-12'}>
+                                                    {
+                                                        selectedGender.length > 0 ?
+                                                            selectedGender.map((item, index) => (
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveGenderTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                                    {item.label}
+                                                                </div>
+                                                            )) : null
+                                                    }
                                                 </div>
+                                            </div>
+                                            <div className={Style["filters-list"] + " " + Style["overflow-hidden"]}>
                                                 {
-                                                    genderList.length > 0 ?
-                                                        genderList.map((item, i) => (
+                                                    searchedGender.length > 0 ?
+                                                        searchedGender.map((item, i) => (
                                                             <div
                                                                 className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                                <input className="form-check-input milatery_select"
+                                                                <input className="form-check-input gender_select"
                                                                        data-text={sp.get("lang") === "fa" ?
                                                                            item.name
                                                                            : item.englishName
-                                                                       } onChange={function (event) {
-                                                                    console.log("CHECKED HIII");
-                                                                    let gender_list = [...gender]
-                                                                    if (event.target.checked) { // add value to the array
-                                                                        console.log("CHECKED HIII");
-                                                                        let contains = false;
-                                                                        for (let i = 0; i < gender_list.length; i++) {
-                                                                            if (gender_list[i].id === item.id) {
-                                                                                contains = true;
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                        if(!contains) gender_list.push(item.id);
-                                                                    }
-                                                                    else { //remove value from the array
-                                                                        for (let i = 0; i < gender_list.length; i++) {
-                                                                            if (gender_list[i].id === item.id) {
-                                                                                gender_list.splice(i,1);
-                                                                            }
-                                                                        }
-                                                                    }
-
-                                                                    setGender(gender_list);
-
-                                                                }}
-                                                                       checked={gender.some(e => e === item.id)}
+                                                                       } onChange={onGenderEdit}
+                                                                       checked={selectedGender.some(e => e.id === item.id)}
                                                                        type="checkbox" value={item.id}
                                                                        id={"gender_" + item.id}/>
                                                                 <label className="form-check-label px-4"
@@ -1632,6 +1694,7 @@ export default function EmploymentAdvertisementList() {
                                             </div>
 
                                         </div>
+
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.typeOfCooperation")}</span>
@@ -1822,19 +1885,8 @@ export default function EmploymentAdvertisementList() {
                     </div>
                 </div>
                 <div className={Style["sort-box"] + " row mb-5"}>
-                    <div className={Style["sort-items"] + " text-right d-inline col-6 col-md-10"}>
-                        <span>مرتب سازی بر اساس :</span>
-                        <div className="d-lg-inline d-none orders-parent">
-                            {
-                                orderFilters.length > 0 ?
-                                    orderFilters.map((item, i) => (
-                                        <a className="" onClick={onOrderClick}>{item}</a>
-                                    )) : null
-                            }
-                            {/*<a href="" className={Style.active}>جدیدترین</a>*/}
-                        </div>
-                    </div>
-                    <div className={Style["sort-imgs"] + " d-inline text-left col-6 col-md-2"}>
+
+                    <div className={Style["sort-imgs"] + " d-inline change-text-reverse col-12 "}>
                         <img src={GridIcon} alt="" onClick={onGridClick}/><img src={ListIcon} alt=""
                                                                                onClick={onListClick}/>
                     </div>
@@ -1846,17 +1898,19 @@ export default function EmploymentAdvertisementList() {
                             <div className={Style["sticky-content"] + " change-dir-reverse w-100 px-3"} id={'filter'}>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>جستجو در نتایج</span>
+                                        <span>{t("employmentAdvertisement.list.search")}</span>
                                     </div>
                                     <div className={Style["search-in-results-div"]}>
-                                        <input type="text" onChange={function (e){setKeyword(e.target.value)}} className={Style["search-in-results"]}
-                                               placeholder="جستجو"/>
+                                        <input type="text" onChange={function (e) {
+                                            setKeyword(e.target.value)
+                                        }} className={Style["search-in-results"]}
+                                               placeholder={t("employmentAdvertisement.list.search")}/>
                                     </div>
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>دسته بندی</span>
-                                        <input type="text" name="" id="" placeholder="جستجو"
+                                        <span>{t("employmentAdvertisement.list.category")}</span>
+                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchCategory}/>
                                     </div>
                                     <div className={'row '}>
@@ -1904,17 +1958,17 @@ export default function EmploymentAdvertisementList() {
                                         }
 
                                     </div>
-                                    <div className={Style["fields-footer"]}>
-                                        <button className={Style["change-height"] + " btn text-success"}
-                                                id={'more-category'} onClick={onClickMoreCategory}>بیشتر <img
-                                            src="assets/imgs/Group (1).png" alt=""/>
-                                        </button>
-                                    </div>
+                                    {/*<div className={Style["fields-footer"]}>*/}
+                                    {/*    <button className={Style["change-height"] + " btn text-success"}*/}
+                                    {/*            id={'more-category'} onClick={onClickMoreCategory}>{t("employmentAdvertisement.list.more")} <img*/}
+                                    {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                    {/*    </button>*/}
+                                    {/*</div>*/}
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>مقاطع</span>
-                                        <input type="text" name="" id="" placeholder="جستجو"
+                                        <span>{t("employmentAdvertisement.list.grade")}</span>
+                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchBranches}/>
                                     </div>
                                     <div className={'row'}>
@@ -1926,7 +1980,7 @@ export default function EmploymentAdvertisementList() {
                                                             <span className={"mx-1 " + Style["pointer"]}
                                                                   onClick={() => {
                                                                       if (item.id !== null)
-                                                                      onRemoveBranchTag(item.id)
+                                                                          onRemoveBranchTag(item.id)
                                                                       else onRemoveBranchTag(-1)
                                                                   }}><img src={Delete} width={10}/></span>
                                                             {item.label}
@@ -1947,7 +2001,7 @@ export default function EmploymentAdvertisementList() {
                                                                    item.name
                                                                    : item.englishName
                                                                } onChange={onBranchEdit}
-                                                               checked={item.id !== -1 ? selectedBranches.some(e => e.id === item.id): selectedBranches.some(e => e.id === null)}
+                                                               checked={item.id !== -1 ? selectedBranches.some(e => e.id === item.id) : selectedBranches.some(e => e.id === null)}
                                                                type="checkbox" value={item.id}
                                                                id={"branch_" + item.id}/>
                                                         <label className="form-check-label px-4"
@@ -1962,18 +2016,18 @@ export default function EmploymentAdvertisementList() {
                                         }
 
                                     </div>
-                                    <div className={Style["fields-footer"]}>
-                                        <button id={'more-branch'}
-                                                className={Style["change-height"] + " btn text-success"}
-                                                onClick={onClickMoreBranches}>بیشتر <img
-                                            src="assets/imgs/Group (1).png" alt=""/>
-                                        </button>
-                                    </div>
+                                    {/*<div className={Style["fields-footer"]}>*/}
+                                    {/*    <button id={'more-branch'}*/}
+                                    {/*            className={Style["change-height"] + " btn text-success"}*/}
+                                    {/*            onClick={onClickMoreBranches}>{t("employmentAdvertisement.list.more")} <img*/}
+                                    {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                    {/*    </button>*/}
+                                    {/*</div>*/}
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>استان ها</span>
-                                        <input type="text" name="" id="" placeholder="جستجو"
+                                        <span>{t("employmentAdvertisement.list.province")}</span>
+                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchProvince}/>
                                     </div>
                                     <div className={'row'}>
@@ -2021,13 +2075,13 @@ export default function EmploymentAdvertisementList() {
                                         }
 
                                     </div>
-                                    <div className={Style["fields-footer"]}>
-                                        <button id={'more-province'}
-                                                className={Style["change-height"] + " btn text-success"}
-                                                onClick={onClickMoreProvince}>بیشتر <img
-                                            src="assets/imgs/Group (1).png" alt=""/>
-                                        </button>
-                                    </div>
+                                    {/*<div className={Style["fields-footer"]}>*/}
+                                    {/*    <button id={'more-province'}*/}
+                                    {/*            className={Style["change-height"] + " btn text-success"}*/}
+                                    {/*            onClick={onClickMoreProvince}>{t("employmentAdvertisement.list.more")} <img*/}
+                                    {/*        src="assets/imgs/Group (1).png" alt=""/>*/}
+                                    {/*    </button>*/}
+                                    {/*</div>*/}
                                 </div>
                                 <div
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
@@ -2153,8 +2207,8 @@ export default function EmploymentAdvertisementList() {
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>نظام وظیفه</span>
-                                        <input type="text" name="" id="" placeholder="جستجو"
+                                        <span>{t("employmentAdvertisement.list.militaryStatus")}</span>
+                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchMilatery}/>
                                     </div>
                                     <div className={'row'}>
@@ -2203,83 +2257,38 @@ export default function EmploymentAdvertisementList() {
                                 </div>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
-                                        <span>جنسیت</span>
+                                        <span>{t("employmentAdvertisement.list.gender")}</span>
+                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                               onChange={onSearchGender}/>
                                     </div>
-                                    <div className={Style["filters-list"] + " " + Style["overflow-hidden"]}
-                                    >
-                                        <div
-                                            className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                            <input className="form-check-input milatery_select"
-                                                   data-text={sp.get("lang") === "fa" ?
-                                                       "مهم نیست"
-                                                       : "Not Important"
-                                                   } onChange={function (event) {
-                                                let gender_list = [...gender]
-                                                if (event.target.checked) { // add value to the array
-                                                    let contains = false;
-                                                    for (let i = 0; i < gender_list.length; i++) {
-                                                        if (gender_list[i].id === 0) {
-                                                            contains = true;
-                                                            break;
-                                                        }
-                                                    }
-                                                    if(!contains) gender_list.push(0);
-                                                }
-                                                else { //remove value from the array
-                                                    for (let i = 0; i < gender_list.length; i++) {
-                                                        if (gender_list[i].id === 0) {
-                                                            gender_list.splice(i,1);
-                                                        }
-                                                    }
-                                                }
-
-                                                setGender(gender_list);
-
-                                            }}
-                                                    checked={gender.some(e => e === 0)}
-                                                   type="checkbox" value={0}
-                                                   id={"gender_" + 0}/>
-                                            <label className="form-check-label px-4"
-                                                   htmlFor={"gender_" + 0}>
-                                                {sp.get("lang") === "fa" ?
-                                                    "مهم نیست"
-                                                    : "Not Important"
-                                                }
-                                            </label>
+                                    <div className={'row'}>
+                                        <div className={'col-12'}>
+                                            {
+                                                selectedGender.length > 0 ?
+                                                    selectedGender.map((item, index) => (
+                                                        <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveGenderTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                            {item.label}
+                                                        </div>
+                                                    )) : null
+                                            }
                                         </div>
+                                    </div>
+                                    <div className={Style["filters-list"] + " " + Style["overflow-hidden"]}>
                                         {
-                                            genderList.length > 0 ?
-                                                genderList.map((item, i) => (
+                                            searchedGender.length > 0 ?
+                                                searchedGender.map((item, i) => (
                                                     <div
                                                         className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                        <input className="form-check-input milatery_select"
+                                                        <input className="form-check-input gender_select"
                                                                data-text={sp.get("lang") === "fa" ?
                                                                    item.name
                                                                    : item.englishName
-                                                               } onChange={function (event) {
-                                                            let gender_list = [...gender]
-                                                            if (event.target.checked) { // add value to the array
-                                                                let contains = false;
-                                                                for (let i = 0; i < gender_list.length; i++) {
-                                                                    if (gender_list[i].id === item.id) {
-                                                                        contains = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                if(!contains) gender_list.push(item.id);
-                                                            }
-                                                            else { //remove value from the array
-                                                                for (let i = 0; i < gender_list.length; i++) {
-                                                                    if (gender_list[i].id === item.id) {
-                                                                        gender_list.splice(i,1);
-                                                                    }
-                                                                }
-                                                            }
-
-                                                            setGender(gender_list);
-
-                                                        }}
-                                                               checked={gender.some(e => e === item.id)}
+                                                               } onChange={onGenderEdit}
+                                                               checked={selectedGender.some(e => e.id === item.id)}
                                                                type="checkbox" value={item.id}
                                                                id={"gender_" + item.id}/>
                                                         <label className="form-check-label px-4"
@@ -2296,6 +2305,7 @@ export default function EmploymentAdvertisementList() {
                                     </div>
 
                                 </div>
+
                                 <div
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
                                     <div className={Style["fields-header"]}>
@@ -2361,14 +2371,7 @@ export default function EmploymentAdvertisementList() {
                                         <br/>
                                     </div>
                                 </div>
-                                {/*<div*/}
-                                {/*    className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>*/}
-                                {/*    <div className={Style["fields-header"]}>*/}
-                                {/*        <span>{t("employmentAdvertisement.list.selectYourSeniorityLevel")}</span>*/}
-                                {/*    </div>*/}
-                                {/*    */}
 
-                                {/*</div>*/}
                                 <div
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
                                     <h6 className={' mx-3'}></h6>
@@ -2469,30 +2472,6 @@ export default function EmploymentAdvertisementList() {
 
                             </div>
                         </div>
-                        {/*<div className={Style["fields-div"] + " my-3 d-md-block d-none"}>*/}
-                        {/*    <div className={Style["fields-header"]}>*/}
-                        {/*        <span>نویسنده ها</span>*/}
-                        {/*    </div>*/}
-                        {/*    <div className={Style["filters-list"]}>*/}
-
-                        {/*        {*/}
-                        {/*            entityFilters.length > 0 ?*/}
-                        {/*                entityFilters.map((item, i) => (*/}
-                        {/*                    <div*/}
-                        {/*                        className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>*/}
-                        {/*                        <input className="form-check-input mx-0" onChange={onEntityEdit}*/}
-                        {/*                               type="checkbox" value={item} id={"entity_" + item.id}/>*/}
-                        {/*                        <label className="form-check-label px-4" htmlFor={"entity_" + item.id}>*/}
-                        {/*                            {sp.get("lang") === "fa" ?*/}
-                        {/*                                item.name*/}
-                        {/*                                : item.englishName*/}
-                        {/*                            }*/}
-                        {/*                        </label>*/}
-                        {/*                    </div>*/}
-                        {/*                )) : null*/}
-                        {/*        }*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
 
 
                     </div>
@@ -2504,7 +2483,8 @@ export default function EmploymentAdvertisementList() {
                                     dataLength={newsList.length}
                                     scrollThreshold={0.4}
                                     next={getNewsList}
-                                    hasMore={true}
+                                    hasMore={hasMore}
+                                    style={{ overflow: 'hidden'}}
                                     loader={<h4>Loading...</h4>}
                                 >
                                     {
@@ -2563,14 +2543,14 @@ export default function EmploymentAdvertisementList() {
                                                                         <p className="change-text d-flex change-dir">
                                                                             <span className={Style.locationSpan}>
                                                                                 {sp.get("lang") === "fa" ?
-                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
-                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " + JSON.parse(item.jobOffer.provinceJson).name :
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
                                                                             <span className={Style.dateSpan + " mx-2"}>
                                                                                 {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
                                                                             </span>
 
                                                                         </p>
@@ -2590,7 +2570,8 @@ export default function EmploymentAdvertisementList() {
                                     dataLength={newsList.length}
                                     scrollThreshold={0.4}
                                     next={getNewsList}
-                                    hasMore={true}
+                                    hasMore={hasMore}
+                                    style={{ overflow: 'hidden'}}
                                     loader={<h4>Loading...</h4>}
                                 >
                                     <div className="row change-dir px-2">
@@ -2598,7 +2579,7 @@ export default function EmploymentAdvertisementList() {
                                             newsList.length > 0 ?
                                                 newsList.map((item, index) => (
                                                     <div
-                                                        className={Style2["news"] + " " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
+                                                        className={Style2["news"] + " col-4 " + (index % 2 === 0 ? Style2["news-even"] : Style2["news-odd"]) + " py-2 col-lg-4 col-md-6 col-12 mt-2"}>
                                                         <Link
                                                             to={item.jobOffer.title !== null && sp.get("lang") === "fa" ? {
                                                                     pathname: getRoutesItems().employmentAdvertisementSingle.route,
@@ -2627,7 +2608,8 @@ export default function EmploymentAdvertisementList() {
                                                                             }
                                                                             className=""/>
                                                                     </div>
-                                                                    <div className={Style2["news-text"] + " col-12 mt-2"}>
+                                                                    <div
+                                                                        className={Style2["news-text"] + " col-12 mt-2"}>
                                                                         <h2 className="change-text">
                                                                             {sp.get("lang") === "fa" ?
                                                                                 item.jobOffer.title :
@@ -2643,14 +2625,14 @@ export default function EmploymentAdvertisementList() {
                                                                         <p className="change-text d-flex change-dir justify-content-between mt-3 pb-3">
                                                                             <span className={Style.locationSpan}>
                                                                                 {sp.get("lang") === "fa" ?
-                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " +  JSON.parse(item.jobOffer.provinceJson).name:
-                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " +  JSON.parse(item.jobOffer.provinceJson).englishName
+                                                                                    JSON.parse(item.jobOffer.cityJson).name + " / " + JSON.parse(item.jobOffer.provinceJson).name :
+                                                                                    JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
                                                                             <span className={Style.dateSpan}>
                                                                                 {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش":
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"                                                                                }
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
                                                                             </span>
 
                                                                         </p>
@@ -2661,7 +2643,8 @@ export default function EmploymentAdvertisementList() {
                                                     </div>
                                                 )) : null
                                         }
-                                    </div></InfiniteScroll>
+                                    </div>
+                                </InfiniteScroll>
 
                             </div>
                         }
@@ -2670,7 +2653,7 @@ export default function EmploymentAdvertisementList() {
                 </div>
 
             </div>
-            <div className={'position-fixed'} style={{bottom: '20px', left: '20px'}}>
+            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px'}}>
                 <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>

@@ -122,3 +122,10 @@ a {
 .change-float-reverse {
     float: left !important;
 }
+
+.purple-color{
+    color: #653394;
+}
+.purple-color-bg{
+    background-color: #653394;
+}

@@ -462,7 +462,7 @@ export default function ResumeStep10() {
                         </div>
                         <div className="mx-auto">
                             <div className="row">
-                                <div className={'col-12 col-lg-6'}>
+                                <div className={'col-12 col-lg-7'}>
                                     <List
                                         values={items}
                                         onChange={({oldIndex, newIndex}) => {
@@ -476,11 +476,11 @@ export default function ResumeStep10() {
                                             className="list-unstyled" {...props}>{children}</ul>}
                                         renderItem={({value, index, props}) =>
                                             <li {...props}>
-                                                <div className={'row border my-2 mx-1'}>
+                                                <div className={'row border my-2 mx-4'}>
                                                     <div className="col-xl-1 col-lg-1 col-md-2 col-2 p-0 pl-1">
-                                                        <div className="bg-danger text-white text-center py-4 ">
-                                                            <h6 className="font-medium d-inline-flex">
-                                                                {index + 1}</h6>
+                                                        <div className="purple-color-bg text-white text-center py-4 ">
+                                                            <p className="font-medium d-inline-flex">
+                                                                {index + 1}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-xl-11 col-lg-11 col-md-10 col-10">
@@ -565,8 +565,8 @@ export default function ResumeStep10() {
                                     </div>
 
                                 </div>
-                                <div className={'col-12 col-lg-6 d-none d-lg-block embed-responsive-16by9'}>
-                                    <FrameResume/>
+                                <div className={'col-12 col-lg-5 d-none d-lg-block embed-responsive-16by9'}>
+                                    <FrameResume step={10}/>
                                 </div>
 
                             </div>

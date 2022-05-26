@@ -430,6 +430,9 @@
     "messageUs": "Share your problem or question with us. Our experts will contact you as soon as possible."
   },
   "employmentAdvertisement": {
+    "title": {
+        "advertising": "Advertising List"
+    },
     "list": {
       "isFullTime": "Full Time",
       "isPartTime": "Part Time",
@@ -451,8 +454,16 @@
       "salaryStatus": "salary Status",
       "minSalary": "Minimum Salary",
       "maxSalary": "maximum Salary",
-      "consensusSalary": "Consensus Salary"
-
+      "consensusSalary": "Consensus Salary",
+      "gender": "Gender",
+      "search": "search",
+      "category": "Category",
+      "grade": "Grade",
+      "province": "Province",
+      "militaryStatus": "Military Status",
+      "more": "More",
+      "less": "Less",
+      "sortBy": "Sort By"
 
     },
     "single": {
