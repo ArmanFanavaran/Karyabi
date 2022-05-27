@@ -1068,7 +1068,7 @@ export default function ResumeStep12() {
                         </div>
                     </div>
                 </div>
-                <div className={'position-fixed d-none'} style={{bottom: '20px', left: '20px'}}>
+                <div className={'position-fixed d-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
                     <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1 bg-warning" } onClick={openModalGuide} width={'60px'} height={'60px'}
                          src={guide}/>
                 </div>

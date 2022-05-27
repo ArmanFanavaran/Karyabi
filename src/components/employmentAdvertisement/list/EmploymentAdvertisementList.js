@@ -22,6 +22,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 /************ Float button ************/
 import {useTranslation} from "react-i18next";
 import {serverTimeToDaysAgo} from "../../global/TimeConverter";
+import guide from "../../Resume/step3/imgs/guide.png";
 
 
 var axios = require('axios');
@@ -2983,10 +2984,11 @@ export default function EmploymentAdvertisementList() {
                 </div>
 
             </div>
-            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px'}}>
+            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
                 <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>
+
             <NotificationContainer/>
         </main>
     )

@@ -15,8 +15,6 @@
 }
 .filterButton{
     transition: transform .7s ease-in-out;
-    z-index: auto;
-
 }
 
 .overflow-hidden{

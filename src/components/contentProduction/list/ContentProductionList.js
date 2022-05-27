@@ -838,7 +838,7 @@ export default function ContentProductionList() {
                 </div>
 
             </div>
-            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px'}}>
+            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
                 <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>
