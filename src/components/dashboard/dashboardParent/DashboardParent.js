@@ -121,7 +121,7 @@ export default function Dashboard() {
     }, []);
     return (
         <div className={Style.main}>
-            <div className={"container my-4"}>
+            <div className={"container-fluid my-4 px-0 px-xl-5 "}>
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <Modal
