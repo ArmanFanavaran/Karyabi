@@ -1,0 +1,113 @@
+
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero {
+    background: #ECE9F5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    /*margin-top: 40px;*/
+    border-radius: 4px;
+}
+
+.main h3  {
+    color: #653394;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.companyImg {
+    border-radius: 3px;
+    border: 1px solid #d2d2d2;
+    width: 120px;
+    height: 120px;
+}
+
+.jobTitle {
+    color: #653394;
+}
+.jobField {
+    background-color: #723fa1;
+    color: white;
+    font-size: 0.85rem;
+    border-radius: 3px;
+    padding: 5px 10px;
+    width: fit-content;
+}
+.jobFieldTitle  {
+    font-size: 0.8rem;
+    font-weight: bolder;
+
+}
+.jobDesc {
+    line-height: 2rem;
+}
+.shareResumeBtn {
+    background-color: #8453b1;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+}
+.resumeTemplateImage {
+    cursor: pointer;
+    width: 100%;
+    border: 2px solid #8a8a8d;
+    border-radius: 5px;
+    height: 150px;
+}
+.focusedTemplate {
+    border: 4px solid #88d7fc;
+}
+.templateColorBarLeft, .templateColorBarRight {
+    height: 30px;
+}
+.templateColorBarLeft {
+    border-radius: 4px 0 0 4px;
+}
+.templateColorBarRight {
+    border-radius: 0 4px 4px 0;
+}
+.templateColorBarParent {
+    cursor: pointer;
+}
+.resumeDescription {
+    height: 150px !important;
+}
+.templatesContainer {
+    max-height: 40vh;
+    overflow-y: auto;
+}
+.categoryTitle {
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #575757;
+}
+
+.alert3.bgAlert3.alert3Primary {
+    background-color: rgba(90,78,185,0.08);
+}
+
+.alert3.bgAlert3 {
+    background-color: rgba(225,225,232,0.09);
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+.alert3Primary {
+    border-color: #5a4eb9;
+}
+.alert3 {
+    background-color: #fff;
+    position: relative;
+    border: 1px solid #e1e1e8;
+    border-right: 5px solid #e1e1e8;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding-right: 35px;
+    font-size: 14px;
+    line-height: normal;
+}

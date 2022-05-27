@@ -116,7 +116,7 @@ let Routes = {
         "enDes": "dashboard",
         "route": "/dashboard"
     },
-    "sentResumes": {
+    "SentResumes": {
         "des": "رزومه‌های ارسال شده",
         "enDes": "Sent Resumes",
         "route": "/dashboard/sentResumes"
@@ -223,6 +223,17 @@ let Routes = {
         "route": "/resume/step12"
     },
 
+    /************** Content Production **************/
+    "contentProductionList": {
+        "des": "لیست تولید محتوا",
+        "enDes": "Content Production list",
+        "route": "/content/list"
+    },
+    "contentProductionSingle": {
+        "des": "تولید محتوا تک صفحه",
+        "enDes": "Resume",
+        "route": "/content/single"
+    },
 }
 
 export function getRoutesItems() {

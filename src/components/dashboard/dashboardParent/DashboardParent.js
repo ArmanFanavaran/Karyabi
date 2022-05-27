@@ -18,7 +18,7 @@ import filterImage from "../../employmentAdvertisement/imgs/filter.png";
 
 
 export default function Dashboard() {
-    const[user, setUser] = useState();
+    const [user, setUser] = useState();
     const [language, setLanguage] = useState();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,12 +51,12 @@ export default function Dashboard() {
 
     /************** Scroll Filter *************/
     $(window).scroll(function () {
-        if ($(this).scrollTop() > $('#fixed-class').outerHeight()+200) {
+        if ($(this).scrollTop() > $('#fixed-class').outerHeight() + 200) {
             $('#fixed-class').addClass(Style["fixed-content"])
             $('#filter').css("max-height", " 90vh ")
-            if( $(this).scrollTop()<= $('#advertisementList').outerHeight()-100){
+            if ($(this).scrollTop() <= $('#advertisementList').outerHeight() - 100) {
                 // $('#fixed-class').addClass(Style["fixed-content"])
-                $(Style["fixed-content"]).animate({ scrollTop: $('#fixed-class').height()}, 1000);
+                $(Style["fixed-content"]).animate({scrollTop: $('#fixed-class').height()}, 1000);
             }
 
         } else {
@@ -67,7 +67,7 @@ export default function Dashboard() {
     })
 
 
-    useEffect(function (){
+    useEffect(function () {
         const url = queryString.parse(window.location.search);
         setLanguage(url.lang);
         let axios = require('axios');
@@ -118,7 +118,7 @@ export default function Dashboard() {
 
             }
         })
-    } , []);
+    }, []);
     return (
         <div className={Style.main}>
             <div className={"container my-4"}>
@@ -131,17 +131,21 @@ export default function Dashboard() {
                             style={modalStyle}
                             contentLabel="Example Modal"
                         >
-                            <button className={'btn btn-default float-right'} onClick={() => {setIsModalOpen(false)}}>X</button>
+                            <button className={'btn btn-default float-right'} onClick={() => {
+                                setIsModalOpen(false)
+                            }}>X
+                            </button>
 
                             <div className={" p-3"}>
                                 <div className={"mt-3"}>
                                     <div className={"d-flex justify-content-center"}>
-                                        <img className={Style.profileImage} src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
-                                            : ProfileImage}/>
+                                        <img className={Style.profileImage}
+                                             src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
+                                                 : ProfileImage}/>
                                     </div>
-                                    { user!== undefined  &&
+                                    {user !== undefined &&
                                     <h6 className={Style.profileName + " mt-3"}>
-                                        { language==='fa'  ? user.FirstName + " " + user.LastName :
+                                        {language === 'fa' ? user.FirstName + " " + user.LastName :
                                             user.FirstNameEnglish + " " + user.LastNameEnglish}
                                     </h6>
 
@@ -152,7 +156,12 @@ export default function Dashboard() {
                                 </div>
                                 <hr/>
                                 <ul className={"nav flex-column"}>
-                                    <li className={"nav-item w-100"}><Link className={"text-center d-flex justify-content-center text-secondary"} to={getRoutesItems().sentResumes.route}>رزومه‌های ارسال شده</Link></li>
+                                    <li className={"nav-item w-100"}><Link
+                                        className={"text-center d-flex justify-content-center text-secondary"}
+                                        to={{
+                                            pathname: getRoutesItems().SentResumes.route,
+                                            search: "lang=" +language,
+                                        }}>رزومه‌های ارسال شده</Link></li>
                                     <hr/>
 
                                 </ul>
@@ -165,14 +174,15 @@ export default function Dashboard() {
                         <div id={"fixed-class"} className={Style.nav + " p-3"}>
                             <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
-                                    <img className={Style.profileImage} src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
-                                        : ProfileImage}/>
+                                    <img className={Style.profileImage}
+                                         src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
+                                             : ProfileImage}/>
                                 </div>
-                                { user!== undefined  &&
-                                    <h6 className={Style.profileName + " mt-3"}>
-                                        { language==='fa'  ? user.FirstName + " " + user.LastName :
-                                            user.FirstNameEnglish + " " + user.LastNameEnglish}
-                                    </h6>
+                                {user !== undefined &&
+                                <h6 className={Style.profileName + " mt-3"}>
+                                    {language === 'fa' ? user.FirstName + " " + user.LastName :
+                                        user.FirstNameEnglish + " " + user.LastNameEnglish}
+                                </h6>
 
                                 }
 
@@ -181,7 +191,13 @@ export default function Dashboard() {
                             </div>
                             <hr/>
                             <ul className={"nav flex-column"}>
-                                <li className={"nav-item w-100"}><Link className={"text-center d-flex justify-content-center text-secondary"} to={getRoutesItems().sentResumes.route}>رزومه‌های ارسال شده</Link></li>
+                                <li className={"nav-item w-100"}><Link
+                                    className={"text-center d-flex justify-content-center text-secondary"}
+                                    to={{
+                                        pathname: getRoutesItems().SentResumes.route,
+                                        search: "lang=" +language,
+                                    }}
+                                >رزومه‌های ارسال شده</Link></li>
                                 <hr/>
 
                             </ul>
@@ -189,15 +205,17 @@ export default function Dashboard() {
                     </div>
                     <div className={"col-xl-9 col-12 p-4"}>
 
-                        <Route path={"/"} exact component={ProfileInfo}/>
-                        <Route path={getRoutesItems().sentResumes.route} exact component={SentResumes}/>
+                        <Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>
+                        <Route path={getRoutesItems().SentResumes.route} exact component={SentResumes}/>
                     </div>
                 </div>
             </div>
 
 
             <div className={'position-fixed d-block d-xl-none'} style={{bottom: '20px', left: '20px'}}>
-                <img className={Style["filterButton"]} onClick={()=>{setIsModalOpen(true)}} width={'60px'} height={'60px'}
+                <img className={Style["filterButton"]} onClick={() => {
+                    setIsModalOpen(true)
+                }} width={'60px'} height={'60px'}
                      src={filterImage}/>
             </div>
         </div>

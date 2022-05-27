@@ -164,7 +164,9 @@
       "adminPanel": "پنل ادمین",
       "createResume": "ساخت رزومه",
       "showResume": "نمایش رزومه",
-      "logOut": "خروج"
+      "logOut": "خروج",
+      "contentProduction": "محتوای آموزشی"
+
     },
     "footer": {
       "about_our_observatory": "اتحادیه ستاره شناسی معلمان ایران",
@@ -475,5 +477,22 @@
       "joinNow": "همین حالا شروع کنید",
       "sendResume": "ارسال رزومه"
     }
+  },
+  "contentProduction": {
+    "title": {
+      "contentProduction": "محتوای آموزشی"
+    },
+    "list": {
+      "search": "جستجو",
+      "category": "دسته بندی",
+      "more": "بیشتر",
+      "less": "کمتر",
+      "sortBy": "مرتب سازی"
+
+    },
+    "single": {
+      "category": "دسته بندی"
+    }
   }
+
 }

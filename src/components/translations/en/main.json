@@ -164,7 +164,8 @@
       "adminPanel": "Panel Admin",
       "createResume": "Create Resume",
       "showResume": "Show Resume",
-      "logOut": "Logout"
+      "logOut": "Logout",
+      "contentProduction": "Content Production"
     },
     "footer": {
       "about_our_observatory": "Iranian Teachers Astronomy Union",
@@ -480,6 +481,23 @@
       "gender": "Gender",
       "joinNow": "Join Now",
       "sendResume": "Send Resume"
+    }
+  },
+
+  "contentProduction": {
+    "title": {
+        "contentProduction": "Content Production"
+    },
+    "list": {
+      "search": "search",
+      "category": "Category",
+      "more": "More",
+      "less": "Less",
+      "sortBy": "Sort By"
+
+    },
+    "single": {
+      "category": "Category"
     }
   }
 }

@@ -598,7 +598,7 @@ export default function ResumeStep4() {
                         </h2>
                         <div className="mx-auto ">
                             <div className="row ">
-                                <div className={'col-12 col-lg-7'}>
+                                <div className={'col-12 col-lg-7 px-5'}>
                                     <List
                                         values={items}
                                         onChange={({oldIndex, newIndex}) => {
@@ -612,7 +612,7 @@ export default function ResumeStep4() {
                                             className="list-unstyled" {...props}>{children}</ul>}
                                         renderItem={({value, index, props}) =>
                                             <li {...props}>
-                                                <div className={'row border my-2 mx-4'}>
+                                                <div className={'row border my-2'}>
                                                     <div className="col-xl-1 col-lg-1 col-md-2 col-2 p-0 pl-1">
                                                         <div className="purple-color-bg text-white text-center py-4 ">
                                                             <p className="font-medium d-inline-flex">

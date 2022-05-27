@@ -57,12 +57,17 @@ import AboutUs from "./components/about/aboutUs";
 import NewsList from "./components/employmentAdvertisement/list/EmploymentAdvertisementList";
 import EmploymentAdvertisementSingle from "./components/employmentAdvertisement/single/EmploymentAdvertisementSingle";
 
+/****************** Content Production *****************************/
+import ContentProductionList from "./components/contentProduction/list/ContentProductionList";
+import ContentProductionSingle from "./components/contentProduction/single/ContentProductionSingle.js";
+
 /****************** Courses *****************************/
 import CoursesList from "./components/courses/list/CoursesList";
 import CoursesSingle from "./components/courses/single/CoursesSingle";
 
 /************** Dashboard **************/
 import Dashboard from "./components/dashboard/dashboardParent/DashboardParent";
+import SentResume from "./components/dashboard/sentResumes/SentResumes";
 
 
 export default function Routes() {
@@ -110,9 +115,13 @@ export default function Routes() {
                 <Route path={getRoutesItems().resumeStep12.route} exact component={ResumeStep12}/>
 
 
-                {/****************** News *****************************/}
+                {/****************** Employment Advertisement *****************************/}
                 <Route path={getRoutesItems().employmentAdvertisementList.route} exact component={NewsList}/>
                 <Route path={getRoutesItems().employmentAdvertisementSingle.route} exact component={EmploymentAdvertisementSingle}/>
+
+                {/****************** Content Production *****************************/}
+                <Route path={getRoutesItems().contentProductionList.route} exact component={ContentProductionList}/>
+                <Route path={getRoutesItems().contentProductionSingle.route} exact component={ContentProductionSingle}/>
 
                 {/****************** Courses *****************************/}
                 <Route path="/courses/list" exact component={CoursesList}/>
@@ -127,8 +136,7 @@ export default function Routes() {
                 <Controller>
                     {/****************** Dashboard *****************************/}
 
-                    <Route path={"/"} strict={true} exact component={"<div></div>"}/>
-                    <Route path={getRoutesItems().DashboardParent.route + "/*" }  exact  component={Dashboard}/>
+                    <Route path={getRoutesItems().DashboardParent.route + "*" }  exact  component={Dashboard}/>
 
 
                 </Controller>

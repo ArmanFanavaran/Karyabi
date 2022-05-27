@@ -1506,7 +1506,7 @@ export default function EmploymentAdvertisementList() {
                                                             item.id !== 1 ?
                                                                 <div
                                                                     className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                                    <input className="form-check-input milatery_select"
+                                                                    <input className="form-check-input salary_select"
                                                                            data-text={sp.get("lang") === "fa" ?
                                                                                item.name
                                                                                : item.englishName
@@ -1558,7 +1558,7 @@ export default function EmploymentAdvertisementList() {
                                                             item.id !== 1 && item.id > minSalary[0].id ?
                                                                 <div
                                                                     className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                                    <input className="form-check-input milatery_select"
+                                                                    <input className="form-check-input salary_select"
                                                                            data-text={sp.get("lang") === "fa" ?
                                                                                item.name.replace("از", "تا")
                                                                                : item.englishName
