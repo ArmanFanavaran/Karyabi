@@ -18,6 +18,9 @@ import minus from "./imgs/minus.svg";
 import Modal from "react-modal";
 import Delete from "./imgs/delete.png";
 import trash from "./imgs/trash.svg"
+import guide from "./imgs/guide.png"
+import FrameResume from "../frameResume/FrameResume";
+
 export default function ResumeStep12() {
     var moment = require("moment-jalaali");
     const history = useHistory();
@@ -72,6 +75,52 @@ export default function ResumeStep12() {
         webkitScrollbarThumb: {backgroundColor: "darkgrey", outline: "1px solid slategrey"}
 
     };// Modal.setAppElement('#yourAppElement');
+    const customStylesGuide = {
+
+        content: {
+            top: '56%',
+            left: '50%',
+            width: '90%',
+            maxWidth: '1000px',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            zIndex: '1',
+            borderRadius: '15px',
+            padding: '20px',
+            // marginTop:'30px',
+            overflowY: 'auto',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#6969dd #e0e0e0',
+            height: '85vh',
+            transform: 'translate(-50%, -50%)',
+
+        },
+
+        "@media only screen and (max-width: 375px)": {
+            backgroundColor: 'red'
+        },
+
+        webkitScrollbar: {width: "1em"},
+        webkitScrollbarTrack: {boxShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)"},
+        webkitScrollbarThumb: {backgroundColor: "darkgrey", outline: "1px solid slategrey"}
+
+    };
+    const [modalIsOpenGuide, setIsOpenGuide] = React.useState(false);
+
+
+    /************** Modal **************/
+
+    function openModalGuide() {
+        setIsOpenGuide(true);
+        document.body.style.overflow = 'hidden';
+
+    }
+    function closeModalGuide() {
+        setIsOpenGuide(false);
+        document.body.style.overflow = 'visible';
+
+    }
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -526,6 +575,28 @@ export default function ResumeStep12() {
                             </div>
                         </div>
                         <div className="mx-auto">
+                            <div className={'row d-xl-none'}>
+                                <div className={'col-12'}>
+                                    <Modal
+                                        isOpen={modalIsOpenGuide}
+                                        // onAfterOpen={afterOpenModal}
+                                        onRequestClose={closeModalGuide}
+                                        style={customStylesGuide}
+                                        contentLabel="Example Modal"
+                                    >
+                                        <div className={'row'}>
+                                            <div className={'col-12'}>
+                                                <button className={'btn btn-default float-right'} onClick={closeModalGuide}>X</button>
+
+                                            </div>
+
+                                        </div>
+                                        <FrameResume step={12}/>
+
+                                    </Modal>
+                                </div>
+                            </div>
+
                             <Modal
                                 isOpen={modalIsOpen}
                                 // onAfterOpen={afterOpenModal}
@@ -687,22 +758,6 @@ export default function ResumeStep12() {
                                     }
                                     <label>  {t("resume.step12.isNewComer")}</label>
                                 </div>
-                                <div className={'col-12 col-md-4 mt-2'}>
-                                    {
-                                        resume.IsInternship ?
-                                            <button className="mx-3 btn btn-primary text-white"
-                                                    onClick={() => {
-                                                        // onActiveLevel(false)
-                                                        update("isInternship", false)
-                                                    }}><i className="fas fa-toggle-on"></i></button>
-                                            : <button className=" mx-3 btn btn-secondary text-white"
-                                                      onClick={() => {
-                                                          // onActiveLevel(true)
-                                                          update("isInternship", true)
-                                                      }}><i className="fas fa-toggle-off"></i></button>
-                                    }
-                                    <label>  {t("resume.step12.isInternship")}</label>
-                                </div>
                                 <div className={'col-12 mt-3'}>
                                     <hr/>
                                     <h6 className={' mx-3'}>{t("resume.step12.typeOfCooperation")}</h6>
@@ -754,6 +809,22 @@ export default function ResumeStep12() {
                                                       }}><i className="fas fa-toggle-off"></i></button>
                                     }
                                     <label>  {t("resume.step12.isFullTime")}</label>
+                                </div>
+                                <div className={'col-12 col-md-4 mt-2'}>
+                                    {
+                                        resume.IsInternship ?
+                                            <button className="mx-3 btn btn-primary text-white"
+                                                    onClick={() => {
+                                                        // onActiveLevel(false)
+                                                        update("isInternship", false)
+                                                    }}><i className="fas fa-toggle-on"></i></button>
+                                            : <button className=" mx-3 btn btn-secondary text-white"
+                                                      onClick={() => {
+                                                          // onActiveLevel(true)
+                                                          update("isInternship", true)
+                                                      }}><i className="fas fa-toggle-off"></i></button>
+                                    }
+                                    <label>  {t("resume.step12.isInternship")}</label>
                                 </div>
                                 <div className={'col-12 mt-3'}>
                                     <hr/>
@@ -996,6 +1067,10 @@ export default function ResumeStep12() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className={'position-fixed d-none'} style={{bottom: '20px', left: '20px'}}>
+                    <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1 bg-warning" } onClick={openModalGuide} width={'60px'} height={'60px'}
+                         src={guide}/>
                 </div>
             </main>
             <NotificationContainer/>

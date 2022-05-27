@@ -13,6 +13,15 @@
     flex-direction: column;
 }
 
+.filterButton:hover {
+    transform: rotate(360deg);
+
+}
+.filterButton{
+    transition: transform .7s ease-in-out;
+    z-index: auto;
+
+}
 
 .showPath {
     margin: 40px 10px 20px;

@@ -478,6 +478,7 @@ export default function EmploymentAdvertisementList() {
     /* Remove Tag in branch */
     const onRemoveBranchTag = (id) => {
         let selected_branches = [...selectedBranches];
+        console.log(selected_branches)
 
         let selected_ids = [];
         for (let i = 0; i < selected_branches.length; i++) {
@@ -753,7 +754,10 @@ export default function EmploymentAdvertisementList() {
             provinceListSelect.push(item.id)
         ))
         selectedBranches.map((item, index) => (
-            branchListSelect.push(item.id)
+            item.id === -2 ?
+                branchListSelect.push(null) :
+                branchListSelect.push(item.id)
+
         ))
         selectedGender.map((item, index) => (
             genderList.push(item.id)
@@ -824,7 +828,7 @@ export default function EmploymentAdvertisementList() {
                 })
                 .catch(function (error) {
                 });
-        }else {
+        } else {
             setHasMore(false)
         }
 
@@ -862,7 +866,10 @@ export default function EmploymentAdvertisementList() {
             provinceListSelect.push(item.id)
         ))
         selectedBranches.map((item, index) => (
-            branchListSelect.push(item.id)
+            item.id === -2 ?
+                branchListSelect.push(null) :
+                branchListSelect.push(item.id)
+
         ))
         selectedGender.map((item, index) => (
             genderList.push(item.id)
@@ -940,6 +947,16 @@ export default function EmploymentAdvertisementList() {
         axios(count_config)
             .then(function (response) {
                 setCount(response.data.data);
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: 0
+                }, 500);
+                let lastPage = Math.ceil(response.data.data / pageSize); // the last page
+                if (1 < lastPage) {
+                    setHasMore(true)
+                } else {
+                    setHasMore(false)
+                }
+
             })
             .catch(function (error) {
                 let errors = error.response.data.errors;
@@ -1074,10 +1091,10 @@ export default function EmploymentAdvertisementList() {
         axios(entity_config)
             .then(function (response) {
                 let tmp = response.data.data
-                // const newArray = [{id: -1, name: 'مهم نیست', englishName: 'Not important'},...tmp] // [ 4, 3, 2, 1 ]
+                const newArray = [{id: -2, name: 'مهم نیست', englishName: 'Not important'}, ...tmp] // [ 4, 3, 2, 1 ]
                 // console.log(newArray)
-                setBranchFilters(tmp);
-                setSearchedBranches(tmp);
+                setBranchFilters(newArray);
+                setSearchedBranches(newArray);
             })
             .catch(function (error) {
             });
@@ -1090,8 +1107,10 @@ export default function EmploymentAdvertisementList() {
         };
         axios(milatery_config)
             .then(function (response) {
-                setMilateryFilters(response.data.data);
-                setSearchedMilatery(response.data.data);
+                let tmp = response.data.data
+                const newArray = [{id: 0, name: 'مهم نیست', englishName: 'Not important'}, ...tmp] // [ 4, 3, 2, 1 ]
+                setMilateryFilters(newArray);
+                setSearchedMilatery(newArray);
             })
             .catch(function (error) {
             });
@@ -1126,46 +1145,6 @@ export default function EmploymentAdvertisementList() {
             })
             .catch(function (error) {
             });
-        /*get news count*/
-
-        // var count_data = JSON.stringify({
-        //     "roleId": 2,
-        //     "page": 1,
-        //     "pageSize": 50,
-        //     "heights": [
-        //         200
-        //     ],
-        //     "widths": [
-        //         200
-        //     ],
-        //     "qualities": [
-        //         90
-        //     ],
-        //     "keyword": null,
-        //     "ownerId": 1,
-        //     "owner": "Company",
-        //     "genderIds": null,
-        //     "isAdaptiveSalary": false,
-        //     "minSalaryStatusId": 0,
-        //     "maxSalaryStatusId": 12,
-        //     "degreeIds": null,
-        //     "typeId": 1,
-        //     "provinceIds": null,
-        //     "militaryStatusIds": null,
-        //     "categoryIds": null,
-        //     "isFullTime": false,
-        //     "isPartTime": false,
-        //     "isRemote": false,
-        //     "isInternship": false,
-        //     "isPromotionPossible": false,
-        //     "isInsurancePossible": false,
-        //     "isCoursePossible": false,
-        //     "isFlexibleWorkTimePossible": false,
-        //     "isCommutingServicePossible": false,
-        //     "isFreeFoodPossible": false,
-        //     "sortBye": 0,
-        //
-        // });
 
         var count_config = {
             method: 'post',
@@ -1198,54 +1177,6 @@ export default function EmploymentAdvertisementList() {
                 }
             });
 
-
-        /* get entity filter*/
-        // var entity_config = {
-        //     method: 'get',
-        //     url: generateURL("News/getLookingFoEntityFilter"),
-        //     headers: {}
-        // };
-        //
-        // axios(entity_config)
-        //     .then(function (response) {
-        //         setEntityFilters(response.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        //
-        // /*get order by Filters*/
-        // var order_config = {
-        //     method: 'get',
-        //     url: generateURL("News/GetNewsListOrderByFilter"),
-        //     headers: {}
-        // };
-        //
-        // axios(order_config)
-        //     .then(function (response) {
-        //         setOrderFilters(response.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-        /*get branch filters */
-        // var config = {
-        //     method: 'get',
-        //     url: generateURL("HelpingData/GetBranches"),
-        //     headers: {}
-        // };
-        //
-        // axios(config)
-        //     .then(function (response) {
-        //         setBranchFilters(response.data.data);
-        //         setSearchedBranches(response.data.data);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-
-
     }, []);
 
     return (
@@ -1265,7 +1196,152 @@ export default function EmploymentAdvertisementList() {
                             <button className={'btn btn-default float-right'} onClick={closeModal}>X</button>
                             <div className={' '}>
                                 <div className="row mx-auto w-100 change-text change-dir">
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedCategory.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                                        }
+                                        {
+                                            selectedCategory.length > 0 ?
+                                                selectedCategory.map((item, index) => (
+                                                    <div
+                                                        className={Style["branch-tags"] + " px-2 py-1 mx-1 change-dir change-text"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveCategoryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedBranches.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.grade")}:</span>:null
+                                        }
+                                        {
+                                            selectedBranches.length > 0 ?
+                                                selectedBranches.map((item, index) => (
+                                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      if (item.id !== null)
+                                                                          onRemoveBranchTag(item.id)
+                                                                      else onRemoveBranchTag(-1)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedProvince.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.province")}:</span>:null
+                                        }
+                                        {
+                                            selectedProvince.length > 0 ?
+                                                selectedProvince.map((item, index) => (
+                                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveProvinceTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            minSalary[0].id !== 0 ?
+                                                <span>{t("employmentAdvertisement.list.minSalary")}:</span>:null
+                                        }
+                                        {salaryList.map((item, i) => (
+                                            item.id === minSalary[0].id ?
 
+                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMinSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                    {sp.get("lang") === "fa" ?
+                                                        item.name
+                                                        : item.englishName
+                                                    }
+                                                </div>
+                                                : null
+
+                                        ))}
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            maxSalary[0].id !== 0 ?
+                                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span>:null
+                                        }
+                                        {salaryList.map((item, i) => (
+                                            item.id === maxSalary[0].id ?
+
+                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMaxSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                    {sp.get("lang") === "fa" ?
+                                                        item.name.replace("از", "تا")
+                                                        : item.englishName
+                                                    }
+                                                </div>
+                                                : null
+
+                                        ))}
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedMilatery.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span>:null
+                                        }
+                                        {
+                                            selectedMilatery.length > 0 ?
+                                                selectedMilatery.map((item, index) => (
+                                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveMilateryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedGender.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.gender")}:</span>:null
+                                        }
+                                        {
+                                            selectedGender.length > 0 ?
+                                                selectedGender.map((item, index) => (
+                                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveGenderTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
+                                    <div className={'col-12'}>
+                                        <hr/>
+                                    </div>
                                     <div className={"col-12 change-dir " + Style.input} id={'form'}>
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
@@ -1281,7 +1357,8 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.category")}</span>
-                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                <input type="text" name="" id=""
+                                                       placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchCategory}/>
                                             </div>
                                             <div className={'row '}>
@@ -1340,7 +1417,8 @@ export default function EmploymentAdvertisementList() {
                                             className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.grade")}</span>
-                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                <input type="text" name="" id=""
+                                                       placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchBranches}/>
                                             </div>
                                             <div className={'row'}>
@@ -1416,7 +1494,8 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.province")}</span>
-                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                <input type="text" name="" id=""
+                                                       placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchProvince}/>
                                             </div>
                                             <div className={'row'}>
@@ -1497,6 +1576,31 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.minSalary")}</span>
+                                                <div className={'row'}>
+                                                    <div className={'col-12'}>
+                                                        {salaryList.map((item, i) => (
+                                                            item.id === minSalary[0].id ?
+
+                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMinSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                                    {sp.get("lang") === "fa" ?
+                                                                        item.name
+                                                                        : item.englishName
+                                                                    }
+                                                                </div>
+                                                                : null
+
+                                                        ))}
+
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <div className={Style["filters-list"] + " collapsible-content-province"}
                                                  style={collapsibleContentStyle}>
@@ -1548,6 +1652,31 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.maxSalary")}</span>
+                                                <div className={'row'}>
+                                                    <div className={'col-12'}>
+                                                        {salaryList.map((item, i) => (
+                                                            item.id === maxSalary[0].id ?
+
+                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMaxSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                                    {sp.get("lang") === "fa" ?
+                                                                        item.name.replace("از", "تا")
+                                                                        : item.englishName.replace("Of at least", "Maximum")
+                                                                    }
+                                                                </div>
+                                                                : null
+
+                                                        ))}
+
+                                                    </div>
+
+                                                </div>
                                             </div>
 
                                             <div className={Style["filters-list"] + " collapsible-content-province"}
@@ -1558,10 +1687,10 @@ export default function EmploymentAdvertisementList() {
                                                             item.id !== 1 && item.id > minSalary[0].id ?
                                                                 <div
                                                                     className={Style["filter-item"] + " form-check change-dir change-text mx-3"}>
-                                                                    <input className="form-check-input salary_select"
+                                                                    <input className="form-check-input milatery_select"
                                                                            data-text={sp.get("lang") === "fa" ?
                                                                                item.name.replace("از", "تا")
-                                                                               : item.englishName
+                                                                               : item.englishName.replace("Of at least", "Maximum")
                                                                            } onChange={function () {
                                                                         if (maxSalary[0].id !== item.id) {
                                                                             setMaxSalary(
@@ -1582,7 +1711,7 @@ export default function EmploymentAdvertisementList() {
                                                                            htmlFor={"maxSalary_" + item.id}>
                                                                         {sp.get("lang") === "fa" ?
                                                                             item.name.replace("از", "تا")
-                                                                            : item.englishName
+                                                                            : item.englishName.replace("Of at least", "Maximum")
                                                                         }
                                                                     </label>
                                                                 </div> : null
@@ -1595,7 +1724,8 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.militaryStatus")}</span>
-                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                <input type="text" name="" id=""
+                                                       placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchMilatery}/>
                                             </div>
                                             <div className={'row'}>
@@ -1646,7 +1776,8 @@ export default function EmploymentAdvertisementList() {
                                         <div className={Style["fields-div"] + " my-3 pb-2"}>
                                             <div className={Style["fields-header"]}>
                                                 <span>{t("employmentAdvertisement.list.gender")}</span>
-                                                <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                                <input type="text" name="" id=""
+                                                       placeholder={t("employmentAdvertisement.list.search")}
                                                        onChange={onSearchGender}/>
                                             </div>
                                             <div className={'row'}>
@@ -1890,7 +2021,149 @@ export default function EmploymentAdvertisementList() {
                         <img src={GridIcon} alt="" onClick={onGridClick}/><img src={ListIcon} alt=""
                                                                                onClick={onListClick}/>
                     </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedCategory.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                        }
+                        {
+                            selectedCategory.length > 0 ?
+                                selectedCategory.map((item, index) => (
+                                    <div
+                                        className={Style["branch-tags"] + " px-2 py-1 mx-1 change-dir change-text"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveCategoryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedBranches.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.grade")}:</span>:null
+                        }
+                        {
+                            selectedBranches.length > 0 ?
+                                selectedBranches.map((item, index) => (
+                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      if (item.id !== null)
+                                                                          onRemoveBranchTag(item.id)
+                                                                      else onRemoveBranchTag(-1)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedProvince.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.province")}:</span>:null
+                        }
+                        {
+                            selectedProvince.length > 0 ?
+                                selectedProvince.map((item, index) => (
+                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveProvinceTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            minSalary[0].id !== 0 ?
+                                <span>{t("employmentAdvertisement.list.minSalary")}:</span>:null
+                        }
+                        {salaryList.map((item, i) => (
+                            item.id === minSalary[0].id ?
 
+                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMinSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                    {sp.get("lang") === "fa" ?
+                                        item.name
+                                        : item.englishName
+                                    }
+                                </div>
+                                : null
+
+                        ))}
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            maxSalary[0].id !== 0 ?
+                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span>:null
+                        }
+                        {salaryList.map((item, i) => (
+                            item.id === maxSalary[0].id ?
+
+                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMaxSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                    {sp.get("lang") === "fa" ?
+                                        item.name.replace("از", "تا")
+                                        : item.englishName
+                                    }
+                                </div>
+                                : null
+
+                        ))}
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedMilatery.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span>:null
+                        }
+                        {
+                            selectedMilatery.length > 0 ?
+                                selectedMilatery.map((item, index) => (
+                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveMilateryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedGender.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.gender")}:</span>:null
+                        }
+                        {
+                            selectedGender.length > 0 ?
+                                selectedGender.map((item, index) => (
+                                    <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveGenderTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
                 </div>
                 <div className="row change-dir">
                     <div className={"d-none d-lg-none d-xl-block col-xl-3"}>
@@ -1910,7 +2183,8 @@ export default function EmploymentAdvertisementList() {
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.category")}</span>
-                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                        <input type="text" name="" id=""
+                                               placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchCategory}/>
                                     </div>
                                     <div className={'row '}>
@@ -1968,7 +2242,8 @@ export default function EmploymentAdvertisementList() {
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.grade")}</span>
-                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                        <input type="text" name="" id=""
+                                               placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchBranches}/>
                                     </div>
                                     <div className={'row'}>
@@ -2027,7 +2302,8 @@ export default function EmploymentAdvertisementList() {
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.province")}</span>
-                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                        <input type="text" name="" id=""
+                                               placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchProvince}/>
                                     </div>
                                     <div className={'row'}>
@@ -2109,6 +2385,32 @@ export default function EmploymentAdvertisementList() {
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.minSalary")}</span>
+                                        <div className={'row'}>
+                                            <div className={'col-12'}>
+                                                {salaryList.map((item, i) => (
+                                                    item.id === minSalary[0].id ?
+
+                                                        <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMinSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                            {sp.get("lang") === "fa" ?
+                                                                item.name
+                                                                : item.englishName
+                                                            }
+                                                        </div>
+                                                        : null
+
+                                                ))}
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                     <div className={Style["filters-list"] + " collapsible-content-province"}
                                          style={collapsibleContentStyle}>
@@ -2161,6 +2463,31 @@ export default function EmploymentAdvertisementList() {
                                     className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text pb-2"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.maxSalary")}</span>
+                                        <div className={'row'}>
+                                            <div className={'col-12'}>
+                                                {salaryList.map((item, i) => (
+                                                    item.id === maxSalary[0].id ?
+
+                                                        <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                        <span className={"mx-1 " + Style["pointer"]}
+                                                              onClick={() => {
+                                                                  setMaxSalary(
+                                                                      [{
+                                                                          id: 0
+                                                                      }])
+                                                              }}><img src={Delete} width={10}/></span>
+                                                            {sp.get("lang") === "fa" ?
+                                                                item.name.replace("از", "تا")
+                                                                : item.englishName.replace("Of at least", "Maximum")
+                                                            }
+                                                        </div>
+                                                        : null
+
+                                                ))}
+
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                     <div className={Style["filters-list"] + " collapsible-content-province"}
@@ -2174,7 +2501,7 @@ export default function EmploymentAdvertisementList() {
                                                             <input className="form-check-input milatery_select"
                                                                    data-text={sp.get("lang") === "fa" ?
                                                                        item.name.replace("از", "تا")
-                                                                       : item.englishName
+                                                                       : item.englishName.replace("Of at least", "Maximum")
                                                                    } onChange={function () {
                                                                 if (maxSalary[0].id !== item.id) {
                                                                     setMaxSalary(
@@ -2195,7 +2522,7 @@ export default function EmploymentAdvertisementList() {
                                                                    htmlFor={"maxSalary_" + item.id}>
                                                                 {sp.get("lang") === "fa" ?
                                                                     item.name.replace("از", "تا")
-                                                                    : item.englishName
+                                                                    : item.englishName.replace("Of at least", "Maximum")
                                                                 }
                                                             </label>
                                                         </div> : null
@@ -2205,10 +2532,12 @@ export default function EmploymentAdvertisementList() {
 
                                     </div>
                                 </div>
+
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.militaryStatus")}</span>
-                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                        <input type="text" name="" id=""
+                                               placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchMilatery}/>
                                     </div>
                                     <div className={'row'}>
@@ -2258,7 +2587,8 @@ export default function EmploymentAdvertisementList() {
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
                                         <span>{t("employmentAdvertisement.list.gender")}</span>
-                                        <input type="text" name="" id="" placeholder={t("employmentAdvertisement.list.search")}
+                                        <input type="text" name="" id=""
+                                               placeholder={t("employmentAdvertisement.list.search")}
                                                onChange={onSearchGender}/>
                                     </div>
                                     <div className={'row'}>
@@ -2484,7 +2814,7 @@ export default function EmploymentAdvertisementList() {
                                     scrollThreshold={0.4}
                                     next={getNewsList}
                                     hasMore={hasMore}
-                                    style={{ overflow: 'hidden'}}
+                                    style={{overflow: 'hidden'}}
                                     loader={<h4>Loading...</h4>}
                                 >
                                     {
@@ -2515,7 +2845,7 @@ export default function EmploymentAdvertisementList() {
                                                                 <div
                                                                     className={Style["news-item-img"] + " text-center p-lg-4"}>
                                                                     <img
-                                                                        src={item.jobOffer.coverImgs.length >0  ? item.jobOffer.coverImgs[0] : advertisment}
+                                                                        src={item.jobOffer.coverImgs.length > 0 ? item.jobOffer.coverImgs[0] : advertisment}
                                                                         alt={sp.get("lang") === "fa" ?
                                                                             item.company.name :
                                                                             item.company.englishName
@@ -2571,7 +2901,7 @@ export default function EmploymentAdvertisementList() {
                                     scrollThreshold={0.4}
                                     next={getNewsList}
                                     hasMore={hasMore}
-                                    style={{ overflow: 'hidden'}}
+                                    style={{overflow: 'hidden'}}
                                     loader={<h4>Loading...</h4>}
                                 >
                                     <div className="row change-dir px-2">
@@ -2601,7 +2931,7 @@ export default function EmploymentAdvertisementList() {
                                                                 <div className="row">
                                                                     <div className={Style2["news-img"] + " col-12"}>
                                                                         <img
-                                                                            src={item.jobOffer.coverImgs.length >0  ? item.jobOffer.coverImgs[0] : advertisment}
+                                                                            src={item.jobOffer.coverImgs.length > 0 ? item.jobOffer.coverImgs[0] : advertisment}
                                                                             alt={sp.get("lang") === "fa" ?
                                                                                 item.company.name :
                                                                                 item.company.englishName

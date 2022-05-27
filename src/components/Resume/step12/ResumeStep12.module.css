@@ -12,7 +12,15 @@
     min-height: 80vh;
     flex-direction: column;
 }
+.filterButton:hover {
+    transform: rotate(360deg);
 
+}
+.filterButton{
+    transition: transform .7s ease-in-out;
+    z-index: auto;
+
+}
 .formSearch{
     width: 85%;
     /*box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.40);*/

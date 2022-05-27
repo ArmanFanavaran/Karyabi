@@ -1,4 +1,5 @@
 .border{
+    margin: 0 auto;
     border: 2px #0d2458 dashed;
     min-height: 400px;
     padding: 10px 10px;

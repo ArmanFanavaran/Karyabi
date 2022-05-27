@@ -15,6 +15,8 @@ import {useHistory} from "react-router";
 import {css} from "@emotion/react";
 import {MoonLoader} from "react-spinners";
 import FrameResume from "../frameResume/FrameResume"
+import guide from "./imgs/guide.png"
+import Modal from "react-modal";
 
 export default function ResumeStep3() {
     const history = useHistory();
@@ -33,6 +35,53 @@ export default function ResumeStep3() {
       border: 10px #ff0000;
       //z-index: 99999;
     `;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+
+    /************** Modal **************/
+    const customStyles = {
+
+        content: {
+            top: '56%',
+            left: '50%',
+            width: '90%',
+            maxWidth: '1000px',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            zIndex: '1',
+            borderRadius: '15px',
+            padding: '20px',
+            // marginTop:'30px',
+            overflowY: 'auto',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#6969dd #e0e0e0',
+            height: '85vh',
+            transform: 'translate(-50%, -50%)',
+
+        },
+
+        "@media only screen and (max-width: 375px)": {
+            backgroundColor: 'red'
+        },
+
+        webkitScrollbar: {width: "1em"},
+        webkitScrollbarTrack: {boxShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)"},
+        webkitScrollbarThumb: {backgroundColor: "darkgrey", outline: "1px solid slategrey"}
+
+    };
+
+    function openModal() {
+        setIsOpen(true);
+        document.body.style.overflow = 'hidden';
+
+    }
+    function closeModal() {
+        setIsOpen(false);
+        document.body.style.overflow = 'visible';
+
+    }
+
 
     var axios = require('axios');
     axios.defaults.withCredentials = true;
@@ -128,6 +177,28 @@ export default function ResumeStep3() {
                             {t("resume.step3.aboutMe")}
                         </h2>
                         <div className="mx-auto">
+                            <div className={'row d-xl-none'}>
+                                <div className={'col-12'}>
+                                    <Modal
+                                        isOpen={modalIsOpen}
+                                        // onAfterOpen={afterOpenModal}
+                                        onRequestClose={closeModal}
+                                        style={customStyles}
+                                        contentLabel="Example Modal"
+                                    >
+                                        <div className={'row'}>
+                                            <div className={'col-12'}>
+                                                <button className={'btn btn-default float-right'} onClick={closeModal}>X</button>
+
+                                            </div>
+
+                                        </div>
+                                        <FrameResume step={3}/>
+
+                                    </Modal>
+                                </div>
+                            </div>
+
                             <div className={"row "+ Style.input}>
                                 <div className={'col-12 col-lg-7'}>
                                     <div className={'row'}>
@@ -207,6 +278,10 @@ export default function ResumeStep3() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px'}}>
+                    <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1" } onClick={openModal} width={'60px'} height={'60px'}
+                         src={guide}/>
                 </div>
             </main>
             <NotificationContainer/>

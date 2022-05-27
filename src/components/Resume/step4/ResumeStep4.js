@@ -21,6 +21,7 @@ import edit from "./imgs/edit.svg"
 import addImg from "./imgs/add.svg";
 import minus from "./imgs/minus.svg";
 import Modal from 'react-modal';
+import guide from "./imgs/guide.png"
 
 
 export default function ResumeStep4() {
@@ -91,6 +92,22 @@ export default function ResumeStep4() {
         webkitScrollbarThumb: {backgroundColor: "darkgrey", outline: "1px solid slategrey"}
 
     };
+
+    const [modalIsOpenGuide, setIsOpenGuide] = React.useState(false);
+
+
+    /************** Modal **************/
+
+    function openModalGuide() {
+        setIsOpenGuide(true);
+        document.body.style.overflow = 'hidden';
+
+    }
+    function closeModalGuide() {
+        setIsOpenGuide(false);
+        document.body.style.overflow = 'visible';
+
+    }
 // Modal.setAppElement('#yourAppElement');
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -597,6 +614,27 @@ export default function ResumeStep4() {
                             {t("resume.step4.EducationalBackground")}
                         </h2>
                         <div className="mx-auto ">
+                            <div className={'row d-xl-none'}>
+                                <div className={'col-12'}>
+                                    <Modal
+                                        isOpen={modalIsOpenGuide}
+                                        // onAfterOpen={afterOpenModal}
+                                        onRequestClose={closeModalGuide}
+                                        style={customStyles}
+                                        contentLabel="Example Modal"
+                                    >
+                                        <div className={'row'}>
+                                            <div className={'col-12'}>
+                                                <button className={'btn btn-default float-right'} onClick={closeModalGuide}>X</button>
+
+                                            </div>
+
+                                        </div>
+                                        <FrameResume step={4}/>
+
+                                    </Modal>
+                                </div>
+                            </div>
                             <div className="row ">
                                 <div className={'col-12 col-lg-7 px-5'}>
                                     <List
@@ -1103,6 +1141,10 @@ export default function ResumeStep4() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px'}}>
+                    <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1 bg-warning" } onClick={openModalGuide} width={'60px'} height={'60px'}
+                         src={guide}/>
                 </div>
             </main>
             <NotificationContainer/>
