@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {generateURL} from "../../global/Requests";
 import {Link} from "react-router-dom";
-import advertisment from "./../imgs/advertisment.png"
+import advertisment from "./../imgs/content.png"
 import $ from "jquery"
 import InfiniteScroll from "react-infinite-scroll-component";
 

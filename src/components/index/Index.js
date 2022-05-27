@@ -1,17 +1,9 @@
 import Style from "./index.module.css";
 
 import HandLogo from "./imgs/hand logo (2).png";
-import AnjomanRazi from "./imgs/anjoman-razi.png";
-import AnjomanKhajenasir from "./imgs/anjoman-khajenasir.png";
-import LogoTransparent from "./imgs/logo-transparent.png";
-import PersianGulf from "./imgs/persianGulf.png";
-import AnjomanGilan from "./imgs/anjoman-gilan.png";
-import ItLogo from "./imgs/ITLogo.png";
-import Img1 from "./imgs/1.png";
 import Feature9 from "./imgs/Feature_9.png";
 import NewsSample from "./imgs/newsSample.png";
 import {useEffect, useState} from "react";
-import {getSizeImageItems} from "../SizeImageList/SizeImageList";
 import {generateURL} from "../global/Requests";
 import * as queryString from "query-string";
 

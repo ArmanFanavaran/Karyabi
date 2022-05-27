@@ -2515,7 +2515,7 @@ export default function EmploymentAdvertisementList() {
                                                                 <div
                                                                     className={Style["news-item-img"] + " text-center p-lg-4"}>
                                                                     <img
-                                                                        src={item.company.logo !== null ? item.company.logo : advertisment}
+                                                                        src={item.jobOffer.coverImgs.length >0  ? item.jobOffer.coverImgs[0] : advertisment}
                                                                         alt={sp.get("lang") === "fa" ?
                                                                             item.company.name :
                                                                             item.company.englishName
@@ -2601,7 +2601,7 @@ export default function EmploymentAdvertisementList() {
                                                                 <div className="row">
                                                                     <div className={Style2["news-img"] + " col-12"}>
                                                                         <img
-                                                                            src={item.company.logo !== null ? item.company.logo : advertisment}
+                                                                            src={item.jobOffer.coverImgs.length >0  ? item.jobOffer.coverImgs[0] : advertisment}
                                                                             alt={sp.get("lang") === "fa" ?
                                                                                 item.company.name :
                                                                                 item.company.englishName
