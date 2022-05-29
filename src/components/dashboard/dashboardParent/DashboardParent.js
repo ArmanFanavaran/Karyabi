@@ -4,7 +4,7 @@ import ChangePassword from "../../authentication/changePassword/ChangePassword";
 import Controller from "../../authentication/Helper/Controller";
 import * as React from "react";
 import Style from './DashboardParent.module.css'
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 import SentResumes from "../sentResumes/SentResumes";
 import {useEffect, useState} from "react";
 import {generateURL} from "../../global/Requests";
@@ -15,11 +15,13 @@ import $ from "jquery";
 import Modal from "react-modal";
 import Delete from "../../employmentAdvertisement/imgs/delete.png";
 import filterImage from "../../employmentAdvertisement/imgs/filter.png";
+import {getDashboardPages} from "./dashboardPages";
 
 
 export default function Dashboard() {
     const [user, setUser] = useState();
     const [language, setLanguage] = useState();
+    const pages = getDashboardPages();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const modalStyle = {
@@ -47,6 +49,20 @@ export default function Dashboard() {
             // transform: 'translate(-50%, -50%)',
         }
 
+    }
+
+
+    const checkIsActive = (event, pathname) => {
+        const activeItemStyle = "background-color: #f8f2ff;"
+        const inactiveItemStyle = "background-color: #ffffff;"
+        $(".navItems li").attr("style",inactiveItemStyle);
+        $(event.currentTarget).attr("style",activeItemStyle);
+        console.log(pathname)
+        console.log(window.location.pathname)
+    }
+    const isNavActive = (pathname) => {
+        if (window.location.pathname === pathname)
+            return true;
     }
 
     /************** Scroll Filter *************/
@@ -121,7 +137,7 @@ export default function Dashboard() {
     }, []);
     return (
         <div className={Style.main}>
-            <div className={"container-fluid my-4 px-0 px-xl-5 "}>
+            <div className={"container my-4 "}>
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <Modal
@@ -155,15 +171,21 @@ export default function Dashboard() {
                                     {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
                                 </div>
                                 <hr/>
-                                <ul className={"nav flex-column"}>
-                                    <li className={"nav-item w-100"}><Link
-                                        className={"text-center d-flex justify-content-center text-secondary"}
-                                        to={{
-                                            pathname: getRoutesItems().SentResumes.route,
-                                            search: "lang=" +language,
-                                        }}>رزومه‌های ارسال شده</Link></li>
-                                    <hr/>
-
+                                <ul className={"nav flex-column navItems dir-rtl " + Style.navItems}>
+                                    {
+                                        pages.user.map((item)=>(
+                                            <li className={isNavActive(item.pathname)? "nav-item w-100 py-2 px-3 "+ Style.active : "nav-item w-100 py-2 px-3 "}
+                                                onClick={(event)=>{checkIsActive(event, item.pathname)}}
+                                            ><Link
+                                                className={"text-center d-flex  text-secondary change-text"}
+                                                to={{
+                                                    pathname: item.pathname,
+                                                    search: "lang=" +language,
+                                                }}
+                                            ><i className={item.iconClass}></i>
+                                                <span className={'mx-2'}>{language==='fa' ? item.label : item.labelEng}</span></Link></li>
+                                        ))
+                                    }
                                 </ul>
                             </div>
                         </Modal>
@@ -189,21 +211,25 @@ export default function Dashboard() {
                                 <p className={"text-center text-secondary"}>{user !== undefined && user.ResumePhone}</p>
                                 {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
                             </div>
-                            <hr/>
-                            <ul className={"nav flex-column"}>
-                                <li className={"nav-item w-100"}><Link
-                                    className={"text-center d-flex justify-content-center text-secondary"}
-                                    to={{
-                                        pathname: getRoutesItems().SentResumes.route,
-                                        search: "lang=" +language,
-                                    }}
-                                >رزومه‌های ارسال شده</Link></li>
-                                <hr/>
-
+                            <ul className={"nav flex-column navItems " + Style.navItems}>
+                                {
+                                    pages.user.map((item)=>(
+                                        <li className={isNavActive(item.pathname)? "nav-item w-100 py-2 px-3 "+ Style.active : "nav-item w-100 py-2 px-3 "}
+                                            onClick={(event)=>{checkIsActive(event, item.pathname)}}
+                                        ><Link
+                                            className={"text-center d-flex  text-secondary change-text"}
+                                            to={{
+                                                pathname: item.pathname,
+                                                search: "lang=" +language,
+                                            }}
+                                        ><i className={item.iconClass}></i>
+                                            <span className={'mx-2'}>{language==='fa' ? item.label : item.labelEng}</span></Link></li>
+                                    ))
+                                }
                             </ul>
                         </div>
                     </div>
-                    <div className={"col-xl-9 col-12 p-4"}>
+                    <div className={"col-xl-9 col-12 py-4 px-0"}>
 
                         <Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>
                         <Route path={getRoutesItems().SentResumes.route} exact component={SentResumes}/>

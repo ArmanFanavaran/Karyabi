@@ -5,6 +5,36 @@
     height: 100%;
     overflow-y: auto;
 }
+.table td {
+    font-size: 0.9rem;
+    border: 0 !important;
+    /*border-radius: 4px;*/
+}
+.table tr:hover {
+    background-color: #f8f2ff;
+
+}
+.table{
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+.table th {
+    font-size: 0.9rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 0 !important;
+    background-color: #f8f2ff;
+}
+.table th:first-child, .table td:first-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.table th:last-child, .table td:last-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
 .editBtn img {
     width: 15px;
     height: 15px;
@@ -52,4 +82,9 @@
     border: 1px solid #cecece;
     border-radius: 5px;
     color: #575757;
+}
+.approveStatus span{
+    color: white;
+    font-size: 0.85em;
+    /*margin-top: 20px;*/
 }

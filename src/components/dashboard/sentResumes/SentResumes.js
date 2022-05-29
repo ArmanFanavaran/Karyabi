@@ -357,10 +357,10 @@ export default function SentResumes() {
             },
             data: JSON.stringify(config_data)
         };
-        console.log(config_data)
+        // console.log(config_data)
 
         axios(config).then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
             setResumes(response.data.data);
         }).catch(function (error) {
             console.log(error);
@@ -389,10 +389,10 @@ export default function SentResumes() {
             },
             data: JSON.stringify(config_data)
         };
-        console.log(config_data)
+        // console.log(config_data)
 
         axios(count_config).then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
             setCount(response.data.data);
         }).catch(function (error) {
             console.log(error);
@@ -417,22 +417,23 @@ export default function SentResumes() {
 
     return (
         <div>
-            <h5 className={"change-dir change-text " + Style.pageTitle}>رزومه‌های ارسال شده</h5>
+            <h5 className={"change-dir change-text " + Style.pageTitle}>پیگیری رزومه‌های ارسالی</h5>
             <div className={"table-responsive change-dir mt-4"}>
                 <table className={"table change-text " + Style.table}>
                     <thead>
                     <tr>
-                        <td>عنوان شغل</td>
-                        <td>نام شرکت</td>
-                        <td>تاریخ ارسال</td>
-                        <td>ویرایش رزومه</td>
-                        <td>مشاهده</td>
+                        <th>عنوان شغل</th>
+                        <th>نام شرکت</th>
+                        <th>تاریخ ارسال</th>
+                        <th>وضعیت بررسی</th>
+                        <th>ویرایش</th>
+                        <th>مشاهده</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     {
-                        resumes.length > 0 && resumes.map((item, index) => (
+                        resumes.length > 0 ? resumes.map((item, index) => (
                             <tr>
                                 <td><Link to={{
                                     pathname: getRoutesItems().employmentAdvertisementSingle.route,
@@ -440,10 +441,16 @@ export default function SentResumes() {
                                 }}>{language ==='fa' ? item.jobOfferTitle : item.jobOfferTitleEnglish}</Link></td>
                                 <td>{language ==='fa' ? item.ownerName : item.ownerEnglishName}</td>
                                 <td>{serverTimeToNewsDate(item.lastUpdate)}</td>
+                                <td className={Style.approveStatus}>
+                                    {item.isApproved && <span className={'bg-success rounded p-1'}>قبول شده</span>}
+                                    {item.isRejected && <span className={'bg-danger rounded p-1'}>رد شده</span>}
+                                    {(!item.isRejected && !item.isApproved)&& <span className={'bg-secondary rounded  p-1'}>درحال بررسی</span>}
+                                </td>
                                 <td><button className={"btn btn-warning " + Style.editBtn} onClick={()=>{onOpenModal(item.id)}}><img src={Edit}/></button></td>
                                 <td><Link className={"btn btn-info " + Style.editBtn}><img src={Eye}/></Link></td>
                             </tr>
-                        ))
+                        )):
+                            <h5 className={'my-5 text-center text-secondary d-block'}>شما تا به حال رزومه‌ای ارسال نکرده‌اید</h5>
                     }
                     </tbody>
                 </table>
