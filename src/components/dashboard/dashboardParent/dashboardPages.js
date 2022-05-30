@@ -5,7 +5,7 @@ const pages = {
         {
             label: "حساب کاربری",
             labelEng: "Profile",
-            pathname: getRoutesItems().DashboardParent.route + "/",
+            pathname: getRoutesItems().DashboardParent.route ,
             iconClass: "bi bi-person-fill"
         },
         {

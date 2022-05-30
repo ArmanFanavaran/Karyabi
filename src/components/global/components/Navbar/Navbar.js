@@ -124,10 +124,10 @@ export default function Navbar() {
                             </li>
                            <li className={Style.itemNav + " navbar-item my-lg-0 my-2 mx-auto mx-lg-2"}>
                                 <Link className="navbar-link" to={{
-                                    pathname: getRoutesItems().mainPage.route,
+                                    pathname: getRoutesItems().companyList.route,
                                     search: "lang=" + sp.get("lang"),
                                 }}>
-                                    {t("global.navbar.home")}
+                                    {t("global.navbar.companyList")}
                                 </Link>
                             </li>
                             {sp.get("lang") === "en" ?

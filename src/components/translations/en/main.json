@@ -165,7 +165,8 @@
       "createResume": "Create Resume",
       "showResume": "Show Resume",
       "logOut": "Logout",
-      "contentProduction": "Content Production"
+      "contentProduction": "Content Production",
+      "companyList": "Companies"
     },
     "footer": {
       "about_our_observatory": "Iranian Teachers Astronomy Union",

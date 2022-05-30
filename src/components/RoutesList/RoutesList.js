@@ -234,6 +234,13 @@ let Routes = {
         "enDes": "Resume",
         "route": "/content/single"
     },
+
+    /************* Company **************/
+    "companyList": {
+        "des": "لیست شرکت‌ها",
+        "enDes": "Companies List",
+        "route": "/companies/list"
+    }
 }
 
 export function getRoutesItems() {

@@ -112,6 +112,7 @@ export default function Dashboard() {
         console.log(config_data)
 
         axios(config).then(function (response) {
+            console.log(response.data.data)
             let userInfo = JSON.parse(response.data.data.userInfoJson);
             setUser(userInfo);
             console.log(userInfo)

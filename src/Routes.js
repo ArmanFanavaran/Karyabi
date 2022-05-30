@@ -69,6 +69,8 @@ import CoursesSingle from "./components/courses/single/CoursesSingle";
 import Dashboard from "./components/dashboard/dashboardParent/DashboardParent";
 import SentResume from "./components/dashboard/sentResumes/SentResumes";
 
+/************* Company *************/
+import CompaniesList from "./components/company/list/CompanyList";
 
 export default function Routes() {
     return (
@@ -130,7 +132,9 @@ export default function Routes() {
                 {/****************** Contact *****************************/}
                 <Route path="/contact" exact component={ContactAdmin}/>
 
-                {/*<Route path="/test" exact component={Test}/>*/}
+                {/************* Company *************/}
+                <Route path={getRoutesItems().companyList.route} exact component={CompaniesList}/>
+
 
                 {/****************** Controller *****************************/}
                 <Controller>

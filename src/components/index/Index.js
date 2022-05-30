@@ -139,7 +139,7 @@ export default function Index() {
                             </div>
                         </div>
                         <div className={Style["advertising-img"] + " col-md-6 text-center text-md-right  py-2"}>
-                            <img src={Feature9} alt=""/>
+                            <img className={'w-100'} src={Feature9} alt=""/>
                         </div>
                         <div className={Style["courses-text"] + " col-md-6 py-2 order-md-2 order-3"}>
                             <h2 className="m-md-0 mx-auto  text-right">متن ساختگی با تولید لورم ایپسوم</h2>
