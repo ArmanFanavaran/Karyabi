@@ -2016,7 +2016,7 @@ export default function EmploymentAdvertisementList() {
                         </Modal>
                     </div>
                 </div>
-                <div className={Style["sort-box"] + " row mb-5"}>
+                <div className={Style["sort-box"] + " row mb-5 d-none d-xl-flex"}>
 
                     <div className={Style["sort-imgs"] + " d-inline change-text-reverse col-12 "}>
                         <img src={GridIcon} alt="" onClick={onGridClick}/><img src={ListIcon} alt=""
@@ -2953,14 +2953,14 @@ export default function EmploymentAdvertisementList() {
                                                                                 item.company.englishName
                                                                             }
                                                                         </p>
-                                                                        <p className="change-text d-flex change-dir justify-content-between mt-3 pb-3">
-                                                                            <span className={Style.locationSpan}>
+                                                                        <p className="change-text row d-flex change-dir justify-content-between  pb-3">
+                                                                            <span className={Style.locationSpan + " mt-3"}>
                                                                                 {sp.get("lang") === "fa" ?
                                                                                     JSON.parse(item.jobOffer.cityJson).name + " / " + JSON.parse(item.jobOffer.provinceJson).name :
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
-                                                                            <span className={Style.dateSpan}>
+                                                                            <span className={Style.dateSpan  + " mt-3"}>
                                                                                 {sp.get("lang") === "fa" ?
                                                                                     serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
                                                                                     serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}

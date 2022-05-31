@@ -41,6 +41,7 @@ export default function CompaniesList() {
     const [companies, setCompanies] = useState([]);
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState();
+    const [keyword, setKeyword] = useState('');
     const [categoryId, setCategoryId] = useState();
     const [t, i18n] = useTranslation('main');
 
@@ -128,6 +129,70 @@ export default function CompaniesList() {
             stars.push(EmptyStar);
 
         return stars;
+    }
+
+    const onSearch = (event) => {
+        let search = $(event.target).val();
+        setKeyword(search);
+
+        /* get Companies*/
+        let data = {
+            "roleId": 5,
+            "page": 1,
+            "pageSize": pageSize,
+            "logoPicDetail": {
+                "heights": [
+                    200
+                ],
+                "widths": [
+                    200
+                ],
+                "qualities": [
+                    90
+                ]
+            },
+            "mainPicDetail": {
+                "heights": [
+                    200
+                ],
+                "widths": [
+                    200
+                ],
+                "qualities": [
+                    90
+                ]
+            },
+            "keyWord": search,
+            "provinceIds": [],
+            "cityIds": [],
+            "companyCategoryIds": category!==undefined ? [parseInt(category.id)] : [],
+            "economicCode": "",
+            "fixedphone": "",
+            "mobilePhone": "",
+            "userId": 0,
+            "isSortByInsertTimeAsc": false,
+            "isSortByInsertTimeDesc": false,
+            "isSortByScoreAsc": false,
+            "isSortByScoreDesc": false,
+            "fromRegisterationDate": null,
+            "toRegisterationDate": null
+        }
+        let list_config = {
+            method: 'post',
+            url: generateURL("/Company/GetCompanyListClientSide"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+        axios(list_config).then((response) => {
+            setCompanies(response.data.data)
+            console.log(response.data.data)
+        })
+            .catch((error)=> {
+                console.log(error)
+            });
+
     }
 
     useEffect(function (){
@@ -240,6 +305,15 @@ export default function CompaniesList() {
                             <div className={' pt-4'}>
                                 <div className={Style.categories + " w-100 mt-4 "}>
                                     <div className={Style["fields-header"]}>
+                                        <h6 className={'change-text my-0 ' + Style.categoriesTitle}>جستجو</h6>
+
+                                    </div>
+                                    <div className={'p-4'}>
+                                        <input type={'text'} placeholder={'جستجو'} className={' ' + Style["search-in-results"]} onChange={onSearch}/>
+                                    </div>
+                                </div>
+                                <div className={Style.categories + " w-100 mt-4 "}>
+                                    <div className={Style["fields-header"]}>
                                         <h6 className={'change-text my-0 ' + Style.categoriesTitle}>دسته‌بندی ها</h6>
 
                                     </div>
@@ -294,19 +368,28 @@ export default function CompaniesList() {
 
 
                 </div>
-                <div className="row change-dir">
+                <div className="row change-dir w-100">
 
-                    {/** Desktop Category */}
-                    <div className={"d-none d-lg-none d-xl-block col-xl-3"}>
-                        <div className={Style.categories + " w-100 mt-4 "}>
-                            <div className={Style["fields-header"]}>
-                                <h6 className={'change-text my-0 ' + Style.categoriesTitle}>دسته‌بندی ها</h6>
+                        {/** Desktop Category */}
+                        <div className={"d-none d-lg-none d-xl-block col-xl-3"}>
+                            <div className={Style.categories + " w-100 mt-4 "}>
+                                <div className={Style["fields-header"]}>
+                                    <h6 className={'change-text my-0 ' + Style.categoriesTitle}>جستجو</h6>
 
+                                </div>
+                                <div className={'p-4'}>
+                                    <input type={'text'} placeholder={'جستجو'} className={' ' + Style["search-in-results"]} onChange={onSearch}/>
+                                </div>
                             </div>
+                            <div className={Style.categories + " w-100 mt-4 "}>
+                                <div className={Style["fields-header"]}>
+                                    <h6 className={'change-text my-0 ' + Style.categoriesTitle}>دسته‌بندی ها</h6>
 
-                            <ul className="nav flex-column p-4">
-                                {
-                                    categories.length > 0 &&
+                                </div>
+
+                                <ul className="nav flex-column p-4">
+                                    {
+                                        categories.length > 0 &&
                                         categories.map((item)=> (
                                             <li className="nav-item">
                                                 <Link to={{
@@ -316,91 +399,91 @@ export default function CompaniesList() {
                                                         + "&&lang="+ language
                                                 }}
                                                       onClick={()=>{setCategoryId(item.id)}}
-                                                    className="nav-link change-text" href="#">
+                                                      className={categoryId !== undefined && categoryId === item.id ? "nav-link change-text " + Style.active : "nav-link change-text "} href="#">
                                                     {language==='fa'? item.name : item.englishName}
                                                 </Link>
                                             </li>
                                         ))
-                                }
-                            </ul>
-                        </div>
-
-                    </div>
-                    <div className="col-xl-9">
-                        {isGrid ?
-                            <div className={'row w-100'}>
-                                {
-                                    companies.length > 0 && companies.map((item)=>(
-                                        <div className={'col-12 col-xl-6 mt-4'}>
-                                            <div className={Style.gridItemEven}>
-                                                <div className={'position-relative'}>
-                                                    <img src={Background} className={Style.gridBackground}/>
-                                                    <img src={item.logo!== "" ? item.logo : Logo} className={"rounded img-thumbnail " + Style.gridLogo}/>
-                                                    <div className={'d-flex rounded px-2 py-2 change-dir '+ Style.gridRate}>
-                                                        <span className={'mx-1'}>{item.totalScore}</span>
-                                                        <span className={'mx-1'}><img src={FullStar}/></span>
-                                                    </div>
-                                                </div>
-                                                <div className={'mt-5 px-4 pb-4 pt-2'}>
-                                                    <Link><h5 className={'change-text ' + Style.gritTitle}>{language==='fa' ? item.name : item.englishName}</h5></Link>
-                                                    <div className={'d-flex row '}>
-                                                        <div className={Style.dateSpan + " mx-1 mt-3"}>
-                                                            {language==='fa' ? item.province.name + " / " + item.city.name : item.province.englishName + " / " + item.city.englishName}
-                                                        </div>
-                                                        <div className={Style.dateSpan + " mx-1 mt-3"}>{language==='fa' ? item.companyCategory.name : item.companyCategory.englishName}</div>
-                                                        {item.isRecruiting && <div className={Style.locationSpan + " mx-1 mt-3"}>درحال استخدام</div>}
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-
+                                    }
+                                </ul>
                             </div>
-                            :
-                            <div className={'row w-100'}>
-                                {
-                                    companies.length > 0 && companies.map((item) => (
-                                        <div className={'col-12 mt-4'}>
-                                            <div className={Style.gridItemEven + " d-flex justify-content-between p-4"}>
-                                                <div className={'d-flex flex-grow-1'}>
-                                                    <img src={item.logo!== "" ? item.logo : Logo} className={"rounded img-thumbnail " + Style.listLogo}/>
-                                                    <div className={'px-3 flex-grow-1'}>
+
+                        </div>
+                        <div className="col-xl-9">
+                            {isGrid ?
+                                <div className={'row w-100'}>
+                                    {
+                                        companies.length > 0 && companies.map((item)=>(
+                                            <div className={'col-12 col-xl-6 mt-4'}>
+                                                <div className={Style.gridItemEven}>
+                                                    <div className={'position-relative'}>
+                                                        <img src={Background} className={Style.gridBackground}/>
+                                                        <img src={item.logo!== "" ? item.logo : Logo} className={"rounded img-thumbnail " + Style.gridLogo}/>
+                                                        <div className={'d-flex rounded px-2 py-2 change-dir '+ Style.gridRate}>
+                                                            <span className={'mx-1'}>{item.totalScore}</span>
+                                                            <span className={'mx-1'}><img src={FullStar}/></span>
+                                                        </div>
+                                                    </div>
+                                                    <div className={'mt-5 px-4 pb-4 pt-2'}>
                                                         <Link><h5 className={'change-text ' + Style.gritTitle}>{language==='fa' ? item.name : item.englishName}</h5></Link>
-                                                        <div className={'d-flex pt-2'}>
-                                                            <div className={Style.dateSpan + " mx-1 "}>
+                                                        <div className={'d-flex row '}>
+                                                            <div className={Style.dateSpan + " mx-1 mt-3"}>
                                                                 {language==='fa' ? item.province.name + " / " + item.city.name : item.province.englishName + " / " + item.city.englishName}
                                                             </div>
-                                                            <div className={Style.dateSpan + " mx-1 "}>{language==='fa' ? item.companyCategory.name : item.companyCategory.englishName}</div>
-                                                            {item.isRecruiting && <div className={Style.locationSpan + " mx-1"}>درحال استخدام</div>}
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className={Style.scoreText + " mt-4"}>{item.totalScore}</div>
+                                                            <div className={Style.dateSpan + " mx-1 mt-3"}>{language==='fa' ? item.companyCategory.name : item.companyCategory.englishName}</div>
+                                                            {item.isRecruiting && <div className={Style.locationSpan + " mx-1 mt-3"}>درحال استخدام</div>}
 
-                                                        <div className={'d-flex dir-ltr ' + Style.listStars}>
-                                                            {
-                                                                calculateScoreStars(item.totalScore).map((item)=> (
-                                                                    <img src={item}/>
-                                                                ))
-                                                            }
                                                         </div>
                                                     </div>
+
                                                 </div>
-
                                             </div>
-                                        </div>
-                                    ))
+                                        ))
+                                    }
 
-                                }
+                                </div>
+                                :
+                                <div className={'row w-100'}>
+                                    {
+                                        companies.length > 0 && companies.map((item) => (
+                                            <div className={'col-12 mt-4'}>
+                                                <div className={Style.gridItemEven + " d-flex justify-content-between p-4"}>
+                                                    <div className={'d-flex flex-grow-1'}>
+                                                        <img src={item.logo!== "" ? item.logo : Logo} className={"rounded img-thumbnail " + Style.listLogo}/>
+                                                        <div className={'px-3 flex-grow-1'}>
+                                                            <Link><h5 className={'change-text ' + Style.gritTitle}>{language==='fa' ? item.name : item.englishName}</h5></Link>
+                                                            <div className={'d-flex pt-2'}>
+                                                                <div className={Style.dateSpan + " mx-1 "}>
+                                                                    {language==='fa' ? item.province.name + " / " + item.city.name : item.province.englishName + " / " + item.city.englishName}
+                                                                </div>
+                                                                <div className={Style.dateSpan + " mx-1 "}>{language==='fa' ? item.companyCategory.name : item.companyCategory.englishName}</div>
+                                                                {item.isRecruiting && <div className={Style.locationSpan + " mx-1"}>درحال استخدام</div>}
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className={Style.scoreText + " mt-4"}>{item.totalScore}</div>
 
-                            </div>
-                        }
+                                                            <div className={'d-flex dir-ltr ' + Style.listStars}>
+                                                                {
+                                                                    calculateScoreStars(item.totalScore).map((item)=> (
+                                                                        <img src={item}/>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        ))
+
+                                    }
+
+                                </div>
+                            }
+
+                        </div>
                     </div>
-                </div>
 
             </div>
             <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
