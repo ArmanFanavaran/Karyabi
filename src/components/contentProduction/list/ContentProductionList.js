@@ -247,7 +247,7 @@ export default function ContentProductionList() {
             "heights": [200],
             "widths": [200],
             "qualities": [90],
-            "catId": categoryListSelect,
+            "catIds": categoryListSelect,
             "keyWord": keyword,
             "isOrderByInsertTimeDes": true,
             "isOrderByInsertTimeAsec": false,
@@ -332,7 +332,7 @@ export default function ContentProductionList() {
             "heights": [200],
             "widths": [200],
             "qualities": [90],
-            "catId": categoryListSelect,
+            "catIds": categoryListSelect,
             "keyWord": keyword,
             "isOrderByInsertTimeDes": true,
             "isOrderByInsertTimeAsec": false,
@@ -379,6 +379,16 @@ export default function ContentProductionList() {
         axios(count_config)
             .then(function (response) {
                 setCount(response.data.data);
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: 0
+                }, 500);
+                let lastPage = Math.ceil(response.data.data / pageSize); // the last page
+                if (1 < lastPage) {
+                    setHasMore(true)
+                } else {
+                    setHasMore(false)
+                }
+
             })
             .catch(function (error) {
                 let errors = error.response.data.errors;
@@ -396,6 +406,7 @@ export default function ContentProductionList() {
 
                 }
             });
+
     }, [selectedCategory, keyword])
 
     const onGridClick = () => {
@@ -417,7 +428,7 @@ export default function ContentProductionList() {
             "heights": [200],
             "widths": [200],
             "qualities": [90],
-            "catId": 0,
+            "catIds": [],
             "keyWord": "",
             "isOrderByInsertTimeDes": true,
             "isOrderByInsertTimeAsec": false,
@@ -438,6 +449,7 @@ export default function ContentProductionList() {
         };
         axios(list_config)
             .then(function (response) {
+                console.log(response.data.data)
                 let data = response.data.data;
                 setNewsList(data)
                 // let latest = [];
@@ -597,7 +609,25 @@ export default function ContentProductionList() {
                         <img src={GridIcon} alt="" onClick={onGridClick}/><img src={ListIcon} alt=""
                                                                                onClick={onListClick}/>
                     </div>
-
+                    <div className={'d-none d-xl-block col-12 change-text change-dir'}>
+                        {
+                            selectedCategory.length > 0 ?
+                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                        }
+                        {
+                            selectedCategory.length > 0 ?
+                                selectedCategory.map((item, index) => (
+                                    <div
+                                        className={Style["branch-tags"] + " px-2 py-1 mx-1 change-dir change-text"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveCategoryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                        {item.label}
+                                    </div>
+                                )) : null
+                        }
+                    </div>
                 </div>
                 <div className="row change-dir">
                     <div className={"d-none d-lg-none d-xl-block col-xl-3"}>

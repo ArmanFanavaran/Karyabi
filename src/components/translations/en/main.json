@@ -484,7 +484,6 @@
       "sendResume": "Send Resume"
     }
   },
-
   "contentProduction": {
     "title": {
         "contentProduction": "Content Production"
@@ -496,6 +495,22 @@
       "less": "Less",
       "sortBy": "Sort By"
 
+    },
+    "single": {
+      "category": "Category"
+    }
+  },
+  "company": {
+    "title": {
+        "company": "Company"
+    },
+    "list": {
+      "search": "search",
+      "category": "Category",
+      "more": "More",
+      "less": "Less",
+      "sortBy": "Sort By",
+      "hiring": "Hiring"
     },
     "single": {
       "category": "Category"

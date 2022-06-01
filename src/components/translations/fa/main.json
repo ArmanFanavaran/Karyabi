@@ -494,6 +494,22 @@
     "single": {
       "category": "دسته بندی"
     }
+  },
+  "company": {
+    "title": {
+      "company": "شرکت ها"
+    },
+    "list": {
+      "search": "جستجو",
+      "category": "دسته بندی",
+      "more": "بیشتر",
+      "less": "کمتر",
+      "sortBy": "مرتب سازی",
+      "hiring": "درحال استخدام"
+    },
+    "single": {
+      "category": "دسته بندی"
+    }
   }
 
 }
