@@ -2837,7 +2837,7 @@ export default function EmploymentAdvertisementList() {
                                                             pathname: getRoutesItems().employmentAdvertisementSingle.route,
                                                             search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
                                                         } : null
-                                                    } className={Style.mouse}>
+                                                    } target="_blank" className={Style.mouse}>
                                                     <div
                                                         className={Style["news-item"] + " " + (index % 2 === 0 ? Style["news-item-even"] : Style["news-item-odd"]) + " mx-2 my-4"}>
                                                         <div
@@ -2927,7 +2927,7 @@ export default function EmploymentAdvertisementList() {
                                                                     pathname: getRoutesItems().employmentAdvertisementSingle.route,
                                                                     search: "lang=" + sp.get("lang") + "&" + "id=" + item.jobOffer.id + "&" + "title=" + item.jobOffer.titleEnglish
                                                                 } : null
-                                                            } className={Style.mouse}>
+                                                            } target="_blank" className={Style.mouse}>
                                                             <div className={Style2["container-item"] + " container"}>
                                                                 <div className="row">
                                                                     <div className={Style2["news-img"] + " col-12"}>
