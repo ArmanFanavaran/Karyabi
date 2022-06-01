@@ -570,7 +570,6 @@ export default function CompaniesList() {
                 <h3>{t("company.title.company")}</h3>
 
                 {/** Mobile Category */}
-
                 <div className={'row d-xl-none'}>
                     <div className={'col-12'}>
                         <Modal
@@ -709,11 +708,11 @@ export default function CompaniesList() {
 
 
                 </div>
-                <div className="row change-dir">
+                <div className="row change-dir w-100 mx-0">
 
                     {/** Desktop Category */}
-                    <div className={"d-none d-lg-none d-xl-block col-xl-3"}>
-                        <div className={" "} id={"fixed-class"}>
+                    <div className={"d-none d-lg-none d-xl-block col-xl-3 px-0 mt-2"}>
+                        <div className={"px-0 "} id={"fixed-class"}>
                             <div className={Style["sticky-content"] + " change-dir-reverse w-100 px-3"} id={'filter'}>
                                 <div className={Style["fields-div"] + " my-3 d-md-block d-none change-dir change-text"}>
                                     <div className={Style["fields-header"]}>
@@ -786,7 +785,7 @@ export default function CompaniesList() {
 
 
                     </div>
-                    <div className="col-12 col-xl-9">
+                    <div className="col-12 col-xl-9 px-0">
                         {isGrid ?
                             <InfiniteScroll
                                 dataLength={companies.length}
@@ -796,26 +795,11 @@ export default function CompaniesList() {
                                 style={{overflow: 'hidden'}}
                                 loader={<h4>Loading...</h4>}
                             >
-                                <div className={'row'}>
+                                <div className={'row w-100 px-xl-3 px-1 mx-0'}>
                                     {
                                         companies.length > 0 && companies.map((item) => (
-                                            <div className={'col-12 col-xl-6 mt-4'}>
-                                                <Link to={item.name !== null && language === "fa" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name.replace(/\s+/g, '-').toLowerCase()
-                                                    } :
-                                                    language === "fa" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name
-                                                    } : item.englishName !== null && language === "en" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName.replace(/\s+/g, '-').toLowerCase()
-
-                                                    } : language === "en" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName
-                                                    } : null
-                                                } className={Style.gridItemEven}>
+                                            <div className={'col-12 col-xl-6 my-4'}>
+                                                <div  className={Style.gridItemEven}>
                                                     <div className={'position-relative'}>
                                                         <img src={Background} className={Style.gridBackground}/>
                                                         <img src={item.logo !== "" ? item.logo : Logo}
@@ -827,7 +811,25 @@ export default function CompaniesList() {
                                                         </div>
                                                     </div>
                                                     <div className={'mt-5 px-4 pb-4 pt-2'}>
-                                                        <h5 className={'change-text ' + Style.gritTitle}>{language === 'fa' ? item.name : item.englishName}</h5>
+                                                        <Link to={item.name !== null && language === "fa" ? {
+                                                                pathname: getRoutesItems().companySingle.route,
+                                                                search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name.replace(/\s+/g, '-').toLowerCase()
+                                                            } :
+                                                            language === "fa" ? {
+                                                                pathname: getRoutesItems().companySingle.route,
+                                                                search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name
+                                                            } : item.englishName !== null && language === "en" ? {
+                                                                pathname: getRoutesItems().companySingle.route,
+                                                                search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName.replace(/\s+/g, '-').toLowerCase()
+
+                                                            } : language === "en" ? {
+                                                                pathname: getRoutesItems().companySingle.route,
+                                                                search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName
+                                                            } : null
+                                                        }>
+                                                            <h5 className={'change-text ' + Style.gritTitle}>{language === 'fa' ? item.name : item.englishName}</h5>
+                                                        </Link>
+
                                                         <div className={'d-flex row '}>
                                                             <div className={Style.dateSpan + " mx-1 mt-3"}>
                                                                 {language === 'fa' ? item.province.name + " / " + item.city.name : item.province.englishName + " / " + item.city.englishName}
@@ -840,7 +842,7 @@ export default function CompaniesList() {
                                                         </div>
                                                     </div>
 
-                                                </Link>
+                                                </div>
                                             </div>
                                         ))
                                     }
@@ -856,32 +858,35 @@ export default function CompaniesList() {
                                 style={{overflow: 'hidden'}}
                                 loader={<h4>Loading...</h4>}
                             >
-                                <div className={'row'}>
+                                <div className={'row mx-0 px-2 px-xl-3'}>
                                     {
                                         companies.length > 0 && companies.map((item) => (
                                             <div className={'col-12 mt-4'}>
-                                                <Link to={item.name !== null && language === "fa" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name.replace(/\s+/g, '-').toLowerCase()
-                                                    } :
-                                                    language === "fa" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name
-                                                    } : item.englishName !== null && language === "en" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName.replace(/\s+/g, '-').toLowerCase()
-
-                                                    } : language === "en" ? {
-                                                        pathname: getRoutesItems().contentProductionSingle.route,
-                                                        search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName
-                                                    } : null
-                                                }
+                                                <div
                                                       className={Style.gridItemEven + " d-flex justify-content-between p-4"}>
                                                     <div className={'d-flex flex-grow-1'}>
                                                         <img src={item.logo !== "" ? item.logo : Logo}
                                                              className={"rounded img-thumbnail " + Style.listLogo}/>
                                                         <div className={'px-3 flex-grow-1'}>
-                                                            <h5 className={'change-text ' + Style.gritTitle}>{language === 'fa' ? item.name : item.englishName}</h5>
+                                                            <Link to={item.name !== null && language === "fa" ? {
+                                                                    pathname: getRoutesItems().companySingle.route,
+                                                                    search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name.replace(/\s+/g, '-').toLowerCase()
+                                                                } :
+                                                                language === "fa" ? {
+                                                                    pathname: getRoutesItems().companySingle.route,
+                                                                    search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.name
+                                                                } : item.englishName !== null && language === "en" ? {
+                                                                    pathname: getRoutesItems().companySingle.route,
+                                                                    search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName.replace(/\s+/g, '-').toLowerCase()
+
+                                                                } : language === "en" ? {
+                                                                    pathname: getRoutesItems().companySingle.route,
+                                                                    search: "lang=" + language + "&" + "id=" + item.id + "&" + "title=" + item.englishName
+                                                                } : null
+                                                            }>
+                                                                <h5 className={'change-text ' + Style.gritTitle}>{language === 'fa' ? item.name : item.englishName}</h5>
+                                                            </Link>
+
                                                             <div className={'d-flex pt-2'}>
                                                                 <div className={Style.dateSpan + " mx-1 "}>
                                                                     {language === 'fa' ? item.province.name + " / " + item.city.name : item.province.englishName + " / " + item.city.englishName}
@@ -906,7 +911,7 @@ export default function CompaniesList() {
                                                         </div>
                                                     </div>
 
-                                                </Link>
+                                                </div>
                                             </div>
                                         ))
 
