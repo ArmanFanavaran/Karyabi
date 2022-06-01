@@ -423,6 +423,10 @@
 .categories a:hover {
     color: #5d6ae0;
 }
+
+.categories a.active {
+    color: #5d6ae0;
+}
 .categoriesTitle {
     color: #747474;
     font-size: 1em;

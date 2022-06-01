@@ -240,6 +240,11 @@ let Routes = {
         "des": "لیست شرکت‌ها",
         "enDes": "Companies List",
         "route": "/companies/list"
+    },
+    "companySingle": {
+        "des": "تک صفحه شرکت",
+        "enDes": "Company Single",
+        "route": "/companies/single"
     }
 }
 
