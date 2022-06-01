@@ -743,13 +743,13 @@ export default function ResumeStep5() {
                     </div>
                 </div>
                 <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
-                    {modalIsOpen ?
+                    {modalIsOpenGuide ?
                         <img style={{border: "1px dashed #000", borderRadius: "50%"}}
-                             className={Style["filterButton"] + " p-1"} onClick={closeModal} width={'60px'} height={'60px'}
+                             className={Style["filterButton"] + " p-1"} onClick={closeModalGuide} width={'60px'} height={'60px'}
                              src={guide}/>
                         :
                         <img style={{border: "1px dashed #000", borderRadius: "50%"}}
-                             className={Style["filterButton"] + " p-1"} onClick={openModal} width={'60px'} height={'60px'}
+                             className={Style["filterButton"] + " p-1"} onClick={openModalGuide} width={'60px'} height={'60px'}
                              src={guide}/>
                     }
 
