@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import * as React from "react";
 import {useEffect, useState} from "react";
 import Style from "./ResumeStep1.module.css"
 import NavbarResume from "../navbar/NavbarResume"
@@ -7,7 +8,6 @@ import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 import DatePicker from 'react-datepicker2';
 import {useTranslation} from "react-i18next";
 import * as queryString from "query-string";
-import * as React from "react";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import FrameResume from "../frameResume/FrameResume"
 /////////////// Icon ///////////
@@ -27,7 +27,6 @@ import {useHistory} from "react-router";
 import {css} from "@emotion/react";
 import {MoonLoader} from "react-spinners";
 import Modal from "react-modal";
-import Delete from "../../employmentAdvertisement/imgs/delete.png";
 import guide from "./imgs/guide.png"
 
 export default function ResumeStep1() {
@@ -374,7 +373,9 @@ export default function ResumeStep1() {
                                     >
                                         <div className={'row'}>
                                             <div className={'col-12'}>
-                                                <button className={'btn btn-default float-right'} onClick={closeModal}>X</button>
+                                                <button className={'btn btn-default float-right'}
+                                                        onClick={closeModal}>X
+                                                </button>
 
                                             </div>
 
@@ -386,7 +387,7 @@ export default function ResumeStep1() {
                             </div>
                             <div className="row">
                                 <div className={'col-12 col-lg-7'}>
-                                    <div className={'row '+Style.input}>
+                                    <div className={'row ' + Style.input}>
                                         <div className="col-md-6 col-12 py-2 change-dir change-text">
                                             <div className="col-12">
                                                 <label htmlFor="" className="">{t("resume.step1.firstName")}</label>
@@ -712,16 +713,16 @@ export default function ResumeStep1() {
                             </div>
                             <div className="row">
                                 <div className="col-12">
-                                    <button onClick={()=> history.push({
+                                    <button onClick={() => history.push({
                                         pathname: getRoutesItems().resumeStep2.route,
                                         search: "lang=" + sp.get("lang"),
 
                                     })}
-                                        className="btn change-float-reverse my-3 mx-3 btn-info">
+                                            className="btn change-float-reverse my-3 mx-3 btn-info">
                                         {t("resume.step1.nextStep")}
 
                                     </button>
-                                    <button onClick={()=> history.push({
+                                    <button onClick={() => history.push({
                                         pathname: getRoutesItems().resumeStep1.route,
                                         search: "lang=" + sp.get("lang"),
 
@@ -739,9 +740,17 @@ export default function ResumeStep1() {
                         </div>
                     </div>
                 </div>
-                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
-                    <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1" } onClick={openModal} width={'60px'} height={'60px'}
-                         src={guide}/>
+                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
+                    {modalIsOpen ?
+                        <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                             className={Style["filterButton"] + " p-1"} onClick={closeModal} width={'60px'} height={'60px'}
+                             src={guide}/>
+                    :
+                        <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                             className={Style["filterButton"] + " p-1"} onClick={openModal} width={'60px'} height={'60px'}
+                             src={guide}/>
+                    }
+
                 </div>
             </main>
             <NotificationContainer/>

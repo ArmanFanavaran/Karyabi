@@ -22,6 +22,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 /************ Float button ************/
 import {useTranslation} from "react-i18next";
 import {serverTimeToDaysAgo} from "../../global/TimeConverter";
+import guide from "../../Resume/step1/imgs/guide.png";
 
 
 var axios = require('axios');
@@ -524,6 +525,25 @@ export default function ContentProductionList() {
                             <button className={'btn btn-default float-right'} onClick={closeModal}>X</button>
                             <div className={' '}>
                                 <div className="row mx-auto w-100 change-text change-dir">
+                                    <div className={'col-12 change-text change-dir'}>
+                                        {
+                                            selectedCategory.length > 0 ?
+                                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                                        }
+                                        {
+                                            selectedCategory.length > 0 ?
+                                                selectedCategory.map((item, index) => (
+                                                    <div
+                                                        className={Style["branch-tags"] + " px-2 py-1 mx-1 change-dir change-text"}>
+                                                            <span className={"mx-1 " + Style["pointer"]}
+                                                                  onClick={() => {
+                                                                      onRemoveCategoryTag(item.id)
+                                                                  }}><img src={Delete} width={10}/></span>
+                                                        {item.label}
+                                                    </div>
+                                                )) : null
+                                        }
+                                    </div>
 
                                     <div className={"col-12 change-dir " + Style.input} id={'form'}>
                                         <div className={Style["fields-div"] + " my-3"}>
@@ -603,7 +623,7 @@ export default function ContentProductionList() {
                         </Modal>
                     </div>
                 </div>
-                <div className={Style["sort-box"] + " row mb-5"}>
+                <div className={Style["sort-box"] + " row mb-5 d-none d-xl-flex"}>
 
                     <div className={Style["sort-imgs"] + " d-inline change-text-reverse col-12 "}>
                         <img src={GridIcon} alt="" onClick={onGridClick}/><img src={ListIcon} alt=""
@@ -868,9 +888,17 @@ export default function ContentProductionList() {
                 </div>
 
             </div>
-            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
-                <img className={Style["filterButton"]} onClick={openModal} width={'60px'} height={'60px'}
-                     src={filterImage}/>
+            <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
+                {modalIsOpen ?
+                    <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                         className={Style["filterButton"] + " p-1"} onClick={closeModal} width={'60px'} height={'60px'}
+                         src={guide}/>
+                    :
+                    <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                         className={Style["filterButton"] + " p-1"} onClick={openModal} width={'60px'} height={'60px'}
+                         src={guide}/>
+                }
+
             </div>
             <NotificationContainer/>
         </main>

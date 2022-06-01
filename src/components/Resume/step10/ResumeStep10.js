@@ -780,9 +780,17 @@ export default function ResumeStep10() {
                         </div>
                     </div>
                 </div>
-                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px',zIndex:"1"}}>
-                    <img style={{border:"1px dashed #000",borderRadius:"50%"}} className={Style["filterButton"] + " p-1 bg-warning" } onClick={openModalGuide} width={'60px'} height={'60px'}
-                         src={guide}/>
+                <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
+                    {modalIsOpen ?
+                        <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                             className={Style["filterButton"] + " p-1"} onClick={closeModal} width={'60px'} height={'60px'}
+                             src={guide}/>
+                        :
+                        <img style={{border: "1px dashed #000", borderRadius: "50%"}}
+                             className={Style["filterButton"] + " p-1"} onClick={openModal} width={'60px'} height={'60px'}
+                             src={guide}/>
+                    }
+
                 </div>
             </main>
             <NotificationContainer/>
