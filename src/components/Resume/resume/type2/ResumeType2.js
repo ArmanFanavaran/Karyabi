@@ -214,24 +214,25 @@ export default function ResumeType2(src, options) {
         $('footer').hide()
         $('#print').hide()
         $('#firstDiv').removeClass("mt-5")
+        $('#firstDiv').removeClass("pt-5")
         var prevRowHeight = 0;
-        $(".break").each(function () {
-            // console.log($(this).height());
-            var maxHeight = 1356 * sizeBreak;
-            // console.log("position: " + $(this).offset().top + " Height: " + $(this).height())
-
-            var eachRowHeight = $(this).offset().top + $(this).height();
-            // console.log("sub: " + eachRowHeight)
-
-            if ((prevRowHeight + eachRowHeight) > maxHeight) {
-                sizeBreak += 1;
-                $(this).before('<div style="page-break-before: always;" class="break-before"></div><div class="mt-5 pt-3"></div>');
-                // $(this).before('<div style="border: 2px solid" ></div>');
-                console.log("add page break before");
-            }
-            console.log("==============================================")
-            prevRowHeight = $(this).height();
-        });
+        // $(".break").each(function () {
+        //     // console.log($(this).height());
+        //     var maxHeight = 1356 * sizeBreak;
+        //     // console.log("position: " + $(this).offset().top + " Height: " + $(this).height())
+        //
+        //     var eachRowHeight = $(this).offset().top + $(this).height();
+        //     // console.log("sub: " + eachRowHeight)
+        //
+        //     if ((prevRowHeight + eachRowHeight) > maxHeight) {
+        //         sizeBreak += 1;
+        //         $(this).before('<div style="page-break-before: always;" class="break-before"></div><div class="mt-5 pt-3"></div>');
+        //         // $(this).before('<div style="border: 2px solid" ></div>');
+        //         console.log("add page break before");
+        //     }
+        //     console.log("==============================================")
+        //     prevRowHeight = $(this).height();
+        // });
         var x = "<html>" + document.getElementsByTagName('html')[0].outerHTML + "</html>";
         // console.log($(this).height());
         $(".break-before").remove()
@@ -245,15 +246,18 @@ export default function ResumeType2(src, options) {
             "</div>"
         console.log(x)
         var data = JSON.stringify({
-            "requestLanguage": "string",
-            "entity": "string",
-            "entityId": 0,
-            "isClientSide": true,
-            "serviceTypeName": 0,
             "htmlContent": x,
             "styleSheet": "https://karyabi.ceunion.ir/",
             "isStyleSheetInWeb": true,
-            "isReadyToDownload": true
+            "isReadyToDownload": true,
+            "pageBreaksEnhancedAlgorithm": true,
+            "marginTop": 35,
+            "marginLeft": 1,
+            "marginRight": 1,
+            "marginBottom": 0,
+            "footerHeight": 50,
+            "footerHtml": "<div class=\"row\">\n\t<div class=\"col-12\">\n\t\t<div class=\"text-right\" style=\"text-align:center;padding-top:25px\">\n\t\t\t<a href=\"www.karyabi.ceunion.ir\">www.karyabi.ceunion.ir</a>\n\t\t</div>\n\t</div>\n</div>",
+            "footerBaseUrl": ""
         })
         $('header').show()
         $('footer').show()
