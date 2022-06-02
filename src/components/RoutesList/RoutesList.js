@@ -111,6 +111,7 @@ let Routes = {
     },
 
     /************* Dashboard **************/
+    /*user*/
     "DashboardParent": {
         "des": "داشبورد",
         "enDes": "dashboard",
@@ -120,6 +121,12 @@ let Routes = {
         "des": "رزومه‌های ارسال شده",
         "enDes": "Sent Resumes",
         "route": "/dashboard/sentResumes"
+    },
+    /*company*/
+    "companyJobOffers": {
+        "des": "فرصت‌های شغلی",
+        "enDes": "Job Offers",
+        "route": "/dashboard/company/jobOffers"
     },
 
     /************** Change Password **************/
