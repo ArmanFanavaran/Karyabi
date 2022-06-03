@@ -508,7 +508,15 @@
       "hiring": "درحال استخدام"
     },
     "single": {
-      "category": "دسته بندی"
+      "category": "دسته‌بندی",
+      "foundIn": "تاسیس در ",
+      "person": "نفر",
+      "introduction": "معرفی",
+      "jobOffers": "فرصت‌های شغلی",
+      "recruiting": "درحال استخدام",
+      "location": "موقعیت مکانی",
+      "introductionToUs": "معرفی ما",
+      "ourCooperation": "مزایای همکاری با ما"
     }
   }
 

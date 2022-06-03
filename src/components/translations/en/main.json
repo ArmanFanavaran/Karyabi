@@ -513,7 +513,15 @@
       "hiring": "Hiring"
     },
     "single": {
-      "category": "Category"
+      "category": "Category",
+      "foundIn": "Found in ",
+      "person": "Person",
+      "introduction": "Introduction",
+      "jobOffers": "Job Offers",
+      "recruiting": "Recruiting",
+      "location": "Location",
+      "introductionToUs": "Introduction To US",
+      "ourCooperation": "Our Cooperation Advantages"
     }
   }
 }
