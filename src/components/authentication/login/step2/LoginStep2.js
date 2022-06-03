@@ -110,6 +110,10 @@ function LoginComponent2() {
                                 domain: getCookiesItems().is_admin_one.domain,
                                 expires: getCookiesItems().is_admin_one.expires
                             })
+                            Cookies.set(getCookiesItems().isCompany.nickName, response.data.data.isCompany, {
+                                domain: getCookiesItems().isCompany.domain,
+                                expires: getCookiesItems().isCompany.expires
+                            })
                             Cookies.set(getCookiesItems().firstName.nickName, response.data.data.firstName, {
                                 domain: getCookiesItems().firstName.domain,
                                 expires: getCookiesItems().firstName.expires

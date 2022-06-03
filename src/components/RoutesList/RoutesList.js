@@ -128,6 +128,23 @@ let Routes = {
         "enDes": "Job Offers",
         "route": "/dashboard/company/jobOffers"
     },
+   /************* Dashboard Admin **************/
+    /*Admin*/
+    "DashboardParentAdmin": {
+        "des": "پنل ادمین",
+        "enDes": "panel admin",
+        "route": "/admin/dashboard"
+    },
+    "HeroList": {
+        "des": "لیست متن صفحه اصلی",
+        "enDes": "Hero list",
+        "route": "/admin/dashboard/hero/list"
+    },
+    "CreateNews": {
+        "des": "ساخت خبر جدید",
+        "enDes": "Create News",
+        "route": "/admin/dashboard/create-news"
+    },
 
     /************** Change Password **************/
     "changePassword": {

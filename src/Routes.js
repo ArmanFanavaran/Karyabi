@@ -4,7 +4,7 @@ import {createBrowserHistory} from "history";
 
 import Controller from "./components/authentication/Helper/Controller";
 import {getRoutesItems} from "./components/RoutesList/RoutesList";
-import Test from "./components/Test";
+import Test from "./components/imageCropper/Text";
 
 
 /****************** Index *****************************/
@@ -67,6 +67,7 @@ import CoursesSingle from "./components/courses/single/CoursesSingle";
 
 /************** Dashboard **************/
 import Dashboard from "./components/dashboard/dashboardParent/DashboardParent";
+import DashboardParentAdmin from "./components/dashboardAdmin/dashboardParent/DashboardParentAdmin";
 import SentResume from "./components/dashboard/sentResumes/SentResumes";
 
 /************* Company *************/
@@ -79,6 +80,7 @@ export default function Routes() {
             <Navbar/>
             <Switch>
                 {/****************** Index *****************************/}
+                <Route path="/test" exact component={Test}/>
                 <Route path="/" exact component={Index}/>
 
                 {/****************** About *****************************/}
@@ -141,6 +143,7 @@ export default function Routes() {
                     {/****************** Dashboard *****************************/}
 
                     <Route path={getRoutesItems().DashboardParent.route + "*" }  exact  component={Dashboard}/>
+                    <Route path={getRoutesItems().DashboardParentAdmin.route + "*" }  exact  component={DashboardParentAdmin}/>
 
 
                 </Controller>

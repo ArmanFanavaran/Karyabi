@@ -1,7 +1,7 @@
 import Style from "./SentResumes.module.css"
 import {Link} from "react-router-dom";
-import Edit from "../imgs/edit.png"
-import Eye from "../imgs/eye.png"
+import Edit from "./imgs/edit.png"
+import Eye from "./imgs/eye.png"
 import {useEffect, useState} from "react";
 import {generateURL} from "../../global/Requests";
 import {NotificationContainer, NotificationManager} from "react-notifications";

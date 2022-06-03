@@ -29,6 +29,13 @@ var cookie = {
         "expires": 7,
         "type":"cookie"
     },
+    "isCompany": {
+        "des": "Is company",
+        "nickName": "RedBubble",
+        "domain":generateCookieDomain(),
+        "expires": 7,
+        "type":"cookie"
+    },
     "firstName": {
         "des": "FirstName",
         "nickName": "melon",

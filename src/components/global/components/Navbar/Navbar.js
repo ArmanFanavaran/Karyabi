@@ -161,6 +161,14 @@ export default function Navbar() {
                                             }}
                                                   className={" dropdown-item text-dark"}>{t("global.navbar.profileSingle")}
                                             </Link>
+                                            {admin || adminOne ?
+                                                <Link to={{
+                                                    pathname: getRoutesItems().DashboardParentAdmin.route,
+                                                    search: "lang=" + sp.get("lang"),
+                                                }}
+                                                      className={" dropdown-item text-dark"}>{t("global.navbar.adminPanel")}
+                                                </Link>:null
+                                            }
                                             <Link to={{
                                                 pathname: getRoutesItems().changePassword.route,
                                                 search: "lang=" + sp.get("lang"),
@@ -179,11 +187,11 @@ export default function Navbar() {
                                             }}
                                                   className={" dropdown-item text-dark"}>{t("global.navbar.showResume")}
                                             </Link>
-                                            { admin || adminOne ?
-                                                <a href={generateAdminURL()}
-                                                   className={" dropdown-item text-dark"}>{t("global.navbar.adminPanel")}
-                                                </a>:null
-                                            }
+                                            {/*{ admin || adminOne ?*/}
+                                            {/*    <a href={generateAdminURL()}*/}
+                                            {/*       className={" dropdown-item text-dark"}>{t("global.navbar.adminPanel")}*/}
+                                            {/*    </a>:null*/}
+                                            {/*}*/}
                                             <a onClick={Exit} href="javascript:void(0);" className={" dropdown-item text-dark"}>
                                                 {t("global.navbar.logOut")}
                                             </a>

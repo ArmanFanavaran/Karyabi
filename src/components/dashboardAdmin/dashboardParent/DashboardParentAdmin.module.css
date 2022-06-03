@@ -1,0 +1,52 @@
+
+.main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero {
+    background: #ECE9F5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    /*margin-top: 40px;*/
+    border-radius: 4px;
+}
+.nav {
+    /*height: calc(100vh - 200px);*/
+    height: calc(80vh - 200px);
+    width: 100%;
+    /*background: #F6F6F6;*/
+    /*box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);*/
+    border-radius: 10px;
+}
+.profileImage {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #adadad;
+    border-radius: 100%;
+}
+.profileName {
+    text-align: center;
+    color: #653394;
+
+}
+.filterButton:hover {
+    transform: rotate(360deg);
+
+}
+.filterButton{
+    transition: transform .7s ease-in-out;
+}
+.navItems li{
+    border-radius: 4px;
+
+    color: #603695;
+    font-size: 0.8rem;
+}
+.navItems li.active {
+    background-color: #f8f2ff;
+}
+.navItems i {
+    font-size: 1.0rem;
+}

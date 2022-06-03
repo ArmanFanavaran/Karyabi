@@ -215,6 +215,9 @@ export default function ResumeType2(src, options) {
         $('#print').hide()
         $('#firstDiv').removeClass("mt-5")
         $('#firstDiv').removeClass("pt-5")
+        $([document.documentElement, document.body]).animate({
+            scrollTop: 0
+        }, 1000);
         var prevRowHeight = 0;
         // $(".break").each(function () {
         //     // console.log($(this).height());
@@ -263,6 +266,7 @@ export default function ResumeType2(src, options) {
         $('footer').show()
         $('#print').show()
         $('#firstDiv').addClass("mt-5")
+        $('#firstDiv').addClass("pt-5")
         var config = {
             method: 'post',
             url: generateURL('/VisualOutPutGenerator/GetByteArrayFromHtmlStringViaSelectPdf'),
@@ -674,15 +678,15 @@ export default function ResumeType2(src, options) {
                                                             </li>
                                                         </ul>
 
-
                                                         {resume.skillInfoLevelShown ?
                                                             <div>
                                                                 <RatingStar
-                                                                    id="clickable"
-                                                                    rating={value.Level}
+                                                                    id={value.id}
+                                                                    rating={parseInt(value.Level)}
                                                                 />
                                                             </div> : null
                                                         }
+                                                        {parseFloat(value.Level)}
                                                     </div>
                                                 ))}
                                             </div>
@@ -711,7 +715,7 @@ export default function ResumeType2(src, options) {
                                                             <div>
                                                                 <RatingStar
                                                                     id="clickable"
-                                                                    rating={value.Level}
+                                                                    rating={parseInt(value.Level)}
                                                                 />
                                                             </div> : null
                                                         }
@@ -808,7 +812,7 @@ export default function ResumeType2(src, options) {
                                                                     <div>
                                                                         <RatingStar
                                                                             id="clickable"
-                                                                            rating={value.Level}
+                                                                            rating={parseInt(value.Level)}
                                                                         />
                                                                     </div> : null
                                                                 }

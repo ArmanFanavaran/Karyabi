@@ -518,6 +518,22 @@
       "introductionToUs": "معرفی ما",
       "ourCooperation": "مزایای همکاری با ما"
     }
-  }
+  },
+  "admin": {
+    "hero": {
+      "list": {
+        "listHero": "لیست پیام صفحه اصلی",
+        "message": "پیام",
+        "messageEnglish": "پیام انگلیسی",
+        "status": "وضعیت",
+        "edit": "ویرایش",
+        "delete": "حذف",
+        "deleteRequest": "درخواست حذف",
+        "editRequest": "درخواست ویرایش",
+        "add" : "پیام خود را اضافه کنید"
 
+
+      }
+    }
+  }
 }

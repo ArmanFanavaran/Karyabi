@@ -523,5 +523,20 @@
       "introductionToUs": "Introduction To US",
       "ourCooperation": "Our Cooperation Advantages"
     }
+  },
+  "admin": {
+    "hero": {
+      "list": {
+        "listHero": "List of home page messages",
+        "message": "Message",
+        "messageEnglish": "Message English",
+        "status": "Status",
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleteRequest": "Delete Request",
+        "editRequest": "Edit Request",
+        "add" : "Add your Message"
+      }
+    }
   }
 }
