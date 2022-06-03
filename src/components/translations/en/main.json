@@ -535,6 +535,7 @@
         "delete": "Delete",
         "deleteRequest": "Delete Request",
         "editRequest": "Edit Request",
+        "addRequest": "Add Request",
         "add" : "Add your Message"
       }
     }

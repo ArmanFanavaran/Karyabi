@@ -600,7 +600,7 @@ export default function HeroList() {
                     <div className={'col-12 change-dir change-text'}>
                         <button className={'btn btn-default '} onClick={closeModalAdd}>X</button>
                         <br/>
-                        <h4>   {t("admin.hero.list.editRequest")}</h4>
+                        <h4>   {t("admin.hero.list.addRequest")}</h4>
                         <hr/>
                         {sp.get("lang") === "fa" ?
                             <p>پیام خود را اضافه کنید
