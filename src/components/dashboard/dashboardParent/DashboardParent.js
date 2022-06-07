@@ -16,6 +16,7 @@ import Modal from "react-modal";
 import Delete from "../../employmentAdvertisement/imgs/delete.png";
 import filterImage from "../../employmentAdvertisement/imgs/filter.png";
 import {getDashboardPages} from "./dashboardPages";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 export default function Dashboard() {
@@ -91,13 +92,13 @@ export default function Dashboard() {
 
         let config_data = {
             "heights": [
-                500
+                getSizeImageItems().UserNavbarPic.Heights
             ],
             "widths": [
-                400
+                getSizeImageItems().UserNavbarPic.Widths
             ],
             "qualities": [
-                60
+                getSizeImageItems().UserNavbarPic.Qualities
             ]
         }
 
