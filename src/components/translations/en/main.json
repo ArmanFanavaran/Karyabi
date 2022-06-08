@@ -470,6 +470,11 @@
 
     },
     "single": {
+      "major": "Major",
+      "degree": "Degree",
+      "languages": "Fluent Languages",
+      "notImportant": "Not Important",
+      "experience": "Experience",
       "person": "person",
       "jobCategory": "Job Category",
       "location": "Location",

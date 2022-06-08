@@ -87,9 +87,9 @@
 }
 .listEmergency {
     color: white;
-    background-color: #ff8c00;
-    font-size: 0.85rem;
-    padding: 5px 15px;
+    background-color: #dc3545;
+    font-size: 1rem;
+    padding: 5px 20px;
     border-radius: 6px;
     font-weight: bolder;
 }

@@ -50,10 +50,14 @@ export default function EmploymentAdvertisementSingle() {
     const [jobSalary, setJobSalary] = useState({fa: "", eng:""});
     const [jobDescription, setJobDescription] = useState({fa: "", eng:""});
     const [jobSkills, setJobSkills] = useState([]);
-    const [gender, setGender] = useState({fa: "", eng:""});
+    const [jobExperience, setJobExperience] = useState();
+    const [gender, setGender] = useState();
     const [advertisementId, setAdvertisementId] = useState();
     const [militaryStatus, setMilitaryStatus] = useState([]);
     const [advantages, setAdvantages] = useState([]);
+    const [majors, setMajors] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    const [degree, setDegree] = useState();
     const [cooperationTypes, setCooperationTypes] = useState([]);
 
 
@@ -265,6 +269,7 @@ export default function EmploymentAdvertisementSingle() {
                 setJobCapacity(data.company.minMemberCount + "-" + data.company.maxMemberCount);
                 setWebSiteLink(data.jobOffer.websiteLink);
                 setCompanyLogo(data.company.logo);
+                setJobEmergency(data.jobOffer.isEmergency);
                 setJobTitle({fa:data.jobOffer.title, eng:data.jobOffer.titleEnglish});
                 let category = JSON.parse(data.jobOffer.categoryJson);
                 setJobCategory({fa:category.Name, eng:category.EnglishName});
@@ -277,9 +282,37 @@ export default function EmploymentAdvertisementSingle() {
                 let salary = JSON.parse(data.jobOffer.salaryStatusJson)
                 setJobSalary({fa:salary.name, eng:salary.englishName});
 
+                if (data.jobOffer.minExperienceJson !== null && data.jobOffer.minExperienceJson !== ""){
+                    let min_experience = JSON.parse(data.jobOffer.minExperienceJson);
+                    setJobExperience({fa:min_experience.name, eng:min_experience.englishName})
+                }
+
                 setJobDescription({fa:data.jobOffer.description, eng:data.jobOffer.descriptionEnglish});
-                let gender_data = JSON.parse(data.jobOffer.genderJson);
-                setGender({fa:gender_data.name, eng:gender_data.englishName});
+
+                if(data.jobOffer.genderJson !== null && data.jobOffer.genderJson !== ""){
+                    let gender_data = JSON.parse(data.jobOffer.genderJson);
+                    setGender({fa:gender_data.name, eng:gender_data.englishName});
+                }
+
+                if(data.jobOffer.degreeJson !== null && data.jobOffer.degreeJson !== ""){
+                    let degree_data = JSON.parse(data.jobOffer.degreeJson);
+                    setDegree({fa:degree_data.Name, eng:degree_data.EnglishName});
+                }
+
+                let majors_data = JSON.parse(data.jobOffer.majorsJson);
+                let majors_array = [];
+                $(majors_data).each(function (i, item) {
+                    majors_array.push({fa:item.Major.Name, eng:item.Major.EnglishName});
+                })
+                setMajors(majors_array);
+
+                let languages_data = JSON.parse(data.jobOffer.languagesJson);
+                let languages_array = [];
+                $(languages_data).each(function (i, item) {
+                    languages_array.push({fa:item.name, eng:item.englishName});
+                })
+                setLanguages(languages_array);
+
 
                 let skills = JSON.parse(data.jobOffer.skillsJson);
                 let skills_array = [];
@@ -347,7 +380,7 @@ export default function EmploymentAdvertisementSingle() {
                                 <div className={"d-flex w-100 pt-2 row justify-content-center justify-content-xl-start"}>
                                     <h6 className={"mx-2"}>{language ==='fa'? companyShortDesc.fa : companyShortDesc.eng}</h6>
                                     <div className={ " mx-2"}>{jobCapacity} {t("employmentAdvertisement.single.person")} </div>
-                                    <a className={ " mx-2"} href={"#"}>{websiteLink}</a>
+                                    <Link className={ " mx-2"} to={{pathname:"https://" +websiteLink}} target={"_blank"}>{websiteLink}</Link>
                                 </div>
                             </div>
                         </div>
@@ -378,9 +411,10 @@ export default function EmploymentAdvertisementSingle() {
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.militaryStatus")}</div>
                                         <div className={"d-flex row w-100 mx-0"}>
                                             {
-                                                militaryStatus.length > 0 && militaryStatus.map((item, index) => (
+                                                militaryStatus.length > 0 ? militaryStatus.map((item, index) => (
                                                     <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.name : item.englishName}</div>
-                                                ))
+                                                )):
+                                                <div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
                                             }
                                         </div>
                                     </div>
@@ -388,15 +422,25 @@ export default function EmploymentAdvertisementSingle() {
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.cooperationType")}</div>
                                         <div className={"d-flex row w-100 mx-0"}>
                                             {
-                                                cooperationTypes.length > 0 && cooperationTypes.map((item, index) => (
+                                                cooperationTypes.length > 0 ? cooperationTypes.map((item, index) => (
                                                     <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.fa : item.eng}</div>
-                                                ))
+                                                )): <div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
+
                                             }
                                         </div>
                                     </div>
                                     <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.salary")}</div>
                                         <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobSalary.fa : jobSalary.eng}</div>
+                                    </div>
+                                    <div className={"col-12 col-xl-6  mt-4"}>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.experience")}</div>
+                                        {
+                                            jobExperience!== undefined ?
+                                                <div className={Style.jobField + " mt-2"}>{language ==='fa'? jobExperience.fa : jobExperience.eng}</div>:
+                                                <div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
+                                        }
+
                                     </div>
                                 </div>
                                 <h5 className={"mt-5"}>{t("employmentAdvertisement.single.jobDescription")}</h5>
@@ -420,18 +464,43 @@ export default function EmploymentAdvertisementSingle() {
                                 <div className={"row"}>
                                     <div className={"col-12 col-xl-6 mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
-                                        <div className={"d-flex row"}>
+                                        <div className={"d-flex row mx-0"}>
                                             {
-                                                jobSkills.length > 0 && jobSkills.map((item, index) => (
+                                                jobSkills.length > 0 ? jobSkills.map((item, index) => (
                                                     <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.fa : item.eng}</div>
-                                                ))
+                                                )):<div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div className={"col-12 col-xl-6 mt-4"}>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
+                                        <div className={"d-flex row mx-0"}>
+                                            {
+                                                degree !== undefined ?
+                                                    <div className={Style.jobField + " mt-2"}>{language ==='fa'? degree.fa : degree.eng}</div>:
+                                                    <div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={"col-12 col-xl-6 mt-4"}>
+                                        <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.major")}</div>
+                                        <div className={"d-flex row mx-0"}>
+                                            {
+                                                majors.length > 0 ? majors.map((item, index) => (
+                                                    <div className={Style.jobField + " mt-2 mx-1"}>{language ==='fa'? item.fa : item.eng}</div>
+                                                )):<div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
                                             }
 
                                         </div>
                                     </div>
                                     <div className={"col-12 col-xl-6  mt-4"}>
                                         <div className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.gender")}</div>
-                                        <div className={Style.jobField + " mt-2"}>{language ==='fa'? gender.fa : gender.eng}</div>
+                                        {
+                                            gender !== undefined ?
+                                                <div className={Style.jobField + " mt-2"}>{language ==='fa'? gender.fa : gender.eng}</div>:
+                                                <div className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
+                                        }
                                     </div>
 
                                 </div>
