@@ -85,3 +85,11 @@
     border-radius: 5px;
     color: #575757;
 }
+.listEmergency {
+    color: white;
+    background-color: #ff8c00;
+    font-size: 0.85rem;
+    padding: 5px 15px;
+    border-radius: 6px;
+    font-weight: bolder;
+}

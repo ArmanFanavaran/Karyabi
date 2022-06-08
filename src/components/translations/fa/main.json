@@ -432,6 +432,7 @@
       "advertising": "لیست آگهی ها"
     },
     "list": {
+      "emergency": "فوری",
       "isFullTime": "تمام وقت",
       "isPartTime": "پاره وقت",
       "isRemote": "دورکاری",

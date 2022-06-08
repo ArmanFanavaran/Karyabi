@@ -1043,6 +1043,7 @@ export default function EmploymentAdvertisementList() {
         axios(list_config)
             .then(function (response) {
                 let data = response.data.data;
+                console.log(response.data.data)
                 setNewsList(data)
                 // let latest = [];
                 // for (let i = 0; i < data.length && i < 3; i++) {
@@ -2852,6 +2853,7 @@ export default function EmploymentAdvertisementList() {
                                                                             item.company.englishName
                                                                         }
                                                                         className=""/>
+
                                                                 </div>
                                                             </div>
                                                             <div className="col-12 col-lg-9 col-md-7">
@@ -2859,11 +2861,19 @@ export default function EmploymentAdvertisementList() {
                                                                     <div className="pl-md-5">
 
 
-                                                                        <h6 className="change-text">
-                                                                            {sp.get("lang") === "fa" ?
-                                                                                item.jobOffer.title :
-                                                                                item.jobOffer.titleEnglish
+                                                                        <h6 className="change-text d-flex change-dir">
+                                                                            <div className={"pt-1"}>
+                                                                                {sp.get("lang") === "fa" ?
+                                                                                    item.jobOffer.title :
+                                                                                    item.jobOffer.titleEnglish
+                                                                                }
+                                                                            </div>
+                                                                            {
+                                                                                item.isEmergency &&
+                                                                                <div><span className={Style.listEmergency + " mx-4 "}>{t("employmentAdvertisement.list.emergency")}</span></div>
+
                                                                             }
+
                                                                         </h6>
                                                                         <p className={'change-text text-muted d-flex change-dir justify-content-between'}>
                                                                             {sp.get("lang") === "fa" ?
@@ -2930,7 +2940,7 @@ export default function EmploymentAdvertisementList() {
                                                             } target="_blank" className={Style.mouse}>
                                                             <div className={Style2["container-item"] + " container"}>
                                                                 <div className="row">
-                                                                    <div className={Style2["news-img"] + " col-12"}>
+                                                                    <div className={Style2["news-img"] + " col-12 position-relative"}>
                                                                         <img
                                                                             src={item.jobOffer.coverImgs.length > 0 ? item.jobOffer.coverImgs[0] : advertisment}
                                                                             alt={sp.get("lang") === "fa" ?
@@ -2938,6 +2948,11 @@ export default function EmploymentAdvertisementList() {
                                                                                 item.company.englishName
                                                                             }
                                                                             className=""/>
+                                                                        {
+                                                                            item.isEmergency &&
+                                                                            <div className={Style.gridEmergency}>{t("employmentAdvertisement.list.emergency")}</div>
+
+                                                                        }
                                                                     </div>
                                                                     <div
                                                                         className={Style2["news-text"] + " col-12 mt-2"}>

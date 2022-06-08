@@ -42,6 +42,7 @@ export default function EmploymentAdvertisementSingle() {
     const [companyLogo, setCompanyLogo] = useState("");
     const [companyDescription, setCompanyDescription] = useState({fa: "", eng:""});
     const [jobCapacity, setJobCapacity] = useState();
+    const [jobEmergency, setJobEmergency] = useState(false);
     const [websiteLink, setWebSiteLink] = useState();
     const [jobTitle, setJobTitle] = useState({fa: "", eng:""});
     const [jobCategory, setJobCategory] = useState({fa: "", eng:""});
@@ -356,7 +357,13 @@ export default function EmploymentAdvertisementSingle() {
                     <div className={"row w-100 change-dir change-text mx-0"}>
                         <div className={ " col-12 col-xl-8 p-2"}>
                             <div className={Style.hero + " p-4"}>
-                                <h4 className={Style.jobTitle + " d-block change-text"}>{language ==='fa'? jobTitle.fa : jobTitle.eng}</h4>
+                                <div className={'d-flex row w-100 mx-0 change-dir justify-content-between'}>
+                                    <h4 className={Style.jobTitle + " change-text"}>{language ==='fa'? jobTitle.fa : jobTitle.eng}</h4>
+                                    {
+                                        jobEmergency &&
+                                        <div><span className={Style.listEmergency + " mx-2 "}>{t("employmentAdvertisement.list.emergency")}</span></div>
+                                    }
+                                </div>
                                 <hr/>
                                 <div className={"row"}>
                                     <div className={"col-12 col-xl-6 mt-4"}>

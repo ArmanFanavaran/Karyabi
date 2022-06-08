@@ -436,6 +436,7 @@
         "advertising": "Advertising List"
     },
     "list": {
+      "emergency": "Emergency",
       "isFullTime": "Full Time",
       "isPartTime": "Part Time",
       "isRemote": "Remote",

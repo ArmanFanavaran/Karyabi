@@ -365,3 +365,22 @@
     font-size: 0.8em;
     padding: 5px 20px;
 }
+.gridEmergency {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    background-color: #ff8c00;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bolder;
+}
+.listEmergency {
+    color: white;
+    background-color: #ff8c00;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bolder;
+}
