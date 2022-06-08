@@ -341,12 +341,14 @@ export default function EmploymentAdvertisementSingle() {
                             <img className={Style.companyImg  + " mx-auto"} src={companyLogo}/>
                         </div>
                         <div className={"col-xl-10 col-12"}>
-                            <div className={"w-100"}>
-                                <h3 className={"mt-2 text-sm-center display-block change-text pt-3"}>{language === 'fa' ?companyName.fa : companyName.eng} </h3>
-                                <div className={"d-flex w-100 pt-2 row justify-content-center justify-content-xl-start"}>
-                                    <h6 className={"mx-2"}>{language ==='fa'? companyShortDesc.fa : companyShortDesc.eng}</h6>
-                                    <div className={ " mx-2"}>{jobCapacity} {t("employmentAdvertisement.single.person")} </div>
-                                    <a className={ " mx-2"} href={"#"}>{websiteLink}</a>
+                            <div>
+                                <h3 className={"mt-2 text-sm-center display-block change-text pt-3 px-2"}>{language === 'fa' ?companyName.fa : companyName.eng} </h3>
+                                <div className={" pt-2 row  px-2"}>
+                                    <h6 className={"mx-2 px-2"}>{language ==='fa'? companyShortDesc.fa : companyShortDesc.eng}</h6>
+                                    <br/>
+                                    <div className={ " mx-2 px-2"}>{jobCapacity} {t("employmentAdvertisement.single.person")} </div>
+                                    <br/>
+                                    <a className={ " mx-2 px-2"} href={"#"}>{websiteLink}</a>
                                 </div>
                             </div>
                         </div>

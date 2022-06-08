@@ -140,6 +140,11 @@ let Routes = {
         "enDes": "Hero list",
         "route": "/admin/dashboard/hero/list"
     },
+    "DegreeList": {
+        "des": "لیست مقطع تحصیلی",
+        "enDes": "Degree list",
+        "route": "/admin/dashboard/degree/list"
+    },
     "CreateNews": {
         "des": "ساخت خبر جدید",
         "enDes": "Create News",

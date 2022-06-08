@@ -1,20 +1,16 @@
-import {useEffect, useState} from "react";
 import * as React from "react";
-import {NotificationContainer, NotificationManager} from "react-notifications";
-import Pagination from "react-js-pagination";
+import {useEffect, useState} from "react";
+import {NotificationManager} from "react-notifications";
 import {useHistory} from "react-router";
 import {initializeTitlesWithValue} from "../../global/Titles";
 import {generateURL} from "../../global/Requests";
-import {Link} from "react-router-dom";
-import {getRoutesItems} from "../../RoutesList/RoutesList";
 import {useTranslation} from "react-i18next";
 import * as queryString from "query-string";
-import $ from "jquery";
 import {css} from "@emotion/react";
 import Modal from "react-modal";
 import addImg from "./imgs/add.svg";
 
-export default function HeroList() {
+export default function DegreeList() {
     const [DataHero, setDataHero] = useState([])
     const [editItems, setEditItems] = React.useState([]);
     const [editId, setEditId] = React.useState([]);
@@ -165,13 +161,13 @@ export default function HeroList() {
 
     useEffect(function () {
         if (sp.get("lang") === "en") {
-            initializeTitlesWithValue("Admin | Hero | list")
+            initializeTitlesWithValue("Admin | Degree | list")
         } else if (sp.get("lang") === "fa") {
-            initializeTitlesWithValue("ادمین | متن اصلی | لیست")
+            initializeTitlesWithValue("ادمین | مقطع تحصیلی | لیست")
         }
         var configHero = {
             method: 'get',
-            url: generateURL('/Hero/GetAll'),
+            url: generateURL('/Side/GetDegreeList'),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -181,7 +177,7 @@ export default function HeroList() {
         axios(configHero)
             .then(function (response) {
                 setDataHero(response.data.data)
-
+console.log(response.data.data)
             })
             .catch(function (error) {
                 let errors = error.response.data.errors;
@@ -208,7 +204,7 @@ export default function HeroList() {
 
         var configHero = {
             method: 'get',
-            url: generateURL('/Hero/GetAll'),
+            url: generateURL('/Side/GetDegreeList'),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -242,7 +238,7 @@ export default function HeroList() {
 
         var configDelete = {
             method: 'get',
-            url: generateURL('/Hero/Remove?id=' +id),
+            url: generateURL('/Side/RemoveDegree?id=' +id),
             headers: {}
         };
         axios(configDelete)
@@ -271,82 +267,18 @@ export default function HeroList() {
             });
     }
 
-    ///// Change Status ////////
-    const onInActiveHero = (id) => {
-        var config = {
-            method: 'get',
-            url: generateURL('/Hero/ChangeStatus?id=' + id + '&status=false'),
-            headers: {}
-        };
-
-        axios(config)
-            .then(function (response) {
-                NotificationManager.success(response.data.message, '', 1000);
-                requestData();
-            })
-            .catch(function (error) {
-                let errors = error.response.data.errors;
-                if (errors != null) {
-                    Object.keys(errors).map((key, i) => {
-                        for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
-                        }
-                    });
-
-                } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message,'',1000);
-                } else {
-                    NotificationManager.error(error.response.data.Message,'',1000);
-
-                }
-            });
-
-    }
-
-    const onActiveHero = (id) => {
-        var config = {
-            method: 'get',
-            url: generateURL('/Hero/ChangeStatus?id=' + id + '&status=true'),
-            headers: {}
-
-        };
-
-        axios(config)
-            .then(function (response) {
-                NotificationManager.success(response.data.message, '', 1000);
-                requestData();
-
-            })
-            .catch(function (error) {
-                let errors = error.response.data.errors;
-                if (errors != null) {
-                    Object.keys(errors).map((key, i) => {
-                        for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
-                        }
-                    });
-
-                } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message,'',1000);
-                } else {
-                    NotificationManager.error(error.response.data.Message,'',1000);
-
-                }
-            });
-
-
-    }
 
     ///// Edit Index //////////
     const edit = (id) => {
         var dataHero = JSON.stringify({
-            "message": document.getElementById('message').value,
-            "messageLangs": document.getElementById('messageEnglish').value,
-            "heroId":parseInt(id)
+            "name": document.getElementById('message').value,
+            "englishName": document.getElementById('messageEnglish').value,
+            "id": parseInt(id),
+            "count": editItems.count
         });
         var configHero = {
             method: 'post',
-            url: generateURL('/Hero/Update'),
+            url: generateURL('/Side/UpdateDegree'),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -390,7 +322,7 @@ export default function HeroList() {
         });
         var configHero = {
             method: 'post',
-            url: generateURL('/Hero/Add'),
+            url: generateURL('/Side/AddDegree'),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -429,7 +361,7 @@ export default function HeroList() {
             <div className={'row'}>
                 <div className={'col-12'}>
                     <h1 className={'change-dir change-text'}
-                        style={{fontSize: "20px", fontWeight: "bold"}}>  {t("admin.hero.list.listHero")}</h1>
+                        style={{fontSize: "20px", fontWeight: "bold"}}>  {t("admin.degree.list.listDegree")}</h1>
                     <div >
                         <button id={'open'} onClick={openModalAdd}
                                 className={'btn btn-login change-dir change-float'}><img
@@ -441,20 +373,20 @@ export default function HeroList() {
                             <thead>
                             <tr className={'text-center'}>
                                 <th>
-                                    {t("admin.hero.list.message")}
+                                    {t("admin.degree.list.message")}
                                 </th>
                                 <th>
-                                    {t("admin.hero.list.messageEnglish")}
+                                    {t("admin.degree.list.messageEnglish")}
                                 </th>
                                 <th>
-                                    {t("admin.hero.list.status")}
+                                    {t("admin.degree.list.count")}
                                 </th>
                                 <th>
-                                    {t("admin.hero.list.edit")}
+                                    {t("admin.degree.list.edit")}
 
                                 </th>
                                 <th>
-                                    {t("admin.hero.list.delete")}
+                                    {t("admin.degree.list.delete")}
 
                                 </th>
 
@@ -465,29 +397,16 @@ export default function HeroList() {
                                 DataHero.map((value, index) => (
                                     <tr className={'text-cnter'}>
 
-                                        <td className={'text-center'}>{value.message}</td>
-                                        <td className={'text-center'}>{value.messageLangs}</td>
-                                        <td className={'text-center'}>
-                                            {
-                                                value.isActivate ?
-                                                    <button className="btn btn-primary text-white" data-id={value.id}
-                                                            onClick={() => {
-                                                                onInActiveHero(value.id)
-                                                            }}><i className="fas fa-toggle-on"></i></button>
-                                                    :
-                                                    <button className="btn btn-secondary text-white" data-id={value.id}
-                                                            onClick={() => {
-                                                                onActiveHero(value.id)
-                                                            }}><i className="fas fa-toggle-off"></i></button>
-                                            }
+                                        <td className={'text-center'}>{value.name}</td>
+                                        <td className={'text-center'}>{value.englishName}</td>
+                                        <td className={'text-center'}>{value.count}</td>
 
-                                        </td>
 
                                         <td className="text-center font-small-1">
                                             <button onClick={() => {
                                                 openModalEdit(value.id)
                                             }} type="button" className="btn btn-success"
-                                                    value={value.id}>{t("admin.hero.list.edit")}
+                                                    value={value.id}>{t("admin.degree.list.edit")}
 
                                             </button>
                                         </td>
@@ -495,7 +414,7 @@ export default function HeroList() {
                                             <button onClick={() => {
                                                 openModalDelete(value.id)
                                             }} type="button" className="btn btn-danger"
-                                                    value={value.id}> {t("admin.hero.list.delete")}
+                                                    value={value.id}> {t("admin.degree.list.delete")}
                                             </button>
                                         </td>
 
@@ -524,7 +443,7 @@ export default function HeroList() {
                     <div className={'col-12 change-dir change-text'}>
                         <button className={'btn btn-default '} onClick={closeModalDelete}>X</button>
                         <br/>
-                        <h4>   {t("admin.hero.list.deleteRequest")}</h4>
+                        <h4>   {t("admin.degree.list.deleteRequest")}</h4>
                         <hr/>
                         {sp.get("lang") === "fa" ?
                             <p>آیا میخواهید پیام {deleteItems.title}را حذف کنید؟
@@ -533,12 +452,12 @@ export default function HeroList() {
                             </p>
                         }
                         {sp.get("lang") === "fa" ?
-                            deleteItems.message :
-                            deleteItems.messageLangs
+                            deleteItems.name :
+                            deleteItems.englishName
                         }
                         <br/>
                         <div className={'change-text-reverse'}>
-                            <button onClick={()=>{Delete(deleteId)}} className={'btn btn-danger change-text'}> {t("admin.hero.list.delete")}</button>
+                            <button onClick={()=>{Delete(deleteId)}} className={'btn btn-danger change-text'}> {t("admin.degree.list.delete")}</button>
                         </div>
                     </div>
 
@@ -557,12 +476,12 @@ export default function HeroList() {
                     <div className={'col-12 change-dir change-text'}>
                         <button className={'btn btn-default '} onClick={closeModalEdit}>X</button>
                         <br/>
-                        <h4>   {t("admin.hero.list.editRequest")}</h4>
+                        <h4>   {t("admin.degree.list.editRequest")}</h4>
                         <hr/>
                         {sp.get("lang") === "fa" ?
-                            <p>آیا میخواهید پیام {deleteItems.title}را ویرایش کنید؟
+                            <p>آیا میخواهید مقطع {deleteItems.title}را ویرایش کنید؟
                             </p> :
-                            <p>Do you want to Edit {deleteItems.title} message?
+                            <p>Do you want to Edit {deleteItems.title} degree?
                             </p>
                         }
 
@@ -571,21 +490,21 @@ export default function HeroList() {
                 </div>
                     <div className={'row'}>
                         <div className={'col-12 mt-2 change-text'}>
-                            <label> {t("admin.hero.list.message")}</label>
-                            <input className={'form-control change-text change-dir'} id={'message'} defaultValue={editItems.message}/>
+                            <label> {t("admin.degree.list.message")}</label>
+                            <input className={'form-control change-text change-dir'} id={'message'} defaultValue={editItems.name}/>
 
                         </div>
                         <div className={'col-12 mt-2 change-text'}>
-                            <label> {t("admin.hero.list.messageEnglish")}</label>
+                            <label> {t("admin.degree.list.messageEnglish")}</label>
                             <input className={'form-control'} id={'messageEnglish'}
-                                   defaultValue={editItems.messageLangs}/>
+                                   defaultValue={editItems.englishName}/>
 
                         </div>
                     </div>
                     <div className={'row'}>
                         <div className={'col-12'}>
                             <div className={'change-text-reverse mt-3'}>
-                                <button onClick={()=>{edit(editId)}} className={'btn btn-success change-text'}> {t("admin.hero.list.edit")}</button>
+                                <button onClick={()=>{edit(editId)}} className={'btn btn-success change-text'}> {t("admin.degree.list.edit")}</button>
                             </div>
                         </div>
                     </div>
@@ -601,12 +520,12 @@ export default function HeroList() {
                     <div className={'col-12 change-dir change-text'}>
                         <button className={'btn btn-default '} onClick={closeModalAdd}>X</button>
                         <br/>
-                        <h4>   {t("admin.hero.list.addRequest")}</h4>
+                        <h4>   {t("admin.degree.list.addRequest")}</h4>
                         <hr/>
                         {sp.get("lang") === "fa" ?
-                            <p>پیام خود را اضافه کنید
+                            <p>مقطع خود را اضافه کنید
                             </p> :
-                            <p>Add your Message
+                            <p>Add your Degree
                             </p>
                         }
 
@@ -615,12 +534,12 @@ export default function HeroList() {
                 </div>
                 <div className={'row'}>
                     <div className={'col-12 mt-2 change-text'}>
-                        <label> {t("admin.hero.list.message")}</label>
+                        <label> {t("admin.degree.list.message")}</label>
                         <input className={'form-control change-text change-dir'} id={'message'}/>
 
                     </div>
                     <div className={'col-12 mt-2 change-text'}>
-                        <label> {t("admin.hero.list.messageEnglish")}</label>
+                        <label> {t("admin.degree.list.messageEnglish")}</label>
                         <input className={'form-control'} id={'messageEnglish'}/>
 
                     </div>
@@ -628,7 +547,7 @@ export default function HeroList() {
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <div className={'change-text-reverse mt-3'}>
-                            <button onClick={()=>{add()}} className={'btn btn-success change-text'}> {t("admin.hero.list.add")}</button>
+                            <button onClick={()=>{add()}} className={'btn btn-success change-text'}> {t("admin.degree.list.add")}</button>
                         </div>
                     </div>
                 </div>

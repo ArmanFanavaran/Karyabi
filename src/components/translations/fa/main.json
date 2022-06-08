@@ -535,6 +535,21 @@
 
 
       }
+    },
+    "degree": {
+      "list": {
+        "listDegree": "لیست مقطع تحصیلی",
+        "message": "نام مقطع",
+        "messageEnglish": "نام مقطع انگلیسی",
+        "status": "وضعیت",
+        "edit": "ویرایش",
+        "delete": "حذف",
+        "deleteRequest": "درخواست حذف",
+        "editRequest": "درخواست ویرایش",
+        "addRequest": "درخواست اضافه کردن",
+        "add" : "مقطع خود را اضافه کنید",
+        "count" : "تعداد"
+      }
     }
   }
 }

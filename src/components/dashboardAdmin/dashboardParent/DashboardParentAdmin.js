@@ -15,7 +15,7 @@ import {getDashboardPagesAdmin} from "./dashboardPagesAdmin";
 
 /**************** Page component *****************/
 import HeroList from "../hero/HeroList";
-
+import DegreeList from "../degree/DegreeList"
 export default function DashboardParentAdmin() {
     const [user, setUser] = useState();
     const [language, setLanguage] = useState();
@@ -232,6 +232,7 @@ export default function DashboardParentAdmin() {
 
                         <Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>
                         <Route path={getRoutesItems().HeroList.route} exact component={HeroList}/>
+                        <Route path={getRoutesItems().DegreeList.route} exact component={DegreeList}/>
                     </div>
                 </div>
             </div>

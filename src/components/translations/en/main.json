@@ -538,6 +538,22 @@
         "addRequest": "Add Request",
         "add" : "Add your Message"
       }
+    },
+    "degree": {
+      "list": {
+        "listDegree": "List of Degree",
+        "message": "Name of degree",
+        "messageEnglish": "Name of degree English",
+        "status": "Status",
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleteRequest": "Delete Request",
+        "editRequest": "Edit Request",
+        "addRequest": "Add Request",
+        "add" : "Add your Message",
+        "count" : "Count"
+
+      }
     }
   }
 }

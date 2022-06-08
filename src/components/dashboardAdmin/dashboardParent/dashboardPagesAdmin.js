@@ -8,12 +8,12 @@ const pages = {
             pathname: getRoutesItems().HeroList.route ,
             iconClass: "bi bi-person-fill"
         },
-        // {
-        //     label: "پیگیری رزومه‌های ارسالی",
-        //     labelEng: "Track submitted resumes",
-        //     pathname: getRoutesItems().SentResumes.route,
-        //     iconClass: "bi bi-clock-history"
-        // }
+        {
+            label: "مقطع تحصیلی",
+            labelEng: "Degree",
+            pathname: getRoutesItems().DegreeList.route,
+            iconClass: "bi bi-clock-history"
+        }
     ],
     company: []
 
