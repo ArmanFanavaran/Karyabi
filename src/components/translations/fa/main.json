@@ -432,6 +432,7 @@
       "advertising": "لیست آگهی ها"
     },
     "list": {
+      "emergency": "فوری",
       "isFullTime": "تمام وقت",
       "isPartTime": "پاره وقت",
       "isRemote": "دورکاری",
@@ -464,6 +465,11 @@
       "sortBy": "مرتب سازی"
     },
     "single": {
+      "degree": "مقطع تحصیلی",
+      "languages": "زبان‌های تحت تسلط",
+      "major": "رشته تحصیلی",
+      "notImportant": "مهم نیست",
+      "experience": "سابقه کاری",
       "person": "نفر",
       "jobCategory": "دسته‌بندی شغلی",
       "location": "موقعیت مکانی",

@@ -40,6 +40,8 @@ export default function SentResumes() {
     const [updateAdId, setUpdateAdId] = useState();
     const resumeTemplates = getResumeTemplates();
     const resumeColors = getResumeColors();
+    const [defaultDescription, setDefaultDescription] = useState();
+    const [preCatArray, setPreCatArray] = useState([]);
     const modalStyle = {
         content: {
             direction: "rtl",
@@ -66,6 +68,7 @@ export default function SentResumes() {
     const onOpenModal = (id) => {
         setIsModalOpen(true);
         setUpdateAdId(id)
+        console.log(id)
         var axios = require('axios');
         axios.defaults.withCredentials = true;
         var config_resume_list = {
@@ -90,6 +93,45 @@ export default function SentResumes() {
                 console.log(error);
             });
 
+        /* get default selected data*/
+        let default_config = {
+            method: 'post',
+            url: generateURL("/JobOfferRequest/GetJobOfferResuest"),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({
+                "id": id,
+                "roleId": 5,
+                "roleAccountId": 0,
+                "heights": [
+                    200
+                ],
+                "widths": [
+                    200
+                ],
+                "qualities": [
+                    90
+                ]
+
+            })
+        };
+        axios(default_config)
+            .then(function (response) {
+                let data = response.data.data;
+                console.log(data)
+                setPreCatArray([data.resumeCatId])
+                setTemplateId(data.designId);
+                setColorId(data.colorId);
+                setResumeId(data.resumeId);
+                setDefaultDescription(data.description);
+
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
 
     }
 
@@ -100,28 +142,23 @@ export default function SentResumes() {
         setResumeCatId(null);
         $("#resume_description").val("");
         setModalStep(0);
+        setPreCatArray([]);
 
     }
 
     const onselectResume = (e) => {
         setResumeId(parseInt(e.target.value));
-        $("#step0_submit").addClass("d-block");
-        $("#step0_submit").removeClass("d-none");
     }
 
     const onTemplateSelect = (category, template) => {
         setTemplateId(template);
         setResumeCatId(category);
-        $("#step1_submit").addClass("d-block");
-        $("#step1_submit").removeClass("d-none");
+
     }
 
     const onColorSelect = (id) => {
         setColorId(id);
-        console.log(id)
 
-        $("#step2_submit").addClass("d-block");
-        $("#step2_submit").removeClass("d-none");
 
     }
 
@@ -446,7 +483,8 @@ export default function SentResumes() {
                                     {item.isRejected && <span className={'bg-danger rounded p-1'}>رد شده</span>}
                                     {(!item.isRejected && !item.isApproved)&& <span className={'bg-secondary rounded  p-1'}>درحال بررسی</span>}
                                 </td>
-                                <td><button className={"btn btn-warning " + Style.editBtn} onClick={()=>{onOpenModal(item.id)}}><img src={Edit}/></button></td>
+                                <td><button disabled={item.isApproved || item.isRejected}
+                                    className={"btn btn-warning " + Style.editBtn} onClick={()=>{onOpenModal(item.id)}}><img src={Edit}/></button></td>
                                 <td><Link className={"btn btn-info " + Style.editBtn}><img src={Eye}/></Link></td>
                             </tr>
                         )):
@@ -483,13 +521,13 @@ export default function SentResumes() {
                                             {
                                                 myResumes.length > 0 &&
                                                 myResumes.map( (item, index) => (
-                                                    <option value={item.id}>{item.title}</option>
+                                                    <option value={item.id} selected={item.id === resumeId}>{item.title}</option>
                                                 ))
                                             }
                                         </select>
                                     </div>
                                     <div className="modal-footer">
-                                        <button type="button" className="btn btn-primary d-none"  id={"step0_submit"}
+                                        <button type="button" className="btn btn-primary"  id={"step0_submit"}
                                                 onClick={() => {setModalStep(modalStep + 1);}}>مرحله بعد</button>
                                     </div>
                                 </div>}
@@ -499,9 +537,9 @@ export default function SentResumes() {
                                         <h6 className={"text-right my-4"}>انتخاب قالب</h6>
 
                                         <div className={Style.templatesContainer}>
-                                            <Accordion allowZeroExpanded>
+                                            <Accordion allowZeroExpanded preExpanded={preCatArray}>
                                                 {resumeTemplates.map((category) => (
-                                                    <AccordionItem key={category.id}>
+                                                    <AccordionItem key={category.id} uuid={category.id}>
                                                         <AccordionItemHeading>
                                                             <AccordionItemButton>
                                                                 <h6 className={"change-text py-2 px-3 " + Style.categoryTitle}>{language === 'fa' ? category.categoryName  : category.categoryNameEng}</h6>
@@ -540,7 +578,7 @@ export default function SentResumes() {
                                                         setModalStep(modalStep-1)
                                                 }}>قبلی
                                         </button>
-                                        <button type="button" className="btn btn-primary d-none"  id={"step1_submit"}
+                                        <button type="button" className="btn btn-primary"  id={"step1_submit"}
                                                 onClick={() => {setModalStep(modalStep + 1);}}>مرحله بعد</button>
                                     </div>
                                 </div>}
@@ -570,7 +608,7 @@ export default function SentResumes() {
                                                         setModalStep(modalStep-1)
                                                 }}>قبلی
                                         </button>
-                                        <button type="button" className="btn btn-primary d-none"  id={"step2_submit"}
+                                        <button type="button" className="btn btn-primary"  id={"step2_submit"}
                                                 onClick={() => {setModalStep(modalStep + 1);}}>مرحله بعد</button>
                                     </div>
                                 </div>}
@@ -578,7 +616,7 @@ export default function SentResumes() {
                                 <div>
                                     <div className="modal-body">
                                         <h6 className={"text-right my-4"}>افزودن توضیحات</h6>
-                                        <textarea className={"form-control " + Style.resumeDescription} id={"resume_description"}></textarea>
+                                        <textarea className={"form-control " + Style.resumeDescription} id={"resume_description"}>{defaultDescription}</textarea>
 
                                     </div>
                                     <div className="modal-footer">

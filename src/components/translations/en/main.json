@@ -436,6 +436,7 @@
         "advertising": "Advertising List"
     },
     "list": {
+      "emergency": "Emergency",
       "isFullTime": "Full Time",
       "isPartTime": "Part Time",
       "isRemote": "Remote",
@@ -469,6 +470,11 @@
 
     },
     "single": {
+      "major": "Major",
+      "degree": "Degree",
+      "languages": "Fluent Languages",
+      "notImportant": "Not Important",
+      "experience": "Experience",
       "person": "person",
       "jobCategory": "Job Category",
       "location": "Location",
