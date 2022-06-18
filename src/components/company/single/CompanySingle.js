@@ -196,7 +196,7 @@ export default function CompanySingle() {
                             <div className={'d-flex change-dir text-white row w-100  mx-0 ' + Style.foundationContainer}>
                                 <div className={'mx-3'}>{t("company.single.foundIn")} {company.foundationYear}</div>
                                 <div className={'mx-3'}>{language === 'fa' ? company.companyCategory.name : company.companyCategory.englishName}</div>
-                                <div className={'mx-3'}>{company.minMemberCount} - company.maxMemberCount} {t("company.single.person")}</div>
+                                <div className={'mx-3'}>{company.minMemberCount} - {company.maxMemberCount} {t("company.single.person")} </div>
                                 <a className={Style.websiteAddress + ' mx-3'} href={company.webSiteAddress}>{company.webSiteAddress}</a>
                             </div>
                         }
@@ -240,7 +240,7 @@ export default function CompanySingle() {
                                                         item.company.name :
                                                         item.company.englishName
                                                     }
-                                                    className=""/>
+                                                    className=" mx-0"/>
                                             </div>
                                         </div>
                                         <div className="col-12 col-lg-9 col-md-7">
