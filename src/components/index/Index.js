@@ -1,8 +1,18 @@
 import Style from "./index.module.css";
 
-import HandLogo from "./imgs/hand logo (2).png";
-import Feature9 from "./imgs/Feature_9.png";
-import NewsSample from "./imgs/newsSample.png";
+import num1 from "./imgs/num1.png"
+import num2 from "./imgs/num2.png"
+import num3 from "./imgs/num3.png"
+import num4 from "./imgs/num4.png"
+import num5 from "./imgs/num5.png"
+import num6 from "./imgs/num6.png"
+
+import service1 from "./imgs/service1.png"
+import service2 from "./imgs/service2.png"
+import service3 from "./imgs/service3.png"
+
+import heroPic from "./imgs/picture.png"
+
 import {useEffect, useState} from "react";
 import {generateURL} from "../global/Requests";
 import * as queryString from "query-string";
@@ -33,193 +43,112 @@ export default function Index() {
             });
     }, [])
     return (
-        <main className="container-fluid">
-            <div className={Style.hero}>
-                <div className="container">
-                    <div className={Style["hero-row"]}>
-                        <div className={Style["hero-text"] + " col-12 col-md-6 order-md-1 order-2 change-dir change-text"}>
-                            <h1 className={'mt-5 mt-md-0'}>
-                                {sp.get("lang") === "fa" ?
-                                    "به وبسایت کاریابی دانشگاه خلیج فارس خوش آمدید" :
-                                    "Welcome to the job search website of Persian Gulf University"
-                                }
-                            </h1>
-                            <p className={'change-dir change-text'}>
-                                {hero.message}
-                            </p>
-                            <button className="btn">
-                                {sp.get("lang") === "fa" ?
-                                    "اطلاعات بیشتر" :
-                                    "More Details"
-                                }
-                            </button>
-                        </div>
-                        <div className={Style["hero-img"] + " col-12 d-none d-md-block col-md-6 order-md-2 order-1"}>
-                            <img src={HandLogo} alt=""/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/*<div className={Style.clubs + " py-3 container text-center"}>*/}
-            {/*    <h3 className="py-4">انجمن های موثر</h3>*/}
-            {/*    <div className="row">*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={AnjomanRazi}*/}
-            {/*                                                         alt=""*/}
-            {/*                                                         className=""/></div>*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={AnjomanKhajenasir} alt="" className=""/>*/}
-            {/*        </div>*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={LogoTransparent} alt=""*/}
-            {/*                                                         className=""/></div>*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={PersianGulf} alt=""*/}
-            {/*                                                         className=""/>*/}
-            {/*        </div>*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={ItLogo}*/}
-            {/*                                                         alt=""*/}
-            {/*                                                         className=""/></div>*/}
-            {/*        <div className={Style["uni-logo"] + " col-lg-2 col-md-6"}><img src={AnjomanGilan}*/}
-            {/*                                                         alt=""*/}
-            {/*                                                         className=""/></div>*/}
-            {/*    </div>*/}
-            {/*    <div className={Style.dots + " text-center pt-1"}>*/}
-            {/*        <span className={Style.dot}></span>*/}
-            {/*        <span className={Style.dot}></span>*/}
-            {/*        <span className={Style.dot + " " + Style.acitve}></span>*/}
-            {/*        <span className={Style.dot}></span>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className={Style.courses}>*/}
-            {/*    <div className="container">*/}
-            {/*        <h3 className="text-center pt-4">دوره های اتحادیه</h3>*/}
-            {/*        <div className="row py-2">*/}
-
-            {/*            <div className="offset-md-6  col-md-6  text-md-right text-center py-2 order-1">*/}
-            {/*                <div className={Style["courses-btn-group"] + " btn-group rounded"} role="group" aria-label="Basic example">*/}
-            {/*                    <button type="button" className={Style["courses-btn"] + " btn " + Style.acitve}>آخرین دوره ها</button>*/}
-            {/*                    <button type="button" className={Style["courses-btn"] + " btn "}>علاقه مندی ها</button>*/}
-            {/*                    <button type="button" className={Style["courses-btn"] + " btn "}>پر بازدید ترین ها</button>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*            <div className={Style["courses-text"] + " col-md-6 py-2 order-md-2 order-3"}>*/}
-            {/*                <h2 className="m-md-0 mx-auto  text-right">متن ساختگی با تولید لورم ایپسوم</h2>*/}
-            {/*                <p className="m-md-0 mx-auto  text-right">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از*/}
-            {/*                    صنعت*/}
-            {/*                    چاپ و با استفاده از طراحان گرافیک است.</p>*/}
-            {/*                <div className="text-md-right">*/}
-            {/*                    <button className={Style["courses-text-btn"] + " btn"}>اطلاعات بیشتر</button>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*            <div className={Style["courses-img"] + " col-md-6 text-center text-md-left py-2 order-md-3 order-2"}>*/}
-            {/*                <img src={Img1} alt=""/>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*        <div className={Style.dots + " text-center"}>*/}
-            {/*            <span className={Style.dot}></span>*/}
-            {/*            <span className={Style.dot}></span>*/}
-            {/*            <span className={Style.dot + " " + Style.acitve}></span>*/}
-            {/*            <span className={Style.dot}></span>*/}
-            {/*        </div>*/}
-            {/*        <div className={Style["more-news"] + " text-left"}>*/}
-            {/*            <a href="">نمایش تمامی دوره ها<i className="px-1 fas fa-arrow-left"></i></a>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <div className={Style.advertising}>
-                <div className="container mt-5">
-                    <h3 className="text-center">آگهی های استخدامی</h3>
-                    <div className="row py-4">
-
-                        <div className="offset-md-6  col-md-6  text-md-right text-center py-2">
-                            <div className={Style["advertising-btn-group"] + " btn-group rounded"} role="group"
-                                 aria-label="Basic example">
-                                <button type="button"
-                                        className={Style["advertising-btn"] + " btn " + Style["acitve"]}>آخرین دوره ها
-                                </button>
-                                <button type="button" className={Style["advertising-btn"] + " btn "}>علاقه مندی ها
-                                </button>
+        <main className="py-5">
+            <section className={Style.hero + " container"} dir="rtl">
+                <div className={Style.searchBox}>
+                    <form>
+                        <div className="row">
+                            <div className="col-12 col-md-3 my-2">
+                                <input type="text" className="form-control" placeholder="عنوان شرکت..."/>
+                            </div>
+                            <div className="col-12 col-md-3 my-2">
+                                <input type="text" className="form-control w-100" placeholder="استان"/>
+                            </div>
+                            <div className="col-12 col-md-3 my-2">
+                                <input type="text" className="form-control w-100" placeholder="دسته بندی"/>
+                            </div>
+                            <div className="col-12 col-md-3 my-2">
+                                <input type="submit" className="form-control w-100" value="جستجو"/>
                             </div>
                         </div>
-                        <div className={Style["advertising-img"] + " col-md-6 text-center text-md-right  py-2"}>
-                            <img className={'w-100'} src={Feature9} alt=""/>
+                    </form>
+                </div>
+                <div className={"container " + Style.heroContent}>
+                    <div className="row change-dir">
+                        <div className="col-md-5">
+                            <div className={Style.rightContent + " text-center mt-5"}>
+                                <h2 className={'change-text'}>به وبسایت کاریابی دانشگاه ”خلیج فارس“ خوش آمدید.</h2>
+                                <div className=" mt-5">
+                                    <p className={'change-text'}>  {hero.message}</p>
+                                    <button className={'btn w-100'}>اطلاعات بیشتر</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className={Style["courses-text"] + " col-md-6 py-2 order-md-2 order-3"}>
-                            <h2 className="m-md-0 mx-auto  text-right">متن ساختگی با تولید لورم ایپسوم</h2>
-                            <p className="m-md-0 mx-auto  text-right">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                صنعت
-                                چاپ و با استفاده از طراحان گرافیک است.</p>
-                            <div className="text-md-right">
-                                <button className={Style["courses-text-btn"] + " btn"}>اطلاعات بیشتر</button>
+                        <div className="col-md-7">
+                            <div className={Style.rightContent +" mt-4"}>
+                                <img src={heroPic} alt=""/>
                             </div>
                         </div>
                     </div>
-                    <div className={Style.dots + " text-center"}>
-                        <span className={Style.dot}></span>
-                        <span className={Style.dot}></span>
-                        <span className={Style.dot + " " + Style.acitve}></span>
-                        <span className={Style.dot}></span>
-                    </div>
-                    <div className={Style["more-news"] + " text-left"}>
-                        <a href="">نمایش تمامی آگهی ها<i className="px-1 fas fa-arrow-left"></i></a>
+                </div>
+            </section>
+            <section className={Style.services + " container"}>
+                <div className="text-center">
+                    <h3>خدمات</h3>
+                    <div className={Style.servicesItems + " row"}>
+                        <div className={Style.cardCustom + " col-12 col-md-4"}>
+                            <div className={Style.marginCustom}>
+                                <img className={Style.cardImgTop} src={service1} alt="Card image cap"/>
+                                <div className={Style.cardBody}>
+                                    <h5 className={Style.cardTitle}>جستجوی قالب مربوطه شغلی</h5>
+                                    <p className={Style.cardText}>بر اساس رزومه قادر خواهید بود قالب های شغلی مربوطه را
+                                        با
+                                        توجه
+                                        به سلیقه و درخواستتان انتخاب نمایید.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className={Style.cardCustom + " col-12 col-md-4"}>
+                            <img className={Style.cardImgTop} src={service2}/>
+                            <div className={Style.cardBody}>
+                                <h5 className={Style.cardTitle}>اطلاع رسانی موقعیت های شغلی</h5>
+                                <p className={Style.cardText}> بر اساس بیشترین میزان شباهت با رزومه ی خود به روش های
+                                    الکترونیکی میتوانید از آگهی مدنظرتان مطلع شوید. </p>
+
+                            </div>
+                        </div>
+                        <div className={Style.cardCustom + " col-12 col-md-4"}>
+                            <img className={Style.cardImgTop} src={service3}
+                                 alt="Card image cap"/>
+                            <div className={Style.cardBody}>
+                                <h5 className={Style.cardTitle}>ساخت رزومه های متعدد</h5>
+                                <p className={Style.cardText}>شما میتوانید در این بستر چندین رزومه مجزا از هم با موضوعات
+                                    مختلف را بسازید.</p>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className={Style.news}>
-                <div className="container text-center">
-                    <h3>اخبار</h3>
-                    <div className="row">
-                        <div className={Style["news-item"] + " col-lg-3 col-md-6"}>
-                            <img className="rounded" src={NewsSample}
-                                 alt=""/>
-                            <h6>دستاوردهای اصلی</h6>
-                            <p className="">از طراحان گرافیک است. چاپگر ها و متون سادگی نامفهوم از صنعت چاپ و با استفاده
-                                لورم ایپسوم متن ساختگی با تولید</p>
+            </section>
+            <section className="resumePaths container">
+                <div className="text-center">
+                    <h3>مراحل ساخت رزومه</h3>
+                    <div className="pathTable">
+                        <div className="row">
+                            <div className="col-md-4 col-6">
+                                <img src={num1} alt=""/>
+                            </div>
+                            <div className="col-md-4 col-6">
+                                <img src={num2} alt=""/>
+                            </div>
+                            <div className="col-md-4 col-6">
+                                <img src={num3} alt=""/>
+                            </div>
+                            <div className="col-md-4 col-6">
+                                <img src={num4} alt=""/>
+                            </div>
+                            <div className="col-md-4 col-6">
+                                <img src={num5} alt=""/>
+                            </div>
+                            <div className="col-md-4 col-6">
+                                <img src={num6} alt=""/>
+                            </div>
+
                         </div>
-                        <div className={Style["news-item"] + " col-lg-3 col-md-6"}>
-                            <img className="rounded" src={NewsSample} alt=""/>
-                            <h6>دستاوردهای اصلی</h6>
-                            <p>از طراحان گرافیک است. چاپگر ها و متون سادگی نامفهوم از صنعت چاپ و با استفاده لورم
-                                ایپسوم متن ساختگی با تولید</p>
-                        </div>
-                        <div className={Style["news-item"] + " col-lg-3 col-md-6"}>
-                            <img className="rounded" src={NewsSample} alt=""/>
-                            <h6>دستاوردهای اصلی</h6>
-                            <p className="">از طراحان گرافیک است. چاپگر ها و متون سادگی نامفهوم از صنعت چاپ و با استفاده
-                                لورم ایپسوم متن ساختگی با تولید</p>
-                        </div>
-                        <div className={Style["news-item"] + " col-lg-3 col-md-6"}>
-                            <img className="rounded" src={NewsSample} alt=""/>
-                            <h6>دستاوردهای اصلی</h6>
-                            <p>از طراحان گرافیک است. چاپگر ها و متون سادگی نامفهوم از صنعت چاپ و با استفاده لورم
-                                ایپسوم متن ساختگی با تولید</p>
-                        </div>
-                    </div>
-                    <div className={Style.dots + " text-center"}>
-                        <span className={Style.dot}></span>
-                        <span className={Style.dot}></span>
-                        <span className={Style.dot + " " + Style.acitve}></span>
-                        <span className={Style.dot}></span>
-                    </div>
-                    <div className={Style["more-news"] + " text-left"}>
-                        <a href="">نمایش کل اخبار<i className="px-1 fas fa-arrow-left"></i></a>
                     </div>
                 </div>
-            </div>
-            {/*</div>*/}
-            <div className={Style["statistics"] + " container"}>
-                <div className="row text-center py-4">
-                    <div className="col-lg-4 col-12 pt-2">
-                        <h5>+30</h5>
-                        <p>تعداد شرکت کننده های عضو اتحادیه</p>
-                    </div>
-                    <div className="col-lg-4 col-12 pt-2">
-                        <h5>+43,000</h5>
-                        <p>تعداد کل اعضای اتحادیه</p>
-                    </div>
-                    <div className="col-lg-4 col-12 pt-2">
-                        <h5>+100</h5>
-                        <p>تعداد انجمن های عضو اتحادیه</p>
-                    </div>
-                </div>
-            </div>
+            </section>
         </main>
     )
 }
