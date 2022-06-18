@@ -67,16 +67,16 @@ export default function Index() {
                     <div className="row change-dir">
                         <div className="col-md-5">
                             <div className={Style.rightContent + " text-center mt-5"}>
-                                <h2 className={'change-text'}>به وبسایت کاریابی دانشگاه ”خلیج فارس“ خوش آمدید.</h2>
-                                <div className=" mt-5">
-                                    <p className={'change-text'}>  {hero.message}</p>
+                                <h2>به وبسایت کاریابی دانشگاه ”خلیج فارس“ خوش آمدید.</h2>
+                                <div className=" mt-4">
+                                    <p>  {hero.message}</p>
                                     <button className={'btn w-100'}>اطلاعات بیشتر</button>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-7">
-                            <div className={Style.rightContent +" mt-4"}>
-                                <img src={heroPic} alt=""/>
+                            <div className={Style.rightContent + " mt-4"}>
+                                <img className={Style.w90} src={heroPic} alt=""/>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ export default function Index() {
             <section className={Style.services + " container"}>
                 <div className="text-center">
                     <h3>خدمات</h3>
-                    <div className={Style.servicesItems + " row"}>
+                    <div className={" row"}>
                         <div className={Style.cardCustom + " col-12 col-md-4"}>
                             <div className={Style.marginCustom}>
                                 <img className={Style.cardImgTop} src={service1} alt="Card image cap"/>
@@ -100,22 +100,26 @@ export default function Index() {
                             </div>
                         </div>
                         <div className={Style.cardCustom + " col-12 col-md-4"}>
-                            <img className={Style.cardImgTop} src={service2}/>
-                            <div className={Style.cardBody}>
-                                <h5 className={Style.cardTitle}>اطلاع رسانی موقعیت های شغلی</h5>
-                                <p className={Style.cardText}> بر اساس بیشترین میزان شباهت با رزومه ی خود به روش های
-                                    الکترونیکی میتوانید از آگهی مدنظرتان مطلع شوید. </p>
+                            <div className={Style.marginCustom}>
+                                <img className={Style.cardImgTop} src={service2}/>
+                                <div className={Style.cardBody}>
+                                    <h5 className={Style.cardTitle}>اطلاع رسانی موقعیت های شغلی</h5>
+                                    <p className={Style.cardText}> بر اساس بیشترین میزان شباهت با رزومه ی خود به روش های
+                                        الکترونیکی میتوانید از آگهی مدنظرتان مطلع شوید. </p>
 
+                                </div>
                             </div>
                         </div>
                         <div className={Style.cardCustom + " col-12 col-md-4"}>
-                            <img className={Style.cardImgTop} src={service3}
-                                 alt="Card image cap"/>
-                            <div className={Style.cardBody}>
-                                <h5 className={Style.cardTitle}>ساخت رزومه های متعدد</h5>
-                                <p className={Style.cardText}>شما میتوانید در این بستر چندین رزومه مجزا از هم با موضوعات
-                                    مختلف را بسازید.</p>
-
+                            <div className={Style.marginCustom}>
+                                <img className={Style.cardImgTop} src={service3}
+                                     alt="Card image cap"/>
+                                <div className={Style.cardBody}>
+                                    <h5 className={Style.cardTitle}>ساخت رزومه های متعدد</h5>
+                                    <p className={Style.cardText}>شما میتوانید در این بستر چندین رزومه مجزا از هم با
+                                        موضوعات
+                                        مختلف را بسازید.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,23 +130,35 @@ export default function Index() {
                     <h3>مراحل ساخت رزومه</h3>
                     <div className="pathTable">
                         <div className="row">
-                            <div className="col-md-4 col-6">
-                                <img src={num1} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num1} alt=""/>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-6">
-                                <img src={num2} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num2} alt=""/>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-6">
-                                <img src={num3} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num3} alt=""/>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-6">
-                                <img src={num4} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num4} alt=""/>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-6">
-                                <img src={num5} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num5} alt=""/>
+                                </div>
                             </div>
-                            <div className="col-md-4 col-6">
-                                <img src={num6} alt=""/>
+                            <div className="col-12 col-md-4">
+                                <div className={Style.marginQuide}>
+                                    <img className={'w-100'} src={num6} alt=""/>
+                                </div>
                             </div>
 
                         </div>
