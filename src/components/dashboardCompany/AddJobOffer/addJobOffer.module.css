@@ -1,0 +1,30 @@
+h5{
+    color: #653394;
+}
+.toggleBtn {
+    background-color: #653394;
+    border-color: #653394;
+}
+.addSkillBtn {
+    color: white;
+    font-size: 0.8rem;
+    background-color: #9e68d0;
+    border: 0;
+    border-radius: 5px;
+}
+.skillTag {
+    background-color: #e1bbfd;
+    color: #363636;
+    font-size: 0.85rem;
+    border-radius: 7px;
+}
+.skillTag button {
+    color: black !important;
+}
+.skillFieldLabel {
+    display: block;
+    font-size: 0.9em;
+}
+.skillTagParent {
+    width: fit-content;
+}

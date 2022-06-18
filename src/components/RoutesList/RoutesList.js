@@ -123,10 +123,25 @@ let Routes = {
         "route": "/dashboard/sentResumes"
     },
     /*company*/
+    "dashboardParentCompany": {
+        "des": "داشبورد شرکت",
+        "enDes": "Company Dashboard",
+        "route": "/company/dashboard"
+    },
     "companyJobOffers": {
         "des": "فرصت‌های شغلی",
         "enDes": "Job Offers",
-        "route": "/dashboard/company/jobOffers"
+        "route": "/company/dashboard/jobOffers"
+    },
+    "addJobOfferByCompany": {
+        "des": "افزودن فرصت شغلی",
+        "enDes": "Add Job Offer",
+        "route": "/company/dashboard/addJobOffer"
+    },
+    "addJobOfferByCompanyStep2": {
+        "des": "افزودن فرصت شغلی",
+        "enDes": "Add Job Offer",
+        "route": "/company/dashboard/addJobOfferStep2"
     },
    /************* Dashboard Admin **************/
     /*Admin*/

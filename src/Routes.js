@@ -4,7 +4,6 @@ import {createBrowserHistory} from "history";
 
 import Controller from "./components/authentication/Helper/Controller";
 import {getRoutesItems} from "./components/RoutesList/RoutesList";
-import Test from "./components/imageCropper/Text";
 
 
 /****************** Index *****************************/
@@ -68,10 +67,11 @@ import CoursesSingle from "./components/courses/single/CoursesSingle";
 /************** Dashboard **************/
 import Dashboard from "./components/dashboard/dashboardParent/DashboardParent";
 import DashboardParentAdmin from "./components/dashboardAdmin/dashboardParent/DashboardParentAdmin";
-import SentResume from "./components/dashboard/sentResumes/SentResumes";
+import DashboardParentCompany from "./components/dashboardCompany/dashboardParent/DashboardParent";
 
 /************* Company *************/
 import CompaniesList from "./components/company/list/CompanyList";
+import CompanySingle from "./components/company/single/CompanySingle";
 
 export default function Routes() {
     return (
@@ -80,7 +80,6 @@ export default function Routes() {
             <Navbar/>
             <Switch>
                 {/****************** Index *****************************/}
-                <Route path="/test" exact component={Test}/>
                 <Route path="/" exact component={Index}/>
 
                 {/****************** About *****************************/}
@@ -136,6 +135,7 @@ export default function Routes() {
 
                 {/************* Company *************/}
                 <Route path={getRoutesItems().companyList.route} exact component={CompaniesList}/>
+                <Route path={getRoutesItems().companySingle.route} exact component={CompanySingle}/>
 
 
                 {/****************** Controller *****************************/}
@@ -144,6 +144,7 @@ export default function Routes() {
 
                     <Route path={getRoutesItems().DashboardParent.route + "*" }  exact  component={Dashboard}/>
                     <Route path={getRoutesItems().DashboardParentAdmin.route + "*" }  exact  component={DashboardParentAdmin}/>
+                    <Route path={getRoutesItems().dashboardParentCompany.route + "*" }  exact  component={DashboardParentCompany}/>
 
 
                 </Controller>

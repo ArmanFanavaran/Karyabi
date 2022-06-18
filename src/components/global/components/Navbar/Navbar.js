@@ -169,6 +169,14 @@ export default function Navbar() {
                                                       className={" dropdown-item text-dark"}>{t("global.navbar.adminPanel")}
                                                 </Link>:null
                                             }
+                                            {admin || adminOne ?
+                                                <Link to={{
+                                                    pathname: getRoutesItems().dashboardParentCompany.route,
+                                                    search: "lang=" + sp.get("lang"),
+                                                }}
+                                                      className={" dropdown-item text-dark"}>{t("global.navbar.companyPanel")}
+                                                </Link>:null
+                                            }
                                             <Link to={{
                                                 pathname: getRoutesItems().changePassword.route,
                                                 search: "lang=" + sp.get("lang"),

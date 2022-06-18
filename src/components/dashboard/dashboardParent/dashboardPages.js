@@ -15,7 +15,7 @@ const pages = {
             iconClass: "bi bi-clock-history"
         }
     ],
-    company: []
+
 
 }
 export function getDashboardPages(){
