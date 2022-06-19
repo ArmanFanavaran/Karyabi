@@ -3,9 +3,9 @@ import {getRoutesItems} from "../../RoutesList/RoutesList";
 const pages = {
     company: [
         {
-            label: "ثبت آگهی شغلی",
-            labelEng: "Add Job Offer",
-            pathname: getRoutesItems().addJobOfferByCompany.route ,
+            label: "فرصت‌های شغلی",
+            labelEng: "Job Offers",
+            pathname: getRoutesItems().companyJobOffers.route ,
             iconClass: "bi bi-person-fill"
         },
 

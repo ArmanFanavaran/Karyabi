@@ -23,6 +23,7 @@ import {
 
 import AddJobOfferStep1 from "../AddJobOffer/addJobOfferStep1";
 import AddJobOfferStep2 from "../AddJobOffer/addJobOfferStep2";
+import JobOfferList from "../AddJobOffer/JobOfferList";
 
 
 export default function DashboardParentCompany() {
@@ -371,6 +372,7 @@ export default function DashboardParentCompany() {
                         {/*<Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>*/}
                         <Route path={getRoutesItems().addJobOfferByCompany.route} exact component={AddJobOfferStep1}/>
                         <Route path={getRoutesItems().addJobOfferByCompanyStep2.route} exact component={AddJobOfferStep2}/>
+                        <Route path={getRoutesItems().companyJobOffers.route} exact component={JobOfferList}/>
                     </div>
                 </div>
             </div>

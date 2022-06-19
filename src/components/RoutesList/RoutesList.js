@@ -60,38 +60,6 @@ let Routes = {
         "enDes": "Register (Enter Password)",
         "route": "/register/step3"
     },
-    // "registerStep4": {
-    //     "des": "ثبت نام (رمز عبور)",
-    //     "enDes": "Register (Enter Password)",
-    //     "route": "/register/step4"
-    // },
-    // "registerStep5": {
-    //     "des": "اطلاعات کاربری",
-    //     "enDes": "User Info",
-    //     "route": "/register/step5"
-    // },
-    /************** Team **************/
-    // "teamSingle": {
-    //     "des": "نمایش تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/single"
-    // },
-    // "teamActivitySingle": {
-    //     "des": "نمایش فعالیت تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/activity/single"
-    // },
-    // "teamUserSingle": {
-    //     "des": "نمایش عضو تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/user/single"
-    // },
-    /************** Staff **************/
-    // "staffSingle": {
-    //     "des": "نمایش سمت",
-    //     "enDes": "Staff Single",
-    //     "route": "/staff/single"
-    // },
     /************** Profile **************/
 
     "profileSingle": {
@@ -143,6 +111,7 @@ let Routes = {
         "enDes": "Add Job Offer",
         "route": "/company/dashboard/addJobOfferStep2"
     },
+
    /************* Dashboard Admin **************/
     /*Admin*/
     "DashboardParentAdmin": {

@@ -1,3 +1,4 @@
+/*add job offer*/
 h5{
     color: #653394;
 }
@@ -27,4 +28,46 @@ h5{
 }
 .skillTagParent {
     width: fit-content;
+}
+/* joboffer list*/
+.table tbody{
+    height: 100%;
+    overflow-y: auto;
+}
+.table td {
+    font-size: 0.9rem;
+    border: 0 !important;
+    /*border-radius: 4px;*/
+}
+.table tr:hover {
+    background-color: #f8f2ff;
+
+}
+.table{
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+.table th {
+    font-size: 0.9rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 0 !important;
+    background-color: #f8f2ff;
+}
+.table th:first-child, .table td:first-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.table th:last-child, .table td:last-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.addJobOfferBtn {
+    background-color: #9558d0;
+    color: white;
+    border: none;
+}
+.fitContent {
+    width: fit-content !important;
 }
