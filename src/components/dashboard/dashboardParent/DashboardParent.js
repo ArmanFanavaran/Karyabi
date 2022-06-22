@@ -17,6 +17,9 @@ import Delete from "../../employmentAdvertisement/imgs/delete.png";
 import filterImage from "../../employmentAdvertisement/imgs/filter.png";
 import {getDashboardPages} from "./dashboardPages";
 import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
+import AddCompanyCriticalInfo from "../addCompany/AddCompanyCriticalInfo";
+import UpdateCompanyTypicalInfo from "../addCompany/UpdateCompanyTypicalInfo";
+import Requests from "../requests/Requests";
 
 
 export default function Dashboard() {
@@ -193,8 +196,8 @@ export default function Dashboard() {
                         </Modal>
                     </div>
                 </div>
-                <div className={"row w-100 change-dir"}>
-                    <div className={"col-xl-3 col-12 d-none d-xl-inline"}>
+                <div className={"row w-100 change-dir mx-0 pb-5"}>
+                    <div className={"col-xl-3 col-12 d-none d-xl-inline mb-5 pb-5"}>
                         <div id={"fixed-class"} className={Style.nav + " p-3"}>
                             <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
@@ -235,6 +238,9 @@ export default function Dashboard() {
 
                         <Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>
                         <Route path={getRoutesItems().SentResumes.route} exact component={SentResumes}/>
+                        <Route path={getRoutesItems().addCompany.route} exact component={AddCompanyCriticalInfo}/>
+                        <Route path={getRoutesItems().updateCompany.route} exact component={UpdateCompanyTypicalInfo}/>
+                        <Route path={getRoutesItems().dashboardRequests.route} exact component={Requests}/>
                     </div>
                 </div>
             </div>

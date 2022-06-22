@@ -1,0 +1,24 @@
+.toggleBtn {
+    background-color: #914ccb;
+    border-color: #914ccb;
+}
+.criticalLabel {
+    font-size: 0.9rem;
+    color: #6a6a6a;
+}
+.criticalDefaultField {
+    color: #7545cc;
+    font-weight: bolder;
+}
+.knowledgeIcon {
+    font-size: 1.2rem !important;
+}
+.logoPreview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.mainPicPreview {
+    width: 100%;
+    height: 400px;
+}

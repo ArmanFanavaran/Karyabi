@@ -90,6 +90,21 @@ let Routes = {
         "enDes": "Sent Resumes",
         "route": "/dashboard/sentResumes"
     },
+    "addCompany": {
+        "des": "ثبت شرکت",
+        "enDes": "Add Company",
+        "route": "/dashboard/addCompany"
+    },
+    "updateCompany": {
+        "des": "تکمیل اطلاعات شرکت",
+        "enDes": "Upadte Company Info",
+        "route": "/dashboard/updateCompany"
+    },
+    "dashboardRequests": {
+        "des": "لیست درخواست ها",
+        "enDes": "Requests",
+        "route": "/dashboard/requests"
+    },
     /*company*/
     "dashboardParentCompany": {
         "des": "داشبورد شرکت",
