@@ -8,6 +8,12 @@ const pages = {
             pathname: getRoutesItems().companyJobOffers.route ,
             iconClass: "bi bi-person-fill"
         },
+        {
+            label: "رزومه‌های ارسالی",
+            labelEng: "Received Resumes",
+            pathname: getRoutesItems().companyReceivedResumes.route ,
+            iconClass: "bi bi-person-fill"
+        },
 
     ],
 

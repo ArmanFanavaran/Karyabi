@@ -188,7 +188,7 @@ export default function AddCompanyCriticalInfo() {
                 </div>
                 <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
                     <label className={'d-block change-text'}>نام شرکت (انگلیسی)</label>
-                    <input type={'text'} className={'form-control text-left'} id={'eng_name_input'}/>
+                    <input type={'text'} className={'form-control text-left'} dir={"ltr"} id={'eng_name_input'}/>
                 </div>
                 <div className={'col-12 form-group change-dir mt-4'}>
                     <label className={'d-block change-text'}>آدرس شرکت</label>
@@ -236,11 +236,11 @@ export default function AddCompanyCriticalInfo() {
                 </div>
                 <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
                     <label className={'d-block change-text'}>شماره تلفن همراه</label>
-                    <input type={'text'} className={'form-control text-left'} id={'phone_input'}/>
+                    <input type={'number'} className={'form-control text-left'} dir={"ltr"} id={'phone_input'}/>
                 </div>
                 <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
                     <label className={'d-block change-text'}>ایمیل</label>
-                    <input type={'email'} className={'form-control'} id={'email_input'}/>
+                    <input type={'email'} className={'form-control text-left'} dir={"ltr"} id={'email_input'}/>
                 </div>
                 <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
                     {isKnowledge ?

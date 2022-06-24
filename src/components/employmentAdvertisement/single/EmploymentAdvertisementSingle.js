@@ -185,27 +185,41 @@ export default function EmploymentAdvertisementSingle() {
 
             NotificationManager.success(response.data.message, "", 2000);
 
-            history.push(getRoutesItems().sentResumes.route + "/");
+            setTimeout(() => {
+                history.push({
+                    pathname: getRoutesItems().SentResumes.route,
+                    search: "lang=" + language
+                });
+            });
 
 
         }).catch(function (error) {
             console.log(error);
             setIsModalOpen(false);
-            let errors = error.response.data.errors;
-            if (errors != null) {
-                Object.keys(errors).map((key, i) => {
-                    for (var i = 0; i < errors[key].length; i++) {
-                        NotificationManager.error(errors[key][i], "", 2000);
-                    }
-                });
+            if (error.response != null && error.response != undefined) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i], "", 2000);
+                        }
+                    });
 
-            } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                NotificationManager.error(error.response.data.message, "", 2000);
-            } else {
-                NotificationManager.error(error.response.data.Message, "", 2000);
-                history.push(getRoutesItems().sentResumes.route + "/")
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message, "", 2000);
+                } else {
+                    NotificationManager.error(error.response.data.Message, "", 2000);
+                    setTimeout(() => {
+                        history.push({
+                            pathname: getRoutesItems().SentResumes.route,
+                            search: "lang=" + language
+                        });
+                    }, 2000);
 
+
+                }
             }
+
         });
     }
 

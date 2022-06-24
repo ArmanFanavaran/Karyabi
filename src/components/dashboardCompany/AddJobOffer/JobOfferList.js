@@ -3,8 +3,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import {Link} from "react-router-dom";
 import {getRoutesItems} from "../../RoutesList/RoutesList";
 import {serverTimeToNewsDate} from "../../global/TimeConverter";
-import Edit from "../../dashboard/sentResumes/imgs/edit.png";
-import Eye from "../../dashboard/sentResumes/imgs/eye.png";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import queryString from "query-string";

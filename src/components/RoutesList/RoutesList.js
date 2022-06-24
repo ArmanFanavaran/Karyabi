@@ -126,6 +126,11 @@ let Routes = {
         "enDes": "Add Job Offer",
         "route": "/company/dashboard/addJobOfferStep2"
     },
+    "companyReceivedResumes": {
+        "des": "رزومه های ارسالی",
+        "enDes": "Received Resumes",
+        "route": "/company/dashboard/receivedResumes"
+    },
 
    /************* Dashboard Admin **************/
     /*Admin*/
