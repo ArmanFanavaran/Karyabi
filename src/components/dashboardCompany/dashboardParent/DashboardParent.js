@@ -162,24 +162,24 @@ export default function DashboardParentCompany() {
             "pageSize": 100,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": "",
@@ -263,7 +263,7 @@ export default function DashboardParentCompany() {
                                 <div className={"mt-3"}>
                                     <div className={"d-flex justify-content-center"}>
                                         <img className={Style.profileImage}
-                                             src={currentCompany !== undefined ? currentCompany.logo
+                                             src={currentCompany !== undefined && currentCompany.logo !== "" ? currentCompany.logo
                                                  : ProfileImage}/>
                                     </div>
                                     {currentCompany !== undefined  && companies.length===1 &&
@@ -335,7 +335,7 @@ export default function DashboardParentCompany() {
                             <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
                                     <img className={Style.profileImage}
-                                         src={currentCompany !== undefined ? currentCompany.logo
+                                         src={currentCompany !== undefined && currentCompany.logo !== "" ? currentCompany.logo
                                              : ProfileImage}/>
                                 </div>
                                 {currentCompany !== undefined  && companies.length===1 &&

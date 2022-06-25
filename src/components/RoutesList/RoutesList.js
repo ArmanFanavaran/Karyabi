@@ -97,8 +97,13 @@ let Routes = {
     },
     "updateCompany": {
         "des": "تکمیل اطلاعات شرکت",
-        "enDes": "Upadte Company Info",
+        "enDes": "Update Company Info",
         "route": "/dashboard/updateCompany"
+    },
+    "updateCompanyCriticalInfo": {
+        "des": "تغییر اطلاعات  پایه شرکت",
+        "enDes": "Update Company Critical Info",
+        "route": "/dashboard/updateCompanyCritical"
     },
     "dashboardRequests": {
         "des": "لیست درخواست ها",

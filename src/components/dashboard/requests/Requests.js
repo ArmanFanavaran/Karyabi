@@ -125,7 +125,7 @@ export default function Requests() {
                                         <div className={'d-flex justify-content-center'}>
                                             <Link to={{
                                                 pathname:getRoutesItems().updateCompany.route,
-                                                search: "lang=" + language + " &company=" + item.id,
+                                                search: "lang=" + language + "&company=" + item.id,
                                             }}
                                                   className={'btn btn-warning'}><i className="bi bi-pencil-square"></i></Link>
                                         </div>

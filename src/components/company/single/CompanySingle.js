@@ -4,13 +4,14 @@ import queryString from "query-string";
 import {generateURL} from "../../global/Requests";
 import * as $ from "jquery";
 import {useEffect, useState} from "react";
-import Logo from './../imgs/sampleLogo.png';
+import Logo from './../imgs/sampleaminpic.jpg';
 import {getRoutesItems} from "../../RoutesList/RoutesList";
 import advertisment from "../../employmentAdvertisement/imgs/advertisment.png";
 import {serverTimeToDaysAgo} from "../../global/TimeConverter";
 import {Link} from "react-router-dom";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 export default function CompanySingle() {
@@ -56,26 +57,26 @@ export default function CompanySingle() {
                 "roleId": 5,
                 "logoPicDetail": {
                     "heights": [
-                        200
+                        getSizeImageItems().companyLogo.Heights
                     ],
                     "widths": [
-                        200
+                        getSizeImageItems().companyLogo.Widths
                     ],
                     "qualities": [
-                        90
+                        getSizeImageItems().companyLogo.Qualities
                     ]
                 },
                 "mainPicDetail": {
                     "heights": [
-                        200
+                        getSizeImageItems().companyMainPic.Heights
                     ],
                     "widths": [
-                        200
+                        getSizeImageItems().companyMainPic.Widths
                     ],
                     "qualities": [
-                        90
+                        getSizeImageItems().companyMainPic.Qualities
                     ]
-                }
+                },
             });
             var config = {
                 method: 'post',

@@ -521,7 +521,7 @@ export default function EmploymentAdvertisementSingle() {
                                     </div>
                                     <div className={"col-12 col-xl-6 mt-4"}>
                                         <div
-                                            className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
+                                            className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.degree")}</div>
                                         <div className={"d-flex row mx-0"}>
                                             {
                                                 degree !== undefined ?

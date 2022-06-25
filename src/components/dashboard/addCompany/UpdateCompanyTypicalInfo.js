@@ -366,18 +366,18 @@ export default function UpdateCompanyTypicalInfo() {
                         {address}
                     </div>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
-                    <label className={'d-block change-text ' + Style.criticalLabel}>شماره تلفن همراه</label>
-                    <div className={Style.criticalDefaultField + " change-text mt-2"}>
-                        {phone}
-                    </div>
-                </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
-                    <label className={'d-block change-text ' + Style.criticalLabel}>ایمیل</label>
-                    <div className={Style.criticalDefaultField + " change-text mt-2"}>
-                        {email}
-                    </div>
-                </div>
+                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-4'}>*/}
+                {/*    <label className={'d-block change-text ' + Style.criticalLabel}>شماره تلفن همراه</label>*/}
+                {/*    <div className={Style.criticalDefaultField + " change-text mt-2"}>*/}
+                {/*        {phone}*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-4'}>*/}
+                {/*    <label className={'d-block change-text ' + Style.criticalLabel}>ایمیل</label>*/}
+                {/*    <div className={Style.criticalDefaultField + " change-text mt-2"}>*/}
+                {/*        {email}*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
                     {
                         isKnowledge && <label className={'d-block change-text '}>
@@ -390,7 +390,10 @@ export default function UpdateCompanyTypicalInfo() {
 
                 </div>
                 <div className={'d-flex mt-4 col-12'}>
-                    <Link className={'btn btn-warning py-2 px-4'} >ویرایش اطلاعات اولیه</Link>
+                    <Link className={'btn btn-warning py-2 px-4'} to={{
+                        pathname:getRoutesItems().updateCompanyCriticalInfo.route,
+                        search:"lang=" + language + "&company=" + companyId
+                    }} >ویرایش اطلاعات اولیه</Link>
                 </div>
             </div>
             <h5 className={"change-text mt-5"}>اطلاعات تکمیلی</h5>
