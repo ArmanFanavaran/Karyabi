@@ -159,6 +159,31 @@ let Routes = {
         "enDes": "Create News",
         "route": "/admin/dashboard/create-news"
     },
+    "FooterSettings": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/footerSettings"
+    },
+    "UpdateFooterSettings": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/footerSettings/update"
+    },
+    "PublicLinks": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/publicLinks"
+    },
+    "UpdatePublicLinks": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/publicLinks/update"
+    },
+    "AddPublicLinks": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/publicLinks/add"
+    },
 
     /************** Change Password **************/
     "changePassword": {

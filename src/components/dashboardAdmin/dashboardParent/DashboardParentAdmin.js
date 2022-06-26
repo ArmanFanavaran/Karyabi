@@ -16,6 +16,11 @@ import {getDashboardPagesAdmin} from "./dashboardPagesAdmin";
 /**************** Page component *****************/
 import HeroList from "../hero/HeroList";
 import DegreeList from "../degree/DegreeList"
+import Footer from "../footer/Footer";
+import UpdateFooter from "../footer/UpdateFooter";
+import PublicLinks from "../publicLinks/PublicLinkList";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
+import EditPublicLink from "../publicLinks/EditPublicLink";
 export default function DashboardParentAdmin() {
     const [user, setUser] = useState();
     const [language, setLanguage] = useState();
@@ -89,13 +94,13 @@ export default function DashboardParentAdmin() {
 
         let config_data = {
             "heights": [
-                500
+                getSizeImageItems().UserNavbarPic.Heights
             ],
             "widths": [
-                400
+                getSizeImageItems().UserNavbarPic.Widths
             ],
             "qualities": [
-                60
+                getSizeImageItems().UserNavbarPic.Qualities
             ]
         }
 
@@ -229,10 +234,13 @@ export default function DashboardParentAdmin() {
                         </div>
                     </div>
                     <div className={"col-xl-9 col-12 py-4 px-0"}>
-
                         <Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>
                         <Route path={getRoutesItems().HeroList.route} exact component={HeroList}/>
                         <Route path={getRoutesItems().DegreeList.route} exact component={DegreeList}/>
+                        <Route path={getRoutesItems().FooterSettings.route} exact component={Footer}/>
+                        <Route path={getRoutesItems().UpdateFooterSettings.route} exact component={UpdateFooter}/>
+                        <Route path={getRoutesItems().PublicLinks.route} exact component={PublicLinks}/>
+                        <Route path={getRoutesItems().UpdatePublicLinks.route} exact component={EditPublicLink}/>
                     </div>
                 </div>
             </div>
