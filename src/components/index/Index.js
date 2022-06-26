@@ -1,11 +1,19 @@
 import Style from "./index.module.css";
 
-import num1 from "./imgs/num1.png"
-import num2 from "./imgs/num2.png"
-import num3 from "./imgs/num3.png"
-import num4 from "./imgs/num4.png"
-import num5 from "./imgs/num5.png"
-import num6 from "./imgs/num6.png"
+import E1 from "./imgs/englishFrames/E1.PNG";
+import E2 from "./imgs/englishFrames/E2.PNG";
+import E3 from "./imgs/englishFrames/E3.PNG";
+import E4 from "./imgs/englishFrames/E4.PNG";
+import E5 from "./imgs/englishFrames/E5.PNG";
+import E6 from "./imgs/englishFrames/E6.PNG";
+
+import P1 from "./imgs/persianFrames/p1.PNG";
+import P2 from "./imgs/persianFrames/p2.PNG";
+import P3 from "./imgs/persianFrames/p3.PNG";
+import P4 from "./imgs/persianFrames/p4.PNG";
+import P5 from "./imgs/persianFrames/p5.PNG";
+import P6 from "./imgs/persianFrames/p6.PNG";
+
 
 import service1 from "./imgs/service1.png"
 import service2 from "./imgs/service2.png"
@@ -24,9 +32,11 @@ export default function Index() {
     const queryStringes = queryString.parse(window.location.search);
     const sp = new URLSearchParams(queryStringes);
     const [hero, setHero] = useState([])
+    const [language, setLanguage] = useState();
 
 
     useEffect(function () {
+        setLanguage(queryStringes.lang)
 
         var config = {
             method: 'get',
@@ -130,34 +140,34 @@ export default function Index() {
                     <h3>مراحل ساخت رزومه</h3>
                     <div className="pathTable">
                         <div className="row">
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num1} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide  + " " + Style.borderBottomGuild}>
+                                    <img className={Style.frameImg} src={language === "fa" ? P1 : E1} alt=""/>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num2} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide  + " " + Style.borderBottomGuild}>
+                                    <img className={Style.frameImg} src={language === "fa" ? P2 : E2} alt=""/>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num3} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild}>
+                                    <img className={Style.frameImg } src={language === "fa" ? P3 : E3} alt=""/>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num4} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide + " " + Style.borderBottomGuild_sm}>
+                                    <img className={Style.frameImg} src={language === "fa" ? P4 : E4} alt=""/>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num5} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide + " " + Style.borderBottomGuild_sm }>
+                                    <img className={Style.frameImg} src={language === "fa" ? P5 : E5} alt=""/>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-4">
-                                <div className={Style.marginQuide}>
-                                    <img className={'w-100'} src={num6} alt=""/>
+                            <div className="col-12 col-md-4 p-0">
+                                <div className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild_sm}>
+                                    <img className={Style.frameImg } src={language === "fa" ? P6 : E6} alt=""/>
                                 </div>
                             </div>
 
