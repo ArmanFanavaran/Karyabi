@@ -194,6 +194,8 @@ export default function DashboardParentCompany() {
             "isSortByInsertTimeDesc": false,
             "isSortByScoreAsc": false,
             "isSortByScoreDesc": false,
+            "isConfirmed": true,
+            "isNotConfirmed": false,
             "fromRegisterationDate": null,
             "toRegisterationDate": null
         }

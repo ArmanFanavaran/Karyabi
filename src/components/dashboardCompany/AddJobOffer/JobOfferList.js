@@ -353,6 +353,7 @@ export default function JobOfferList() {
                     <tr>
                         <th>عنوان آگهی</th>
                         <th>آخرین تغییر</th>
+                        <th>وضعیت تایید</th>
                         <th>ویرایش</th>
                         <th>آکهی فوری</th>
                         <th>نمایش/عدم‌نمایش</th>
@@ -365,6 +366,13 @@ export default function JobOfferList() {
                             <tr>
                                 <td><h6>{language === 'fa'  ? item.jobOffer.title : item.jobOffer.titleEnglish}</h6></td>
                                 <td>{serverTimeToNewsDate(item.jobOffer.timeOrder)}</td>
+                                <td>
+                                    {
+                                        item.jobOffer.isConfirmed ?
+                                        <span className={'text-success rounded p-1'}>تایید شده</span>:
+                                        <span className={'text-danger rounded p-1'}>تایید نشده</span>
+                                    }
+                                </td>
                                 <td><Link to={{
                                     pathname:getRoutesItems().addJobOfferByCompanyStep2.route,
                                     search: "lang=" +language + "&company=" + companyId + "&joboffer=" + item.jobOffer.id,
