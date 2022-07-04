@@ -72,12 +72,14 @@ export default function EditPublicLink() {
     useEffect(function () {
         const url = queryString.parse(window.location.search);
         setLanguage(url.lang);
+        let id = parseInt((url.id));
+        setId(id)
 
         var axios = require('axios');
         axios.defaults.withCredentials = true;
         var config = {
             method: 'get',
-            url: generateURL('/PublicLink/GetPublicLinkSingle'),
+            url: generateURL('/PublicLink/GetPublicLinkSingle?id=') + id,
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -19,11 +19,13 @@ import service1 from "./imgs/service1.png"
 import service2 from "./imgs/service2.png"
 import service3 from "./imgs/service3.png"
 
-import heroPic from "./imgs/picture.png"
+import heroPicFa from "./imgs/picture.png"
+import heroPicEn from "./imgs/heroEn.PNG"
 
 import {useEffect, useState} from "react";
 import {generateURL} from "../global/Requests";
 import * as queryString from "query-string";
+import {useTranslation} from "react-i18next";
 
 
 export default function Index() {
@@ -33,6 +35,8 @@ export default function Index() {
     const sp = new URLSearchParams(queryStringes);
     const [hero, setHero] = useState([])
     const [language, setLanguage] = useState();
+    const [t, i18n] = useTranslation('main');
+
 
 
     useEffect(function () {
@@ -47,6 +51,7 @@ export default function Index() {
         };
         axios(config)
             .then(function (response) {
+                console.log(response.data.data)
                 setHero(response.data.data)
             })
             .catch(function (error) {
@@ -57,36 +62,41 @@ export default function Index() {
             <section className={Style.hero + " container"} dir="rtl">
                 <div className={Style.searchBox}>
                     <form>
-                        <div className="row">
+                        <div className="row ">
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control" placeholder="عنوان شرکت..."/>
+                                <input type="text" className="form-control change-text change-dir" placeholder={t("index.skill")}/>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control w-100" placeholder="استان"/>
+                                <input type="text" className="form-control w-100 change-text change-dir" placeholder={t("index.jobTitle")}/>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control w-100" placeholder="دسته بندی"/>
+                                <input type="text" className="form-control w-100 change-text change-dir" placeholder={t("index.companyName")}/>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="submit" className="form-control w-100" value="جستجو"/>
+                                <input type="submit" className="form-control w-100 " value={t("index.search")}/>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div className={"container " + Style.heroContent}>
-                    <div className="row change-dir">
+                    <div className="row change-dir pt-5">
                         <div className="col-md-5">
                             <div className={Style.rightContent + " text-center mt-5"}>
-                                <h2>به وبسایت کاریابی دانشگاه ”خلیج فارس“ خوش آمدید.</h2>
+                                <h2>{t("index.welcomeHero")}</h2>
                                 <div className=" mt-4">
                                     <p>  {hero.message}</p>
-                                    <button className={'btn w-100'}>اطلاعات بیشتر</button>
+                                    <button className={'btn w-100'}>{t("index.moreInfo")}</button>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-7">
                             <div className={Style.rightContent + " mt-4"}>
-                                <img className={Style.w90} src={heroPic} alt=""/>
+                                {
+                                    language === 'fa' ?
+                                        <img className={Style.w90} src={heroPicFa} alt=""/>:
+                                        <img className={Style.w90} src={heroPicEn} alt=""/>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -94,17 +104,14 @@ export default function Index() {
             </section>
             <section className={Style.services + " container"}>
                 <div className="text-center">
-                    <h3>خدمات</h3>
+                    <h3>{t("index.services")}</h3>
                     <div className={" row"}>
                         <div className={Style.cardCustom + " col-12 col-md-4"}>
                             <div className={Style.marginCustom}>
                                 <img className={Style.cardImgTop} src={service1} alt="Card image cap"/>
                                 <div className={Style.cardBody}>
-                                    <h5 className={Style.cardTitle}>جستجوی قالب مربوطه شغلی</h5>
-                                    <p className={Style.cardText}>بر اساس رزومه قادر خواهید بود قالب های شغلی مربوطه را
-                                        با
-                                        توجه
-                                        به سلیقه و درخواستتان انتخاب نمایید.</p>
+                                    <h5 className={Style.cardTitle}>{t("index.searchTemplatesTitle")}</h5>
+                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.searchTemplatesText")}</p>
 
                                 </div>
                             </div>
@@ -113,9 +120,8 @@ export default function Index() {
                             <div className={Style.marginCustom}>
                                 <img className={Style.cardImgTop} src={service2}/>
                                 <div className={Style.cardBody}>
-                                    <h5 className={Style.cardTitle}>اطلاع رسانی موقعیت های شغلی</h5>
-                                    <p className={Style.cardText}> بر اساس بیشترین میزان شباهت با رزومه ی خود به روش های
-                                        الکترونیکی میتوانید از آگهی مدنظرتان مطلع شوید. </p>
+                                    <h5 className={Style.cardTitle}>{t("index.jobOfferAnnouncementsTitle")}</h5>
+                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.jobOfferAnnouncementsText")}</p>
 
                                 </div>
                             </div>
@@ -124,11 +130,9 @@ export default function Index() {
                             <div className={Style.marginCustom}>
                                 <img className={Style.cardImgTop} src={service3}
                                      alt="Card image cap"/>
-                                <div className={Style.cardBody}>
-                                    <h5 className={Style.cardTitle}>ساخت رزومه های متعدد</h5>
-                                    <p className={Style.cardText}>شما میتوانید در این بستر چندین رزومه مجزا از هم با
-                                        موضوعات
-                                        مختلف را بسازید.</p>
+                                <div className={Style.cardBody }>
+                                    <h5 className={Style.cardTitle}>{t("index.multipleResumesTitle")}</h5>
+                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.multipleResumesText")}</p>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +141,7 @@ export default function Index() {
             </section>
             <section className="resumePaths container">
                 <div className="text-center">
-                    <h3>مراحل ساخت رزومه</h3>
+                    <h3>{t("index.buildResumeSteps")}</h3>
                     <div className="pathTable">
                         <div className="row">
                             <div className="col-12 col-md-4 p-0">

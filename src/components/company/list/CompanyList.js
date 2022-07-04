@@ -393,6 +393,7 @@ export default function CompaniesList() {
             "fromRegisterationDate": null,
             "toRegisterationDate": null
         }
+        console.log(data)
         let list_config = {
             method: 'post',
             url: generateURL("/Company/GetCompanyListClientSide"),
@@ -470,24 +471,24 @@ export default function CompaniesList() {
             "pageSize": pageSize,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": keyword,

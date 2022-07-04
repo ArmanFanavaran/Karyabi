@@ -56,7 +56,7 @@ export default function PublicLinks() {
     return(
         <div>
             <div className={'w-100'}>
-                <h5 className={'change-text'}>درخواست‌های ثبت شرکت</h5>
+                <h5 className={'change-text'}>پیوندها</h5>
                 <div className={"table-responsive change-dir mt-4"}>
                     <table className={"table change-text " + Style.table}>
                         <thead>

@@ -74,7 +74,9 @@ export function serverTimeToDaysAgo(date) {
     let serverTime = new Date(date);
     let now = new Date();
     let difference = now - serverTime; // time is milliseconds
-    let days = Math.ceil(difference / (1000 * 3600 * 24));
+    let days = Math.floor(difference / (1000 * 3600 * 24));
+    // console.log("days")
+    // console.log(days)
     return days;
 
 }

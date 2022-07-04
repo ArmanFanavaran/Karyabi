@@ -12,6 +12,7 @@ import {Link} from "react-router-dom";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
+import HtmlComponent from "../../global/EditorToHTML";
 
 
 export default function CompanySingle() {
@@ -104,13 +105,13 @@ export default function CompanySingle() {
             "page": 1,
             "pageSize": 50,
             "heights": [
-                200
+                getSizeImageItems().companyLogo.Heights
             ],
             "widths": [
-                200
+                getSizeImageItems().companyLogo.Widths
             ],
             "qualities": [
-                90
+                getSizeImageItems().companyLogo.Qualities
             ],
             "keyword": null,
             "ownerId": id,
@@ -311,8 +312,12 @@ export default function CompanySingle() {
                                     {company.mainPic !== "" &&
                                     <img src={company.mainPic} className={Style.mainPic + " rounded d-block d-xl-none"}/>
                                     }
-                                    <p className={Style.culture + " change-text change-dir p-3 m-0 d-none d-xl-block"}>{language==='fa' ? company.workCulture : company.workCultureEnglish}</p>
-                                    <p className={Style.cultureMobile + " change-text change-dir p-3 my-4 d-block d-xl-none rounded"}>{language==='fa' ? company.workCulture : company.workCultureEnglish}</p>
+                                    <HtmlComponent className={Style.culture + " change-text change-dir p-3 m-0 d-none d-xl-block"}
+                                                   val={language==='fa' ? company.workCulture : company.workCultureEnglish}/>
+                                    <HtmlComponent className={Style.cultureMobile + " change-text change-dir p-3 my-4 d-block d-xl-none rounded"}
+                                                   val={language==='fa' ? company.workCulture : company.workCultureEnglish}/>
+                                    {/*<p className={Style.culture + " change-text change-dir p-3 m-0 d-none d-xl-block"}>{language==='fa' ? company.workCulture : company.workCultureEnglish}</p>*/}
+                                    {/*<p className={Style.cultureMobile + " change-text change-dir p-3 my-4 d-block d-xl-none rounded"}>{language==='fa' ? company.workCulture : company.workCultureEnglish}</p>*/}
 
                                 </div>
                             </div>
@@ -344,7 +349,9 @@ export default function CompanySingle() {
                             <div className={'col-12 change-dir change-text mt-5'}>
                                 <h5 className={'change-text ' + Style.paraTitle}>{t("company.single.introductionToUs")}</h5>
 
-                                <p className={Style.introduction}>{language === 'fa' ? company.introduction : company.introductionEnglish}</p>
+                                <HtmlComponent className={Style.introduction}
+                                               val={language === 'fa' ? company.introduction : company.introductionEnglish}/>
+                                {/*<p className={Style.introduction}>{language === 'fa' ? company.introduction : company.introductionEnglish}</p>*/}
                             </div>
                         }
                         {/* cooperation benefits */}
@@ -352,7 +359,9 @@ export default function CompanySingle() {
                             company !== undefined &&
                             <div className={'col-12 mt-5 change-text change-dir'}>
                                 <h5 className={'change-text ' + Style.paraTitle}>{t("company.single.ourCooperation")}</h5>
-                                <p className={Style.introduction}>{language === 'fa' ? company.cooperationBenefits : company.cooperationBenefitsEnglish}</p>
+                                <HtmlComponent className={Style.introduction}
+                                               val={language === 'fa' ? company.cooperationBenefits : company.cooperationBenefitsEnglish}/>
+                                {/*<p className={Style.introduction}>{language === 'fa' ? company.cooperationBenefits : company.cooperationBenefitsEnglish}</p>*/}
 
                             </div>
                         }

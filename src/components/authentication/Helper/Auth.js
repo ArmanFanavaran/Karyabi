@@ -58,6 +58,10 @@ export function refreshToken() {
                     domain: getCookiesItems().refreshExp.domain,
                     expires: getCookiesItems().refreshExp.expires
                 })
+                Cookies.set(getCookiesItems().isCompany.nickName, response.data.data.isCompany, {
+                    domain: getCookiesItems().isCompany.domain,
+                    expires: getCookiesItems().isCompany.expires
+                })
                 Cookies.set(getCookiesItems().is_admin.nickName, response.data.data.isAdmin, {
                     domain: getCookiesItems().is_admin.domain,
                     expires: getCookiesItems().is_admin.expires

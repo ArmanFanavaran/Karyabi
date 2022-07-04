@@ -23,6 +23,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {useTranslation} from "react-i18next";
 import {serverTimeToDaysAgo} from "../../global/TimeConverter";
 import guide from "../../Resume/step3/imgs/guide.png";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 var axios = require('axios');
@@ -770,9 +771,15 @@ export default function EmploymentAdvertisementList() {
             "roleId": 2,
             "page": next_page,
             "pageSize": pageSize,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
             "keyword": keyword,
             "ownerId": 0,
             "owner": "Company",
@@ -886,9 +893,15 @@ export default function EmploymentAdvertisementList() {
             "roleId": 5,
             "page": 1,
             "pageSize": 6,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
             "keyword": keyword,
             "ownerId": 0,
             "owner": "Company",
@@ -1006,9 +1019,15 @@ export default function EmploymentAdvertisementList() {
             "roleId": 5,
             "page": 1,
             "pageSize": 6,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
             "keyword": null,
             "ownerId": 0,
             "owner": "Company",
@@ -2888,11 +2907,20 @@ export default function EmploymentAdvertisementList() {
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
-                                                                            <span className={Style.dateSpan + " mx-2"}>
-                                                                                {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                            </span>
+                                                                            {
+                                                                                serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
+                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
+                                                                                    </span>:
+                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            " امروز" :
+                                                                                            " Today"}
+                                                                                    </span>
+                                                                            }
+
 
                                                                         </p>
                                                                     </div>
@@ -2975,11 +3003,21 @@ export default function EmploymentAdvertisementList() {
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
-                                                                            <span className={Style.dateSpan  + " mt-3"}>
-                                                                                {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                            </span>
+                                                                            <div className={"pt-3"}>
+                                                                                {
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
+                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
+                                                                                    </span>:
+                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            " امروز" :
+                                                                                            " Today"}
+                                                                                    </span>
+                                                                                }
+                                                                            </div>
 
                                                                         </p>
                                                                     </div>

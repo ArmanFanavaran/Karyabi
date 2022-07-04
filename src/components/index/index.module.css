@@ -137,8 +137,9 @@ section h3 {
 .cardCustom  .cardText {
     color: #401568;
     font-size: 15px;
-    padding: 15px 0;
+    padding: 15px 10px;
     text-align: right;
+    margin-bottom: 0;
 }
 
 .cardImgTop {

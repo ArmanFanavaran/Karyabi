@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="container">
                     <div className="row py-4 d-flex align-items-center">
                         <div className="col-md-6 col-lg-5 text-center text-md-right mb-4 mb-md-0">
-                            <h5 className="mb-0">اتحادیه انجمن های علمی کامپیوتر</h5>
+                            <h5 className="mb-0">کاریابی دانشگاه خلیج فارس</h5>
                         </div>
 
                         <div className="col-md-6 col-lg-7 text-center text-md-left social-medias">
@@ -55,8 +55,8 @@ export default function Footer() {
                         </p>
                     </div>
                     <div
-                        className="col-md-6 text-center text-lg-left order-3 order-lg-2 order-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 className="font-weight-bold">third</h6>
+                        className="col-md-6 text-center text-lg-left order-3 order-lg-2 order-md-3 col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
+                        <h6 className="font-weight-bold">کارجویان</h6>
                         <p>
                             <a href="#!">First page</a>
                         </p>
@@ -71,8 +71,8 @@ export default function Footer() {
                         </p>
                     </div>
                     <div
-                        className="col-md-6 text-center text-lg-left order-2 order-md-2 order-lg-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 className="font-weight-bold">Second</h6>
+                        className="col-md-6 text-center text-lg-left order-2 order-md-2 order-lg-3 col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
+                        <h6 className="font-weight-bold">میانبرها</h6>
                         <p>
                             <a href="#!">First page</a>
                         </p>
@@ -88,8 +88,8 @@ export default function Footer() {
 
                     </div>
                     <div
-                        className="order-1  order-lg-4 order-md-1 col-md-6 text-center text-lg-left col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 className="font-weight-bold">First</h6>
+                        className="order-1  order-lg-4 order-md-1 col-md-6 text-center text-lg-left col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
+                        <h6 className="font-weight-bold">کاریابی</h6>
                         <p>
                             <a href="#!">First page</a>
                         </p>
@@ -114,7 +114,7 @@ export default function Footer() {
                         <span>Privacy policy</span>
                     </div>
                     <div className="col-lg-4 col-12 mt-lg-0 my-2">
-                        <span>آرمان فناوران پارس رایانه 2021@</span>
+                        <span>آرمان فناوران پارس رایانه 2022@</span>
                     </div>
                 </div>
             </div>
