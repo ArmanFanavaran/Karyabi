@@ -57,7 +57,7 @@ export default function PublicLinks() {
         <div>
             <div className={'w-100'}>
                 <h5 className={'change-text'}>پیوندها</h5>
-                <div className={"d-flex change-dir"}><Link to={{
+                <div className={"d-flex change-dir mt-3"}><Link to={{
                     pathname:getRoutesItems().AddPublicLinks.route,
                     search: "lang=" +language
                 }} className={'btn ' + Style.addJobOfferBtn}>

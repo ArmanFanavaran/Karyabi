@@ -31,3 +31,8 @@
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
+.addJobOfferBtn {
+    background-color: #9558d0;
+    color: white;
+    border: none;
+}

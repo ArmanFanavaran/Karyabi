@@ -26,7 +26,7 @@ export default function AddPublicLink() {
         }
         var config = {
             method: 'post',
-            url: generateURL('/PublicLink/UpdatePublicLink'),
+            url: generateURL('/PublicLink/AddPublicLink'),
             headers: {
                 'Content-Type': 'application/json'
             },
