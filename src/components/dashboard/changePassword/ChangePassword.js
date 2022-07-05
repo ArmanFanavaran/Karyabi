@@ -2,13 +2,11 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import $ from 'jquery'
 import {generateURL} from "../../global/Requests";
-import {useEffect, useState} from "react";
-import queryString from "query-string";
+import {useState} from "react";
 import {useHistory} from "react-router";
 import Style from "./ChangePassword.module.css"
 import {useTranslation} from "react-i18next";
 import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
-import {getCookiesItems} from "../../CookiesList/CookiesList";
 import {MoonLoader} from "react-spinners";
 import {css} from "@emotion/react";
 import {getRoutesItems} from "../../RoutesList/RoutesList";

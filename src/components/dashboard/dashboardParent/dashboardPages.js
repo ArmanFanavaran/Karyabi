@@ -25,7 +25,13 @@ const pages = {
             labelEng: "Requests",
             pathname: getRoutesItems().dashboardRequests.route,
             iconClass: "bi bi-clock-history"
-        }
+        },
+        {
+            label: "ویرایش رمز عبور",
+            labelEng: "Change Password",
+            pathname: getRoutesItems().dashboardChangePass.route,
+            iconClass: "bi bi-key"
+        },
     ],
 
 

@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../authentication/changePassword/imgs/background.png);
+    background-image: url(../dashboard/changePassword/imgs/background.png);
     background-position: right;
     background-repeat: no-repeat;
     background-size: cover;

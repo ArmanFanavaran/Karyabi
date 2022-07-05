@@ -7,7 +7,7 @@ import queryString from "query-string";
 import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import Style from "./ForgetPassStep1.module.css";
-import Arrow from "../../changePassword/imgs/Arrow5.png"
+import Arrow from "../../../dashboard/changePassword/imgs/Arrow5.png"
 import {Link} from "react-router-dom";
 import Countdown from "react-countdown";
 import {CountdownCircleTimer} from "react-countdown-circle-timer";

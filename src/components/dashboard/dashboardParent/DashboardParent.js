@@ -1,6 +1,6 @@
 import {Router, Switch, Route, Link} from 'react-router-dom'
 import {getRoutesItems} from "../../RoutesList/RoutesList";
-import ChangePassword from "../../authentication/changePassword/ChangePassword";
+import ChangePassword from "../changePassword/ChangePassword";
 import Controller from "../../authentication/Helper/Controller";
 import * as React from "react";
 import Style from './DashboardParent.module.css'
@@ -243,6 +243,7 @@ export default function Dashboard() {
                         <Route path={getRoutesItems().updateCompany.route} exact component={UpdateCompanyTypicalInfo}/>
                         <Route path={getRoutesItems().updateCompanyCriticalInfo.route} exact component={UpdateCompanyCriticalInfo}/>
                         <Route path={getRoutesItems().dashboardRequests.route} exact component={Requests}/>
+                        <Route path={getRoutesItems().dashboardChangePass.route} exact component={ChangePassword}/>
                     </div>
                 </div>
             </div>

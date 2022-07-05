@@ -110,6 +110,12 @@ let Routes = {
         "enDes": "Requests",
         "route": "/dashboard/requests"
     },
+    "dashboardChangePass": {
+        "des": "ویرایش رمز عبور",
+        "enDes": "Change Password",
+        "route": "/dashboard/changePassword1"
+    },
+
     /*company*/
     "dashboardParentCompany": {
         "des": "داشبورد شرکت",

@@ -182,12 +182,6 @@ export default function Navbar() {
                                                 </Link>:null
                                             }
                                             <Link to={{
-                                                pathname: getRoutesItems().changePassword.route,
-                                                search: "lang=" + sp.get("lang"),
-                                            }}
-                                                  className={" dropdown-item text-dark"}>{t("global.navbar.changePassword")}
-                                            </Link>
-                                            <Link to={{
                                                 pathname: getRoutesItems().resumeStep1.route,
                                                 search: "lang=" + sp.get("lang"),
                                             }}
