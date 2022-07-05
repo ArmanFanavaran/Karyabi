@@ -170,18 +170,18 @@ let Routes = {
         "route": "/admin/dashboard/footerSettings/update"
     },
     "PublicLinks": {
-        "des": "تنظیمات فوتر",
-        "enDes": "footer settings",
+        "des": "پیوندها",
+        "enDes": "public links",
         "route": "/admin/dashboard/publicLinks"
     },
     "UpdatePublicLinks": {
-        "des": "تنظیمات فوتر",
-        "enDes": "footer settings",
+        "des": "ویرایش پیوند ",
+        "enDes": "edit public link",
         "route": "/admin/dashboard/publicLinks/update"
     },
     "AddPublicLinks": {
-        "des": "تنظیمات فوتر",
-        "enDes": "footer settings",
+        "des": "افزودن",
+        "enDes": "add public link",
         "route": "/admin/dashboard/publicLinks/add"
     },
 

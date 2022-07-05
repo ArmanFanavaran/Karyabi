@@ -1013,6 +1013,19 @@ export default function EmploymentAdvertisementList() {
 
 
     useEffect(() => {
+        const url = queryString.parse(window.location.search);
+        let keyword = url.keyword;
+        let category = url.category;
+        if (category !== "null")
+            category = [parseInt(category)];
+        else category = null;
+        let province = url.province;
+        if (province !== "null")
+            province = [parseInt(province)];
+        else province = null;
+
+
+
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
@@ -1028,7 +1041,7 @@ export default function EmploymentAdvertisementList() {
             "qualities": [
                 getSizeImageItems().companyLogo.Qualities
             ],
-            "keyword": null,
+            "keyword": keyword,
             "ownerId": 0,
             "owner": "Company",
             "genderIds": null,
@@ -1037,9 +1050,9 @@ export default function EmploymentAdvertisementList() {
             "maxSalaryStatusId": 12,
             "degreeIds": null,
             "typeId": 1,
-            "provinceIds": null,
+            "provinceIds": province,
             "militaryStatusIds": null,
-            "categoryIds": null,
+            "categoryIds": category,
             "isFullTime": false,
             "isPartTime": false,
             "isRemote": false,
@@ -1052,6 +1065,8 @@ export default function EmploymentAdvertisementList() {
             "isFreeFoodPossible": false,
             "sortBye": 0
         });
+        console.log("list_data")
+        console.log(list_data)
         var list_config = {
             method: 'post',
             url: generateURL("/JobOffer/GetJobOfferListClientSide"),

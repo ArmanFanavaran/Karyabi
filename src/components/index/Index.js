@@ -26,22 +26,48 @@ import {useEffect, useState} from "react";
 import {generateURL} from "../global/Requests";
 import * as queryString from "query-string";
 import {useTranslation} from "react-i18next";
+import $ from 'jquery';
+import {useHistory} from "react-router-dom";
+import {getRoutesItems} from "../RoutesList/RoutesList";
+import {parse} from "query-string";
 
 
 export default function Index() {
+    const history = useHistory();
     var axios = require('axios');
     axios.defaults.withCredentials = true;
     const queryStringes = queryString.parse(window.location.search);
     const sp = new URLSearchParams(queryStringes);
-    const [hero, setHero] = useState([])
+    const [hero, setHero] = useState([]);
+    const [provinces, setProvinces] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [language, setLanguage] = useState();
     const [t, i18n] = useTranslation('main');
+
+    const onSearchJobOffer = () => {
+
+        let keyword = $("#skill_input").val().trim();
+        let category = $("#category_select").val();
+        if (category !== undefined && category !== null)
+            category = parseInt(category);
+        else category = null;
+        let province = $("#province_select").val();
+        if (province !== undefined && province !== null)
+            province = parseInt(province);
+        else province = null;
+
+        history.push({
+            pathname: getRoutesItems().employmentAdvertisementList.route,
+            search: "lang=" + language + "&keyword=" + keyword + "&category=" + category + "&province=" + province
+        });
+    }
 
 
 
     useEffect(function () {
         setLanguage(queryStringes.lang)
 
+        /************ get Hero ***********/
         var config = {
             method: 'get',
             url: generateURL('/Hero/GetHeroClient'),
@@ -56,6 +82,35 @@ export default function Index() {
             })
             .catch(function (error) {
             });
+
+        /************ get Provinces ***********/
+        var province_config = {
+            method: 'get',
+            url: generateURL('/SideArray/GetProvinceList'),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        axios(province_config)
+            .then(function (response) {
+                console.log(response.data.data)
+                setProvinces(response.data.data)
+            })
+            .catch(function (error) {
+            });
+
+        /************** Category List *************/
+        var entity_config = {
+            method: 'get',
+            url: generateURL("/Side/GetJobCategoryList"),
+            headers: {}
+        };
+        axios(entity_config)
+            .then(function (response) {
+                setCategories(response.data.data);
+            })
+            .catch(function (error) {
+            });
     }, [])
     return (
         <main className="py-5">
@@ -64,16 +119,32 @@ export default function Index() {
                     <form>
                         <div className="row ">
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control change-text change-dir" placeholder={t("index.skill")}/>
+                                <input id={"skill_input"} type="text" className="form-control change-text change-dir" placeholder={t("index.skill")}/>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control w-100 change-text change-dir" placeholder={t("index.jobTitle")}/>
+                                <select id={"category_select"} className="form-control w-100 change-text change-dir">
+                                    <option disabled={true} selected={true}>{t("index.jobCategory")}</option>
+                                    {
+                                        categories.map((item) => (
+                                            <option value={item.id}>{language === 'fa'? item.name : item.englishName}</option>
+
+                                        ))
+                                    }
+                                </select>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="text" className="form-control w-100 change-text change-dir" placeholder={t("index.companyName")}/>
+                                <select id={"province_select"} className="form-control w-100 change-text change-dir">
+                                    <option disabled={true} selected={true}>{t("index.province")}</option>
+                                    {
+                                        provinces.map((item) => (
+                                            <option value={item.id}>{language === 'fa'? item.name : item.englishName}</option>
+
+                                        ))
+                                    }
+                                </select>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <input type="submit" className="form-control w-100 " value={t("index.search")}/>
+                                <button className={"form-control w-100 " + Style.searchbtn} onClick={onSearchJobOffer}>{t("index.search")}</button>
                             </div>
                         </div>
                     </form>

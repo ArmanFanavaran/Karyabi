@@ -407,9 +407,9 @@
     "multipleResumesText": "شما میتوانید در این بستر چندین رزومه مجزا از هم با موضوعات مختلف بسازید.",
     "buildResumeSteps": "مراحل ساخت رزومه",
     "services": "خدمات",
-    "skill": "مهارت",
-    "jobTitle": "عنوان شغل",
-    "companyName": "نام شرکت",
+    "skill": "مهارت، عنوان شغل یا نام شرکت",
+    "jobCategory": "دسته‌بندی",
+    "province": "استان",
     "search": "جستجو"
 
   },

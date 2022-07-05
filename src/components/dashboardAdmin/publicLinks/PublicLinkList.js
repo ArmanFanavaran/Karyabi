@@ -57,6 +57,13 @@ export default function PublicLinks() {
         <div>
             <div className={'w-100'}>
                 <h5 className={'change-text'}>پیوندها</h5>
+                <div className={"d-flex change-dir"}><Link to={{
+                    pathname:getRoutesItems().AddPublicLinks.route,
+                    search: "lang=" +language
+                }} className={'btn ' + Style.addJobOfferBtn}>
+                    <span>افزودن پیوند</span>
+                    <i className={'bi bi-plus-lg mx-1'}></i>
+                </Link></div>
                 <div className={"table-responsive change-dir mt-4"}>
                     <table className={"table change-text " + Style.table}>
                         <thead>
@@ -73,10 +80,10 @@ export default function PublicLinks() {
                         { links.map((item) => (
                             <tr>
                                 <td>{item.name}</td>
-                                <td>{item.englishName}</td>
+                                <td className={'text-left'}>{item.englishName}</td>
                                 <td>{item.address}</td>
                                 <td>{item.categotryName}</td>
-                                <td>{item.categotryNameEnglish}</td>
+                                <td className={'text-left'}>{item.categotryNameEnglish}</td>
                                 <td>
                                     <div className={'d-flex justify-content-center'}>
                                         <Link to={{

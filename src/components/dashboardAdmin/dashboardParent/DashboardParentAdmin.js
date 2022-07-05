@@ -21,6 +21,7 @@ import UpdateFooter from "../footer/UpdateFooter";
 import PublicLinks from "../publicLinks/PublicLinkList";
 import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 import EditPublicLink from "../publicLinks/EditPublicLink";
+import AddPublicLink from "../publicLinks/AddPublicLink";
 export default function DashboardParentAdmin() {
     const [user, setUser] = useState();
     const [language, setLanguage] = useState();
@@ -241,6 +242,7 @@ export default function DashboardParentAdmin() {
                         <Route path={getRoutesItems().UpdateFooterSettings.route} exact component={UpdateFooter}/>
                         <Route path={getRoutesItems().PublicLinks.route} exact component={PublicLinks}/>
                         <Route path={getRoutesItems().UpdatePublicLinks.route} exact component={EditPublicLink}/>
+                        <Route path={getRoutesItems().AddPublicLinks.route} exact component={AddPublicLink}/>
                     </div>
                 </div>
             </div>

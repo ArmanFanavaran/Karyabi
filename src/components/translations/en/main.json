@@ -411,9 +411,9 @@
     "multipleResumesText": "Here, you can create several distinct resumes with different topics.",
     "buildResumeSteps": "Steps Of Building A Resume",
     "services": "Services",
-    "skill": "Skill",
-    "jobTitle": "Job Title",
-    "companyName": "Company Name",
+    "skill": "Skill, Job Title Or Company Name",
+    "jobCategory": "Job Category",
+    "province": "Province",
     "search": "Search"
   },
   "team": {
