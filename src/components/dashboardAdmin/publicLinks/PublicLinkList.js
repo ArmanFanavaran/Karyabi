@@ -7,6 +7,8 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import queryString from "query-string";
 import {generateURL} from "../../global/Requests";
+import {getCategoriesJson} from "./CategoryJson";
+import $ from 'jquery'
 
 
 export default function PublicLinks() {
@@ -53,6 +55,22 @@ export default function PublicLinks() {
 
     }, []);
 
+    function findCategoryNameById  (id) {
+        let categories = getCategoriesJson();
+        let name = "";
+        console.log(id)
+        console.log("id")
+        categories.map((item) => {
+            if(item.id === id){
+                console.log(item.name)
+
+                if (language === 'fa') name = item.name;
+                else name = item.engName;
+            }
+        });
+        return name;
+    }
+
     return(
         <div>
             <div className={'w-100'}>
@@ -71,8 +89,7 @@ export default function PublicLinks() {
                             <th>عنوان فارسی</th>
                             <th>عنوان انگلیسی</th>
                             <th>آدرس</th>
-                            <th>عنوان فارسی دسته‌بندی</th>
-                            <th>عنوان انگلیسی دسته‌بندی</th>
+                            <th>دسته‌بندی</th>
                             <th>ویرایش</th>
                         </tr>
                         </thead>
@@ -82,8 +99,7 @@ export default function PublicLinks() {
                                 <td>{item.name}</td>
                                 <td className={'text-left'}>{item.englishName}</td>
                                 <td>{item.address}</td>
-                                <td>{item.categotryName}</td>
-                                <td className={'text-left'}>{item.categotryNameEnglish}</td>
+                                <td>{findCategoryNameById(item.categotryName)}</td>
                                 <td>
                                     <div className={'d-flex justify-content-center'}>
                                         <Link to={{

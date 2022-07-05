@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import queryString from "query-string";
 import {generateURL} from "../../Requests";
 import {NotificationManager} from "react-notifications";
+import {getCategoriesJson} from "../../../dashboardAdmin/publicLinks/CategoryJson";
+import {Link} from "react-router-dom";
 
 
 export default function Footer() {
@@ -23,6 +25,7 @@ export default function Footer() {
     const [instagram, setInstagram] = useState();
     const [youtube, setYoutube] = useState();
     const [links, setLinks] = useState([]);
+    const categories = getCategoriesJson();
 
 
     useEffect(function (){
@@ -148,56 +151,24 @@ export default function Footer() {
             </div>
             <div className="container text-center text-md-left mt-5">
                 <div className="row columns mt-3 change-dir">
+                    {
+                        categories.map((categoryItem) => (
+                            <div
+                                className="col-md-6 text-center text-lg-left  col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
+                                <h6 className="font-weight-bold mb-3">{language === 'fa' ? categoryItem.name : categoryItem.engName}</h6>
+                                {
+                                    links.map((linkItem) => (
+                                        linkItem.categotryName === categoryItem.id &&
+                                        <p>
+                                            <Link to={linkItem.address}>{language === 'fa' ? linkItem.name : linkItem.englishName}</Link>
+                                        </p>
+                                    ))
+                                }
 
-                    <div
-                        className="col-md-6 text-center text-lg-left  col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
-                        <h6 className="font-weight-bold">کارجویان</h6>
-                        <p>
-                            <a href="#!">First page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Second page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Third page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Fourth page</a>
-                        </p>
-                    </div>
-                    <div
-                        className="col-md-6 text-center text-lg-left  col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
-                        <h6 className="font-weight-bold">میانبرها</h6>
-                        <p>
-                            <a href="#!">First page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Second page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Third page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Fourth page</a>
-                        </p>
+                            </div>
+                        ))
+                    }
 
-                    </div>
-                    <div
-                        className=" col-md-6 text-center text-lg-left col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
-                        <h6 className="font-weight-bold">کاریابی</h6>
-                        <p>
-                            <a href="#!">First page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Second page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Third page</a>
-                        </p>
-                        <p>
-                            <a href="#!">Fourth page</a>
-                        </p>
-                    </div>
                     <div
                         className="col-md-6 text-center text-lg-right  col-lg-3 col-xl-4 mb-4 text-white">
                         <p className="address-footer change-text px-3 pb-3 text-white font-weight-bold">{language === 'fa' ? brandSlogan : brandSloganEng}</p>

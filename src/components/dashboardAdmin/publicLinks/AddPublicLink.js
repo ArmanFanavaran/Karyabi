@@ -6,9 +6,11 @@ import queryString from "query-string";
 import $ from 'jquery';
 import {getRoutesItems} from "../../RoutesList/RoutesList";
 import {useHistory} from "react-router-dom";
+import {getCategoriesJson} from "./CategoryJson";
 
 export default function AddPublicLink() {
     const history = useHistory();
+    const categories = getCategoriesJson();
     const [language, setLanguage] = useState();
 
     const onSubmitFooter = () => {
@@ -22,7 +24,7 @@ export default function AddPublicLink() {
             "englishName": $("#nameEng_input").val(),
             "address": $("#address_input").val(),
             "categotryName": $("#category_input").val(),
-            "categotryNameEnglish": $("#categoryEng_input").val()
+            "categotryNameEnglish": $("#category_input").val()
         }
         var config = {
             method: 'post',
@@ -86,11 +88,13 @@ export default function AddPublicLink() {
                 </div>
                 <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
                     <label className={"d-block"}>عنوان فارسی دسته‌بندی</label>
-                    <input className={"form-control"} type={'text'} id={"category_input"}/>
-                </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
-                    <label className={"d-block"}>عنوان انگلیسی دسته‌بندی</label>
-                    <input className={"form-control"} type={'text'} id={"categoryEng_input"}/>
+                    <select className={"form-control"}  id={"category_input"}>
+                        {
+                            categories.map((item) => (
+                                <option value={item.id}>{language === 'fa' ? item.name: item.engName}</option>
+                            ))
+                        }
+                    </select>
                 </div>
                 <div className={'col-12  change-text change-dir mt-4'}>
                     <label className={"d-block"}>آدرس</label>

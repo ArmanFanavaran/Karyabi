@@ -6,6 +6,7 @@ import queryString from "query-string";
 import $ from 'jquery';
 import {getRoutesItems} from "../../RoutesList/RoutesList";
 import {useHistory} from "react-router-dom";
+import {getCategoriesJson} from "./CategoryJson";
 
 export default function EditPublicLink() {
     const history = useHistory();
@@ -14,8 +15,8 @@ export default function EditPublicLink() {
     const [name, setName] = useState();
     const [nameEng, setNameEng] = useState();
     const [category, setCategory] = useState();
-    const [categoryEng, setCategoryEng] = useState();
     const [address, setAddress] = useState();
+    const categories = getCategoriesJson();
 
     const onSubmitFooter = () => {
         var axios = require('axios');
@@ -29,7 +30,7 @@ export default function EditPublicLink() {
             "englishName": $("#nameEng_input").val(),
             "address": $("#address_input").val(),
             "categotryName": $("#category_input").val(),
-            "categotryNameEnglish": $("#categoryEng_input").val()
+            "categotryNameEnglish": $("#category_input").val()
         }
         var config = {
             method: 'post',
@@ -97,7 +98,6 @@ export default function EditPublicLink() {
                 setNameEng(data.englishName);
                 setAddress(data.address);
                 setCategory(data.categotryName);
-                setCategoryEng(data.categotryNameEnglish);
 
             })
             .catch(function (error) {
@@ -132,12 +132,14 @@ export default function EditPublicLink() {
                     <input className={"form-control"} type={'text'} id={"nameEng_input"} defaultValue={nameEng}/>
                 </div>
                 <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
-                    <label className={"d-block"}>عنوان فارسی دسته‌بندی</label>
-                    <input className={"form-control"} type={'text'} id={"category_input"} defaultValue={category}/>
-                </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
-                    <label className={"d-block"}>عنوان انگلیسی دسته‌بندی</label>
-                    <input className={"form-control"} type={'text'} id={"categoryEng_input"} defaultValue={categoryEng}/>
+                    <label className={"d-block"}>دسته‌بندی</label>
+                    <select className={"form-control"}  id={"category_input"}>
+                        {
+                            categories.map((item) => (
+                                <option value={item.id} selected={category === item.id}>{language === 'fa' ? item.name: item.engName}</option>
+                            ))
+                        }
+                    </select>
                 </div>
                 <div className={'col-12  change-text change-dir mt-4'}>
                     <label className={"d-block"}>آدرس</label>
