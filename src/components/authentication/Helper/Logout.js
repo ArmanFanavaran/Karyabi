@@ -37,6 +37,9 @@ export function Logout() {
             Cookies.remove(getCookiesItems().is_admin.nickName, {
                 domain: getCookiesItems().is_admin.domain
             })
+            Cookies.remove(getCookiesItems().is_admin.nickName, {
+                domain: getCookiesItems().isCompany.domain
+            })
             Cookies.remove(getCookiesItems().is_admin_one.nickName, {
                 domain: getCookiesItems().is_admin_one.domain
             })

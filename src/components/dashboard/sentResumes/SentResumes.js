@@ -9,6 +9,7 @@ import queryString from "query-string";
 import {serverTimeToNewsDate} from "../../global/TimeConverter";
 import {getRoutesItems} from "../../RoutesList/RoutesList";
 import * as $ from 'jquery';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import {Table} from 'react-infinite-table';
 import * as React from "react";
 import {
@@ -397,7 +398,7 @@ export default function SentResumes() {
         // console.log(config_data)
 
         axios(config).then(function (response) {
-            // console.log(response.data)
+            console.log(response.data)
             setResumes(response.data.data);
         }).catch(function (error) {
             console.log(error);
@@ -479,8 +480,22 @@ export default function SentResumes() {
                                 <td>{language ==='fa' ? item.ownerName : item.ownerEnglishName}</td>
                                 <td>{serverTimeToNewsDate(item.lastUpdate)}</td>
                                 <td className={Style.approveStatus}>
-                                    {item.isApproved && <span className={'bg-success rounded p-1'}>قبول شده</span>}
-                                    {item.isRejected && <span className={'bg-danger rounded p-1'}>رد شده</span>}
+                                    {item.isApproved &&
+                                    <div >
+                                        <span className={'bg-success rounded p-1'}>قبول شده</span>
+                                        {
+                                            item.approveOrRejectMessage !== null && item.approveOrRejectMessage !== "" &&
+                                            <span className={"btn text-success"} data-toggle="tooltip" data-placement="top" title={item.approveOrRejectMessage}><i className={'bi bi-chat-right-dots-fill'}></i></span>
+                                        }
+                                    </div>}
+                                    {item.isRejected &&
+                                    <div>
+                                        <span className={'bg-danger rounded p-1'}>رد شده</span>
+                                        {
+                                            item.approveOrRejectMessage !== null && item.approveOrRejectMessage !== "" &&
+                                            <span className={"btn text-danger"} data-toggle="tooltip" data-placement="top" title={item.approveOrRejectMessage}><i className={'bi bi-chat-right-dots-fill'}></i></span>
+                                        }
+                                    </div>}
                                     {(!item.isRejected && !item.isApproved)&& <span className={'bg-secondary rounded  p-1'}>درحال بررسی</span>}
                                 </td>
                                 <td><button disabled={item.isApproved || item.isRejected}

@@ -25,6 +25,7 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
 import {getRoutesItems} from "../../RoutesList/RoutesList";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 export default function EmploymentAdvertisementSingle() {
@@ -185,27 +186,41 @@ export default function EmploymentAdvertisementSingle() {
 
             NotificationManager.success(response.data.message, "", 2000);
 
-            history.push(getRoutesItems().sentResumes.route + "/");
+            setTimeout(() => {
+                history.push({
+                    pathname: getRoutesItems().SentResumes.route,
+                    search: "lang=" + language
+                });
+            });
 
 
         }).catch(function (error) {
             console.log(error);
             setIsModalOpen(false);
-            let errors = error.response.data.errors;
-            if (errors != null) {
-                Object.keys(errors).map((key, i) => {
-                    for (var i = 0; i < errors[key].length; i++) {
-                        NotificationManager.error(errors[key][i], "", 2000);
-                    }
-                });
+            if (error.response != null && error.response != undefined) {
+                let errors = error.response.data.errors;
+                if (errors != null) {
+                    Object.keys(errors).map((key, i) => {
+                        for (var i = 0; i < errors[key].length; i++) {
+                            NotificationManager.error(errors[key][i], "", 2000);
+                        }
+                    });
 
-            } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                NotificationManager.error(error.response.data.message, "", 2000);
-            } else {
-                NotificationManager.error(error.response.data.Message, "", 2000);
-                history.push(getRoutesItems().sentResumes.route + "/")
+                } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                    NotificationManager.error(error.response.data.message, "", 2000);
+                } else {
+                    NotificationManager.error(error.response.data.Message, "", 2000);
+                    setTimeout(() => {
+                        history.push({
+                            pathname: getRoutesItems().SentResumes.route,
+                            search: "lang=" + language
+                        });
+                    }, 2000);
 
+
+                }
             }
+
         });
     }
 
@@ -223,26 +238,26 @@ export default function EmploymentAdvertisementSingle() {
             "owner": "Company",
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
-            }
+            },
         });
 
         var config = {
@@ -258,6 +273,7 @@ export default function EmploymentAdvertisementSingle() {
         axios(config)
             .then(function (response) {
                 let data = response.data.data;
+                console.log("data");
                 console.log(data);
                 // setJobOffer(data.jobOffer)
                 setCompanyName({fa: data.company.name, eng: data.company.englishName});
@@ -306,20 +322,28 @@ export default function EmploymentAdvertisementSingle() {
                 })
                 setMajors(majors_array);
 
-                let languages_data = JSON.parse(data.jobOffer.languagesJson);
-                let languages_array = [];
-                $(languages_data).each(function (i, item) {
-                    languages_array.push({fa: item.name, eng: item.englishName});
-                })
-                setLanguages(languages_array);
+                // let languages_data = JSON.parse(data.jobOffer.languagesJson);
+                // let languages_array = [];
+                // $(languages_data).each(function (i, item) {
+                //     languages_array.push({fa: item.name, eng: item.englishName});
+                // })
+                // setLanguages(languages_array);
 
 
                 let skills = JSON.parse(data.jobOffer.skillsJson);
+                console.log("skills")
+                console.log(skills)
                 let skills_array = [];
                 $(skills).each(function (i, item) {
+                    if (item.AreaOfInterestPersian !== null)
                     skills_array.push({fa: item.AreaOfInterestPersian.Name, eng: item.AreaOfInterestEnglish.Name});
+                    else
+                        skills_array.push({fa: "", eng: item.AreaOfInterestEnglish.Name, isSoftware: item.AreaOfInterestEnglish.IsSoftWare});
+
                 })
                 setJobSkills(skills_array);
+                console.log("skills")
+                console.log(skills)
 
                 let military_array = [];
                 if (data.jobOffer.miltaryStatus1Json !== "")
@@ -497,8 +521,16 @@ export default function EmploymentAdvertisementSingle() {
                                         <div className={"d-flex row mx-0"}>
                                             {
                                                 jobSkills.length > 0 ? jobSkills.map((item, index) => (
-                                                    <div
-                                                        className={Style.jobField + " mt-2 mx-1"}>{language === 'fa' ? item.fa : item.eng}</div>
+                                                        <div>
+                                                            {
+                                                                item.isSoftware ?
+                                                                    <div
+                                                                        className={Style.jobField + " mt-2 mx-1"}>{item.eng}</div> :
+                                                                    <div
+                                                                        className={Style.jobField + " mt-2 mx-1"}>{language === 'fa'?item.fa:item.eng}</div>
+                                                            }
+                                                        </div>
+
                                                 )) : <div
                                                     className={Style.jobField + " mt-2 mx-1"}>{t("employmentAdvertisement.single.notImportant")}</div>
                                             }
@@ -507,7 +539,7 @@ export default function EmploymentAdvertisementSingle() {
                                     </div>
                                     <div className={"col-12 col-xl-6 mt-4"}>
                                         <div
-                                            className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.neededSkills")}</div>
+                                            className={Style.jobFieldTitle}>{t("employmentAdvertisement.single.degree")}</div>
                                         <div className={"d-flex row mx-0"}>
                                             {
                                                 degree !== undefined ?

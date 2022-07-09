@@ -400,7 +400,21 @@
     "main_members": "Main Members",
     "UserCount": "User count",
     "Personnel": "Personnel count",
-    "ActivityCount": "Activity Count"
+    "ActivityCount": "Activity Count",
+    "welcomeHero" : "Take steps towards achieving your goal with us!",
+    "moreInfo" : "More Info",
+    "searchTemplatesTitle" : "Search For Resume Templates Related To Your Job",
+    "searchTemplatesText" : "With Resume Maker you will be able to choose the relevant job templates according to your taste and needs.",
+    "jobOfferAnnouncementsTitle" : "Job Offer Announcements",
+    "jobOfferAnnouncementsText": "Based on the similarity of your resume, You can announce related Job Offers via electronic methods.",
+    "multipleResumesTitle": "Build Multiple Resumes",
+    "multipleResumesText": "Here, you can create several distinct resumes with different topics.",
+    "buildResumeSteps": "Steps Of Building A Resume",
+    "services": "Services",
+    "skill": "Skill, Job Title Or Company Name",
+    "jobCategory": "Job Category",
+    "province": "Province",
+    "search": "Search"
   },
   "team": {
     "team_activities": "Team Activities",
@@ -562,5 +576,6 @@
 
       }
     }
-  }
+  },
+  "dashboard": {}
 }

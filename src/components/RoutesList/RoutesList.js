@@ -60,38 +60,6 @@ let Routes = {
         "enDes": "Register (Enter Password)",
         "route": "/register/step3"
     },
-    // "registerStep4": {
-    //     "des": "ثبت نام (رمز عبور)",
-    //     "enDes": "Register (Enter Password)",
-    //     "route": "/register/step4"
-    // },
-    // "registerStep5": {
-    //     "des": "اطلاعات کاربری",
-    //     "enDes": "User Info",
-    //     "route": "/register/step5"
-    // },
-    /************** Team **************/
-    // "teamSingle": {
-    //     "des": "نمایش تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/single"
-    // },
-    // "teamActivitySingle": {
-    //     "des": "نمایش فعالیت تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/activity/single"
-    // },
-    // "teamUserSingle": {
-    //     "des": "نمایش عضو تیم",
-    //     "enDes": "Team Single",
-    //     "route": "/team/user/single"
-    // },
-    /************** Staff **************/
-    // "staffSingle": {
-    //     "des": "نمایش سمت",
-    //     "enDes": "Staff Single",
-    //     "route": "/staff/single"
-    // },
     /************** Profile **************/
 
     "profileSingle": {
@@ -122,6 +90,32 @@ let Routes = {
         "enDes": "Sent Resumes",
         "route": "/dashboard/sentResumes"
     },
+    "addCompany": {
+        "des": "ثبت شرکت",
+        "enDes": "Add Company",
+        "route": "/dashboard/addCompany"
+    },
+    "updateCompany": {
+        "des": "تکمیل اطلاعات شرکت",
+        "enDes": "Update Company Info",
+        "route": "/dashboard/updateCompany"
+    },
+    "updateCompanyCriticalInfo": {
+        "des": "تغییر اطلاعات  پایه شرکت",
+        "enDes": "Update Company Critical Info",
+        "route": "/dashboard/updateCompanyCritical"
+    },
+    "dashboardRequests": {
+        "des": "لیست درخواست ها",
+        "enDes": "Requests",
+        "route": "/dashboard/requests"
+    },
+    "dashboardChangePass": {
+        "des": "ویرایش رمز عبور",
+        "enDes": "Change Password",
+        "route": "/dashboard/changePassword1"
+    },
+
     /*company*/
     "dashboardParentCompany": {
         "des": "داشبورد شرکت",
@@ -143,6 +137,12 @@ let Routes = {
         "enDes": "Add Job Offer",
         "route": "/company/dashboard/addJobOfferStep2"
     },
+    "companyReceivedResumes": {
+        "des": "رزومه های ارسالی",
+        "enDes": "Received Resumes",
+        "route": "/company/dashboard/receivedResumes"
+    },
+
    /************* Dashboard Admin **************/
     /*Admin*/
     "DashboardParentAdmin": {
@@ -164,6 +164,31 @@ let Routes = {
         "des": "ساخت خبر جدید",
         "enDes": "Create News",
         "route": "/admin/dashboard/create-news"
+    },
+    "FooterSettings": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/footerSettings"
+    },
+    "UpdateFooterSettings": {
+        "des": "تنظیمات فوتر",
+        "enDes": "footer settings",
+        "route": "/admin/dashboard/footerSettings/update"
+    },
+    "PublicLinks": {
+        "des": "پیوندها",
+        "enDes": "public links",
+        "route": "/admin/dashboard/publicLinks"
+    },
+    "UpdatePublicLinks": {
+        "des": "ویرایش پیوند ",
+        "enDes": "edit public link",
+        "route": "/admin/dashboard/publicLinks/update"
+    },
+    "AddPublicLinks": {
+        "des": "افزودن",
+        "enDes": "add public link",
+        "route": "/admin/dashboard/publicLinks/add"
     },
 
     /************** Change Password **************/

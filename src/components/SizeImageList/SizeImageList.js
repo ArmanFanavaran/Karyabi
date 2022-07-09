@@ -91,6 +91,19 @@ var sizeImage = {
         "Widths": 308,
         "Qualities":65
     },
+    /************** Company **************/
+    "companyLogo": {
+        "des": "Size for companyLogo",
+        "Heights":250,
+        "Widths": 250,
+        "Qualities":70
+    },
+    "companyMainPic": {
+        "des": "Size for company Main Pic",
+        "Heights":700,
+        "Widths": 450,
+        "Qualities":90
+    },
 
 }
 

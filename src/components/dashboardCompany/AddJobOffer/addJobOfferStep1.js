@@ -102,7 +102,7 @@ export default function AddJobOfferStep1() {
                 </div>
                 <div className={'col-12 mt-4'}>
                     <label className={'change-text d-block'}>عنوان آگهی (انگلیسی)</label>
-                    <input type={"text"} className={'form-control'} id={'english_title_input'}/>
+                    <input type={"text"} className={'form-control text-left'} dir={"ltr"} id={'english_title_input'}/>
                 </div>
                 {/*<div className={'col-12 mt-4'}>*/}
                 {/*    <label className={'change-text d-block'}>توضیح کوتاه (فارسی)</label>*/}

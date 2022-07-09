@@ -23,6 +23,8 @@ import {
 
 import AddJobOfferStep1 from "../AddJobOffer/addJobOfferStep1";
 import AddJobOfferStep2 from "../AddJobOffer/addJobOfferStep2";
+import JobOfferList from "../AddJobOffer/JobOfferList";
+import JobOfferRequests from "../jobOfferRequests/JobOfferRequests";
 
 
 export default function DashboardParentCompany() {
@@ -160,24 +162,24 @@ export default function DashboardParentCompany() {
             "pageSize": 100,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": "",
@@ -192,6 +194,8 @@ export default function DashboardParentCompany() {
             "isSortByInsertTimeDesc": false,
             "isSortByScoreAsc": false,
             "isSortByScoreDesc": false,
+            "isConfirmed": true,
+            "isNotConfirmed": false,
             "fromRegisterationDate": null,
             "toRegisterationDate": null
         }
@@ -257,38 +261,69 @@ export default function DashboardParentCompany() {
                             }}>X
                             </button>
 
-                            <div className={" p-3"}>
+                            <div className={" p-3 change-dir"}>
                                 <div className={"mt-3"}>
                                     <div className={"d-flex justify-content-center"}>
                                         <img className={Style.profileImage}
-                                             src={user !== undefined && user.PicFullAddress.length > 0 ? user.PicFullAddress[0]
+                                             src={currentCompany !== undefined && currentCompany.logo !== "" ? currentCompany.logo
                                                  : ProfileImage}/>
                                     </div>
-                                    {user !== undefined &&
+                                    {currentCompany !== undefined  && companies.length===1 &&
                                     <h6 className={Style.profileName + " mt-3"}>
-                                        {language === 'fa' ? user.FirstName + " " + user.LastName :
-                                            user.FirstNameEnglish + " " + user.LastNameEnglish}
+                                        {language === 'fa' ? currentCompany.name :
+                                            currentCompany.englishName}
                                     </h6>
+                                    }
+                                    { companies.length > 1 && currentCompany !== undefined &&
+                                    <Accordion allowZeroExpanded className={Style.companyAccordion + " py-1 px-2 mt-3 mb-3"}>
+                                        <AccordionItem dangerouslySetExpanded={isCompanyListExpanded}>
+                                            <AccordionItemHeading>
+                                                <AccordionItemButton>
+                                                    <h6 className={Style.profileName + " m-0 d-flex justify-content-center"}
+                                                        onClick={()=>{
+                                                            isCompanyListExpanded ?
+                                                                setIsCompanyListExpanded(false) : setIsCompanyListExpanded(true)
+                                                        }}>
+                                                        {language === 'fa' ? currentCompany.name :
+                                                            currentCompany.englishName}
+                                                        <i className={'bi bi-caret-down-fill'}></i>
+                                                    </h6>
+                                                </AccordionItemButton>
+                                            </AccordionItemHeading>
+                                            <AccordionItemPanel>
+                                                {
+                                                    companies.map((item) => (
+                                                        <div onClick={()=> {onCompanyItemClicked(item)}}
+                                                             className={Style.companyItem + " change-dir change-text py-2 mx-3"}>
+                                                            <i className="bi bi-box-arrow-in-left mx-1"></i>
+                                                            {language === 'fa' ? item.name :
+                                                                item.englishName}
+                                                        </div>
+                                                    ))
+                                                }
 
+                                            </AccordionItemPanel>
+                                        </AccordionItem>
+                                    </Accordion>
                                     }
 
-                                    <p className={"text-center text-secondary"}>{user !== undefined && user.ResumePhone}</p>
-                                    {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
+
                                 </div>
-                                <hr/>
-                                <ul className={"nav flex-column navItems dir-rtl " + Style.navItems}>
+                                <ul className={"nav flex-column navItems " + Style.navItems}>
                                     {
                                         pages.company.map((item)=>(
                                             <li className={isNavActive(item.pathname)? "nav-item w-100 py-2 px-3 "+ Style.active : "nav-item w-100 py-2 px-3 "}
                                                 onClick={(event)=>{checkIsActive(event, item.pathname)}}
-                                            ><Link
+                                            >{ currentCompany !== undefined &&
+                                            <Link
                                                 className={"text-center d-flex  text-secondary change-text"}
                                                 to={{
                                                     pathname: item.pathname,
-                                                    search: "lang=" +language,
+                                                    search: "lang=" +language +"&company=" + currentCompany.id,
                                                 }}
                                             ><i className={item.iconClass}></i>
-                                                <span className={'mx-2'}>{language==='fa' ? item.label : item.labelEng}</span></Link></li>
+                                                <span className={'mx-2'}>{language==='fa' ? item.label : item.labelEng}</span></Link>
+                                            }</li>
                                         ))
                                     }
                                 </ul>
@@ -302,7 +337,7 @@ export default function DashboardParentCompany() {
                             <div className={"mt-3"}>
                                 <div className={"d-flex justify-content-center"}>
                                     <img className={Style.profileImage}
-                                         src={currentCompany !== undefined ? currentCompany.logo
+                                         src={currentCompany !== undefined && currentCompany.logo !== "" ? currentCompany.logo
                                              : ProfileImage}/>
                                 </div>
                                 {currentCompany !== undefined  && companies.length===1 &&
@@ -371,6 +406,8 @@ export default function DashboardParentCompany() {
                         {/*<Route path={getRoutesItems().DashboardParent.route} exact component={ProfileInfo}/>*/}
                         <Route path={getRoutesItems().addJobOfferByCompany.route} exact component={AddJobOfferStep1}/>
                         <Route path={getRoutesItems().addJobOfferByCompanyStep2.route} exact component={AddJobOfferStep2}/>
+                        <Route path={getRoutesItems().companyJobOffers.route} exact component={JobOfferList}/>
+                        <Route path={getRoutesItems().companyReceivedResumes.route} exact component={JobOfferRequests}/>
                     </div>
                 </div>
             </div>

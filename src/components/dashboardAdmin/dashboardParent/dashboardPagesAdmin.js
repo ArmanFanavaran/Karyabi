@@ -13,7 +13,19 @@ const pages = {
             labelEng: "Degree",
             pathname: getRoutesItems().DegreeList.route,
             iconClass: "bi bi-clock-history"
-        }
+        },
+        {
+            label: "تنظیمات فوتر",
+            labelEng: "Footer Settings",
+            pathname: getRoutesItems().FooterSettings.route,
+            iconClass: "bi bi-clock-history"
+        },
+        {
+            label: "پیوندها",
+            labelEng: "Links",
+            pathname: getRoutesItems().PublicLinks.route,
+            iconClass: "bi bi-clock-history"
+        },
     ],
     company: []
 

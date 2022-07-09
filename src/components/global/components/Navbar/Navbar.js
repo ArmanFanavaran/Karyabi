@@ -23,6 +23,7 @@ export default function Navbar() {
     const [userName, setUserName] = useState("");
     const [admin, setAdmin] = useState("");
     const [adminOne, setAdminOne] = useState("");
+    const [isCompany, setIsCompany] = useState("");
     const pathname = window.location.pathname;
     const queryStringes = queryString.parse(window.location.search);
     const sp = new URLSearchParams(queryStringes);
@@ -46,6 +47,9 @@ export default function Navbar() {
         }
         if(Cookies.get(getCookiesItems().is_admin_one.nickName) !== null && Cookies.get(getCookiesItems().is_admin_one.nickName) !== undefined){
             setAdminOne(JSON.parse(Cookies.get(getCookiesItems().is_admin_one.nickName)))
+        }
+        if(Cookies.get(getCookiesItems().isCompany.nickName) !== null && Cookies.get(getCookiesItems().isCompany.nickName) !== undefined){
+            setIsCompany(JSON.parse(Cookies.get(getCookiesItems().isCompany.nickName)))
         }
         setUserName(Cookies.get(getCookiesItems().firstName.nickName))
         setAccessExpire(!isAccessTokenExpired())
@@ -177,12 +181,6 @@ export default function Navbar() {
                                                       className={" dropdown-item text-dark"}>{t("global.navbar.companyPanel")}
                                                 </Link>:null
                                             }
-                                            <Link to={{
-                                                pathname: getRoutesItems().changePassword.route,
-                                                search: "lang=" + sp.get("lang"),
-                                            }}
-                                                  className={" dropdown-item text-dark"}>{t("global.navbar.changePassword")}
-                                            </Link>
                                             <Link to={{
                                                 pathname: getRoutesItems().resumeStep1.route,
                                                 search: "lang=" + sp.get("lang"),

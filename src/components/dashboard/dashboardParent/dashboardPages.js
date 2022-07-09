@@ -13,7 +13,25 @@ const pages = {
             labelEng: "Track submitted resumes",
             pathname: getRoutesItems().SentResumes.route,
             iconClass: "bi bi-clock-history"
-        }
+        },
+        {
+            label: "ثبت شرکت",
+            labelEng: "Add Company",
+            pathname: getRoutesItems().addCompany.route,
+            iconClass: "bi bi-clock-history"
+        },
+        {
+            label: "لیست شرکت‌ها",
+            labelEng: "Requests",
+            pathname: getRoutesItems().dashboardRequests.route,
+            iconClass: "bi bi-clock-history"
+        },
+        {
+            label: "ویرایش رمز عبور",
+            labelEng: "Change Password",
+            pathname: getRoutesItems().dashboardChangePass.route,
+            iconClass: "bi bi-key"
+        },
     ],
 
 

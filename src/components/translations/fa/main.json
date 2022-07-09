@@ -396,7 +396,22 @@
     "main_members": "اعضای اصلی",
     "UserCount": "تعداد کاربران",
     "Personnel": "تعداد پرسنل",
-    "ActivityCount": "تعداد فعالیت ها"
+    "ActivityCount": "تعداد فعالیت ها",
+    "welcomeHero" : "با ما در راستای تحقق هدفتان گام بردارید!",
+    "moreInfo" : "اطلاعات بیشتر",
+    "searchTemplatesTitle" : "جستجوی قالب مربوطه شغلی",
+    "searchTemplatesText" : "با رزومه\u200Cساز قادر خواهید\u200Cبود قالب\u200Cهای شغلی مربوط را با توجه به سلیقه و درخواستتان انتخاب کنید.",
+    "jobOfferAnnouncementsTitle" : "اطلاع\u200Cرسانی موقعیت\u200Cهای شغلی",
+    "jobOfferAnnouncementsText": "براساس  میزان شباهت با رزومه\u200Cی خود به روش\u200Cهای الکترونیکی می\u200Cتوانید از آگهی مدنظرتان مطلع شوید.",
+    "multipleResumesTitle": "ساخت رزومه‌های متعدد",
+    "multipleResumesText": "شما میتوانید در این بستر چندین رزومه مجزا از هم با موضوعات مختلف بسازید.",
+    "buildResumeSteps": "مراحل ساخت رزومه",
+    "services": "خدمات",
+    "skill": "مهارت، عنوان شغل یا نام شرکت",
+    "jobCategory": "دسته‌بندی",
+    "province": "استان",
+    "search": "جستجو"
+
   },
   "team": {
     "team_activities": "فعالیت‌های تیم",

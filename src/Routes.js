@@ -20,7 +20,7 @@ import LoginStep2 from "./components/authentication/login/step2/LoginStep2";
 import LoginStep3 from "./components/authentication/login/step3/LoginStep3";
 
 /****************** Change Password *****************************/
-import ChangePassword from "./components/authentication/changePassword/ChangePassword";
+import ChangePassword from "./components/dashboard/changePassword/ChangePassword";
 
 /****************** Register *****************************/
 import RegisterStep2 from "./components/authentication/register/step2/RegisterStep2";
@@ -95,7 +95,7 @@ export default function Routes() {
                 <Route path={getRoutesItems().registerStep3.route} exact component={RegisterStep3}/>
 
                 {/****************** Change Password *****************************/}
-                <Route path={getRoutesItems().changePassword.route} exact component={ChangePassword}/>
+                {/*<Route path={getRoutesItems().changePassword.route} exact component={ChangePassword}/>*/}
 
                 {/****************** Reset Password *****************************/}
                 <Route path={getRoutesItems().resetPasswordStep1.route} exact component={ForgetPassStep1}/>

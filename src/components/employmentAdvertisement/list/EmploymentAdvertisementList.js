@@ -23,6 +23,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {useTranslation} from "react-i18next";
 import {serverTimeToDaysAgo} from "../../global/TimeConverter";
 import guide from "../../Resume/step3/imgs/guide.png";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 var axios = require('axios');
@@ -770,11 +771,17 @@ export default function EmploymentAdvertisementList() {
             "roleId": 2,
             "page": next_page,
             "pageSize": pageSize,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
             "keyword": keyword,
-            "ownerId": 1,
+            "ownerId": 0,
             "owner": "Company",
             "genderIds": genderList,
             "isAdaptiveSalary": isAdaptiveSalary,
@@ -886,11 +893,17 @@ export default function EmploymentAdvertisementList() {
             "roleId": 5,
             "page": 1,
             "pageSize": 6,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
             "keyword": keyword,
-            "ownerId": 1,
+            "ownerId": 0,
             "owner": "Company",
             "genderIds": genderList,
             "isAdaptiveSalary": isAdaptiveSalary,
@@ -1000,17 +1013,36 @@ export default function EmploymentAdvertisementList() {
 
 
     useEffect(() => {
+        const url = queryString.parse(window.location.search);
+        let keyword = url.keyword;
+        let category = url.category;
+        if (category !== "null")
+            category = [parseInt(category)];
+        else category = null;
+        let province = url.province;
+        if (province !== "null")
+            province = [parseInt(province)];
+        else province = null;
+
+
+
         /************** News List *************/
         /*get news list*/
         var list_data = JSON.stringify({
             "roleId": 5,
             "page": 1,
             "pageSize": 6,
-            "heights": [200],
-            "widths": [200],
-            "qualities": [90],
-            "keyword": null,
-            "ownerId": 1,
+            "heights": [
+                getSizeImageItems().companyLogo.Heights
+            ],
+            "widths": [
+                getSizeImageItems().companyLogo.Widths
+            ],
+            "qualities": [
+                getSizeImageItems().companyLogo.Qualities
+            ],
+            "keyword": keyword,
+            "ownerId": 0,
             "owner": "Company",
             "genderIds": null,
             "isAdaptiveSalary": false,
@@ -1018,9 +1050,9 @@ export default function EmploymentAdvertisementList() {
             "maxSalaryStatusId": 12,
             "degreeIds": null,
             "typeId": 1,
-            "provinceIds": null,
+            "provinceIds": province,
             "militaryStatusIds": null,
-            "categoryIds": null,
+            "categoryIds": category,
             "isFullTime": false,
             "isPartTime": false,
             "isRemote": false,
@@ -1033,6 +1065,8 @@ export default function EmploymentAdvertisementList() {
             "isFreeFoodPossible": false,
             "sortBye": 0
         });
+        console.log("list_data")
+        console.log(list_data)
         var list_config = {
             method: 'post',
             url: generateURL("/JobOffer/GetJobOfferListClientSide"),
@@ -2888,11 +2922,20 @@ export default function EmploymentAdvertisementList() {
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
-                                                                            <span className={Style.dateSpan + " mx-2"}>
-                                                                                {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                            </span>
+                                                                            {
+                                                                                serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
+                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
+                                                                                    </span>:
+                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            " امروز" :
+                                                                                            " Today"}
+                                                                                    </span>
+                                                                            }
+
 
                                                                         </p>
                                                                     </div>
@@ -2975,11 +3018,21 @@ export default function EmploymentAdvertisementList() {
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
                                                                                 }
                                                                             </span>
-                                                                            <span className={Style.dateSpan  + " mt-3"}>
-                                                                                {sp.get("lang") === "fa" ?
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
-                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                            </span>
+                                                                            <div className={"pt-3"}>
+                                                                                {
+                                                                                    serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
+                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
+                                                                                            serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
+                                                                                    </span>:
+                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                        {sp.get("lang") === "fa" ?
+                                                                                            " امروز" :
+                                                                                            " Today"}
+                                                                                    </span>
+                                                                                }
+                                                                            </div>
 
                                                                         </p>
                                                                     </div>

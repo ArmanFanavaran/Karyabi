@@ -12,7 +12,7 @@ import Background from './../imgs/background.jpg';
 import FullStar from './../imgs/full-star.png';
 import EmptyStar from './../imgs/empty-star.png';
 import HalfStar from './../imgs/half-star.png';
-import Logo from './../imgs/sampleLogo.png';
+import Logo from './../imgs/sampleaminpic.jpg';
 
 import Delete from "../../employmentAdvertisement/imgs/delete.png";
 import * as queryString from "query-string";
@@ -26,6 +26,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {useTranslation} from "react-i18next";
 import InfiniteScroll from "react-infinite-scroll-component";
 import guide from "../../Resume/step1/imgs/guide.png";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 
 var axios = require('axios');
@@ -276,24 +277,24 @@ export default function CompaniesList() {
             "pageSize": pageSize,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": keyword,
@@ -357,24 +358,24 @@ export default function CompaniesList() {
             "pageSize": pageSize,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": "",
@@ -392,6 +393,7 @@ export default function CompaniesList() {
             "fromRegisterationDate": null,
             "toRegisterationDate": null
         }
+        console.log(data)
         let list_config = {
             method: 'post',
             url: generateURL("/Company/GetCompanyListClientSide"),
@@ -469,24 +471,24 @@ export default function CompaniesList() {
             "pageSize": pageSize,
             "logoPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyLogo.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyLogo.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyLogo.Qualities
                 ]
             },
             "mainPicDetail": {
                 "heights": [
-                    200
+                    getSizeImageItems().companyMainPic.Heights
                 ],
                 "widths": [
-                    200
+                    getSizeImageItems().companyMainPic.Widths
                 ],
                 "qualities": [
-                    90
+                    getSizeImageItems().companyMainPic.Qualities
                 ]
             },
             "keyWord": keyword,

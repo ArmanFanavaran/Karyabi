@@ -16,9 +16,11 @@ import {
     AccordionItemPanel
 } from "react-accessible-accordion";
 import {NotificationContainer} from "react-notifications";
+import {useHistory} from "react-router-dom";
 
 
 export default function AddJobOfferStep2() {
+    const history = useHistory();
     const [language, setLanguage] = useState();
     const [jobOfferId, setJobOfferId] = useState();
     const [companyId, setCompanyId] = useState();
@@ -37,12 +39,14 @@ export default function AddJobOfferStep2() {
 
 
     /* default data */
-    const [description, setDescription] = useState();
-    const [engDescription, setEngDescription] = useState();
+    const [description, setDescription] = useState("");
+    const [engDescription, setEngDescription] = useState("");
     const [title, setTitle] = useState();
     const [titleEng, setTitleEng] = useState();
     const [category, setCategory] = useState();
     const [website, setWebsite] = useState();
+    const [expirationTime, setExpirationTime] = useState();
+    const [cooperationTime, setCooperationTime] = useState();
     const [experience, setExperience] = useState();
     const [military, setMilitary] = useState();
     const [province, setProvince] = useState();
@@ -129,11 +133,13 @@ export default function AddJobOfferStep2() {
                                 Name: major_data.name,
                                 EnglishName: major_data.englishName,
                                 Count: major_data.count
-                            }
+                            },
+                            Id: major_data.id
                         }
                         let joboffer_majors = [...jobOfferMajors];
                         joboffer_majors.push(major);
                         setJobOfferMajors(joboffer_majors)
+                        console.log()
 
                         $("#none_major").prop("selected", true);
 
@@ -167,6 +173,7 @@ export default function AddJobOfferStep2() {
     }
 
     const onRemoveMajor = (id) => {
+        console.log(id)
 
         let data = {
             "id": id,
@@ -188,6 +195,7 @@ export default function AddJobOfferStep2() {
                     if (item.Id === id)
                         majors_array.splice(index, 1);
                 });
+                console.log(jobOfferMajors)
                 setJobOfferMajors(majors_array);
             })
             .catch(function (error) {
@@ -242,7 +250,8 @@ export default function AddJobOfferStep2() {
                             IsSoftWare: true,
                             Name: data.areaOfInterestEnglish.name
                         },
-                        AreaOfInterestPersian: null
+                        AreaOfInterestPersian: null,
+                        Id: response.data.id
                     }
                 } //end if
                 else {
@@ -256,9 +265,11 @@ export default function AddJobOfferStep2() {
                             Id: data.areaOfInterestPersian.id,
                             IsSoftWare: data.areaOfInterestPersian.IsSoftWare,
                             Name: data.areaOfInterestPersian.name
-                        }
+                        },
+                        Id: response.data.id
                     }
                 } //end else
+                console.log(skill)
                 skills_array.push(skill);
                 setSkills(skills_array);
 
@@ -288,6 +299,8 @@ export default function AddJobOfferStep2() {
     }
 
     const onRemoveSkill = (id) => {
+        console.log(id)
+        console.log(skills)
 
         let data = {
             "id": id,
@@ -328,6 +341,108 @@ export default function AddJobOfferStep2() {
                 }
             });
 
+    }
+
+    const onSubmitAd = () => {
+        let province_id = $("#province_select").val();
+        if (province_id === null) {
+            NotificationManager.error("لطفا استان را انتخاب کنید", '', 2000);
+            return;
+        }
+        else province_id = parseInt(province_id);
+
+        let cooperation_time = $("#cooperation_time_input").val();
+        if (cooperation_time !== "" && cooperation_time !== null)
+            cooperation_time = parseInt(cooperation_time);
+        else cooperation_time = 0;
+
+        let expiration_time = $("#expiration_time_input").val();
+
+        if (expiration_time !== "" && expiration_time !== null) {
+            expiration_time = parseInt(expiration_time);
+            if (expiration_time < 1 || expiration_time > 60){
+                NotificationManager.error("مدت اعتبار اگهی باید بین 1 تا 60 روز باشد.", "", 3000);
+                return;
+            }
+        }
+        else expiration_time = 60;
+
+
+
+        let axios = require('axios');
+        let data = {
+            "id": jobOfferId,
+            "roleId": 8,
+            "roleAccountId": companyId,
+            "title":$("#title_input").val(),
+            "titleEnglish": $("#english_title_input").val(),
+            "description":description,
+            "descriptionEnglish": engDescription,
+            "websiteLink": $("#website_input").val(),
+            "minExperienceId": parseInt($("#experience_select").val()),
+            "isEmergency": isEmergency,
+            "genderId": parseInt($("#gender_select").val()),
+            "typeId": 1,
+            "salaryStatusId": parseInt($("#salary_select").val()),
+            "militaryStatusId1": parseInt($("#military_select").val()),
+            "militaryStatusId2": 0,
+            "militaryStatusId3": 0,
+            "provinceId": province_id,
+            "cityId": parseInt($("#city_select").val()),
+            "categoryId": parseInt($("#category_select").val()),
+            "degreeId": parseInt($("#degree_select").val()),
+            "cooperationTime": cooperation_time,
+            "expirationTimeLimit": expiration_time,
+            "isFullTime": isFullTime,
+            "isPartTime": isPartTime,
+            "isRemote": isRemote,
+            "isInternship": isInternship,
+            "isPromotionPossible": isPromotionPossible,
+            "isInsurancePossible": isInsurancePossible,
+            "isCoursePossible": isCoursePossible,
+            "isFlexibleWorkTimePossible": isFlexibleWorkTimePossible,
+            "isCommutingServicePossible": isCommutingServicePossible,
+            "isFreeFoodPossible": isFreeFoodPossible
+        }
+        console.log(data)
+        let config = {
+            method: 'post',
+            url: generateURL("/JobOffer/UpdateJobOffer"),
+            headers: {'Content-Type': 'application/json'},
+            data: JSON.stringify(data)
+        };
+        axios(config)
+            .then(function (response) {
+
+                NotificationManager.success("آکهی ثبت شد", '', 2000);
+                setTimeout(function (){
+                    history.push({
+                        pathname: getRoutesItems().companyJobOffers.route,
+                        search: "lang=" +language +"&company=" + companyId,
+                    })
+                }, 2000)
+
+            })
+            .catch(function (error) {
+                let errors;
+                if(error.response !== undefined) {
+                    errors = error.response.data.errors;
+                    if (errors != null) {
+                        Object.keys(errors).map((key, i) => {
+                            for (var i = 0; i < errors[key].length; i++) {
+                                NotificationManager.error(errors[key][i], '', 3000);
+                            }
+                        });
+
+                    } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                        NotificationManager.error(error.response.data.message, '', 3000);
+                    } else {
+                        NotificationManager.error(error.response.data.Message, '', 3000);
+
+                    }
+                }
+
+            });
     }
 
     useEffect(function (){
@@ -503,14 +618,92 @@ export default function AddJobOfferStep2() {
                 setTitleEng(data.titleEnglish);
                 let category_json = JSON.parse(data.categoryJson)
                 setCategory(parseInt(category_json.Id));
-                setDescription(data.description);
-                setEngDescription(data.descriptionEnglish);
-                setWebsite(data.websiteLink);
-                setExperience(); //TODO
-                setMilitary(); //TODO
-                setMilitary(); //TODO
+                if (data.description !== null  && data.description !== "")
+                    setDescription(data.description);
 
-                //TODO
+                if (data.descriptionEnglish !== null && data.descriptionEnglish !== "")
+                    setEngDescription(data.descriptionEnglish);
+
+                setWebsite(data.websiteLink);
+                setExpirationTime(parseInt(data.expirationTimeLeft));
+                setCooperationTime(parseInt(data.cooperationTime));
+                if(data.provinceJson !== null && data.provinceJson !== ""){
+                    let province_json = JSON.parse(data.provinceJson);
+                    setProvince(province_json.Id);
+
+                    /* get cities of province*/
+                    let config = {
+                        method: 'get',
+                        url: generateURL("/SideArray/GetCitiesOfProvince?province_id=") + province_json.Id,
+                        headers: {"Content-Type": "application/json"},
+                    };
+                    axios(config)
+                        .then(function (response) {
+                            setCities(response.data.data)
+                        })
+                        .catch(function (error) {
+                            let errors = error.response.data.errors;
+                            if (errors != null) {
+                                Object.keys(errors).map((key, i) => {
+                                    for (var i = 0; i < errors[key].length; i++) {
+                                        NotificationManager.error(errors[key][i], '', 1000);
+                                    }
+                                });
+
+                            } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                                NotificationManager.error(error.response.data.message, '', 1000);
+                            } else {
+                                NotificationManager.error(error.response.data.Message, '', 1000);
+
+                            }
+                        });
+
+                }
+
+                if(data.cityJson !== null && data.cityJson !== ""){
+                    let city_json = JSON.parse(data.cityJson);
+                    setCity(city_json.Id);
+                }
+
+                if(data.degreeJson !== null && data.degreeJson !== ""){
+                    let degree_json = JSON.parse(data.degreeJson);
+                    setDegree(degree_json.Id);
+                } else if (data.degreeJson !== "") setDegree(0);
+
+                if(data.miltaryStatus1Json !== null && data.miltaryStatus1Json !== ""){
+                    let military_json = JSON.parse(data.miltaryStatus1Json);
+                    setMilitary(military_json.Id);
+                } else if (data.miltaryStatus1Json !== "") setMilitary(0);
+
+                if(data.salaryStatusJson !== null && data.salaryStatusJson !== ""){
+                    let salary_json = JSON.parse(data.salaryStatusJson);
+                    setSalary(salary_json.Id);
+                } else if (data.salaryStatusJson !== "") setSalary(0);
+
+                if(data.genderJson !== null && data.genderJson !== ""){
+                    let gender_json = JSON.parse(data.genderJson);
+                    setGender(gender_json.Id);
+                } else if (data.genderJson !== "") setGender(0);
+
+                if(data.minExperienceJson !== null && data.minExperienceJson !== ""){
+                    let experience_json = JSON.parse(data.minExperienceJson);
+                    setExperience(experience_json.Id);
+                } else if (data.minExperienceJson !== "") setExperience(0);
+
+                setIsEmergency(data.isEmergency);
+                setIsFreeFoodPossible(data.isFreeFoodPossible);
+                setIsFullTime(data.isFullTime);
+                setIsFlexibleWorkTimePossible(data.isFlexibleWorkTimePossible);
+                setIsCommutingServicePossible(data.isCommutingServicePossible);
+                setIsCoursePossible(data.isCoursePossible);
+                setIsRemote(data.isRemote);
+                setIsPartTime(data.isPartTime);
+                setIsInsurancePossible(data.isInsurancePossible);
+                setIsInternship(data.isInternship);
+                setIsPromotionPossible(data.isPromotionPossible);
+
+
+
             })
             .catch(function (error) {
                 console.log(error)
@@ -562,7 +755,7 @@ export default function AddJobOfferStep2() {
                             language:'ar'
                         } }
                         editor={ ClassicEditor }
-                        data=""
+                        data={description}
                         onChange={ ( event, editor ) => {
                             setDescription(editor.getData())
                         } }
@@ -575,23 +768,32 @@ export default function AddJobOfferStep2() {
                             // language:'ar'
                         } }
                         editor={ ClassicEditor }
-                        data=""
+                        data={engDescription}
                         onChange={ ( event, editor ) => {
                             setEngDescription(editor.getData())
                         } }
                     />
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
+                    <label className={'change-text d-block'}>مدت همکاری(ماه)</label>
+                    <input type={"number"} className={'form-control'} id={'cooperation_time_input'} defaultValue={cooperationTime}/>
+                </div>
+                <div className={'col-12 col-xl-6 mt-4'}>
+                    <label className={'change-text d-block'}>مدت اعتبار آگهی(روز)</label>
+                    <input type={"number"} className={'form-control'} id={'expiration_time_input'} defaultValue={expirationTime} min="1" max="60"/>
+                </div>
+                <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>آدرس وبسایت</label>
-                    <input type={"text"} className={'form-control'} id={'english_description_input'}/>
+                    <input type={"text"} className={'form-control'} id={'website_input'} defaultValue={website}/>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>حداقل سابقه کاری مورد نیاز</label>
-                    <select id={'category_select'} className="form-control">
-                        <option>مهم نیست</option>
+                    <select id={'experience_select'} className="form-control">
+                        <option value={0} selected={0 === experience}>مهم نیست</option>
                         {
                             experiences.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === experience}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
@@ -599,64 +801,70 @@ export default function AddJobOfferStep2() {
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>استان</label>
                     <select id={'province_select'} className="form-control" onChange={onSelectProvince}>
-                        <option disabled={true} >انتخاب...</option>
+                        <option disabled={true} selected={true}>انتخاب...</option>
                         {
                             provinces.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === province}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>شهر</label>
-                    <select id={'category_select'} className="form-control">
+                    <select id={'city_select'} className="form-control">
                         <option disabled={true} >انتخاب...</option>
                         {
                             cities.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === city}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>وضعیت نظام وظیفه</label>
-                    <select id={'category_select'} className="form-control">
-                        <option>مهم نیست</option>
+                    <select id={'military_select'} className="form-control">
+                        <option value={0} selected={0 === military}>مهم نیست</option>
                         {
                             militaries.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === military}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>مقطع</label>
-                    <select id={'category_select'} className="form-control">
-                        <option>مهم نیست</option>
+                    <select id={'degree_select'} className="form-control">
+                        <option value={0} selected={0 === degree}>مهم نیست</option>
                         {
                             degrees.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === degree}
+                                        value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>جنسیت</label>
-                    <select id={'category_select'} className="form-control">
-                        <option>مهم نیست</option>
+                    <select id={'gender_select'} className="form-control">
+                        <option value={0} selected={0 === gender}>مهم نیست</option>
                         {
                             genders.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option  selected={item.id === gender}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div className={'col-12 col-xl-6 mt-4'}>
                     <label className={'change-text d-block'}>وضعیت حقوق</label>
-                    <select id={'category_select'} className="form-control">
+                    <select id={'salary_select'} className="form-control">
                         {
                             salaries.map((item)=>(
-                                <option value={item.id}>{language==='fa'?item.name:item.englishName}</option>
+                                <option selected={item.id === salary}
+                                    value={item.id}>{language==='fa'?item.name:item.englishName}</option>
                             ))
                         }
                     </select>
@@ -684,7 +892,7 @@ export default function AddJobOfferStep2() {
                                                         <div className={Style.skillTag + " px-3 mx-2 my-2"}>
                                                             <span>{
                                                                 item.AreaOfInterestEnglish !== null && item.AreaOfInterestEnglish.IsSoftWare ?
-                                                                    item.AreaOfInterestEnglish.Name : item.AreaOfInterestPersian.Name
+                                                                    item.AreaOfInterestEnglish.Name : <span>{item.AreaOfInterestPersian &&item.AreaOfInterestPersian.Name}</span>
                                                             }</span>
                                                             <span>
                                                         <button className={'btn '} onClick={()=> {onRemoveSkill(item.Id)}}><i className={'bi bi-x-lg'}></i></button>
@@ -950,8 +1158,21 @@ export default function AddJobOfferStep2() {
                     <label>غدا با شرکت</label>
                 </div>
             </div>
-            <div className={'d-flex justify-content-center mt-4'}>
-                {/*<button className={'btn btn-success py-2 px-5'} onClick={onSubmit}>مرحله بعد</button>*/}
+            <div className={'d-flex justify-content-center mt-5'}>
+                <button className={'btn btn-success py-2 px-5'} onClick={onSubmitAd}>ثبت تغییرات</button>
+                {/*<div className={'mx-3'}>*/}
+                {/*    {isEmergency ?*/}
+                {/*        <button className={"mx-3 btn text-white btn-danger" }*/}
+                {/*                onClick={() => {*/}
+                {/*                    setIsEmergency(false)*/}
+                {/*                }}><i className="fas fa-toggle-on"></i></button>:*/}
+                {/*        <button className={"mx-3 btn text-white btn-secondary "  }*/}
+                {/*                onClick={() => {*/}
+                {/*                    setIsEmergency(true)*/}
+                {/*                }}><i className="fas fa-toggle-on"></i></button>}*/}
+
+                {/*    <label>آگهی اضطراری</label>*/}
+                {/*</div>*/}
             </div>
 
             <NotificationContainer/>
