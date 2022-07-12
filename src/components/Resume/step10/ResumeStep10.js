@@ -168,7 +168,62 @@ export default function ResumeStep10() {
 
 
     }
+    // Can be a string as well. Need to ensure each key-value pair ends with ;
+    const overrideLoading = css`
+      display: flex;
+      margin: 0 auto;
+      border: 10px #ff0000;
+      //z-index: 99999;
+    `;
+    const customStylesLoading = {
 
+        content: {
+            top: '56%',
+            left: '50%',
+            width: '100%',
+            // maxWidth: '1000px',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            zIndex: '1',
+            borderRadius: '15px',
+            padding: '20px',
+            opacity: 0.75,
+
+            // marginTop:'30px',
+            overflowY: 'auto',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#6969dd #e0e0e0',
+            height: '90vh',
+            transform: 'translate(-50%, -50%)',
+
+        },
+
+        "@media only screen and (max-width: 375px)": {
+            backgroundColor: 'red'
+        },
+
+        webkitScrollbar: {width: "1em"},
+        webkitScrollbarTrack: {boxShadow: "inset 0 0 6px rgba(0, 0, 0, 0.3)"},
+        webkitScrollbarThumb: {backgroundColor: "darkgrey", outline: "1px solid slategrey"}
+
+    };
+
+    const [modalIsOpenLoading, setIsOpenLoading] = React.useState(false);
+
+    function openModalLoading() {
+        setIsOpenLoading(true);
+        document.body.style.overflow = 'hidden';
+        setLoading(true)
+
+    }
+
+    function closeModalLoading() {
+        setIsOpenLoading(false);
+        document.body.style.overflow = 'visible';
+        setLoading(false)
+
+    }
     var axios = require('axios');
     axios.defaults.withCredentials = true;
 
@@ -447,6 +502,7 @@ export default function ResumeStep10() {
 
     ///// Get Resume ///////
     const onGetResume = () => {
+        openModalLoading()
         var data = JSON.stringify({
             "heights": [getSizeImageItems().UserPicPro.Heights],
             "widths": [getSizeImageItems().UserPicPro.Widths],
@@ -463,6 +519,7 @@ export default function ResumeStep10() {
         let information;
         axios(config)
             .then(function (response) {
+                closeModalLoading()
                 // console.log(response.data.data)
                 setResumeId(response.data.data.id)
                 setResume(response.data.data)
@@ -508,6 +565,29 @@ export default function ResumeStep10() {
                             </div>
                         </div>
                         <div className="mx-auto">
+                            <div className={'row d-xl-none'}>
+                                <div className={'col-12'}>
+                                    <Modal
+                                        isOpen={modalIsOpenLoading}
+                                        // onAfterOpen={afterOpenModal}
+                                        onRequestClose={closeModalLoading}
+                                        style={customStylesLoading}
+                                        contentLabel="Example Modal"
+                                    >
+                                        {/*<button className={'btn btn-default float-right'} onClick={closeModalLoading}>X</button>*/}
+                                        <div className={'container '}>
+                                            <div className="row">
+                                                <div className="col-12 mx-auto mt-4 text-center"
+                                                     style={{paddingTop: "30vh", opacity: "1"}} dir={"ltr"} id={'form'}>
+                                                    <MoonLoader color={color} loading={loading} css={override}
+                                                                size={30}/>
+                                                    <h3 className={"mt-4"}>Loading...</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Modal>
+                                </div>
+                            </div>
                             <div className={'row d-xl-none'}>
                                 <div className={'col-12'}>
                                     <Modal

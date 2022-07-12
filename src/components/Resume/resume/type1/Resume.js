@@ -377,7 +377,7 @@ export default function Resume(src, options) {
 
                                         <span>
                                             {
-                                                age !== null && age !== undefined ? age + " سال " : null
+                                                age !== null && age !== undefined ? age + " ساله - " : null
                                             }
 
                                         </span>
@@ -395,9 +395,10 @@ export default function Resume(src, options) {
                                     <p>
 
                                         {
-                                            age !== null && age !== undefined ? age : null
-                                            + " years old - " +
-                                            resume.mainJobTittle !== null && resume.mainJobTittle !== undefined ? resume.mainJobTittle : null
+                                            age !== null && age !== undefined ? age + " years old - " : null
+                                        }
+                                        {
+                                            resume.mainJobTittleEnglish !== null && resume.mainJobTittleEnglish !== undefined ? resume.mainJobTittleEnglish : null
                                         }
                                     </p>
                             }

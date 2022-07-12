@@ -158,7 +158,7 @@
       "teams": "تیم‌ها",
       "contact_us": "تماس با ما",
       "language": "زبان",
-      "login": "ورود",
+      "login": "ورود/ثبت نام",
       "register": "ثبت نام",
       "profileSingle": "نمایش پروفایل",
       "changePassword": "تغییر رمز عبور",
@@ -384,6 +384,7 @@
       "jobCategory": "دسته بندی شغلی",
       "addJobCategory": "افزودن دسته بندی شغلی",
       "nextStep": "صفحه اصلی ->",
+      "showResume": "نمایش رزومه ->",
       "previousStep": "<- مرحله قبل"
     }
   },

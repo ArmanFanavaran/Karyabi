@@ -158,7 +158,7 @@
       "teams": "Teams",
       "contact_us": "Contact Us",
       "language": "Language",
-      "login": "Login",
+      "login": "Login/Register",
       "register": "Register",
       "profileSingle": "See Profile",
       "changePassword": "Change Password",
@@ -388,6 +388,7 @@
       "jobCategory": "jobCategory",
       "addJobCategory": "Add Job Category",
       "nextStep": "Main Page ->",
+      "showResume": "Show Resume ->",
       "previousStep": "<- previous"
     }
   },

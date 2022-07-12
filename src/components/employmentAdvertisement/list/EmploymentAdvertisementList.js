@@ -1015,15 +1015,13 @@ export default function EmploymentAdvertisementList() {
     useEffect(() => {
         const url = queryString.parse(window.location.search);
         let keyword = url.keyword;
-        let category = url.category;
-        if (category !== "null")
+        let category = [0];
+        if (url.category !== "null" && url.category !== undefined && url.category !== "")
             category = [parseInt(category)];
-        else category = null;
-        let province = url.province;
-        if (province !== "null")
-            province = [parseInt(province)];
-        else province = null;
-
+        let province = [];
+        if (url.province !== "null" && url.province !== undefined && url.province !== "")
+            province = [parseInt(url.province)];
+        // else province = null;
 
 
         /************** News List *************/
@@ -1236,7 +1234,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             selectedCategory.length > 0 ?
-                                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.category")}:</span> : null
                                         }
                                         {
                                             selectedCategory.length > 0 ?
@@ -1255,7 +1253,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             selectedBranches.length > 0 ?
-                                                <span>{t("employmentAdvertisement.list.grade")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.grade")}:</span> : null
                                         }
                                         {
                                             selectedBranches.length > 0 ?
@@ -1275,7 +1273,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             selectedProvince.length > 0 ?
-                                                <span>{t("employmentAdvertisement.list.province")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.province")}:</span> : null
                                         }
                                         {
                                             selectedProvince.length > 0 ?
@@ -1293,7 +1291,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             minSalary[0].id !== 0 ?
-                                                <span>{t("employmentAdvertisement.list.minSalary")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.minSalary")}:</span> : null
                                         }
                                         {salaryList.map((item, i) => (
                                             item.id === minSalary[0].id ?
@@ -1318,7 +1316,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             maxSalary[0].id !== 0 ?
-                                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span> : null
                                         }
                                         {salaryList.map((item, i) => (
                                             item.id === maxSalary[0].id ?
@@ -1343,7 +1341,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             selectedMilatery.length > 0 ?
-                                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span> : null
                                         }
                                         {
                                             selectedMilatery.length > 0 ?
@@ -1361,7 +1359,7 @@ export default function EmploymentAdvertisementList() {
                                     <div className={'col-12 change-text change-dir'}>
                                         {
                                             selectedGender.length > 0 ?
-                                                <span>{t("employmentAdvertisement.list.gender")}:</span>:null
+                                                <span>{t("employmentAdvertisement.list.gender")}:</span> : null
                                         }
                                         {
                                             selectedGender.length > 0 ?
@@ -1618,7 +1616,8 @@ export default function EmploymentAdvertisementList() {
                                                         {salaryList.map((item, i) => (
                                                             item.id === minSalary[0].id ?
 
-                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                         <span className={"mx-1 " + Style["pointer"]}
                                                               onClick={() => {
                                                                   setMinSalary(
@@ -1694,7 +1693,8 @@ export default function EmploymentAdvertisementList() {
                                                         {salaryList.map((item, i) => (
                                                             item.id === maxSalary[0].id ?
 
-                                                                <div className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
+                                                                <div
+                                                                    className={Style["branch-tags"] + " px-2 py-1 mx-1"}>
                                                         <span className={"mx-1 " + Style["pointer"]}
                                                               onClick={() => {
                                                                   setMaxSalary(
@@ -2061,7 +2061,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             selectedCategory.length > 0 ?
-                                <span>{t("employmentAdvertisement.list.category")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.category")}:</span> : null
                         }
                         {
                             selectedCategory.length > 0 ?
@@ -2080,7 +2080,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             selectedBranches.length > 0 ?
-                                <span>{t("employmentAdvertisement.list.grade")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.grade")}:</span> : null
                         }
                         {
                             selectedBranches.length > 0 ?
@@ -2100,7 +2100,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             selectedProvince.length > 0 ?
-                                <span>{t("employmentAdvertisement.list.province")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.province")}:</span> : null
                         }
                         {
                             selectedProvince.length > 0 ?
@@ -2118,7 +2118,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             minSalary[0].id !== 0 ?
-                                <span>{t("employmentAdvertisement.list.minSalary")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.minSalary")}:</span> : null
                         }
                         {salaryList.map((item, i) => (
                             item.id === minSalary[0].id ?
@@ -2143,7 +2143,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             maxSalary[0].id !== 0 ?
-                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.maxSalary")}:</span> : null
                         }
                         {salaryList.map((item, i) => (
                             item.id === maxSalary[0].id ?
@@ -2168,7 +2168,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             selectedMilatery.length > 0 ?
-                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.militaryStatus")}:</span> : null
                         }
                         {
                             selectedMilatery.length > 0 ?
@@ -2186,7 +2186,7 @@ export default function EmploymentAdvertisementList() {
                     <div className={'d-none d-xl-block col-12 change-text change-dir'}>
                         {
                             selectedGender.length > 0 ?
-                                <span>{t("employmentAdvertisement.list.gender")}:</span>:null
+                                <span>{t("employmentAdvertisement.list.gender")}:</span> : null
                         }
                         {
                             selectedGender.length > 0 ?
@@ -2905,7 +2905,9 @@ export default function EmploymentAdvertisementList() {
                                                                             </div>
                                                                             {
                                                                                 item.jobOffer.isEmergency ?
-                                                                                <div><span className={Style.listEmergency + " mx-4 "}>{t("employmentAdvertisement.list.emergency")}</span></div>:null
+                                                                                    <div><span
+                                                                                        className={Style.listEmergency + " mx-4 "}>{t("employmentAdvertisement.list.emergency")}</span>
+                                                                                    </div> : null
                                                                             }
 
                                                                         </h6>
@@ -2924,12 +2926,14 @@ export default function EmploymentAdvertisementList() {
                                                                             </span>
                                                                             {
                                                                                 serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
-                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                    <span
+                                                                                        className={Style.dateSpan + " mx-2"}>
                                                                                         {sp.get("lang") === "fa" ?
                                                                                             serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
                                                                                             serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                                    </span>:
-                                                                                    <span className={Style.dateSpan + " mx-2"}>
+                                                                                    </span> :
+                                                                                    <span
+                                                                                        className={Style.dateSpan + " mx-2"}>
                                                                                         {sp.get("lang") === "fa" ?
                                                                                             " امروز" :
                                                                                             " Today"}
@@ -2983,7 +2987,8 @@ export default function EmploymentAdvertisementList() {
                                                             } target="_blank" className={Style.mouse}>
                                                             <div className={Style2["container-item"] + " container"}>
                                                                 <div className="row">
-                                                                    <div className={Style2["news-img"] + " col-12 position-relative p-5"}>
+                                                                    <div
+                                                                        className={Style2["news-img"] + " col-12 position-relative p-5"}>
                                                                         <img
                                                                             src={item.jobOffer.coverImgs.length > 0 ? item.jobOffer.coverImgs[0] : advertisment}
                                                                             alt={sp.get("lang") === "fa" ?
@@ -2993,7 +2998,8 @@ export default function EmploymentAdvertisementList() {
                                                                             className="mt-2"/>
                                                                         {
                                                                             item.jobOffer.isEmergency &&
-                                                                            <div className={Style.gridEmergency}>{t("employmentAdvertisement.list.emergency")}</div>
+                                                                            <div
+                                                                                className={Style.gridEmergency}>{t("employmentAdvertisement.list.emergency")}</div>
 
                                                                         }
                                                                     </div>
@@ -3012,7 +3018,8 @@ export default function EmploymentAdvertisementList() {
                                                                             }
                                                                         </p>
                                                                         <p className="change-text row d-flex change-dir justify-content-between  pb-3">
-                                                                            <span className={Style.locationSpan + " mt-3"}>
+                                                                            <span
+                                                                                className={Style.locationSpan + " mt-3"}>
                                                                                 {sp.get("lang") === "fa" ?
                                                                                     JSON.parse(item.jobOffer.cityJson).name + " / " + JSON.parse(item.jobOffer.provinceJson).name :
                                                                                     JSON.parse(item.jobOffer.cityJson).englishName + " / " + JSON.parse(item.jobOffer.provinceJson).englishName
@@ -3021,12 +3028,14 @@ export default function EmploymentAdvertisementList() {
                                                                             <div className={"pt-3"}>
                                                                                 {
                                                                                     serverTimeToDaysAgo(item.jobOffer.timeOrder) !== 0 ?
-                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                        <span
+                                                                                            className={Style.dateSpan + " mx-2"}>
                                                                                         {sp.get("lang") === "fa" ?
                                                                                             serverTimeToDaysAgo(item.jobOffer.timeOrder) + " روز پیش" :
                                                                                             serverTimeToDaysAgo(item.jobOffer.timeOrder) + " days ago"}
-                                                                                    </span>:
-                                                                                        <span className={Style.dateSpan + " mx-2"}>
+                                                                                    </span> :
+                                                                                        <span
+                                                                                            className={Style.dateSpan + " mx-2"}>
                                                                                         {sp.get("lang") === "fa" ?
                                                                                             " امروز" :
                                                                                             " Today"}

@@ -1042,12 +1042,12 @@ export default function ResumeStep12() {
 
                                 <div className="col-12">
                                     <button onClick={() => history.push({
-                                        pathname: getRoutesItems().mainPage.route,
+                                        pathname: getRoutesItems().resume.route,
                                         search: "lang=" + sp.get("lang"),
 
                                     })}
                                             className="btn change-float-reverse my-3 mx-3 btn-info">
-                                        {t("resume.step12.nextStep")}
+                                        {t("resume.step12.showResume")}
 
                                     </button>
                                     <button onClick={() => history.push({
