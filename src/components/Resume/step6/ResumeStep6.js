@@ -401,9 +401,9 @@ export default function ResumeStep6() {
 
         axios(config)
             .then(function (response) {
-                onGetResume();
                 setLoading(false)
                 NotificationManager.success(response.data.message, '', 1000);
+                onGetResume();
             })
             .catch(function (error) {
                 setLoading(false)
@@ -511,7 +511,7 @@ export default function ResumeStep6() {
                 console.log(JSON.parse(response.data.data.skillInfoListJson))
                 // let data=JSON.parse(response.data.data.skillInfoListJson);
 
-                if (response.data.data.skillInfoListJson.length !== 0) {
+                if (response.data.data.skillInfoListJson.size !== 0) {
                     let skillInfoList = JSON.parse(response.data.data.skillInfoListJson)
                     // IsSoftWare
                     let data=[]

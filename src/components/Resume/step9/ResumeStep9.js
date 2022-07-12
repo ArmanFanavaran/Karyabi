@@ -242,17 +242,28 @@ export default function ResumeStep9() {
 
     function onSubmitAdd() {
         setLoading(true)
+        var EndDate = new Date(newEDate)
+        var dd = String(EndDate.getDate()).padStart(2, '0');
+        var mm = String(EndDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = EndDate.getFullYear();
+        EndDate = yyyy + '-' + mm + '-' + dd;
+
+        var SDate = new Date(newSDate);// x is now a date object
+        var dd = String(SDate.getDate()).padStart(2, '0');
+        var mm = String(SDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = SDate.getFullYear();
+        SDate = yyyy + '-' + mm + '-' + dd;
         if (add) {
             var data = JSON.stringify({
                 "id": parseInt(resumeId),
                 "title": $('#title').val(),
                 "titleEnglish": $('#titleEnglish').val(),
                 "webAddress": $('#webAddress').val(),
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
-                "isDoing": ($("#isDoing").val() === 'true'),
+                "isDoing": document.getElementById("isDoing").checked === true
 
             });
             console.log(data)
@@ -301,11 +312,11 @@ export default function ResumeStep9() {
                 "title": $('#title').val(),
                 "titleEnglish": $('#titleEnglish').val(),
                 "webAddress": $('#webAddress').val(),
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
-                "isDoing": ($("#isDoing").val() === 'true'),
+                "isDoing": document.getElementById("isDoing").checked === true
 
             });
             console.log(data)
@@ -415,9 +426,10 @@ export default function ResumeStep9() {
 
         axios(config)
             .then(function (response) {
-                onGetResume();
                 setLoading(false)
                 NotificationManager.success(response.data.message, '', 1000);
+                onGetResume();
+
             })
             .catch(function (error) {
                 setLoading(false)
@@ -533,6 +545,7 @@ export default function ResumeStep9() {
                 setResumeId(response.data.data.id)
                 setResume(response.data.data)
                 console.log("Job Resume ")
+                console.log(response.data.data)
                 console.log(JSON.parse(response.data.data.projectResumeInfoListJson))
                 // let data=JSON.parse(response.data.data.skillInfoListJson);
 
@@ -648,7 +661,7 @@ export default function ResumeStep9() {
                                                     </div>
                                                     <div className="col-xl-11 col-lg-11 col-md-10 col-10">
                                                         <div className="row my-1">
-                                                            <div className="col-12 col-md-6 change-text">
+                                                            <div className="col-12 change-text">
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-left change-dir mt-3 text-muted">
@@ -677,29 +690,6 @@ export default function ResumeStep9() {
 
 
                                                                     </p>
-                                                                }
-                                                            </div>
-                                                            <div className={'col-12 col-md-6'}>
-                                                                {
-                                                                    sp.get("lang") === "en" ?
-                                                                        <p className="text-right dir-rtl mt-3 text-muted">
-                                                                            {value.Title}
-                                                                            <br/>
-                                                                            <a href={"https://" + value.WebAddress}>{value.WebAddress}</a>
-                                                                            <br/>
-                                                                            {moment(value.SDate).format('jYYYY')} - {value.IsDoing ? "تاکنون (مشغول به کار)" : moment(value.EDate).format('jYYYY')}
-
-                                                                        </p>
-                                                                        :
-                                                                        <p className="text-left dir-ltr mt-3 text-muted">
-                                                                            {value.TitleEnglish}
-                                                                            <br/>
-                                                                            <a href={"https://" + value.WebAddress}>{value.WebAddress}</a>
-                                                                            <br/>
-                                                                            <span>
-                                                                            {moment(value.SDate).format('YYYY')} - {value.IsDoing ? "Present" : moment(value.EDate).format('YYYY')}
-                                                                            </span>
-                                                                        </p>
                                                                 }
                                                             </div>
                                                             <div className="col-12 change-text-reverse mt-2 mb-4">
@@ -843,8 +833,8 @@ export default function ResumeStep9() {
                                                 }
                                                 <div className="col-md-4 col-12 py-2 change-dir change-text pt-5">
                                                     <div className="form-check px-3">
-                                                        <input onClick={hideEndDate} className="form-check-input" type="checkbox" value="true"
-                                                               id="isDoing" checked={editItems.IsDoing}/>
+                                                        <input onClick={hideEndDate} className="form-check-input" type="checkbox"
+                                                               id="isDoing" defaultChecked={editItems.IsDoing}/>
                                                         <label className="form-check-label px-3" htmlFor="isDoing">
                                                             {t("resume.step9.isDoing")}
                                                         </label>

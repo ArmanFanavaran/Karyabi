@@ -72,6 +72,11 @@ function LoginComponent() {
     const onSubmitWithReCAPTCHA = async () => {
         const recaptchaToken = await executeRecaptcha("login_page");
         let username = $("#username").val();
+        if (username.indexOf("0") == 0) {
+            let cleanNumber = username.substring(1); //removes first character = "1"
+            console.log(cleanNumber)
+            username=cleanNumber
+        }
         setLoading(true)
         var data = JSON.stringify({
             "phoneOrUserName": username,
@@ -160,19 +165,19 @@ function LoginComponent() {
                 <div className="container">
                     <h4>{t("authentication.login.enter_your_information_step1")}</h4>
 
-                        <div className={Style.inputs}>
-                            <input id="username" type="text" className="form-control text-center"
-                                   placeholder={t("authentication.login.username_or_email")}/>
+                    <div className={Style.inputs}>
+                        <input id="username" type="text" className="form-control text-center"
+                               placeholder={t("authentication.login.username_or_email")}/>
 
-                            <button className={Style["btn-login"] + " btn d-block"} type="button"
-                                    onClick={onSubmitWithReCAPTCHA}>{t("authentication.login.login")}
-                            </button>
-                            <div className={'row'}>
-                                <div className={'col-12 col-md-4 mx-auto'}>
-                                    <MoonLoader color={color} loading={loading} css={override} size={30}/>
-                                </div>
+                        <button className={Style["btn-login"] + " btn d-block"} type="button"
+                                onClick={onSubmitWithReCAPTCHA}>{t("authentication.login.login")}
+                        </button>
+                        <div className={'row'}>
+                            <div className={'col-12 col-md-4 mx-auto'}>
+                                <MoonLoader color={color} loading={loading} css={override} size={30}/>
                             </div>
                         </div>
+                    </div>
                 </div>
             </main>
             <NotificationContainer/>

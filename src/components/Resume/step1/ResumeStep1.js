@@ -30,14 +30,17 @@ import Modal from "react-modal";
 import guide from "./imgs/guide.png"
 import addImg from "../step4/imgs/add.svg";
 import minus from "../step4/imgs/minus.svg";
+import Select from "react-select";
 
 export default function ResumeStep1() {
     var moment = require("moment-jalaali");
     const history = useHistory();
 
     let [resume, setResume] = useState("");
-    const [provinces, setProvinces] = useState([]);
-    const [city, setCity] = useState([]);
+    const [provincesList, setProvincesList] = useState([]);
+    const [provincesSelect, setProvincesSelect] = useState([]);
+    const [cityList, setCityList] = useState([]);
+    const [citySelect, setCitySelect] = useState([]);
     const [CityId, setCityId] = useState("");
     const [cities, setCities] = useState([]);
     const [gender, setGender] = useState([]);
@@ -197,6 +200,7 @@ export default function ResumeStep1() {
         let information;
         axios(config)
             .then(function (response) {
+                console.log(JSON.parse(response.data.data.userInfoJson))
                 setResumeId(response.data.data.id)
                 setResume(JSON.parse(response.data.data.userInfoJson))
                 information = JSON.parse(response.data.data.userInfoJson);
@@ -214,7 +218,25 @@ export default function ResumeStep1() {
                 };
                 axios(configProvinces)
                     .then(function (response) {
-                        setProvinces(response.data.data)
+                        console.log(response.data.data)
+                        let provinceList = response.data.data
+                        // IsSoftWare
+                        let data = []
+                        if (sp.get("lang") === "fa") {
+                            provinceList.forEach(function (i) {
+                                let tmp;
+                                tmp = {value: i.id, label: i.name}
+                                data.push(tmp)
+                            });
+                        } else {
+                            provinceList.forEach(function (i) {
+                                let tmp;
+                                tmp = {value: i.id, label: i.englishName}
+                                data.push(tmp)
+                            });
+                        }
+                        setProvincesList(data)
+                        console.log(data)
                         $.each(response.data.data, function (key, value) {
                             if (value.id === information.ProvinceId) {
                                 setCityId(value.id)
@@ -278,6 +300,13 @@ export default function ResumeStep1() {
     function onSubmit() {
         setLoading(true)
         var axios = require('axios');
+
+        var date = new Date(newDate);// x is now a date object
+        var dd = String(newDate.getDate()).padStart(2, '0');
+        var mm = String(newDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = newDate.getFullYear();
+        date = yyyy + '-' + mm + '-' + dd;
+
         var data = JSON.stringify({
             "id": parseInt(resumeId),
             "resumePhone": $('#resumePhone').val(),
@@ -294,15 +323,15 @@ export default function ResumeStep1() {
             "firstName": $('#firstName').val(),
             "lastName": $('#lastName').val(),
             "genderId": parseInt($("#genderId").val()),
-            "birthday": newDate,
+            "birthday": date,
             "marriageStatus": parseInt($("#marriageStatus").val()),
             "miltaryStatus": parseInt($("#miltaryStatus").val()),
-            "province": parseInt($("#province").val()),
+            "province": parseInt(provincesSelect),
             "city": parseInt($("#city").val()),
             "address": $('#address').val(),
             "addressEnglish": $('#addressEnglish').val(),
         });
-        console.log(newDate)
+        console.log(data)
         var config = {
             method: 'post',
             url: generateURL('/Resume/CompleteUserInfoSTP1'),
@@ -370,13 +399,25 @@ export default function ResumeStep1() {
         };
         axios(config)
             .then(function (response) {
-                setCity(response.data.data)
-                let citiesArray = [];
-                $.each(response.data.data, function (key, value) {
-                    citiesArray.push(<option selected={information.CityId == value.id}
-                                             value={value.name}>{value.name}</option>)
-                })
-                setCities(citiesArray);
+                let cityList = response.data.data
+                // IsSoftWare
+                let data = []
+                if (sp.get("lang") === "fa") {
+                    cityList.forEach(function (i) {
+                        let tmp;
+                        tmp = {value: i.id, label: i.name}
+                        data.push(tmp)
+                    });
+                } else {
+                    cityList.forEach(function (i) {
+                        let tmp;
+                        tmp = {value: i.id, label: i.englishName}
+                        data.push(tmp)
+                    });
+                }
+
+                setCityList(data)
+
             })
             .catch(function (error) {
             });
@@ -398,19 +439,45 @@ export default function ResumeStep1() {
 
         axios(config)
             .then(function (response) {
-                setCity(response.data.data)
-                let citiesArray = [];
-                $.each(response.data.data, function (key, value) {
-                    citiesArray.push(<option selected={resume.CityId == value.id}
-                                             value={value.name}>{value.name}</option>)
-                })
-                setCities(citiesArray);
+                let cityList = response.data.data
+                // IsSoftWare
+                let data = []
+                if (sp.get("lang") === "fa") {
+                    cityList.forEach(function (i) {
+                        let tmp;
+                        tmp = {value: i.id, label: i.name}
+                        data.push(tmp)
+                    });
+                } else {
+                    cityList.forEach(function (i) {
+                        let tmp;
+                        tmp = {value: i.id, label: i.englishName}
+                        data.push(tmp)
+                    });
+                }
+
+                setCityList(data)
+
             })
             .catch(function (error) {
             });
 
 
     }
+
+    function provinceSelectFunc(data) {
+        getCityAPI(data.value)
+        setProvincesSelect(data.value);
+        // getCityAPIWithoutEvent(CityId)
+
+    }
+
+    function citySelectFunc(data) {
+        // getCityAPI(data.value)
+        setCitySelect(data.value);
+
+    }
+
 
     return (
         <div>
@@ -602,25 +669,30 @@ export default function ResumeStep1() {
                                                 <label htmlFor="" className="">{t("resume.step1.province")}</label>
                                             </div>
                                             <div className={Style.selectPart + " col-12 "}>
-                                                <select id={'province'} className={Style.formSelect}
-                                                        onChange={(event) => getCityAPI(event.target)}
-                                                        onLoad={() => {
-                                                            getCityAPIWithoutEvent(CityId)
-                                                        }}>
-                                                    {
-                                                        provinces.map((value, index) => (
-                                                            <option
-                                                                selected={resume.ProvinceId == value.id}
-                                                                value={value.id}
-                                                                idCity={value.id}>
-                                                                {sp.get("lang") === "fa" ?
-                                                                    value.name :
-                                                                    value.englishName
-                                                                }
-                                                            </option>
-                                                        ))
-                                                    }
-                                                </select>
+                                                {sp.get("lang") === "fa" ?
+                                                    <Select
+                                                        options={provincesList}
+                                                        placeholder="استان را انتخاب کنید"
+                                                        isSearchable={true}
+                                                        onChange={provinceSelectFunc}
+                                                        defaultValue={{
+                                                            value: resume.ProvinceId,
+                                                            label: resume.ProvinceString
+                                                        }}
+                                                    /> :
+
+                                                    <Select
+                                                        options={provincesList}
+                                                        placeholder="Select Province"
+                                                        isSearchable={true}
+                                                        onChange={provinceSelectFunc}
+                                                        defaultValue={{
+                                                            value: resume.ProvinceId,
+                                                            label: resume.ProvinceString
+                                                        }}
+                                                    />
+                                                }
+
                                             </div>
                                         </div>
 
@@ -629,20 +701,42 @@ export default function ResumeStep1() {
                                                 <label htmlFor="" className="">{t("resume.step1.city")}</label>
                                             </div>
                                             <div className={Style.selectPart + " col-12 "}>
-                                                <select id={'city'} className={Style.formSelect}
-                                                        aria-label="Default select example">
-                                                    {city !== undefined && city.map((value, index) => (
-                                                        <option selected={resume.CityId == value.id}
-                                                                value={value.id}>
-                                                            {sp.get("lang") === "fa" ?
-                                                                value.name :
-                                                                value.englishName
-                                                            }
-                                                        </option>
-                                                    ))
-                                                    }
-                                                </select>
+                                                {/*<select id={'city'} className={Style.formSelect}*/}
+                                                {/*        aria-label="Default select example">*/}
+                                                {/*    {city !== undefined && city.map((value, index) => (*/}
+                                                {/*        <option selected={resume.CityId == value.id}*/}
+                                                {/*                value={value.id}>*/}
+                                                {/*            {sp.get("lang") === "fa" ?*/}
+                                                {/*                value.name :*/}
+                                                {/*                value.englishName*/}
+                                                {/*            }*/}
+                                                {/*        </option>*/}
+                                                {/*    ))*/}
+                                                {/*    }*/}
+                                                {/*</select>*/}
+                                                {sp.get("lang") === "fa" ?
+                                                    <Select
+                                                        options={cityList}
+                                                        placeholder="شهر را انتخاب کنید"
+                                                        isSearchable={true}
+                                                        onChange={citySelectFunc}
+                                                        defaultValue={{
+                                                            value: resume.CityId,
+                                                            label: resume.CityString
+                                                        }}
+                                                    /> :
 
+                                                    <Select
+                                                        options={cityList}
+                                                        placeholder="Select City"
+                                                        isSearchable={true}
+                                                        onChange={citySelectFunc}
+                                                        defaultValue={{
+                                                            value: resume.CityId,
+                                                            label: resume.CityString
+                                                        }}
+                                                    />
+                                                }
                                             </div>
                                         </div>
                                         <hr/>

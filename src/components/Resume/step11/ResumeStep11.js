@@ -241,6 +241,11 @@ export default function ResumeStep11() {
 
     function onSubmitAdd() {
         setLoading(true)
+        var EndDate = new Date(newDate)
+        var dd = String(EndDate.getDate()).padStart(2, '0');
+        var mm = String(EndDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = EndDate.getFullYear();
+        EndDate = yyyy + '-' + mm + '-' + dd;
         if (add) {
             var data = JSON.stringify({
                 "id": parseInt(resumeId),
@@ -251,7 +256,7 @@ export default function ResumeStep11() {
                 "bookMaker": $('#bookMaker').val(),
                 "bookMakerEnglish": $('#bookMakerEnglish').val(),
                 "webAddress": $('#webAddress').val(),
-                "releaseDate": newDate
+                "releaseDate": EndDate
             });
             console.log(data)
             var config = {
@@ -304,7 +309,7 @@ export default function ResumeStep11() {
                 "bookMaker": $('#bookMaker').val(),
                 "bookMakerEnglish": $('#bookMakerEnglish').val(),
                 "webAddress": $('#webAddress').val(),
-                "releaseDate": newDate
+                "releaseDate": EndDate
 
             });
             console.log(data)
@@ -643,7 +648,7 @@ export default function ResumeStep11() {
                                                     </div>
                                                     <div className="col-xl-11 col-lg-11 col-md-10 col-10">
                                                         <div className="row my-1">
-                                                            <div className="col-12 col-md-6 change-text">
+                                                            <div className="col-12 change-text">
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-left change-dir mt-3 text-muted">
@@ -651,14 +656,14 @@ export default function ResumeStep11() {
                                                                             <br/>
                                                                             {value.BookMakerEnglish}
                                                                             <br/>
-                                                                            {moment(value.ReleaseDate).format('YYYY')}
+                                                                            {moment(value.ReleaseDate).format('YYYY/M')}
                                                                         </p>
                                                                         : <p className="text-right mt-3 text-muted">
                                                                             {value.Title}
                                                                             <br/>
                                                                             {value.BookMaker}
                                                                             <br/>
-                                                                            {moment(value.ReleaseDate).format('jYYYY')}
+                                                                            {moment(value.ReleaseDate).format('jYYYY/jM')}
 
                                                                         </p>
                                                                 }
@@ -674,29 +679,7 @@ export default function ResumeStep11() {
                                                                     </p>
                                                                 }
                                                             </div>
-                                                            <div className={'col-12 col-md-6'}>
-                                                                {
-                                                                    sp.get("lang") === "en" ?
-                                                                        <p className="text-right dir-rtl mt-3 text-muted">
-                                                                            {value.Title}
-                                                                            <br/>
-                                                                            {value.BookMaker}
-                                                                            <br/>
-                                                                            {moment(value.ReleaseDate).format('jYYYY')}
 
-                                                                        </p>
-                                                                        :
-                                                                        <p className="text-left dir-ltr mt-3 text-muted">
-                                                                            {value.TitleEnglish}
-                                                                            <br/>
-                                                                            {value.BookMakerEnglish}
-                                                                            <br/>
-                                                                            <span>
-                                                                            {moment(value.ReleaseDate).format('YYYY')}
-                                                                            </span>
-                                                                        </p>
-                                                                }
-                                                            </div>
                                                             <div className="col-12 change-text-reverse mt-2 mb-4">
 
                                                                 <button onClick={() => {

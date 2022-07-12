@@ -164,7 +164,7 @@ function LoginComponent2() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], ' ', 700);
                         }
                     });
 

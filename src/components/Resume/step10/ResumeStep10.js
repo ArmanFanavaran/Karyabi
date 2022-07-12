@@ -239,12 +239,18 @@ export default function ResumeStep10() {
 
     function onSubmitAdd() {
         setLoading(true)
+        var EndDate = new Date(newDate)
+        var dd = String(EndDate.getDate()).padStart(2, '0');
+        var mm = String(EndDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = EndDate.getFullYear();
+        EndDate = yyyy + '-' + mm + '-' + dd;
+
         if (add) {
             var data = JSON.stringify({
                 "id": parseInt(resumeId),
                 "title": $('#title').val(),
                 "titleEnglish": $('#titleEnglish').val(),
-                "date": newDate,
+                "date": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
             });
@@ -294,7 +300,7 @@ export default function ResumeStep10() {
                 "id": parseInt(editItems.Id),
                 "title": $('#title').val(),
                 "titleEnglish": $('#titleEnglish').val(),
-                "date": newDate,
+                "date": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
             });
@@ -634,18 +640,18 @@ export default function ResumeStep10() {
                                                     </div>
                                                     <div className="col-xl-11 col-lg-11 col-md-10 col-10">
                                                         <div className="row my-1">
-                                                            <div className="col-12 col-md-6 change-text">
+                                                            <div className="col-12 change-text">
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-left change-dir mt-3 text-muted">
                                                                             {value.TitleEnglish}
                                                                             <br/>
-                                                                            {moment(value.Date).format('YYYY')}
+                                                                            {moment(value.Date).format('YYYY/M')}
                                                                         </p>
                                                                         : <p className="text-right mt-3 text-muted">
                                                                             {value.Title}
                                                                             <br/>
-                                                                            {moment(value.Date).format('jYYYY')}
+                                                                            {moment(value.Date).format('jYYYY/jM')}
 
                                                                         </p>
                                                                 }
@@ -661,25 +667,7 @@ export default function ResumeStep10() {
                                                                     </p>
                                                                 }
                                                             </div>
-                                                            <div className={'col-12 col-md-6'}>
-                                                                {
-                                                                    sp.get("lang") === "en" ?
-                                                                        <p className="text-right dir-rtl mt-3 text-muted">
-                                                                            {value.Title}
-                                                                            <br/>
-                                                                            {moment(value.Date).format('jYYYY')}
 
-                                                                        </p>
-                                                                        :
-                                                                        <p className="text-left dir-ltr mt-3 text-muted">
-                                                                            {value.TitleEnglish}
-                                                                            <br/>
-                                                                            <span>
-                                                                            {moment(value.Date).format('YYYY')}
-                                                                            </span>
-                                                                        </p>
-                                                                }
-                                                            </div>
                                                             <div className="col-12 change-text-reverse mt-2 mb-4">
 
                                                                 <button onClick={() => {

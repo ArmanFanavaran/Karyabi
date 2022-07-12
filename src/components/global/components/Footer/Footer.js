@@ -8,22 +8,22 @@ import {Link} from "react-router-dom";
 
 
 export default function Footer() {
-    const [language, setLanguage] = useState();
-    const [brand, setBrand] = useState();
-    const [brandSlogan, setBrandSlogan] = useState();
-    const [brandSloganEng, setBrandSloganEng] = useState();
-    const [developedBy, setDevelopedBy] = useState();
-    const [rights, setRights] = useState();
-    const [address, setAddress] = useState();
-    const [addressEng, setAddressEng] = useState();
-    const [phone1, setPhone1] = useState();
-    const [phone2, setPhone2] = useState();
-    const [email, setEmail] = useState();
-    const [telegram, setTelegram] = useState();
-    const [whatsapp, setWhatsapp] = useState();
-    const [linkedin, setLinkedin] = useState();
-    const [instagram, setInstagram] = useState();
-    const [youtube, setYoutube] = useState();
+    const [language, setLanguage] = useState("");
+    const [brand, setBrand] = useState("");
+    const [brandSlogan, setBrandSlogan] = useState("");
+    const [brandSloganEng, setBrandSloganEng] = useState("");
+    const [developedBy, setDevelopedBy] = useState("");
+    const [rights, setRights] = useState("");
+    const [address, setAddress] = useState("");
+    const [addressEng, setAddressEng] = useState("");
+    const [phone1, setPhone1] = useState("");
+    const [phone2, setPhone2] = useState("");
+    const [email, setEmail] = useState("");
+    const [telegram, setTelegram] = useState("");
+    const [whatsapp, setWhatsapp] = useState("");
+    const [linkedin, setLinkedin] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [youtube, setYoutube] = useState("");
     const [links, setLinks] = useState([]);
     const categories = getCategoriesJson();
 
@@ -113,33 +113,33 @@ export default function Footer() {
             <div>
                 <div className="container">
                     <div className="row py-4 d-flex align-items-center">
-                        <div className="col-md-6 col-lg-6 text-center text-md-right mb-4 mb-md-0">
-                            <h5 className="mb-0">{brand}</h5>
+                        <div className="col-12 change-text mb-4 mb-md-0">
+                            <h5 className="mx-3 mb-3">{brand}</h5>
                         </div>
 
-                        <div className="col-md-6 col-lg-6 text-center text-md-left social-medias">
+                        <div className="col-12 text-center text-md-left social-medias">
 
-                            <a href={telegram} className="fb-ic sm-icon ml-md-3">
+                            <a href={telegram} className="fb-ic sm-icon mx-md-3">
                                 <i className="fab fa-telegram-plane white-text"> </i>
                             </a>
 
-                            <a href={whatsapp} className="fb-ic sm-icon ml-md-3">
+                            <a href={whatsapp} className="fb-ic sm-icon mx-md-3">
                                 <i className="fab fa-whatsapp white-text"> </i>
                             </a>
 
-                            <a href={instagram} className="tw-ic sm-icon ml-md-3">
+                            <a href={instagram} className="tw-ic sm-icon mx-md-3">
                                 <i className="fab fa-instagram white-text"> </i>
                             </a>
 
-                            <a href={linkedin} className="gplus-ic sm-icon ml-md-3">
+                            <a href={linkedin} className="gplus-ic sm-icon mx-md-3">
                                 <i className="fab fa-linkedin-in white-text"> </i>
                             </a>
 
-                            <a href={youtube} className="tw-ic sm-icon ml-md-3">
+                            <a href={youtube} className="tw-ic sm-icon mx-md-3">
                                 <i className="fab fa-youtube white-text"> </i>
                             </a>
 
-                            <a href={"mailto:"+email} className="gplus-ic sm-icon ml-md-3">
+                            <a href={"mailto:"+email} className="gplus-ic sm-icon mx-md-3">
                                 <i className="fa fa-envelope white-text"> </i>
                             </a>
                         </div>
@@ -154,7 +154,7 @@ export default function Footer() {
                     {
                         categories.map((categoryItem) => (
                             <div
-                                className="col-md-6 text-center text-lg-left  col-lg-2 col-xl-2 mx-auto mb-4 change-text change-dir">
+                                className="col-md-6 text-center text-lg-left  col-lg-4 col-xl-3 mx-auto mb-4 change-text change-dir">
                                 <h6 className="font-weight-bold mb-3">{language === 'fa' ? categoryItem.name : categoryItem.engName}</h6>
                                 {
                                     links.map((linkItem) => (
@@ -170,7 +170,7 @@ export default function Footer() {
                     }
 
                     <div
-                        className="col-md-6 text-center text-lg-right  col-lg-3 col-xl-4 mb-4 text-white">
+                        className="col-md-6 text-center text-lg-right  col-lg-4 col-xl-3 mb-4 text-white">
                         <p className="address-footer change-text px-3 pb-3 text-white font-weight-bold">{language === 'fa' ? brandSlogan : brandSloganEng}</p>
                         { phone1 != null && phone1 !== "" &&
                         <p className="address-footer change-dir change-text">
@@ -201,12 +201,12 @@ export default function Footer() {
                     {/*<div className="col-lg-4 col-md mt-lg-0 my-2">*/}
                     {/*    <span>Terms of service</span>*/}
                     {/*</div>*/}
-                    <div className="col-lg-3 col-12 mt-lg-0 my-2">
+                    <div className="col-12 mt-lg-0 my-2">
                         <span>{developedBy}</span>
-                    </div>
-                    <div className="col-12 col-lg-9 mt-lg-0 my-2">
+                        <br/>
                         <span>{rights}</span>
                     </div>
+
                 </div>
             </div>
         </footer>

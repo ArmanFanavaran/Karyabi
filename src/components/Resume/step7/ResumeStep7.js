@@ -501,13 +501,15 @@ export default function ResumeStep7() {
                 console.log(JSON.parse(response.data.data.skillInfoListJson))
                 // let data=JSON.parse(response.data.data.skillInfoListJson);
 
-                if (response.data.data.languageInfoListJson.length !== 0) {
+                if (response.data.data.languageInfoListJson.size !== 0) {
+                    console.log("Ener")
                     let skillInfoList = JSON.parse(response.data.data.skillInfoListJson)
                     // IsSoftWare
                     let data = []
                     skillInfoList.forEach(function (i) {
                         if ((i.AreaOfInterestEnglish !== null && i.AreaOfInterestEnglish.IsSoftWare === false) || (i.AreaOfInterestPersian !== null && i.AreaOfInterestPersian.IsSoftWare === false)) {
                             data.push(i)
+                            console.log(i)
                         }
                     });
                     data.sort(function (a, b) {

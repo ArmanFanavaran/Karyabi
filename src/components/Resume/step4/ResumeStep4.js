@@ -22,7 +22,7 @@ import addImg from "./imgs/add.svg";
 import minus from "./imgs/minus.svg";
 import Modal from 'react-modal';
 import guide from "./imgs/guide.png"
-
+import Select from "react-select";
 
 export default function ResumeStep4() {
     var moment = require("moment-jalaali");
@@ -31,12 +31,16 @@ export default function ResumeStep4() {
     let [resume, setResume] = useState("");
     const [items, setItems] = React.useState([]);
     const [editItems, setEditItems] = React.useState([]);
+    const [countryEditName, setCountryEditName] = React.useState([]);
     const [editItemsIndex, setEditItemsIndex] = React.useState([]);
-    let [country, setCountry] = useState([]);
+    let [countryList, setCountryList] = useState([]);
+    let [countrySelect, setCountrySelect] = useState([]);
     let [uniType, setUniType] = useState([]);
-    let [uni, setUni] = useState([]);
+    let [uniList, setUniList] = useState([]);
+    let [uniSelect, setUniSelect] = useState(0);
     let [degree, setDegree] = useState([]);
-    let [major, setMajor] = useState([]);
+    let [majorSelect, setMajorSelect] = useState(0);
+    let [majorList, setMajorList] = useState([]);
     let [loading, setLoading] = useState(false);
     let [endDateStatus, setEndDateStatus] = useState(false);
     let [add, setAdd] = useState(false);
@@ -208,7 +212,17 @@ export default function ResumeStep4() {
         axios(configCountry)
             .then(function (response) {
                 // console.log(JSON.stringify(response.data));
-                setCountry(response.data.data)
+                let countryList = response.data.data
+                // IsSoftWare
+                let data = []
+                countryList.forEach(function (i) {
+                    let tmp;
+                    tmp = {value: i.id, label: i.name}
+
+                    data.push(tmp)
+
+                });
+                setCountryList(data)
             })
             .catch(function (error) {
                 // console.log(error);
@@ -239,7 +253,22 @@ export default function ResumeStep4() {
         axios(configUnivercityList)
             .then(function (response) {
                 // console.log(JSON.stringify(response.data.data));
-                setUni(response.data.data)
+                // console.log(JSON.stringify(response.data.data));
+                let uniList = response.data.data
+                // IsSoftWare
+                let data = []
+                uniList.forEach(function (i) {
+                    let tmp;
+                    if (sp.get("lang") === "fa") {
+                        tmp = {value: i.id, label: i.name}
+                    } else {
+                        tmp = {value: i.id, label: i.englishName}
+                    }
+
+                    data.push(tmp)
+
+                });
+                setUniList(data)
             })
             .catch(function (error) {
                 // console.log(error);
@@ -266,33 +295,48 @@ export default function ResumeStep4() {
 
     function onSubmitAdd() {
         setLoading(true)
+
+        var EndDate = new Date(newEDate)
+        var dd = String(EndDate.getDate()).padStart(2, '0');
+        var mm = String(EndDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = EndDate.getFullYear();
+        EndDate = yyyy + '-' + mm + '-' + dd;
+
+        var SDate = new Date(newSDate);// x is now a date object
+
+        var dd = String(SDate.getDate()).padStart(2, '0');
+        var mm = String(SDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = SDate.getFullYear();
+        SDate = yyyy + '-' + mm + '-' + dd;
+
+
         if (add) {
             let total = 0;
             if ($('#totalAverageVal').val() !== null && $('#totalAverageVal').val() !== "" && $('#totalAverageVal').val() !== NaN) {
                 total = parseFloat($('#totalAverageVal').val())
             }
-            console.log(total)
+
 
             var data = JSON.stringify({
                 "id": parseInt(resumeId),
-                "countryName": $('#countryName').val(),
+                "countryName": countrySelect,
                 "completeInfoPersian": $('#completeInfoPersian').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
                 "majorNamePersian": $('#majorNamePersian').val(),
                 "majorNameEnglish": $('#majorNameEnglish').val(),
                 "totalAverage": total,
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "isEducation": document.getElementById("isEducation").checked === true,
                 "degreeId": parseInt($('#DegreeId').val()),
-                "majorId": $('#MajorId').val() !== null ? parseInt($('#MajorId').val()) : 0,
-                "uniId": parseInt($('#uniId').val()),
+                "majorId": majorSelect !== null ? parseInt(majorSelect) : 0,
+                "uniId": parseInt(uniSelect),
                 "uniTypeId": $('#uniTypeId').val() !== null ? parseInt($('#uniTypeId').val()) : 0,
                 "uniNamePersian": $('#uniNamePersian').val(),
                 "uniNameEnglish": $('#uniNameEnglish').val(),
 
             });
-            // console.log(data)
+            console.log(data)
             var config = {
                 method: 'post',
                 url: generateURL('/Resume/AddEducationInfoSTP4'),
@@ -339,18 +383,18 @@ export default function ResumeStep4() {
             console.log(total)
             var data = JSON.stringify({
                 "id": parseInt(editItems.Id),
-                "countryName": $('#countryName').val(),
+                "countryName": countrySelect,
                 "completeInfoPersian": $('#completeInfoPersian').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
                 "majorNamePersian": $('#majorNamePersian').val(),
                 "majorNameEnglish": $('#majorNameEnglish').val(),
                 "totalAverage": total,
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "isEducation": document.getElementById("isEducation").checked === true,
                 "degreeId": parseInt($('#DegreeId').val()),
-                "majorId": $('#MajorId').val() !== null ? parseInt($('#MajorId').val()) : 0,
-                "uniId": parseInt($('#uniId').val()),
+                "majorId": majorSelect !== null ? parseInt(majorSelect) : 0,
+                "uniId": parseInt(uniSelect),
                 "uniTypeId": $('#uniTypeId').val() !== null ? parseInt($('#uniTypeId').val()) : 0,
                 "uniNamePersian": $('#uniNamePersian').val(),
                 "uniNameEnglish": $('#uniNameEnglish').val(),
@@ -403,7 +447,12 @@ export default function ResumeStep4() {
 /////// Date function /////
     const onSubmitSDate = (value) => {
         // let date = value._i.slice(11, value._i.length);
+        // setNewSDate(value.slice(0,value.indexOf("T")))
         setNewSDate(value)
+        // console.log(value.toString())
+        // // let value23 =value.toString().slice(0,value.toString.indexOf("T"))
+        // console.log(value)
+        // // console.log(value23)
     }
 
 /////// Date function /////
@@ -431,7 +480,21 @@ export default function ResumeStep4() {
         axios(configDegreeList)
             .then(function (response) {
                 // console.log(JSON.stringify(response.data.data));
-                setMajor(response.data.data)
+                let majorList = response.data.data
+                // IsSoftWare
+                let data = []
+                majorList.forEach(function (i) {
+                    let tmp;
+                    if (sp.get("lang") === "fa") {
+                        tmp = {value: i.id, label: i.name}
+                    } else {
+                        tmp = {value: i.id, label: i.englishName}
+                    }
+
+                    data.push(tmp)
+
+                });
+                setMajorList(data)
             })
             .catch(function (error) {
                 // console.log(error);
@@ -454,7 +517,21 @@ export default function ResumeStep4() {
         axios(configDegreeList)
             .then(function (response) {
                 // console.log(JSON.stringify(response.data.data));
-                setMajor(response.data.data)
+                let majorList = response.data.data
+                // IsSoftWare
+                let data = []
+                majorList.forEach(function (i) {
+                    let tmp;
+                    if (sp.get("lang") === "fa") {
+                        tmp = {value: i.id, label: i.name}
+                    } else {
+                        tmp = {value: i.id, label: i.englishName}
+                    }
+
+                    data.push(tmp)
+
+                });
+                setMajorList(data)
             })
             .catch(function (error) {
                 // console.log(error);
@@ -544,6 +621,14 @@ export default function ResumeStep4() {
         // console.log(items[index])
         setEditItemsIndex(index)
         setEditItems(items[index])
+
+        console.log(countryList)
+        countryList.forEach((val) => {
+            console.log("sasa")
+            if (val.label === items[index].CountryName) {
+                setCountryEditName(val.label)
+            }
+        });
         if (items[index].isEducation) {
             setEndDateStatus(false)
         } else {
@@ -574,7 +659,7 @@ export default function ResumeStep4() {
         $('#submitAdd').removeClass('d-none')
         $('#submitEdit').addClass('d-none')
         setEditItems([])
-        setMajor([])
+        setMajorSelect([])
         setSDate(moment(today, 'YYYY/M/D'))
         setNewSDate(moment(today, 'YYYY/M/D'))
         setEDate(moment(today, 'YYYY/M/D'))
@@ -649,7 +734,7 @@ export default function ResumeStep4() {
         axios(config)
             .then(function (response) {
                 closeModalLoading()
-                // console.log(response.data.data.educationInfoListJson)
+                console.log(response.data.data.educationInfoListJson)
                 setResumeId(response.data.data.id)
                 if (response.data.data.educationInfoListJson.length !== 0) {
                     let educationList = JSON.parse(response.data.data.educationInfoListJson)
@@ -673,6 +758,19 @@ export default function ResumeStep4() {
             })
             .catch(function (error) {
             });
+    }
+
+    //// Handel Select ///
+    function majorSelectFunc(data) {
+        setMajorSelect(data.value);
+    }
+
+    function uniSelectFunc(data) {
+        setUniSelect(data.value);
+    }
+
+    function countrySelectFunc(data) {
+        setCountrySelect(data.label);
     }
 
     return (
@@ -800,12 +898,12 @@ export default function ResumeStep4() {
                                                                 {sp.get("lang") === "en" ?
                                                                     <p className="mt-2 change-text">
 
-                                                                        {moment(value.SDate).format('YYYY')} - {value.isEducation ? "Present" : moment(value.EDate).format('YYYY')}
+                                                                        {moment(value.SDate).format('YYYY/M')} to {value.isEducation ? "Present" : moment(value.EDate).format('YYYY/M')}
 
                                                                     </p> :
                                                                     <p className="mt-2 change-text">
 
-                                                                        {moment(value.SDate).format('jYYYY')} - {value.isEducation ? "تاکنون (درحال تحصیل)" : moment(value.EDate).format('jYYYY')}
+                                                                        {moment(value.SDate).format('jYYYY/jM')} تا {value.isEducation ? "تاکنون (درحال تحصیل)" : moment(value.EDate).format('jYYYY/jM')}
 
                                                                     </p>
                                                                 }
@@ -874,7 +972,8 @@ export default function ResumeStep4() {
                                                         <label htmlFor=""
                                                                className="">{t("resume.step4.degree")}</label>
                                                     </div>
-                                                    <div className={Style.selectPart + " col-12 "}>
+
+                                                    <div className={Style.selectPart + " col-12 form-group"}>
                                                         <select onChange={(event) => onGetMajor(event.target)}
                                                                 id={'DegreeId'}
                                                                 className={Style.formSelect}
@@ -903,19 +1002,32 @@ export default function ResumeStep4() {
                                                     </div>
                                                     <div className={Style.selectPart + " col-12 "}>
 
-                                                        <select id={'MajorId'} className={Style.formSelect}
-                                                                aria-label="Default select example">
-                                                            {major !== undefined && major.map((value, index) => (
-                                                                <option selected={editItems.MajorId === value.id}
-                                                                        value={value.id}>
-                                                                    {sp.get("lang") === "fa" ?
-                                                                        value.name :
-                                                                        value.englishName
-                                                                    }
-                                                                </option>
-                                                            ))
+                                                        <div className={" col-12 form-group"}>
+
+                                                            {sp.get("lang") === "fa" ?
+                                                                <Select
+                                                                    options={majorList}
+                                                                    placeholder="دانشگاه را انتخاب کنید"
+                                                                    isSearchable={true}
+                                                                    onChange={majorSelectFunc}
+                                                                    defaultValue={{
+                                                                        value: editItems.MajorId,
+                                                                        label: editItems.MajorString
+                                                                    }}
+                                                                /> :
+
+                                                                <Select
+                                                                    options={majorList}
+                                                                    placeholder="Select Major"
+                                                                    isSearchable={true}
+                                                                    onChange={majorSelectFunc}
+                                                                    defaultValue={{
+                                                                        value: editItems.MajorId,
+                                                                        label: editItems.MajorString
+                                                                    }}
+                                                                />
                                                             }
-                                                        </select>
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -970,24 +1082,46 @@ export default function ResumeStep4() {
                                                                className="">{t("resume.step4.university")}</label>
                                                     </div>
                                                     <div className={Style.selectPart + " col-12 "}>
-                                                        <select id={'uniId'} className={Style.formSelect}
-                                                                aria-label="Default select example">
+                                                        {/*<select id={'uniId'} className={Style.formSelect}*/}
+                                                        {/*        aria-label="Default select example">*/}
 
-                                                            <option
-                                                                value={0}>
-                                                                {t("resume.step4.select")}
-                                                            </option>
-                                                            {uni !== undefined && uni.map((value, index) => (
-                                                                <option selected={editItems.UniId === value.id}
-                                                                        value={value.id}>
-                                                                    {sp.get("lang") === "fa" ?
-                                                                        value.name :
-                                                                        value.englishName
-                                                                    }
-                                                                </option>
-                                                            ))
-                                                            }
-                                                        </select>
+                                                        {/*    <option*/}
+                                                        {/*        value={0}>*/}
+                                                        {/*        {t("resume.step4.select")}*/}
+                                                        {/*    </option>*/}
+                                                        {/*    {uni !== undefined && uni.map((value, index) => (*/}
+                                                        {/*        <option selected={editItems.UniId === value.id}*/}
+                                                        {/*                value={value.id}>*/}
+                                                        {/*            {sp.get("lang") === "fa" ?*/}
+                                                        {/*                value.name :*/}
+                                                        {/*                value.englishName*/}
+                                                        {/*            }*/}
+                                                        {/*        </option>*/}
+                                                        {/*    ))*/}
+                                                        {/*    }*/}
+                                                        {/*</select>*/}
+                                                        {sp.get("lang") === "fa" ?
+                                                            <Select
+                                                                options={uniList}
+                                                                placeholder="دانشگاه را انتخاب کنید"
+                                                                isSearchable={true}
+                                                                onChange={uniSelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.UniId,
+                                                                    label: editItems.UniString
+                                                                }}
+                                                            /> :
+                                                            <Select
+                                                                options={uniList}
+                                                                placeholder="Select University"
+                                                                isSearchable={true}
+                                                                onChange={uniSelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.UniId,
+                                                                    label: editItems.UniString
+                                                                }}
+                                                            />
+                                                        }
 
                                                     </div>
                                                 </div>
@@ -1129,22 +1263,28 @@ export default function ResumeStep4() {
                                                                className="">{t("resume.step4.country")}</label>
                                                     </div>
                                                     <div className={Style.selectPart + " col-12 "}>
-                                                        <select id={'countryName'} className={Style.formSelect}
-                                                                aria-label="Default select example">
-                                                            <option
-                                                                value={0}>
-                                                                {t("resume.step4.select")}
-                                                            </option>
-                                                            {country !== undefined && country.map((value, index) => (
-                                                                <option selected={editItems.CountryName === value.name}
-                                                                        value={value.name}>
-                                                                    {
-                                                                        value.name
-                                                                    }
-                                                                </option>
-                                                            ))
-                                                            }
-                                                        </select>
+                                                        {sp.get("lang") === "fa" ?
+                                                            <Select
+                                                                options={countryList}
+                                                                placeholder="کشور را انتخاب کنید"
+                                                                isSearchable={true}
+                                                                onChange={countrySelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.CountryName,
+                                                                    label: countryEditName
+                                                                }}
+                                                            /> :
+                                                            <Select
+                                                                options={countryList}
+                                                                placeholder="Select Country"
+                                                                isSearchable={true}
+                                                                onChange={countrySelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.CountryName,
+                                                                    label: countryEditName
+                                                                }}
+                                                            />
+                                                        }
 
                                                     </div>
                                                 </div>
@@ -1156,7 +1296,8 @@ export default function ResumeStep4() {
                                                                className="">{t("resume.step4.totalAverage")}</label>
                                                     </div>
                                                     <div className={"col-12 " + Style.input}>
-                                                        <input defaultValue={editItems.TotalAverage} id={'totalAverageVal'}
+                                                        <input defaultValue={editItems.TotalAverage}
+                                                               id={'totalAverageVal'}
                                                                type="text"
                                                                className="form-control dir-ltr"/>
                                                     </div>

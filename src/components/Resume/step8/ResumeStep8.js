@@ -25,6 +25,7 @@ import minus from "./imgs/minus.svg";
 import DatePicker from "react-datepicker2";
 import Modal from "react-modal";
 import guide from "./imgs/guide.png"
+import Select from "react-select";
 
 export default function ResumeStep8() {
     var moment = require("moment-jalaali");
@@ -35,7 +36,8 @@ export default function ResumeStep8() {
     let [add, setAdd] = useState(false);
     const [editItems, setEditItems] = React.useState([]);
     const [editItemsIndex, setEditItemsIndex] = React.useState([]);
-    const [jobCategory, setJobCategory] = React.useState([]);
+    const [jobCategoryList, setJobCategoryList] = React.useState([]);
+    const [jobCategorySelect, setJobCategorySelect] = React.useState([]);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -251,9 +253,21 @@ export default function ResumeStep8() {
         };
         axios(config)
             .then(function (response) {
-                console.log(response.data.data)
-                setJobCategory(response.data.data)
+                let categoryList = response.data.data
+                // IsSoftWare
+                let data = []
+                categoryList.forEach(function (i) {
+                    let tmp;
+                    if (sp.get("lang") === "fa") {
+                        tmp = {value: i.id, label: i.name}
+                    } else {
+                        tmp = {value: i.id, label: i.englishName}
+                    }
 
+                    data.push(tmp)
+
+                });
+                setJobCategoryList(data)
 
             })
             .catch(function (error) {
@@ -263,6 +277,19 @@ export default function ResumeStep8() {
 
     function onSubmitAdd() {
         setLoading(true)
+        var EndDate = new Date(newEDate)
+        var dd = String(EndDate.getDate()).padStart(2, '0');
+        var mm = String(EndDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = EndDate.getFullYear();
+        EndDate = yyyy + '-' + mm + '-' + dd;
+
+        var SDate = new Date(newSDate);// x is now a date object
+
+        var dd = String(SDate.getDate()).padStart(2, '0');
+        var mm = String(SDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = SDate.getFullYear();
+        SDate = yyyy + '-' + mm + '-' + dd;
+
         if (add) {
             var data = JSON.stringify({
                 "id": parseInt(resumeId),
@@ -270,16 +297,16 @@ export default function ResumeStep8() {
                 "instituteNameEnglish": $('#instituteNameEnglish').val(),
                 "position": $('#position').val(),
                 "positionEnglish": $('#positionEnglish').val(),
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
-                "isWorking": ($("#isWorking").val() === 'true'),
+                "isWorking": document.getElementById("isWorking").checked === true,
                 "isNewComer": seniority.isNewComer,
                 "isExpert":  seniority.isExpert,
                 "isManager":  seniority.isManager,
                 "isChief":  seniority.isChief,
-                "jobCategoryId": parseInt($('#jobCategoryId').val()),
+                "jobCategoryId": parseInt(jobCategorySelect),
             });
             console.log(data)
             var config = {
@@ -328,16 +355,16 @@ export default function ResumeStep8() {
                 "instituteNameEnglish": $('#instituteNameEnglish').val(),
                 "position": $('#position').val(),
                 "positionEnglish": $('#positionEnglish').val(),
-                "sDate": newSDate,
-                "eDate": newEDate,
+                "sDate": SDate,
+                "eDate": EndDate,
                 "completeInfo": $('#completeInfo').val(),
                 "completeInfoEnglish": $('#completeInfoEnglish').val(),
-                "isWorking": ($("#isWorking").val() === 'true'),
+                "isWorking":  document.getElementById("isWorking").checked === true,
                 "isNewComer": seniority.isNewComer,
                 "isExpert":  seniority.isExpert,
                 "isManager":  seniority.isManager,
                 "isChief":  seniority.isChief,
-                "jobCategoryId": parseInt($('#jobCategoryId').val()),
+                "jobCategoryId": parseInt(jobCategorySelect),
             });
             console.log(data)
             var config = {
@@ -615,6 +642,10 @@ export default function ResumeStep8() {
             }
         )
     }
+
+    function categorySelectFunc(data) {
+        setJobCategorySelect(data.value);
+    }
     return (
         <div>
             <main className={Style.main}>
@@ -698,7 +729,7 @@ export default function ResumeStep8() {
                                                     </div>
                                                     <div className="col-xl-11 col-lg-11 col-md-10 col-10">
                                                         <div className="row my-1">
-                                                            <div className="col-12 col-md-6 change-text">
+                                                            <div className="col-12 change-text">
                                                                 {
                                                                     sp.get("lang") === "en" ?
                                                                         <p className="text-left mt-3 text-muted">
@@ -706,14 +737,14 @@ export default function ResumeStep8() {
                                                                             <br/>
                                                                             {value.InstituteNameEnglish}
                                                                             <br/>
-                                                                            {moment(value.SDate).format('YYYY')} - {value.isWorking ? "Present" : moment(value.EDate).format('YYYY')}
+                                                                            {moment(value.SDate).format('YYYY/M')} - {value.isWorking ? "Present" : moment(value.EDate).format('YYYY/M')}
                                                                         </p>
                                                                         : <p className="text-right mt-3 text-muted">
                                                                             {value.Position}
                                                                             <br/>
                                                                             {value.InstituteName}
                                                                             <br/>
-                                                                            {moment(value.SDate).format('jYYYY')} - {value.isWorking ? "تاکنون (مشغول به کار)" : moment(value.EDate).format('jYYYY')}
+                                                                            {moment(value.SDate).format('jYYYY/jM')} - {value.isWorking ? "تاکنون (مشغول به کار)" : moment(value.EDate).format('jYYYY/jM')}
 
                                                                         </p>
                                                                 }
@@ -727,28 +758,6 @@ export default function ResumeStep8() {
 
 
                                                                     </p>
-                                                                }
-                                                            </div>
-                                                            <div className={'col-12 col-md-6'}>
-                                                                {
-                                                                    sp.get("lang") === "en" ?
-                                                                        <p className="text-right dir-rtl mt-3 text-muted">
-                                                                            {value.Position}
-                                                                            <br/>
-                                                                            {value.InstituteName}
-                                                                            <br/>
-                                                                            {moment(value.SDate).format('jYYYY')} - {value.isWorking ? "تاکنون (مشغول به کار)" : moment(value.EDate).format('jYYYY')}
-
-                                                                        </p>
-                                                                        : <p className="text-left mt-3 text-muted">
-                                                                            {value.PositionEnglish}
-                                                                            <br/>
-                                                                            {value.InstituteNameEnglish}
-                                                                            <br/>
-                                                                            <span>
-                                                                            {moment(value.SDate).format('YYYY')} - {value.isWorking ? "Present" : moment(value.EDate).format('YYYY')}
-                                                                            </span>
-                                                                        </p>
                                                                 }
                                                             </div>
                                                             <div className="col-12 change-text-reverse mt-2 mb-4">
@@ -886,19 +895,29 @@ export default function ResumeStep8() {
                                                                className="">{t("resume.step8.jobCategory")}</label>
                                                     </div>
                                                     <div className={Style.selectPart}>
-                                                        <select id={'jobCategoryId'} className={Style.formSelect}
-                                                                aria-label="Default select example">
-                                                            {jobCategory !== undefined && jobCategory.map((value, index) => (
-                                                                <option selected={editItems.JobCategoryId == value.id}
-                                                                        value={value.id}>
-                                                                    {sp.get("lang") === "fa" ?
-                                                                        value.name :
-                                                                        value.englishName
-                                                                    }
-                                                                </option>
-                                                            ))
-                                                            }
-                                                        </select>
+                                                        {sp.get("lang") === "fa" ?
+                                                            <Select
+                                                                options={jobCategoryList}
+                                                                placeholder="دسته بندی شغلی را انتخاب کنید"
+                                                                isSearchable={true}
+                                                                onChange={categorySelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.JobCategoryId,
+                                                                    label: editItems.JobCategoryString
+                                                                }}
+                                                            /> :
+                                                            <Select
+                                                                options={jobCategoryList}
+                                                                placeholder="Select Job category"
+                                                                isSearchable={true}
+                                                                onChange={categorySelectFunc}
+                                                                defaultValue={{
+                                                                    value: editItems.JobCategoryId,
+                                                                    label: editItems.JobCategoryString
+                                                                }}
+                                                            />
+                                                        }
+
 
                                                     </div>
                                                 </div>
@@ -986,8 +1005,8 @@ export default function ResumeStep8() {
                                                 <div className="col-md-4 col-12 py-2 change-dir change-text pt-5">
                                                     <div className="form-check px-3">
                                                         <input onClick={hideEndDate} className="form-check-input"
-                                                               type="checkbox" value="true"
-                                                               id="isWorking" checked={editItems.isWorking}/>
+                                                               type="checkbox"
+                                                               id="isWorking" defaultChecked={editItems.isWorking}/>
                                                         <label className="form-check-label px-3" htmlFor="isWorking">
                                                             {t("resume.step8.isWorking")}
                                                         </label>

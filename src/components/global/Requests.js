@@ -1,10 +1,10 @@
 import * as queryString from "query-string";
 
 ///// Local /////
-var cookies_domain = null;
+// var cookies_domain = null;
 
 //// Server /////
-// var cookies_domain = ".ceunion.ir";
+var cookies_domain = ".ceunion.ir";
 
 var domain_url = "https://karyabiapi.ceunion.ir/";
 var domain_AdminURL = "https://admin.ceunion.ir/";
