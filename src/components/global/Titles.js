@@ -22,7 +22,7 @@ export function initializeTitles() {
     // });
 
     if (title !== "") {
-        document.title = "کاریابی دانشگاه خلیج فارس | " + title;
+        document.title = "پُل حُبابی | " + title;
         document.getElementById("nav-title").innerText = title;
         document.getElementById("nav-sm-title").innerText = title;
     }
@@ -40,13 +40,13 @@ export function initializeTitlesWithValue(title) {
     const queryStringes = queryString.parse(window.location.search);
     const sp = new URLSearchParams(queryStringes);
     if (sp.get("lang") == "en") {
-        document.title = "Persian Gulf University job search | " + title;
-        document.querySelector('meta[property="og:title"]').setAttribute("content", "Persian Gulf University job search |");
+        document.title = "Bubbly Bridge | " + title;
+        document.querySelector('meta[property="og:title"]').setAttribute("content", "Bubbly Bridge |");
         document.querySelector('meta[property="og:description"]').setAttribute("content", title);
         document.querySelector('meta[name="description"]').setAttribute("content", title);
     } else {
-        document.title = "کاریابی دانشگاه خلیج فارس | " + title;
-        document.querySelector('meta[property="og:title"]').setAttribute("content", "کاریابی دانشگاه خلیج فارس |");
+        document.title = "پُل حُبابی | " + title;
+        document.querySelector('meta[property="og:title"]').setAttribute("content", "پُل حُبابی |");
         document.querySelector('meta[property="og:description"]').setAttribute("content", title);
         document.querySelector('meta[name="description"]').setAttribute("content", title);
 
