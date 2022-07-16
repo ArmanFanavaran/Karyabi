@@ -4,6 +4,9 @@ const pages = {
     user: [
         {
             label: "متن صفحه اصلی",
+            template:"کارآموزی",
+            type:"نوع 1",
+            description:"این برای کاراموزی مرکز موبایل است",
             labelEng: "Hero list",
             pathname: getRoutesItems().HeroList.route ,
             iconClass: "bi bi-person-fill"

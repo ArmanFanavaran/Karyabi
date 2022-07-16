@@ -117,7 +117,7 @@ export default function Index() {
             <section className={Style.hero + " container"} dir="rtl">
                 <div className={Style.searchBox}>
                     <form>
-                        <div className="row ">
+                        <div className="row change-dir">
                             <div className="col-12 col-md-3 my-2">
                                 <input id={"skill_input"} type="text" className="form-control change-text change-dir" placeholder={t("index.skill")}/>
                             </div>
