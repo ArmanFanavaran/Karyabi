@@ -37,7 +37,7 @@ export default function ResumeStep8() {
     const [editItems, setEditItems] = React.useState([]);
     const [editItemsIndex, setEditItemsIndex] = React.useState([]);
     const [jobCategoryList, setJobCategoryList] = React.useState([]);
-    const [jobCategorySelect, setJobCategorySelect] = React.useState([]);
+    const [jobCategorySelect, setJobCategorySelect] = React.useState(null);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -504,8 +504,14 @@ export default function ResumeStep8() {
                 break;
             }
         }
-        console.log(index)
-        console.log(items[index])
+        $(jobCategoryList).each(function (i, item) {
+            if (item.value === items[index].JobCategoryId){
+                console.log(item)
+                setJobCategorySelect(item.value)
+                // setJobCategorySelect({label:item.label, value: item.value})
+
+            }
+        });
         setEditItemsIndex(index)
         setEditItems(items[index])
         if (items[index].isWorking) {
@@ -514,6 +520,7 @@ export default function ResumeStep8() {
             setEndDateStatus(true)
 
         }
+        console.log(items[index])
         setSeniority(
             {
                 isNewComer:items[index].IsNewComer,

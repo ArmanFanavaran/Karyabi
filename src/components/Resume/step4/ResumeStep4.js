@@ -380,6 +380,10 @@ export default function ResumeStep4() {
             if ($('#totalAverageVal').val() !== null && $('#totalAverageVal').val() !== "" && $('#totalAverageVal').val() !== NaN) {
                 total = parseFloat($('#totalAverageVal').val())
             }
+            console.log(countrySelect)
+            console.log(majorSelect)
+            console.log(uniSelect)
+
             console.log(total)
             var data = JSON.stringify({
                 "id": parseInt(editItems.Id),
@@ -501,7 +505,7 @@ export default function ResumeStep4() {
             });
 
     }
-    const onGetMajorWithId = (id) => {
+    const onGetMajorWithId = (id, index) => {
         // console.log(id)
         if (id === "2") {
             $("#uniId").prop("disabled", true);
@@ -529,6 +533,8 @@ export default function ResumeStep4() {
                     }
 
                     data.push(tmp)
+                    if (items[index].MajorId === i.id)
+                        setMajorSelect(i.id);
 
                 });
                 setMajorList(data)
@@ -618,15 +624,21 @@ export default function ResumeStep4() {
                 break;
             }
         }
-        // console.log(items[index])
+        console.log(items[index])
         setEditItemsIndex(index)
         setEditItems(items[index])
 
-        console.log(countryList)
         countryList.forEach((val) => {
-            console.log("sasa")
             if (val.label === items[index].CountryName) {
-                setCountryEditName(val.label)
+                setCountryEditName(val.label);
+                setCountrySelect(val.label);
+            }
+        });
+
+
+        uniList.forEach((val) => {
+            if (val.value === items[index].UniId) {
+                setUniSelect(val.value);
             }
         });
         if (items[index].isEducation) {
@@ -635,7 +647,7 @@ export default function ResumeStep4() {
             setEndDateStatus(true)
 
         }
-        onGetMajorWithId(items[index].MajorId)
+        onGetMajorWithId(items[index].MajorId, index)
         if (items[index].sDate !== "0001-01-01T00:00:00" && items[index].sDate !== null) {
             setSDate(moment(items[index].SDate, 'YYYY-MM-DD'))
         }

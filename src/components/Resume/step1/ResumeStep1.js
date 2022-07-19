@@ -36,9 +36,12 @@ export default function ResumeStep1() {
     var moment = require("moment-jalaali");
     const history = useHistory();
 
-    let [resume, setResume] = useState("");
+    const [language, setLanguage] = useState();
+    const [resume, setResume] = useState("");
     const [provincesList, setProvincesList] = useState([]);
     const [provincesSelect, setProvincesSelect] = useState([]);
+    const [defaultProvince, setDefaultProvince] = useState(null);
+    const [defaultCity, setDefaultCity] = useState(null);
     const [cityList, setCityList] = useState([]);
     const [citySelect, setCitySelect] = useState([]);
     const [CityId, setCityId] = useState("");
@@ -176,6 +179,8 @@ export default function ResumeStep1() {
     }
 
     useEffect(() => {
+        setLanguage(sp.get("lang"));
+        let default_province_id;
         openModalLoading()
         if (sp.get("lang") === "en") {
             initializeTitlesWithValue("Resume | Personal information")
@@ -200,10 +205,13 @@ export default function ResumeStep1() {
         let information;
         axios(config)
             .then(function (response) {
-                console.log(JSON.parse(response.data.data.userInfoJson))
                 setResumeId(response.data.data.id)
                 setResume(JSON.parse(response.data.data.userInfoJson))
                 information = JSON.parse(response.data.data.userInfoJson);
+                console.log("information")
+                console.log(information)
+                default_province_id = information.ProvinceId;
+
                 closeModalLoading()
                 if (information.Birthday !== "0001-01-01T00:00:00" && information.Birthday !== null) {
                     setDate(moment(information.Birthday, 'YYYY-MM-DD'))
@@ -237,7 +245,13 @@ export default function ResumeStep1() {
                         }
                         setProvincesList(data)
                         console.log(data)
-                        $.each(response.data.data, function (key, value) {
+                        $.each(provinceList, function (key, value) {
+                            if (default_province_id === value.id) {
+                                console.log(value)
+                                if (sp.get("lang") === 'fa')
+                                    setDefaultProvince({value: value.id, label: value.name})
+                                else setDefaultProvince({value: value.id, label: value.englishName})
+                            }
                             if (value.id === information.ProvinceId) {
                                 setCityId(value.id)
                                 getCityAPIWithoutEvent(value.id, information)
@@ -326,8 +340,8 @@ export default function ResumeStep1() {
             "birthday": date,
             "marriageStatus": parseInt($("#marriageStatus").val()),
             "miltaryStatus": parseInt($("#miltaryStatus").val()),
-            "province": parseInt(provincesSelect),
-            "city": parseInt($("#city").val()),
+            "province": provincesSelect,
+            "city": citySelect,
             "address": $('#address').val(),
             "addressEnglish": $('#addressEnglish').val(),
         });
@@ -390,6 +404,8 @@ export default function ResumeStep1() {
 
     ///// Get City List API  //////
     function getCityAPIWithoutEvent(id, information) {
+        let defaultCityId = information.CityId;
+        let defaultCityObject = null;
         var axios = require('axios');
 
         var config = {
@@ -407,16 +423,24 @@ export default function ResumeStep1() {
                         let tmp;
                         tmp = {value: i.id, label: i.name}
                         data.push(tmp)
+
+                        if (defaultCityId === i.id)
+                            defaultCityObject = {value: i.id, label: i.name};
+
                     });
                 } else {
                     cityList.forEach(function (i) {
                         let tmp;
                         tmp = {value: i.id, label: i.englishName}
                         data.push(tmp)
+
+                        if (defaultCityId === i.id)
+                            defaultCityObject = {value: i.id, label: i.englishName};
                     });
                 }
 
-                setCityList(data)
+                setCityList(data);
+                setDefaultCity(defaultCityObject);
 
             })
             .catch(function (error) {
@@ -426,14 +450,14 @@ export default function ResumeStep1() {
     }
 
     ///// Get City List API Event //////
-    function getCityAPI(event) {
+    function getCityAPI(provinceId) {
         var axios = require('axios');
 
-        var optionBack = $(event).find('option[value="' + event.value + '"]')
-        var id = $(optionBack).attr("idCity");
+        // var optionBack = $(event).find('option[value="' + event.value + '"]')
+        // var id = $(optionBack).attr("idCity");
         var config = {
             method: 'get',
-            url: generateURL('/SideArray/GetCitiesOfProvince?province_id=' + id),
+            url: generateURL('/SideArray/GetCitiesOfProvince?province_id=' + provinceId),
             headers: {}
         };
 
@@ -467,6 +491,8 @@ export default function ResumeStep1() {
 
     function provinceSelectFunc(data) {
         getCityAPI(data.value)
+        setDefaultProvince(data);
+        setDefaultCity(null);
         setProvincesSelect(data.value);
         // getCityAPIWithoutEvent(CityId)
 
@@ -474,6 +500,7 @@ export default function ResumeStep1() {
 
     function citySelectFunc(data) {
         // getCityAPI(data.value)
+        setDefaultCity(data);
         setCitySelect(data.value);
 
     }
@@ -675,10 +702,7 @@ export default function ResumeStep1() {
                                                         placeholder="استان را انتخاب کنید"
                                                         isSearchable={true}
                                                         onChange={provinceSelectFunc}
-                                                        defaultValue={{
-                                                            value: resume.ProvinceId,
-                                                            label: resume.ProvinceString
-                                                        }}
+                                                        value={defaultProvince}
                                                     /> :
 
                                                     <Select
@@ -686,10 +710,7 @@ export default function ResumeStep1() {
                                                         placeholder="Select Province"
                                                         isSearchable={true}
                                                         onChange={provinceSelectFunc}
-                                                        defaultValue={{
-                                                            value: resume.ProvinceId,
-                                                            label: resume.ProvinceString
-                                                        }}
+                                                        value={defaultProvince}
                                                     />
                                                 }
 
@@ -720,10 +741,7 @@ export default function ResumeStep1() {
                                                         placeholder="شهر را انتخاب کنید"
                                                         isSearchable={true}
                                                         onChange={citySelectFunc}
-                                                        defaultValue={{
-                                                            value: resume.CityId,
-                                                            label: resume.CityString
-                                                        }}
+                                                        value={defaultCity}
                                                     /> :
 
                                                     <Select
@@ -731,10 +749,8 @@ export default function ResumeStep1() {
                                                         placeholder="Select City"
                                                         isSearchable={true}
                                                         onChange={citySelectFunc}
-                                                        defaultValue={{
-                                                            value: resume.CityId,
-                                                            label: resume.CityString
-                                                        }}
+                                                        value={defaultCity}
+
                                                     />
                                                 }
                                             </div>
