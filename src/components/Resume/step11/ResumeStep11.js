@@ -286,14 +286,14 @@ export default function ResumeStep11() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -339,14 +339,14 @@ export default function ResumeStep11() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -385,14 +385,14 @@ export default function ResumeStep11() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -429,14 +429,14 @@ export default function ResumeStep11() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -537,22 +537,23 @@ export default function ResumeStep11() {
                 closeModalLoading()
                 setResumeId(response.data.data.id)
                 setResume(response.data.data)
-                console.log("Job Resume ")
-                console.log(JSON.parse(response.data.data.articleInfoListJson))
-                // let data=JSON.parse(response.data.data.skillInfoListJson);
 
-                if (response.data.data.honorInfoListJson.length !== 0) {
-                    let projectList = JSON.parse(response.data.data.articleInfoListJson)
+                let data = []
+                if (response.data.data.articleInfoListJson.length > 0) {
+                    data = JSON.parse(response.data.data.articleInfoListJson)
                     // IsSoftWare
-                    projectList.sort(function (a, b) {
+
+                }
+                if (data.length > 0) {
+
+                    data.sort(function (a, b) {
                         return a.Order - b.Order;
                     });
-                    console.log("worl")
-                    console.log(projectList)
-                    setItems(projectList)
+                    setItems(data)
                 } else {
                     setItems([])
                 }
+
 
             })
             .catch(function (error) {

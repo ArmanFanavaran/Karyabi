@@ -34,7 +34,7 @@ export default function ResumeStep4() {
     const [countryEditName, setCountryEditName] = React.useState([]);
     const [editItemsIndex, setEditItemsIndex] = React.useState([]);
     let [countryList, setCountryList] = useState([]);
-    let [countrySelect, setCountrySelect] = useState([]);
+    let [countrySelect, setCountrySelect] = useState("Iran");
     let [uniType, setUniType] = useState([]);
     let [uniList, setUniList] = useState([]);
     let [uniSelect, setUniSelect] = useState(0);
@@ -363,14 +363,14 @@ export default function ResumeStep4() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -430,14 +430,14 @@ export default function ResumeStep4() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -601,7 +601,7 @@ export default function ResumeStep4() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
@@ -671,7 +671,7 @@ export default function ResumeStep4() {
         $('#submitAdd').removeClass('d-none')
         $('#submitEdit').addClass('d-none')
         setEditItems([])
-        setMajorSelect([])
+        setMajorSelect(0)
         setSDate(moment(today, 'YYYY/M/D'))
         setNewSDate(moment(today, 'YYYY/M/D'))
         setEDate(moment(today, 'YYYY/M/D'))

@@ -123,11 +123,13 @@ export default function ResumeStep6() {
         document.body.style.overflow = 'hidden';
 
     }
+
     function closeModalGuide() {
         setIsOpenGuide(false);
         document.body.style.overflow = 'visible';
 
     }
+
 // Modal.setAppElement('#yourAppElement');
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -206,6 +208,7 @@ export default function ResumeStep6() {
         setLoading(false)
 
     }
+
     var axios = require('axios');
     axios.defaults.withCredentials = true;
 
@@ -225,7 +228,7 @@ export default function ResumeStep6() {
 
         axios(configLanguageList)
             .then(function (response) {
-                console.log(JSON.stringify(response.data.data));
+                // console.log(JSON.stringify(response.data.data));
                 setLanguage(response.data.data)
             })
             .catch(function (error) {
@@ -246,7 +249,7 @@ export default function ResumeStep6() {
                 "areaOfInterestEnglishString": $('#skillName').val(),
                 "isSoftware": true,
             });
-            console.log(data)
+            // console.log(data)
             var config = {
                 method: 'post',
                 url: generateURL('/Resume/AddSkillInfoSTP6'),
@@ -274,19 +277,19 @@ export default function ResumeStep6() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
                 });
-        }else {
+        } else {
             var data = JSON.stringify({
                 "id": parseInt(editItems.Id),
                 "level": parseInt(rating),
@@ -294,7 +297,7 @@ export default function ResumeStep6() {
                 "areaOfInterestEnglishString": $('#skillName').val(),
                 "isSoftware": true,
             });
-            console.log(data)
+            // console.log(data)
             var config = {
                 method: 'post',
                 url: generateURL('/Resume/UpdateSkillInfoSTP6'),
@@ -321,14 +324,14 @@ export default function ResumeStep6() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -347,7 +350,7 @@ export default function ResumeStep6() {
             "sourceSideEntityId": parseInt(source),
             "destSideEntityId": parseInt(destination)
         });
-        console.log(data)
+        // console.log(data)
         var config = {
             method: 'post',
             url: generateURL('/Resume/ChangeSkillInfoOrderSTP6'),
@@ -368,14 +371,14 @@ export default function ResumeStep6() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -411,14 +414,14 @@ export default function ResumeStep6() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -434,7 +437,7 @@ export default function ResumeStep6() {
                 break;
             }
         }
-        console.log(index)
+        // console.log(index)
         setEditItemsIndex(index)
         setEditItems(items[index])
         // $('#skillName').val(items[index].AreaOfInterestEnglish.Name)
@@ -481,7 +484,7 @@ export default function ResumeStep6() {
 
     const onRatingChange = val => {
         setRating(val);
-        console.log(val)
+        // console.log(val)
     };
 
     ///// Get Resume ///////
@@ -503,23 +506,25 @@ export default function ResumeStep6() {
         let information;
         axios(config)
             .then(function (response) {
-                console.log("Hi baby")
                 closeModalLoading()
-                console.log(response.data.data)
                 setResumeId(response.data.data.id)
                 setResume(response.data.data)
-                console.log(JSON.parse(response.data.data.skillInfoListJson))
-                // let data=JSON.parse(response.data.data.skillInfoListJson);
-
-                if (response.data.data.skillInfoListJson.size !== 0) {
+                let data = []
+                if (response.data.data.skillInfoListJson.length > 0) {
                     let skillInfoList = JSON.parse(response.data.data.skillInfoListJson)
                     // IsSoftWare
-                    let data=[]
-                    skillInfoList.forEach(function(i){
-                        if((i.AreaOfInterestEnglish !==null && i.AreaOfInterestEnglish.IsSoftWare===true)){
-                            data.push(i)
-                        }
-                    });
+
+                    if (skillInfoList.length > 0) {
+
+                        skillInfoList.forEach(function (i) {
+                            if ((i.AreaOfInterestEnglish !== null && i.AreaOfInterestEnglish.IsSoftWare === true)) {
+                                data.push(i)
+                            }
+                        });
+                    }
+                }
+                if (data.length > 0) {
+
                     data.sort(function (a, b) {
                         return a.Order - b.Order;
                     });
@@ -536,7 +541,7 @@ export default function ResumeStep6() {
     //// Active Level Shown /////
     const onActiveLevel = (bool) => {
         setLoading(true)
-        console.log(bool)
+        // console.log(bool)
         var data = JSON.stringify({
             "id": parseInt(resumeId),
             "levelShown": bool
@@ -562,14 +567,14 @@ export default function ResumeStep6() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -578,7 +583,7 @@ export default function ResumeStep6() {
 
     //// Get sills suggestion /////
     const suggest = () => {
-        console.log("Hello")
+        // console.log("Hello")
         var data = JSON.stringify({
             "name": document.getElementById("skillName").value
         });
@@ -597,7 +602,7 @@ export default function ResumeStep6() {
                 // var suggestions = response.data.data.filter(n => n.name)
                 setSkillsName(response.data.data)
                 updateSkillName(response.data.data)
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 // console.log(response.data.data)
                 // NotificationManager.success(response.data.message, '', 1000);
                 // onGetResume()
@@ -608,14 +613,14 @@ export default function ResumeStep6() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -625,7 +630,7 @@ export default function ResumeStep6() {
     function updateSkillName(skill) {
         var countries = [];
         var input = document.getElementById("skillName");
-        console.log("+11")
+        // console.log("+11")
 
         autocomplete({
             input: input,
@@ -643,7 +648,7 @@ export default function ResumeStep6() {
                     }
                     countries.push(tmp)
                 }
-                console.log(callback)
+                // console.log(callback)
                 var suggestions = countries.filter(n => n.label.startsWith(text))
                 // var suggestions = [{ label: "United States", value: "US" }];
                 callback(suggestions);
@@ -724,7 +729,9 @@ export default function ResumeStep6() {
                                     >
                                         <div className={'row'}>
                                             <div className={'col-12'}>
-                                                <button className={'btn btn-default float-right'} onClick={closeModalGuide}>X</button>
+                                                <button className={'btn btn-default float-right'}
+                                                        onClick={closeModalGuide}>X
+                                                </button>
 
                                             </div>
 
@@ -827,8 +834,10 @@ export default function ResumeStep6() {
                                                         <label htmlFor=""
                                                                className="">{t("resume.step6.selectSkills")}</label>
                                                     </div>
-                                                    <div className={Style.selectPart + " " +Style.input}>
-                                                        <input className={'dir-ltr'} autoComplete="off" onKeyUp={suggest} defaultValue={skillsNameVal} id="skillName" type="text"/>
+                                                    <div className={Style.selectPart + " " + Style.input}>
+                                                        <input className={'dir-ltr'} autoComplete="off"
+                                                               onKeyUp={suggest} defaultValue={skillsNameVal}
+                                                               id="skillName" type="text"/>
 
                                                     </div>
 
@@ -903,11 +912,13 @@ export default function ResumeStep6() {
                 <div className={'position-fixed d-xl-none'} style={{bottom: '20px', left: '20px', zIndex: "1"}}>
                     {modalIsOpenGuide ?
                         <img style={{border: "1px dashed #000", borderRadius: "50%"}}
-                             className={Style["filterButton"] + " p-1"} onClick={closeModalGuide} width={'60px'} height={'60px'}
+                             className={Style["filterButton"] + " p-1"} onClick={closeModalGuide} width={'60px'}
+                             height={'60px'}
                              src={guide}/>
                         :
                         <img style={{border: "1px dashed #000", borderRadius: "50%"}}
-                             className={Style["filterButton"] + " p-1"} onClick={openModalGuide} width={'60px'} height={'60px'}
+                             className={Style["filterButton"] + " p-1"} onClick={openModalGuide} width={'60px'}
+                             height={'60px'}
                              src={guide}/>
                     }
 

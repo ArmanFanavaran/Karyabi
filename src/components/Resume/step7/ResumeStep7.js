@@ -260,14 +260,14 @@ export default function ResumeStep7() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -307,14 +307,14 @@ export default function ResumeStep7() {
                     if (errors != null) {
                         Object.keys(errors).map((key, i) => {
                             for (var i = 0; i < errors[key].length; i++) {
-                                NotificationManager.error(errors[key][i]);
+                                NotificationManager.error(errors[key][i], '', 1000);
                             }
                         });
 
                     } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                        NotificationManager.error(error.response.data.message);
+                        NotificationManager.error(error.response.data.message, '', 1000);
                     } else {
-                        NotificationManager.error(error.response.data.Message);
+                        NotificationManager.error(error.response.data.Message, '', 1000);
 
                     }
 
@@ -355,14 +355,14 @@ export default function ResumeStep7() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -398,14 +398,14 @@ export default function ResumeStep7() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -494,24 +494,27 @@ export default function ResumeStep7() {
         axios(config)
             .then(function (response) {
                 closeModalLoading()
-                console.log("Hi baby")
                 console.log(response.data.data)
                 setResumeId(response.data.data.id)
                 setResume(response.data.data)
-                console.log(JSON.parse(response.data.data.skillInfoListJson))
-                // let data=JSON.parse(response.data.data.skillInfoListJson);
 
-                if (response.data.data.languageInfoListJson.size !== 0) {
-                    console.log("Ener")
+
+                let data = []
+                if (response.data.data.skillInfoListJson.length > 0) {
                     let skillInfoList = JSON.parse(response.data.data.skillInfoListJson)
                     // IsSoftWare
-                    let data = []
-                    skillInfoList.forEach(function (i) {
-                        if ((i.AreaOfInterestEnglish !== null && i.AreaOfInterestEnglish.IsSoftWare === false) || (i.AreaOfInterestPersian !== null && i.AreaOfInterestPersian.IsSoftWare === false)) {
-                            data.push(i)
-                            console.log(i)
-                        }
-                    });
+
+                    if (skillInfoList.length > 0) {
+
+                        skillInfoList.forEach(function (i) {
+                            if ((i.AreaOfInterestEnglish !== null && i.AreaOfInterestEnglish.IsSoftWare === false) || (i.AreaOfInterestPersian !== null && i.AreaOfInterestPersian.IsSoftWare === false)) {
+                                data.push(i)
+                            }
+                        });
+                    }
+                }
+                if (data.length > 0) {
+
                     data.sort(function (a, b) {
                         return a.Order - b.Order;
                     });
@@ -519,6 +522,9 @@ export default function ResumeStep7() {
                 } else {
                     setItems([])
                 }
+
+
+
 
             })
             .catch(function (error) {
@@ -554,14 +560,14 @@ export default function ResumeStep7() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -600,14 +606,14 @@ export default function ResumeStep7() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
@@ -685,14 +691,14 @@ export default function ResumeStep7() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 1000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 1000);
 
                 }
 
