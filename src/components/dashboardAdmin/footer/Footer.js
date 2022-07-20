@@ -83,63 +83,64 @@ export default function Footer() {
         <div>
             <h5 className={'change-text'}>تنظیمات فوتر</h5>
             <div className={"row w-100 mx-0"}>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>عنوان برند</label>
                     <p className={"w-100"}>{brand}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>توسعه دهنده</label>
                     <p className={"w-100"}>{developedBy}</p>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شعار برند (فارسی)</label>
                     <p className={"w-100"}>{brandSlogan}</p>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شعار برند (انگلیسی)</label>
                     <p className={"w-100"}>{brandSloganEng}</p>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
-                    <label className={"d-block"}>متن حقوق</label>
-                    <p className={"w-100"}>{rights}</p>
-                </div>
-                <div className={'col-12 change-text change-dir mt-4'}>
+
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس (فارسی)</label>
                     <p className={"w-100"}>{address}</p>
                 </div>
-                <div className={'col-12 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس (انگلیسی)</label>
                     <p className={"w-100"}>{addressEng}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12  change-text change-dir mt-2'}>
+                    <label className={"d-block"}>متن حقوق</label>
+                    <p className={"w-100"}>{rights}</p>
+                </div>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شماره تلفن اول</label>
                     <p className={"w-100"}>{phone1}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شماره تلفن دوم</label>
                     <p className={"w-100"}>{phone2}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>ایمیل</label>
                     <p className={"w-100"}>{email}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس تلگرام</label>
                     <p className={"w-100"}>{telegram}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس واتساپ</label>
                     <p className={"w-100"}>{whatsapp}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس لینکدین</label>
                     <p className={"w-100"}>{linkedin}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس اینستاگرام</label>
                     <p className={"w-100"}>{instagram}</p>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس یوتیوب</label>
                     <p className={"w-100"}>{youtube}</p>
                 </div>

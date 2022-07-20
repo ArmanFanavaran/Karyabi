@@ -173,7 +173,7 @@ export default function Dashboard() {
 
                                     }
 
-                                    <p className={"text-center text-secondary"}>{user !== undefined && user.ResumePhone}</p>
+                                    <p className={"text-center text-secondary " + Style.userNumber}>{user !== undefined && user.ResumePhone}</p>
                                     {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
                                 </div>
                                 <hr/>
@@ -183,7 +183,7 @@ export default function Dashboard() {
                                             <li className={isNavActive(item.pathname)? "nav-item w-100 py-2 px-3 "+ Style.active : "nav-item w-100 py-2 px-3 "}
                                                 onClick={(event)=>{checkIsActive(event, item.pathname)}}
                                             ><Link
-                                                className={"text-center d-flex  text-secondary change-text"}
+                                                className={"text-center d-flex py-1 change-text"}
                                                 to={{
                                                     pathname: item.pathname,
                                                     search: "lang=" +language,
@@ -214,7 +214,7 @@ export default function Dashboard() {
 
                                 }
 
-                                <p className={"text-center text-secondary"}>{user !== undefined && user.ResumePhone}</p>
+                                <p className={"text-center text-secondary " + Style.userNumber}>{user !== undefined && user.ResumePhone}</p>
                                 {/*<p className={"text-center text-secondary"}>{user !== undefined && user.ResumeEmail}</p>*/}
                             </div>
                             <ul className={"nav flex-column navItems " + Style.navItems}>

@@ -316,7 +316,7 @@ export default function DashboardParentCompany() {
                                                 onClick={(event)=>{checkIsActive(event, item.pathname)}}
                                             >{ currentCompany !== undefined &&
                                             <Link
-                                                className={"text-center d-flex  text-secondary change-text"}
+                                                className={"text-center d-flex py-1 change-text"}
                                                 to={{
                                                     pathname: item.pathname,
                                                     search: "lang=" +language +"&company=" + currentCompany.id,
@@ -388,7 +388,7 @@ export default function DashboardParentCompany() {
                                             onClick={(event)=>{checkIsActive(event, item.pathname)}}
                                         >{ currentCompany !== undefined &&
                                             <Link
-                                                className={"text-center d-flex  text-secondary change-text"}
+                                                className={"text-center d-flex py-1 change-text"}
                                                 to={{
                                                     pathname: item.pathname,
                                                     search: "lang=" +language +"&company=" + currentCompany.id,

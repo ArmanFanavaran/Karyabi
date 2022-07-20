@@ -13,6 +13,7 @@ import $ from "jquery";
 import {css} from "@emotion/react";
 import Modal from "react-modal";
 import addImg from "./imgs/add.svg";
+import Style from "./heroList.module.css";
 
 export default function HeroList() {
     const [DataHero, setDataHero] = useState([])
@@ -428,16 +429,19 @@ export default function HeroList() {
         <div className={'container'}>
             <div className={'row'}>
                 <div className={'col-12'}>
-                    <h1 className={'change-dir change-text'}
-                        style={{fontSize: "20px", fontWeight: "bold"}}>  {t("admin.hero.list.listHero")}</h1>
-                    <div >
-                        <button id={'open'} onClick={openModalAdd}
-                                className={'btn btn-login change-dir change-float'}><img
-                            width={30}
-                            src={addImg}/></button>
-                    </div>
-                    <div className={' table-responsive'}>
-                        <table className="table table-responsive w-100 d-block d-md-table font-IranSans">
+                    <h5 className={'change-dir change-text'}>  {t("admin.hero.list.listHero")}</h5>
+                    {/*<div >*/}
+                    {/*    <button id={'open'} onClick={openModalAdd}*/}
+                    {/*            className={'btn btn-login change-dir change-float'}><img*/}
+                    {/*        width={30}*/}
+                    {/*        src={addImg}/></button>*/}
+                    {/*</div>*/}
+                    <div id={'open'} onClick={openModalAdd} className={"d-flex change-dir mt-3"}><button  className={'btn ' + Style.addJobOfferBtn}>
+                        <span>افزودن متن</span>
+                        <i className={'bi bi-plus-lg mx-1'}></i>
+                    </button></div>
+                    <div className={' table-responsive mt-4'}>
+                        <table className={"table table-responsive w-100 d-block d-md-table " + Style.table}>
                             <thead>
                             <tr className={'text-center'}>
                                 <th>

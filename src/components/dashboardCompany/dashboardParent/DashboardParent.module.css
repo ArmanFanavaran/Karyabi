@@ -21,8 +21,8 @@
     border-radius: 10px;
 }
 .profileImage {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border: 1px solid #adadad;
     border-radius: 100%;
 }
@@ -42,9 +42,9 @@
 }
 .navItems li{
     border-radius: 4px;
-
-    color: #603695;
-    font-size: 0.8rem;
+    font-weight: bolder;
+    /*color: #603695;*/
+    font-size: 0.9rem;
 }
 .navItems li.active {
     background-color: #f8f2ff;
@@ -67,4 +67,13 @@
 .companyAccordion {
     background-color: #f8f2ff;
     border-radius: 6px;
+}
+h5 {
+    font-size: 1.1rem;
+}
+label {
+    font-size: 0.9rem;
+}
+.navItems a{
+    color: #6f44a4 !important;
 }

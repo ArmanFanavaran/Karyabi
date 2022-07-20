@@ -9,6 +9,7 @@ import * as queryString from "query-string";
 import {css} from "@emotion/react";
 import Modal from "react-modal";
 import addImg from "./imgs/add.svg";
+import Style from "../hero/heroList.module.css"
 
 export default function DegreeList() {
     const [DataHero, setDataHero] = useState([])
@@ -360,16 +361,19 @@ console.log(response.data.data)
         <div className={'container'}>
             <div className={'row'}>
                 <div className={'col-12'}>
-                    <h1 className={'change-dir change-text'}
-                        style={{fontSize: "20px", fontWeight: "bold"}}>  {t("admin.degree.list.listDegree")}</h1>
-                    <div >
-                        <button id={'open'} onClick={openModalAdd}
-                                className={'btn btn-login change-dir change-float'}><img
-                            width={30}
-                            src={addImg}/></button>
-                    </div>
-                    <div className={' table-responsive'}>
-                        <table className="table table-responsive w-100 d-block d-md-table font-IranSans">
+                    <h5 className={'change-dir change-text'}>  {t("admin.degree.list.listDegree")}</h5>
+                    {/*<div >*/}
+                    {/*    <button id={'open'} onClick={openModalAdd}*/}
+                    {/*            className={'btn btn-login change-dir change-float'}><img*/}
+                    {/*        width={30}*/}
+                    {/*        src={addImg}/></button>*/}
+                    {/*</div>*/}
+                    <div id={'open'} onClick={openModalAdd} className={"d-flex change-dir mt-3"}><button  className={'btn ' + Style.addJobOfferBtn}>
+                        <span>افزودن مقطع</span>
+                        <i className={'bi bi-plus-lg mx-1'}></i>
+                    </button></div>
+                    <div className={'mt-4 table-responsive'}>
+                        <table className={"table table-responsive w-100 d-block d-md-table font-IranSans " + Style.table}>
                             <thead>
                             <tr className={'text-center'}>
                                 <th>

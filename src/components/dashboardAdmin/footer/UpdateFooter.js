@@ -148,63 +148,63 @@ export default function UpdateFooter() {
             <h5 className={'change-text'}>ویرایش تنظیمات فوتر</h5>
 
             <div className={"row w-100 mx-0"}>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>عنوان برند</label>
                     <input className={"form-control"} type={'text'} id={"brand_input"} defaultValue={brand}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>توسعه دهنده</label>
                     <input className={"form-control"} type={'text'} id={"developedBy_input"} defaultValue={developedBy}/>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شعار برند (فارسی)</label>
                     <input className={"form-control"} type={'text'} id={"brandSlogan_input"} defaultValue={brandSlogan}/>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شعار برند (انگلیسی)</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"brandSloganEng_input"} defaultValue={brandSloganEng}/>
                 </div>
-                <div className={'col-12  change-text change-dir mt-4'}>
-                    <label className={"d-block"}>متن حقوق</label>
-                    <input className={"form-control"} type={'text'} id={"rights_input"} defaultValue={rights}/>
-                </div>
-                <div className={'col-12 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس (فارسی)</label>
                     <input className={"form-control"} type={'text'} id={"address_input"} defaultValue={address}/>
                 </div>
-                <div className={'col-12 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس (انگلیسی)</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"addressEng_input"} defaultValue={addressEng}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12  change-text change-dir mt-2'}>
+                    <label className={"d-block"}>متن حقوق</label>
+                    <input className={"form-control"} type={'text'} id={"rights_input"} defaultValue={rights}/>
+                </div>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شماره تلفن اول</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'number'}  id={"phone1_input"} defaultValue={phone1}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>شماره تلفن دوم</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'number'}  id={"phone2_input"} defaultValue={phone2}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>ایمیل</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'email'} id={"email_input"} defaultValue={email}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس تلگرام</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"telegram_input"} defaultValue={telegram}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس واتساپ</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"whatsapp_input"} defaultValue={whatsapp}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس لینکدین</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"linkedin_input"} defaultValue={linkedin}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس اینستاگرام</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"instagram_input"} defaultValue={instagram}/>
                 </div>
-                <div className={'col-12 col-xl-6 change-text change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 change-text change-dir mt-2'}>
                     <label className={"d-block"}>آدرس یوتیوب</label>
                     <input className={"form-control text-left"} dir={"ltr"} type={'text'} id={"youtube_input"} defaultValue={youtube}/>
                 </div>
