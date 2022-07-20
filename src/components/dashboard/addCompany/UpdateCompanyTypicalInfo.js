@@ -346,7 +346,7 @@ export default function UpdateCompanyTypicalInfo() {
         <div>
             <h5 className={"change-text"}>تکمیل اطلاعات شرکت</h5>
             <div className={'row w-100 mx-0'}>
-                <div className={'col-12 form-group change-dir mt-4'}>
+                <div className={'col-12 form-group change-dir mt-2'}>
                     <label className={'d-block change-text ' + Style.criticalLabel}>نام شرکت </label>
                     <div className={Style.criticalDefaultField + " change-text mt-2"}>
                         <span> {name.fa} </span>
@@ -355,30 +355,30 @@ export default function UpdateCompanyTypicalInfo() {
                     </div>
                 </div>
 
-                <div className={'col-12 form-group change-dir mt-4'}>
+                <div className={'col-12 form-group change-dir mt-2'}>
                     <label className={'d-block change-text ' + Style.criticalLabel}>موقعیت شرکت</label>
                     <div className={Style.criticalDefaultField + " change-text mt-2"}>
                         {language === 'fa' ?
                             province.fa + " / " + city.fa :
                             province.eng + " / " + city.eng}
                     </div>
-                    <div className={Style.criticalDefaultField + " change-text mt-3"}>
+                    <div className={Style.criticalDefaultField + " change-text mt-2"}>
                         {address}
                     </div>
                 </div>
-                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-4'}>*/}
+                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-2'}>*/}
                 {/*    <label className={'d-block change-text ' + Style.criticalLabel}>شماره تلفن همراه</label>*/}
                 {/*    <div className={Style.criticalDefaultField + " change-text mt-2"}>*/}
                 {/*        {phone}*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-4'}>*/}
+                {/*<div className={'col-12 col-xl-6 form-group change-dir mt-2'}>*/}
                 {/*    <label className={'d-block change-text ' + Style.criticalLabel}>ایمیل</label>*/}
                 {/*    <div className={Style.criticalDefaultField + " change-text mt-2"}>*/}
                 {/*        {email}*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {
                         isKnowledge && <label className={'d-block change-text '}>
 
@@ -389,7 +389,7 @@ export default function UpdateCompanyTypicalInfo() {
                     }
 
                 </div>
-                <div className={'d-flex mt-4 col-12'}>
+                <div className={'d-flex mt-2 col-12'}>
                     <Link className={'btn btn-warning py-2 px-4'} to={{
                         pathname:getRoutesItems().updateCompanyCriticalInfo.route,
                         search:"lang=" + language + "&company=" + companyId
@@ -398,23 +398,23 @@ export default function UpdateCompanyTypicalInfo() {
             </div>
             <h5 className={"change-text mt-5"}>اطلاعات تکمیلی</h5>
             <div className={'row w-100 mx-0'}>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>سال تاسیس</label>
                     <input type={'number'} className={'form-control'} id={'foundation_input'} defaultValue={foundation}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>آدرس وبسایت</label>
                     <input type={'text'} className={'form-control'} id={'website_input'} defaultValue={website}/>
                 </div>
-                <div className={'col-6 col-xl-3 form-group change-dir mt-4'}>
+                <div className={'col-6 col-xl-3 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>حداقل تعداد اعضا</label>
                     <input type={'number'} className={'form-control text-left'} id={'min_input'} defaultValue={minMembers}/>
                 </div>
-                <div className={'col-6 col-xl-3 form-group change-dir mt-4'}>
+                <div className={'col-6 col-xl-3 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>حداکثر تعداد اعضا</label>
                     <input type={'number'} className={'form-control text-left'} id={'max_input'} defaultValue={maxMembers}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>دسته‌بندی</label>
                     { category !== undefined &&
                         <select className={'form-control'} id={'category_input'}>
@@ -427,15 +427,15 @@ export default function UpdateCompanyTypicalInfo() {
                         </select>
                     }
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>شماره تلفن همراه</label>
                     <input type={'text'} className={'form-control text-left'} id={'phone_input'} defaultValue={phone}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>ایمیل</label>
                     <input type={'email'} className={'form-control text-left'} id={'email_input'} defaultValue={email}/>
                 </div>
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {informPhone ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {
@@ -448,7 +448,7 @@ export default function UpdateCompanyTypicalInfo() {
 
                     <label>اطلاع‌رسانی از طریق پیامک</label>
                 </div>
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {informEmail ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {
@@ -475,7 +475,7 @@ export default function UpdateCompanyTypicalInfo() {
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                        <div className={'mt-4 change-text change-dir'}>
+                        <div className={'mt-2 change-text change-dir'}>
                             <h6>لوگو:</h6>
                             <div className={'row w-100 mx-0'}>
                                 <img className={Style.logoPreview + " img-thumbnail rounded"} src={logo} />
@@ -490,7 +490,7 @@ export default function UpdateCompanyTypicalInfo() {
                             </div>
                             <input type={'file'} accept="image/*" className={'d-none'} id={'logo_input'} onChange={onUploadLogo}/>
                         </div>
-                        <div className={'mt-4 change-text change-dir'}>
+                        <div className={'mt-2 change-text change-dir'}>
                             <h6>تصویر اصلی:</h6>
                             <div className={'row w-100 mx-0'}>
                                 <div className={'col-12 col-xl-8 px-0'}>
@@ -520,7 +520,7 @@ export default function UpdateCompanyTypicalInfo() {
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>فارسی:</h6>
                             <CKEditor
                                 config={ {
@@ -533,7 +533,7 @@ export default function UpdateCompanyTypicalInfo() {
                                 } }
                             />
                         </div>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>انگلیسی:</h6>
                             <CKEditor
                                 config={ {
@@ -559,7 +559,7 @@ export default function UpdateCompanyTypicalInfo() {
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>فارسی:</h6>
                             <CKEditor
                                 config={ {
@@ -572,7 +572,7 @@ export default function UpdateCompanyTypicalInfo() {
                                 } }
                             />
                         </div>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>انگلیسی:</h6>
                             <CKEditor
                                 config={ {
@@ -598,7 +598,7 @@ export default function UpdateCompanyTypicalInfo() {
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>فارسی:</h6>
                             <CKEditor
                                 config={ {
@@ -611,7 +611,7 @@ export default function UpdateCompanyTypicalInfo() {
                                 } }
                             />
                         </div>
-                        <div className={'mt-4 change-text'}>
+                        <div className={'mt-2 change-text'}>
                             <h6>انگلیسی:</h6>
                             <CKEditor
                                 config={ {

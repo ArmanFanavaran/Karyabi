@@ -228,19 +228,19 @@ export default function UpdateCompanyCriticalInfo() {
         <div>
             <h5 className={"change-text"}>اطلاعات پایه شرکت</h5>
             <div className={'row w-100 mx-0'}>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>نام شرکت (فارسی)</label>
                     <input type={'text'} className={'form-control'} id={'name_input'} defaultValue={name}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>نام شرکت (انگلیسی)</label>
                     <input type={'text'} className={'form-control text-left'} dir={"ltr"} id={'eng_name_input'} defaultValue={engName}/>
                 </div>
-                <div className={'col-12 form-group change-dir mt-4'}>
+                <div className={'col-12 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>آدرس شرکت</label>
                     <input type={'text'} className={'form-control'} id={'address_input'} defaultValue={address}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>استان</label>
                     <select className={'form-control'} id={'province_input'} onChange={onSelectProvince}>
                         <option selected={true} disabled={true}>انتخاب...</option>
@@ -251,7 +251,7 @@ export default function UpdateCompanyCriticalInfo() {
                         }
                     </select>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>شهر</label>
                     <select className={'form-control'} id={'city_input'}>
                         {
@@ -262,7 +262,7 @@ export default function UpdateCompanyCriticalInfo() {
                     </select>
                 </div>
 
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {isKnowledge ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {

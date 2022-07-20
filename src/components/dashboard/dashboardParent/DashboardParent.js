@@ -223,7 +223,7 @@ export default function Dashboard() {
                                         <li className={isNavActive(item.pathname)? "nav-item w-100 py-2 px-3 "+ Style.active : "nav-item w-100 py-2 px-3 "}
                                             onClick={(event)=>{checkIsActive(event, item.pathname)}}
                                         ><Link
-                                            className={"text-center d-flex  text-secondary change-text"}
+                                            className={"text-center d-flex py-1  change-text"}
                                             to={{
                                                 pathname: item.pathname,
                                                 search: "lang=" +language,

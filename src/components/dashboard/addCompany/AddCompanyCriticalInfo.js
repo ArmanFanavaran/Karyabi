@@ -182,19 +182,19 @@ export default function AddCompanyCriticalInfo() {
         <div>
             <h5 className={"change-text"}>ثبت شرکت</h5>
             <div className={'row w-100 mx-0'}>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>نام شرکت (فارسی)</label>
                     <input type={'text'} className={'form-control'} id={'name_input'}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>نام شرکت (انگلیسی)</label>
                     <input type={'text'} className={'form-control text-left'} dir={"ltr"} id={'eng_name_input'}/>
                 </div>
-                <div className={'col-12 form-group change-dir mt-4'}>
+                <div className={'col-12 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>آدرس شرکت</label>
                     <input type={'text'} className={'form-control'} id={'address_input'}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>استان</label>
                     <select className={'form-control'} id={'province_input'} onChange={onSelectProvince}>
                         <option selected={true} disabled={true}>انتخاب...</option>
@@ -205,7 +205,7 @@ export default function AddCompanyCriticalInfo() {
                         }
                     </select>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>شهر</label>
                     <select className={'form-control'} id={'city_input'}>
                         {
@@ -215,15 +215,15 @@ export default function AddCompanyCriticalInfo() {
                         }
                     </select>
                 </div>
-                <div className={'col-6 col-xl-3 form-group change-dir mt-4'}>
+                <div className={'col-6 col-xl-3 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>حداقل تعداد اعضا</label>
                     <input type={'number'} className={'form-control text-left'} id={'min_input'}/>
                 </div>
-                <div className={'col-6 col-xl-3 form-group change-dir mt-4'}>
+                <div className={'col-6 col-xl-3 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>حداکثر تعداد اعضا</label>
                     <input type={'number'} className={'form-control text-left'} id={'max_input'}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>دسته‌بندی</label>
                     <select className={'form-control'} id={'category_input'}>
                         <option selected={true} disabled={true}>انتخاب...</option>
@@ -234,15 +234,15 @@ export default function AddCompanyCriticalInfo() {
                         }
                     </select>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>شماره تلفن همراه</label>
                     <input type={'number'} className={'form-control text-left'} dir={"ltr"} id={'phone_input'}/>
                 </div>
-                <div className={'col-12 col-xl-6 form-group change-dir mt-4'}>
+                <div className={'col-12 col-xl-6 form-group change-dir mt-2'}>
                     <label className={'d-block change-text'}>ایمیل</label>
                     <input type={'email'} className={'form-control text-left'} dir={"ltr"} id={'email_input'}/>
                 </div>
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {isKnowledge ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {
@@ -255,7 +255,7 @@ export default function AddCompanyCriticalInfo() {
 
                     <label>شرکت دانش بنیان</label>
                 </div>
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {informPhone ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {
@@ -268,7 +268,7 @@ export default function AddCompanyCriticalInfo() {
 
                     <label>اطلاع‌رسانی از طریق پیامک</label>
                 </div>
-                <div className={'col-12 col-xl-4 mt-4 change-dir change-text'}>
+                <div className={'col-12 col-xl-4 mt-2 change-dir change-text'}>
                     {informEmail ?
                         <button className={"mx-3 btn text-white "+ Style.toggleBtn }
                                 onClick={() => {
