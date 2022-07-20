@@ -145,6 +145,7 @@ section h3 {
 
 .cardImgTop {
     padding: 10px;
+    width: 100%;
 }
 
 /* roadMap */
@@ -161,6 +162,16 @@ section h3 {
     .servicesItems {
         display: block;
         justify-content: center;
+
+    }
+    .cardImgTop {
+        padding: 10px;
+        width: 70%;
+    }
+
+    .marginQuide{
+        /*margin: 10px;*/
+        border-right: none;
 
     }
 }

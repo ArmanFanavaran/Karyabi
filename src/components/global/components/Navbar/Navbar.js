@@ -93,7 +93,7 @@ export default function Navbar() {
                 }
 
                 <div className="container">
-                    <a href="" className={Style.navbarBrand}><img src={Logo} width={70} height={90}
+                    <a href="" className={Style.navbarBrand}><img src={Logo} width={62} height={80}
                                                              alt=""/></a>
                     <button className="navbar-toggler collapsed" type="button" data-toggle="collapse"
                             data-target="#toggle-menu" aria-controls="toggle-menu" aria-expanded="false"
