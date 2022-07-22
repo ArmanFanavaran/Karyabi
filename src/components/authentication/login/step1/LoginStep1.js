@@ -128,14 +128,14 @@ function LoginComponent() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i], '', 1000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 2000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 2000);
 
                 }
                 if (error.response.data.data !== null && error.response.data.data !== undefined) {
@@ -166,7 +166,7 @@ function LoginComponent() {
                     <h4>{t("authentication.login.enter_your_information_step1")}</h4>
 
                     <div className={Style.inputs}>
-                        <input id="username" type="text" className="form-control text-center"
+                        <input autoComplete="username" name="username" id="username" type="text" className="form-control text-center"
                                placeholder={t("authentication.login.username_or_email")}/>
 
                         <button className={Style["btn-login"] + " btn d-block"} type="button"

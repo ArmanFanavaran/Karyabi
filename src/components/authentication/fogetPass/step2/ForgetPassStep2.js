@@ -148,9 +148,9 @@ export default function RegisterStep3() {
                 <div className="container">
                     <h4>{t("authentication.reset_pass2.enter_your_new_password")}</h4>
                     <div className={Style.inputs + " change-dir change-text"}>
-                        <input type="password" id={'newPassword'} className="form-control"
+                        <input name={'password'} type="password" id={'newPassword'} className="form-control"
                                placeholder={t("authentication.change-pass.new_password")}/>
-                        <input type="password" id={'repeatNewPassword'} className="form-control"
+                        <input  type="password" id={'repeatNewPassword'} className="form-control"
                                placeholder={t("authentication.change-pass.re_new_password")}/>
                         <button onClick={onSubmit}
                                 className={Style.button + " btn d-block"}>{t("authentication.change-pass.send")}</button>

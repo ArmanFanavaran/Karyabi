@@ -43,7 +43,7 @@ export default function Footer() {
 
         axios(config)
             .then(function (response) {
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 let data = response.data.data;
                 setBrand(data.brand);
                 setBrandSlogan(data.brandSlogan);
@@ -66,7 +66,7 @@ export default function Footer() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
+                            NotificationManager.error(errors[key][i],'',1000);
                         }
                     });
 
@@ -86,12 +86,12 @@ export default function Footer() {
             },
         };
         axios(links_config).then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
             setLinks(response.data.data);
 
         }).catch(function (error) {
-            console.log(error);
-            console.log(error.response);
+            // console.log(error);
+            // console.log(error.response);
             // let errors = error.response.data.errors;
             // if (errors != null) {
             //     Object.keys(errors).map((key, i) => {

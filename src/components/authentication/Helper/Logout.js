@@ -26,7 +26,7 @@ export function Logout() {
         .then(function (response) {
             // if (response.status === 200) {
             // axios.defaults.withCredentials = false;
-            console.log("yes")
+            // console.log("yes")
 
             Cookies.remove(getCookiesItems().accessExp.nickName, {
                 domain: getCookiesItems().accessExp.domain
@@ -52,7 +52,7 @@ export function Logout() {
 
             localStorage.removeItem(getCookiesItems().userPic.nickName);
 
-            NotificationManager.success(response.data.message);
+            NotificationManager.success(response.data.message,'',2000);
             setTimeout(() => {
                 // history.push("/login")
                 window.location.reload(false);

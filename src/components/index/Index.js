@@ -48,20 +48,21 @@ export default function Index() {
 
         let keyword = $("#skill_input").val().trim();
         let category = $("#category_select").val();
+        let categoryName = $("#category_select option:selected").text();
         if (category !== undefined && category !== null)
             category = parseInt(category);
         else category = null;
         let province = $("#province_select").val();
+        let provinceName = $("#province_select option:selected").text();
         if (province !== undefined && province !== null)
             province = parseInt(province);
         else province = null;
 
         history.push({
             pathname: getRoutesItems().employmentAdvertisementList.route,
-            search: "lang=" + language + "&keyword=" + keyword + "&category=" + category + "&province=" + province
+            search: "lang=" + language + "&keyword=" + keyword + "&category=" + category + "&catName=" + categoryName.replace(/\s+/g, '-').toLowerCase() + "&province=" + province + "&provName=" + provinceName.replace(/\s+/g, '-').toLowerCase()
         });
     }
-
 
 
     useEffect(function () {
@@ -119,14 +120,16 @@ export default function Index() {
                     <form>
                         <div className="row change-dir">
                             <div className="col-12 col-md-3 my-2">
-                                <input id={"skill_input"} type="text" className="form-control change-text change-dir" placeholder={t("index.skill")}/>
+                                <input id={"skill_input"} type="text" className="form-control change-text change-dir"
+                                       placeholder={t("index.skill")}/>
                             </div>
                             <div className="col-12 col-md-3 my-2">
                                 <select id={"category_select"} className="form-control w-100 change-text change-dir">
                                     <option disabled={true} selected={true}>{t("index.jobCategory")}</option>
                                     {
                                         categories.map((item) => (
-                                            <option value={item.id}>{language === 'fa'? item.name : item.englishName}</option>
+                                            <option
+                                                value={item.id}>{language === 'fa' ? item.name : item.englishName}</option>
 
                                         ))
                                     }
@@ -137,14 +140,16 @@ export default function Index() {
                                     <option disabled={true} selected={true}>{t("index.province")}</option>
                                     {
                                         provinces.map((item) => (
-                                            <option value={item.id}>{language === 'fa'? item.name : item.englishName}</option>
+                                            <option
+                                                value={item.id}>{language === 'fa' ? item.name : item.englishName}</option>
 
                                         ))
                                     }
                                 </select>
                             </div>
                             <div className="col-12 col-md-3 my-2">
-                                <button className={"form-control w-100 " + Style.searchbtn} onClick={onSearchJobOffer}>{t("index.search")}</button>
+                                <button className={"form-control w-100 " + Style.searchbtn}
+                                        onClick={onSearchJobOffer}>{t("index.search")}</button>
                             </div>
                         </div>
                     </form>
@@ -164,7 +169,7 @@ export default function Index() {
                             <div className={Style.rightContent + " mt-4"}>
                                 {
                                     language === 'fa' ?
-                                        <img className={Style.w90} src={heroPicFa} alt=""/>:
+                                        <img className={Style.w90} src={heroPicFa} alt=""/> :
                                         <img className={Style.w90} src={heroPicEn} alt=""/>
                                 }
 
@@ -182,7 +187,7 @@ export default function Index() {
                                 <img className={Style.cardImgTop} src={service1} alt="Card image cap"/>
                                 <div className={Style.cardBody}>
                                     <h5 className={Style.cardTitle}>{t("index.searchTemplatesTitle")}</h5>
-                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.searchTemplatesText")}</p>
+                                    <p className={Style.cardText + " change-text change-dir"}>{t("index.searchTemplatesText")}</p>
 
                                 </div>
                             </div>
@@ -192,7 +197,7 @@ export default function Index() {
                                 <img className={Style.cardImgTop} src={service2}/>
                                 <div className={Style.cardBody}>
                                     <h5 className={Style.cardTitle}>{t("index.jobOfferAnnouncementsTitle")}</h5>
-                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.jobOfferAnnouncementsText")}</p>
+                                    <p className={Style.cardText + " change-text change-dir"}>{t("index.jobOfferAnnouncementsText")}</p>
 
                                 </div>
                             </div>
@@ -201,9 +206,9 @@ export default function Index() {
                             <div className={Style.marginCustom}>
                                 <img className={Style.cardImgTop} src={service3}
                                      alt="Card image cap"/>
-                                <div className={Style.cardBody }>
+                                <div className={Style.cardBody}>
                                     <h5 className={Style.cardTitle}>{t("index.multipleResumesTitle")}</h5>
-                                    <p className={Style.cardText+ " change-text change-dir"}>{t("index.multipleResumesText")}</p>
+                                    <p className={Style.cardText + " change-text change-dir"}>{t("index.multipleResumesText")}</p>
                                 </div>
                             </div>
                         </div>
@@ -216,18 +221,19 @@ export default function Index() {
                     <div className="pathTable">
                         <div className="row">
                             <div className="col-12 col-md-4 p-0">
-                                <div className={Style.marginQuide  + " " + Style.borderBottomGuild}>
+                                <div className={Style.marginQuide + " " + Style.borderBottomGuild}>
                                     <img className={Style.frameImg} src={language === "fa" ? P1 : E1} alt=""/>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 p-0">
-                                <div className={Style.marginQuide  + " " + Style.borderBottomGuild}>
+                                <div className={Style.marginQuide + " " + Style.borderBottomGuild}>
                                     <img className={Style.frameImg} src={language === "fa" ? P2 : E2} alt=""/>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 p-0">
-                                <div className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild}>
-                                    <img className={Style.frameImg } src={language === "fa" ? P3 : E3} alt=""/>
+                                <div
+                                    className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild}>
+                                    <img className={Style.frameImg} src={language === "fa" ? P3 : E3} alt=""/>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 p-0">
@@ -236,13 +242,14 @@ export default function Index() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 p-0">
-                                <div className={Style.marginQuide + " " + Style.borderBottomGuild_sm }>
+                                <div className={Style.marginQuide + " " + Style.borderBottomGuild_sm}>
                                     <img className={Style.frameImg} src={language === "fa" ? P5 : E5} alt=""/>
                                 </div>
                             </div>
                             <div className="col-12 col-md-4 p-0">
-                                <div className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild_sm}>
-                                    <img className={Style.frameImg } src={language === "fa" ? P6 : E6} alt=""/>
+                                <div
+                                    className={Style.marginQuide + " " + Style.noBorderGuild + " " + Style.borderBottomGuild_sm}>
+                                    <img className={Style.frameImg} src={language === "fa" ? P6 : E6} alt=""/>
                                 </div>
                             </div>
 

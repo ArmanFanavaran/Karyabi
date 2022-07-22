@@ -16,23 +16,33 @@ const Controller = props => {
     const path = window.location.pathname;
 
 
-
     if (isAuth) {
         return (
             <div>
                 {props.children}
             </div>
         )
-    }
-    else if (isRefreshed) {
-        refreshToken();
-        return (
-            <div>
-                {props.children}
-            </div>
-        )
-    }
-    else {
+    } else if (isRefreshed) {
+        let isAuth2 = refreshToken();
+        if (isAuth2) {
+            return (
+                <div>
+                    {props.children}
+                </div>
+            )
+        } else {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+            setTimeout(() => {
+                // history.push("/login")
+                window.location.reload(false);
+            }, 1000);
+            return null;
+        }
+    } else {
         history.push({
             pathname: getRoutesItems().loginStep1.route,
             search: "lang=" + sp.get("lang")
@@ -43,6 +53,10 @@ const Controller = props => {
             left: 0,
             behavior: 'smooth'
         });
+        setTimeout(() => {
+            // history.push("/login")
+            window.location.reload(false);
+        }, 1000);
         return null;
     }
 

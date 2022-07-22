@@ -10,7 +10,6 @@ function ScrollTop({ history }) {
                 scrollTop: 0
             }, 1000);
         });
-        console.log("ssadsa asdf xc vsfda")
 
         if ($('#toggle-menu').hasClass('show')) {
             console.log("hello")

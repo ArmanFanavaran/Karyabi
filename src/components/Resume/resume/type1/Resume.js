@@ -182,22 +182,30 @@ export default function Resume(src, options) {
         axios(config)
             .then(function (response) {
                 setResumeId(response.data.data.id)
+                if (response.data.data.userInfoJson.length !== 0) {
+                    setUserInfoJson(JSON.parse(response.data.data.userInfoJson))
+                    calculateAge(JSON.parse(response.data.data.userInfoJson).Birthday)
+                    console.log("user Info");
+                    console.log(JSON.parse(response.data.data.userInfoJson));
+                    console.log("=========================");
+                }
 
-                setUserInfoJson(JSON.parse(response.data.data.userInfoJson))
-                calculateAge(JSON.parse(response.data.data.userInfoJson).Birthday)
-                console.log("user Info");
-                console.log(JSON.parse(response.data.data.userInfoJson));
-                console.log("=========================");
 
-                setEducationInfoListJson(JSON.parse(response.data.data.educationInfoListJson))
-                console.log("education");
-                console.log(JSON.parse(response.data.data.educationInfoListJson));
-                console.log("=========================");
+                if (response.data.data.educationInfoListJson.length !== 0) {
+                    setEducationInfoListJson(JSON.parse(response.data.data.educationInfoListJson))
+                    console.log("education");
+                    console.log(JSON.parse(response.data.data.educationInfoListJson));
+                    console.log("=========================");
 
-                setLanguageInfoListJson(JSON.parse(response.data.data.languageInfoListJson))
-                console.log("Language");
-                console.log(JSON.parse(response.data.data.languageInfoListJson));
-                console.log("=========================");
+                }
+
+                if (response.data.data.languageInfoListJson.length !== 0) {
+                    setLanguageInfoListJson(JSON.parse(response.data.data.languageInfoListJson))
+                    console.log("Language");
+                    console.log(JSON.parse(response.data.data.languageInfoListJson));
+                    console.log("=========================");
+                }
+
 
                 if (response.data.data.skillInfoListJson.length !== 0) {
                     let skillInfoList = JSON.parse(response.data.data.skillInfoListJson)
@@ -219,14 +227,15 @@ export default function Resume(src, options) {
                     });
                     setSkillInfoListJson(data)
                     setSkillInfoListJsonSoftware(dataSoft)
+                    console.log("Skill");
+                    console.log(JSON.parse(response.data.data.skillInfoListJson));
+                    console.log("=========================");
                 } else {
                     setSkillInfoListJsonSoftware([])
                     setSkillInfoListJson([])
-                }
-                console.log("Skill");
-                console.log(JSON.parse(response.data.data.skillInfoListJson));
-                console.log("=========================");
 
+
+                }
 
                 if (response.data.data.projectResumeInfoListJson.length !== 0) {
                     let data = JSON.parse(response.data.data.projectResumeInfoListJson)
@@ -235,12 +244,14 @@ export default function Resume(src, options) {
                         return a.Order - b.Order;
                     });
                     setProjectInfoListJson(data)
+                    console.log("project Info");
+                    console.log(JSON.parse(response.data.data.projectResumeInfoListJson));
+                    console.log("=========================");
                 } else {
                     setProjectInfoListJson([])
+
                 }
-                console.log("project Info");
-                console.log(JSON.parse(response.data.data.projectResumeInfoListJson));
-                console.log("=========================");
+
 
                 if (response.data.data.jobResumeInfoListJson.length !== 0) {
                     let data = JSON.parse(response.data.data.jobResumeInfoListJson)
@@ -249,12 +260,13 @@ export default function Resume(src, options) {
                         return a.Order - b.Order;
                     });
                     setWorkInfoListJson(data)
+                    console.log("Work Info");
+                    console.log(JSON.parse(response.data.data.jobResumeInfoListJson));
+                    console.log("=========================");
                 } else {
                     setWorkInfoListJson([])
                 }
-                console.log("Work Info");
-                console.log(JSON.parse(response.data.data.jobResumeInfoListJson));
-                console.log("=========================");
+
 
                 if (response.data.data.articleInfoListJson.length !== 0) {
                     let data = JSON.parse(response.data.data.articleInfoListJson)
@@ -263,12 +275,13 @@ export default function Resume(src, options) {
                         return a.Order - b.Order;
                     });
                     setArticleInfoListJson(data)
+                    console.log("Article Info");
+                    console.log(JSON.parse(response.data.data.articleInfoListJson));
+                    console.log("=========================");
                 } else {
                     setArticleInfoListJson([])
                 }
-                console.log("Article Info");
-                console.log(JSON.parse(response.data.data.articleInfoListJson));
-                console.log("=========================");
+
 
                 if (response.data.data.honorInfoListJson.length !== 0) {
                     let data = JSON.parse(response.data.data.honorInfoListJson)
@@ -277,18 +290,22 @@ export default function Resume(src, options) {
                         return a.Order - b.Order;
                     });
                     setHonorInfoListJson(data)
+                    console.log("Honor Info");
+                    console.log(JSON.parse(response.data.data.honorInfoListJson));
+                    console.log("=========================");
                 } else {
                     setHonorInfoListJson([])
                 }
-                console.log("Honor Info");
-                console.log(JSON.parse(response.data.data.honorInfoListJson));
-                console.log("=========================");
+
 
                 setResume(response.data.data)
                 console.log("General Info");
                 console.log(response.data.data);
                 console.log("=========================");
-                information = JSON.parse(response.data.data.userInfoJson);
+
+                if (response.data.data.userInfoJson.length >= 0) {
+                    information = JSON.parse(response.data.data.userInfoJson);
+                }
                 setPicFullAddress(JSON.parse(response.data.data.userInfoJson).PicFullAddress)
             })
             .catch(function (error) {
@@ -703,7 +720,7 @@ export default function Resume(src, options) {
                                             : null
                                         }
                                     </div>
-                                    {skillInfoListJson !== null && skillInfoListJson !== undefined && skillInfoListJson !== [] ?
+                                    {skillInfoListJson !== null && skillInfoListJson !== undefined && skillInfoListJson !== [] && skillInfoListJson.length>0?
                                         <div className={Style1.skills}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -733,7 +750,7 @@ export default function Resume(src, options) {
                                                             <div>
                                                                 <RatingStar
                                                                     id="clickable"
-                                                                    rating={value.Level}
+                                                                    rating={parseInt(value.Level)}
                                                                 />
                                                             </div> : null
                                                         }
@@ -742,7 +759,7 @@ export default function Resume(src, options) {
                                             </div>
                                         </div> : null
                                     }
-                                    {skillInfoListJsonSoftware !== null && skillInfoListJsonSoftware !== undefined && skillInfoListJsonSoftware !== [] ?
+                                    {skillInfoListJsonSoftware !== null && skillInfoListJsonSoftware !== undefined && skillInfoListJsonSoftware !== [] && skillInfoListJsonSoftware.length>0?
                                         <div className={Style1.skills}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -765,7 +782,7 @@ export default function Resume(src, options) {
                                                             <div>
                                                                 <RatingStar
                                                                     id="clickable"
-                                                                    rating={value.Level}
+                                                                    rating={parseInt(value.Level)}
                                                                 />
                                                             </div> : null
                                                         }
@@ -775,7 +792,7 @@ export default function Resume(src, options) {
                                             </div>
                                         </div> : null
                                     }
-                                    {educationInfoListJson !== null && educationInfoListJson !== undefined && educationInfoListJson !== [] ?
+                                    {educationInfoListJson !== null && educationInfoListJson !== undefined && educationInfoListJson !== [] && educationInfoListJson.length>0?
                                         <div className={Style1.educations}>
                                             {
                                                 sp.get("lang") === "fa" ?
@@ -821,7 +838,7 @@ export default function Resume(src, options) {
                                     className={sp.get("lang") === "fa" ? Style1.lineSecondPersian + " col-7" : Style1.lineSecond + " col-7"}>
                                     <div className={Style1.profileInfo}>
                                         {
-                                            resume.aboutMe !== null || resume.aboutMeEnglish !== null ?
+                                            (sp.get("lang") === "fa" && resume.aboutMe !== null && resume.aboutMe !== undefined) ||  (sp.get("lang") === "en" && resume.aboutMeEnglish !== null && resume.aboutMeEnglish !== undefined) ?
                                                 <div>
                                                     <h6 className={Style1.titlePart}>
                                                         {
@@ -839,7 +856,7 @@ export default function Resume(src, options) {
                                                     </p>
                                                 </div> : null
                                         }
-                                        {languageInfoListJson !== null && languageInfoListJson !== undefined && languageInfoListJson !== [] ?
+                                        {languageInfoListJson !== null && languageInfoListJson !== undefined && languageInfoListJson !== [] && languageInfoListJson.length>0?
                                             <div className={Style1.languages + " pt-2"}>
                                                 <h6 className={Style1.titlePart}>
                                                     {
@@ -862,7 +879,7 @@ export default function Resume(src, options) {
                                                                     <div>
                                                                         <RatingStar
                                                                             id="clickable"
-                                                                            rating={value.Level}
+                                                                            rating={parseInt(value.Level)}
                                                                         />
                                                                     </div> : null
                                                                 }
@@ -876,7 +893,7 @@ export default function Resume(src, options) {
                                             </div> : null
                                         }
                                     </div>
-                                    {projectInfoListJson !== null && projectInfoListJson !== undefined && projectInfoListJson !== [] ?
+                                    {projectInfoListJson !== null && projectInfoListJson !== undefined && projectInfoListJson !== [] && projectInfoListJson.length>0?
                                         <div className={Style1.experiences + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -926,7 +943,7 @@ export default function Resume(src, options) {
                                             }
                                         </div> : null
                                     }
-                                    {workInfoListJson !== null && workInfoListJson !== undefined && workInfoListJson !== [] ?
+                                    {workInfoListJson !== null && workInfoListJson !== undefined && workInfoListJson !== []  && workInfoListJson.length>0?
                                         <div className={Style1.experiences + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -974,7 +991,7 @@ export default function Resume(src, options) {
                                             }
                                         </div> : null
                                     }
-                                    {articleInfoListJson !== null && articleInfoListJson !== undefined && articleInfoListJson !== [] ?
+                                    {articleInfoListJson !== null && articleInfoListJson !== undefined && articleInfoListJson !== []  && articleInfoListJson.length>0?
                                         <div className={Style1.references + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {
@@ -1015,7 +1032,7 @@ export default function Resume(src, options) {
                                             ))}
                                         </div> : null
                                     }
-                                    {honerInfoListJson !== null && honerInfoListJson !== undefined && honerInfoListJson !== [] ?
+                                    {honerInfoListJson !== null && honerInfoListJson !== undefined  && honerInfoListJson.length>0?
                                         <div className={Style1.references + " pt-2"}>
                                             <h6 className={Style1.titlePart}>
                                                 {

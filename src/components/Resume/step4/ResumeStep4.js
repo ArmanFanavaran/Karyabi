@@ -380,11 +380,7 @@ export default function ResumeStep4() {
             if ($('#totalAverageVal').val() !== null && $('#totalAverageVal').val() !== "" && $('#totalAverageVal').val() !== NaN) {
                 total = parseFloat($('#totalAverageVal').val())
             }
-            console.log(countrySelect)
-            console.log(majorSelect)
-            console.log(uniSelect)
 
-            console.log(total)
             var data = JSON.stringify({
                 "id": parseInt(editItems.Id),
                 "countryName": countrySelect,

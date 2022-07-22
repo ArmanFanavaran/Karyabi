@@ -87,13 +87,23 @@ function LoginComponent2() {
 
                 setLoading(false)
                 let states = response.data.data.states;
-                console.log(response.data.data)
+                // const url = queryString.parse(window.location.search);
+                // console.log(url.EmailOrPhone)
+                // localStorage.username = url.EmailOrPhone;
+                // // localStorage.password = password;
+                // if (url.EmailOrPhone !== "null" && url.EmailOrPhone !== undefined && url.EmailOrPhone !== "") {
+                //
+                //  }
                 let bool = true;
                 for (let key in states) {
                     if (states[key].name === "IsLogedIn") {
                         if (states[key].value === true) {
                             let accessExp = response.data.data.accessExp;
                             let refreshExp = response.data.data.refreshExp;
+                            // var date = new Date();
+                            // date.setTime(date.getTime()+(5*1000));
+
+
                             Cookies.set(getCookiesItems().accessExp.nickName, accessExp, {
                                 domain: getCookiesItems().accessExp.domain,
                                 expires: getCookiesItems().accessExp.expires
@@ -164,14 +174,14 @@ function LoginComponent2() {
                 if (errors != null) {
                     Object.keys(errors).map((key, i) => {
                         for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i], ' ', 700);
+                            NotificationManager.error(errors[key][i],  '', 2000);
                         }
                     });
 
                 } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
+                    NotificationManager.error(error.response.data.message, '', 2000);
                 } else {
-                    NotificationManager.error(error.response.data.Message);
+                    NotificationManager.error(error.response.data.Message, '', 2000);
 
                 }
 
@@ -249,7 +259,7 @@ function LoginComponent2() {
                     <h4>{t("authentication.login.enter_your_information_step2")}</h4>
 
                     <div className={Style.inputs}>
-                        <input id="password" type="password" className="form-control text-center"
+                        <input name="password" id="password" type="password" className="form-control text-center"
                                placeholder={t("authentication.login.password")}/>
                         <div className={'change-dir '}>
                             <input id={"show_pass"} className={' mx-1'} type="checkbox" onClick={showPass}/>

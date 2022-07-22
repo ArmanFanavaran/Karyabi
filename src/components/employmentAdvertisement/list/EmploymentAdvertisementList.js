@@ -38,6 +38,8 @@ export default function EmploymentAdvertisementList() {
     const [orderFilters, setOrderFilters] = useState([]);
     const [t, i18n] = useTranslation('main');
 
+    /**************** Boolean ***********/
+    const [isStartEffect, setIsStartEffect] = useState(false);
 
     /**************** Filter ***********/
     const [isFullTime, setIsFullTime] = useState(false);
@@ -480,7 +482,7 @@ export default function EmploymentAdvertisementList() {
     /* Remove Tag in branch */
     const onRemoveBranchTag = (id) => {
         let selected_branches = [...selectedBranches];
-        console.log(selected_branches)
+        // console.log(selected_branches)
 
         let selected_ids = [];
         for (let i = 0; i < selected_branches.length; i++) {
@@ -819,7 +821,7 @@ export default function EmploymentAdvertisementList() {
                 .then(function (response) {
 
                     let data = response.data.data;
-                    console.log(data)
+                    // console.log(data)
                     let newsData = [...newsList]
                     for (let i = 0; i < data.length; i++) {
                         newsData.push(data[i])
@@ -863,132 +865,135 @@ export default function EmploymentAdvertisementList() {
 
     /************** Get Data *************/
     useEffect(() => {
-        let categoryListSelect = [];
-        let provinceListSelect = [];
-        let branchListSelect = [];
-        let genderList = [];
-        let milateryList = [];
-        selectedCategory.map((item, index) => (
-            categoryListSelect.push(item.id)
-        ))
-        selectedProvince.map((item, index) => (
-            provinceListSelect.push(item.id)
-        ))
-        selectedBranches.map((item, index) => (
-            item.id === -2 ?
-                branchListSelect.push(null) :
-                branchListSelect.push(item.id)
+        if(isStartEffect) {
+            let categoryListSelect = [];
+            let provinceListSelect = [];
+            let branchListSelect = [];
+            let genderList = [];
+            let milateryList = [];
+            selectedCategory.map((item, index) => (
+                categoryListSelect.push(item.id)
+            ))
+            selectedProvince.map((item, index) => (
+                provinceListSelect.push(item.id)
+            ))
+            selectedBranches.map((item, index) => (
+                item.id === -2 ?
+                    branchListSelect.push(null) :
+                    branchListSelect.push(item.id)
 
-        ))
-        selectedGender.map((item, index) => (
-            genderList.push(item.id)
-        ))
-        selectedMilatery.map((item, index) => (
-            milateryList.push(item.id)
-        ))
+            ))
+            selectedGender.map((item, index) => (
+                genderList.push(item.id)
+            ))
+            selectedMilatery.map((item, index) => (
+                milateryList.push(item.id)
+            ))
 
-        /************** News List *************/
-        /*get news list*/
-        var list_data = JSON.stringify({
-            "roleId": 5,
-            "page": 1,
-            "pageSize": 6,
-            "heights": [
-                getSizeImageItems().companyLogo.Heights
-            ],
-            "widths": [
-                getSizeImageItems().companyLogo.Widths
-            ],
-            "qualities": [
-                getSizeImageItems().companyLogo.Qualities
-            ],
-            "keyword": keyword,
-            "ownerId": 0,
-            "owner": "Company",
-            "genderIds": genderList,
-            "isAdaptiveSalary": isAdaptiveSalary,
-            "minSalaryStatusId": parseInt(minSalary[0].id),
-            "maxSalaryStatusId": parseInt(maxSalary[0].id),
-            "degreeIds": branchListSelect,
-            "typeId": 1,
-            "provinceIds": provinceListSelect,
-            "militaryStatusIds": milateryList,
-            "categoryIds": categoryListSelect,
-            "isFullTime": isFullTime,
-            "isPartTime": isPartTime,
-            "isRemote": isRemote,
-            "isInternship": isIntership,
-            "isPromotionPossible": isPremotionPossible,
-            "isInsurancePossible": isInsurancePossible,
-            "isCoursePossible": isCoursePossible,
-            "isFlexibleWorkTimePossible": isFlexibleWorkTimePossible,
-            "isCommutingServicePossible": isCommutingServicePossible,
-            "isFreeFoodPossible": isFreeFoodPossible,
-            "sortBye": 0
-        });
-        var list_config = {
-            method: 'post',
-            url: generateURL("/JobOffer/GetJobOfferListClientSide"),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: list_data
-        };
-        axios(list_config)
-            .then(function (response) {
-
-                setPage(1);
-
-                let data = response.data.data;
-                setNewsList(data)
-                // let latest = [];
-                // for (let i = 0; i < data.length && i < 3; i++) {
-                //     latest.push(data[i]);
-                // }
-                // setLastNews(latest);
-            })
-            .catch(function (error) {
+            /************** News List *************/
+            /*get news list*/
+            var list_data = JSON.stringify({
+                "roleId": 5,
+                "page": 1,
+                "pageSize": 6,
+                "heights": [
+                    getSizeImageItems().companyLogo.Heights
+                ],
+                "widths": [
+                    getSizeImageItems().companyLogo.Widths
+                ],
+                "qualities": [
+                    getSizeImageItems().companyLogo.Qualities
+                ],
+                "keyword": keyword,
+                "ownerId": 0,
+                "owner": "Company",
+                "genderIds": genderList,
+                "isAdaptiveSalary": isAdaptiveSalary,
+                "minSalaryStatusId": parseInt(minSalary[0].id),
+                "maxSalaryStatusId": parseInt(maxSalary[0].id),
+                "degreeIds": branchListSelect,
+                "typeId": 1,
+                "provinceIds": provinceListSelect,
+                "militaryStatusIds": milateryList,
+                "categoryIds": categoryListSelect,
+                "isFullTime": isFullTime,
+                "isPartTime": isPartTime,
+                "isRemote": isRemote,
+                "isInternship": isIntership,
+                "isPromotionPossible": isPremotionPossible,
+                "isInsurancePossible": isInsurancePossible,
+                "isCoursePossible": isCoursePossible,
+                "isFlexibleWorkTimePossible": isFlexibleWorkTimePossible,
+                "isCommutingServicePossible": isCommutingServicePossible,
+                "isFreeFoodPossible": isFreeFoodPossible,
+                "sortBye": 0
             });
+            console.log(list_data)
+            var list_config = {
+                method: 'post',
+                url: generateURL("/JobOffer/GetJobOfferListClientSide"),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: list_data
+            };
+            axios(list_config)
+                .then(function (response) {
 
-        var count_config = {
-            method: 'post',
-            url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: list_data
-        };
+                    setPage(1);
 
-        axios(count_config)
-            .then(function (response) {
-                setCount(response.data.data);
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: 0
-                }, 500);
-                let lastPage = Math.ceil(response.data.data / pageSize); // the last page
-                if (1 < lastPage) {
-                    setHasMore(true)
-                } else {
-                    setHasMore(false)
-                }
+                    let data = response.data.data;
+                    setNewsList(data)
+                    // let latest = [];
+                    // for (let i = 0; i < data.length && i < 3; i++) {
+                    //     latest.push(data[i]);
+                    // }
+                    // setLastNews(latest);
+                })
+                .catch(function (error) {
+                });
 
-            })
-            .catch(function (error) {
-                let errors = error.response.data.errors;
-                if (errors != null) {
-                    Object.keys(errors).map((key, i) => {
-                        for (var i = 0; i < errors[key].length; i++) {
-                            NotificationManager.error(errors[key][i]);
-                        }
-                    });
+            var count_config = {
+                method: 'post',
+                url: generateURL("/JobOffer/GetJobOfferListCountClientSide"),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: list_data
+            };
 
-                } else if (error.response.data.message != null && error.response.data.message != undefined) {
-                    NotificationManager.error(error.response.data.message);
-                } else {
-                    NotificationManager.error(error.response.data.Message);
+            axios(count_config)
+                .then(function (response) {
+                    setCount(response.data.data);
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: 0
+                    }, 500);
+                    let lastPage = Math.ceil(response.data.data / pageSize); // the last page
+                    if (1 < lastPage) {
+                        setHasMore(true)
+                    } else {
+                        setHasMore(false)
+                    }
 
-                }
-            });
+                })
+                .catch(function (error) {
+                    let errors = error.response.data.errors;
+                    if (errors != null) {
+                        Object.keys(errors).map((key, i) => {
+                            for (var i = 0; i < errors[key].length; i++) {
+                                NotificationManager.error(errors[key][i]);
+                            }
+                        });
+
+                    } else if (error.response.data.message != null && error.response.data.message != undefined) {
+                        NotificationManager.error(error.response.data.message);
+                    } else {
+                        NotificationManager.error(error.response.data.Message);
+
+                    }
+                });
+        }
     }, [selectedGender, selectedCategory, selectedProvince, selectedBranches, selectedMilatery,
         keyword, maxSalary, minSalary, isAdaptiveSalary, isFreeFoodPossible, isCommutingServicePossible,
         isFlexibleWorkTimePossible, isCoursePossible, isInsurancePossible, isPremotionPossible, isIntership,
@@ -1014,14 +1019,33 @@ export default function EmploymentAdvertisementList() {
 
     useEffect(() => {
         const url = queryString.parse(window.location.search);
-        let keyword = url.keyword;
-        let category = [0];
-        if (url.category !== "null" && url.category !== undefined && url.category !== "")
-            category = [parseInt(category)];
+        let keyword = "";
+        let category = [];
+        console.log(url.category)
+        if (url.category !== "null" && url.category !== undefined && url.category !== "") {
+            let item = {
+                id: parseInt(url.category),
+                label: url.catName.replaceAll("-", ' ')
+            }
+            category = [item.id];
+            setSelectedCategory([item])
+            console.log(url.category + " category")
+        }
         let province = [];
-        if (url.province !== "null" && url.province !== undefined && url.province !== "")
-            province = [parseInt(url.province)];
+        if (url.province !== "null" && url.province !== undefined && url.province !== "") {
+            let item = {
+                id: parseInt(url.province),
+                label: url.provName.replaceAll("-", ' ')
+            }
+            province = [item.id];
+            setSelectedProvince([item])
+            console.log(url.province + " category")
+        }
         // else province = null;
+        if (url.keyword !== "null" && url.keyword !== undefined && url.keyword !== "") {
+           setKeyword(url.keyword)
+            keyword= url.keyword
+        }
 
 
         /************** News List *************/
@@ -1042,14 +1066,14 @@ export default function EmploymentAdvertisementList() {
             "keyword": keyword,
             "ownerId": 0,
             "owner": "Company",
-            "genderIds": null,
+            "genderIds": [],
             "isAdaptiveSalary": false,
             "minSalaryStatusId": 0,
             "maxSalaryStatusId": 12,
-            "degreeIds": null,
+            "degreeIds": [],
             "typeId": 1,
             "provinceIds": province,
-            "militaryStatusIds": null,
+            "militaryStatusIds": [],
             "categoryIds": category,
             "isFullTime": false,
             "isPartTime": false,
@@ -1063,7 +1087,7 @@ export default function EmploymentAdvertisementList() {
             "isFreeFoodPossible": false,
             "sortBye": 0
         });
-        console.log("list_data")
+        // console.log("list_data")
         console.log(list_data)
         var list_config = {
             method: 'post',
@@ -1076,7 +1100,7 @@ export default function EmploymentAdvertisementList() {
         axios(list_config)
             .then(function (response) {
                 let data = response.data.data;
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 setNewsList(data)
                 // let latest = [];
                 // for (let i = 0; i < data.length && i < 3; i++) {
@@ -1160,7 +1184,7 @@ export default function EmploymentAdvertisementList() {
             .then(function (response) {
                 let tmp = response.data.data
                 tmp.push({id: 0, name: 'مهم نیست', englishName: 'Not important'})
-                console.log(response.data.data);
+                // console.log(response.data.data);
                 setGenderFilters(response.data.data);
                 setSearchedGender(response.data.data);
 
@@ -1193,7 +1217,7 @@ export default function EmploymentAdvertisementList() {
         axios(count_config)
             .then(function (response) {
                 setCount(response.data.data);
-                console.log(response.data.data)
+                // console.log(response.data.data)
             })
             .catch(function (error) {
                 let errors = error.response.data.errors;
@@ -1211,7 +1235,7 @@ export default function EmploymentAdvertisementList() {
 
                 }
             });
-
+        setIsStartEffect(true)
     }, []);
 
     return (

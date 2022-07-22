@@ -101,21 +101,7 @@ export default function Routes() {
                 <Route path={getRoutesItems().resetPasswordStep1.route} exact component={ForgetPassStep1}/>
                 <Route path={getRoutesItems().resetPasswordStep2.route} exact component={ForgetPassStep2}/>
 
-                {/****************** Resume *****************************/}
-                <Route path={getRoutesItems().resume.route} exact component={Resume}/>
-                <Route path={getRoutesItems().resumeType2.route} exact component={ResumeType2}/>
-                <Route path={getRoutesItems().resumeStep1.route} exact component={ResumeStep1}/>
-                <Route path={getRoutesItems().resumeStep2.route} exact component={ResumeStep2}/>
-                <Route path={getRoutesItems().resumeStep3.route} exact component={ResumeStep3}/>
-                <Route path={getRoutesItems().resumeStep4.route} exact component={ResumeStep4}/>
-                <Route path={getRoutesItems().resumeStep5.route} exact component={ResumeStep5}/>
-                <Route path={getRoutesItems().resumeStep6.route} exact component={ResumeStep6}/>
-                <Route path={getRoutesItems().resumeStep7.route} exact component={ResumeStep7}/>
-                <Route path={getRoutesItems().resumeStep8.route} exact component={ResumeStep8}/>
-                <Route path={getRoutesItems().resumeStep9.route} exact component={ResumeStep9}/>
-                <Route path={getRoutesItems().resumeStep10.route} exact component={ResumeStep10}/>
-                <Route path={getRoutesItems().resumeStep11.route} exact component={ResumeStep11}/>
-                <Route path={getRoutesItems().resumeStep12.route} exact component={ResumeStep12}/>
+
 
 
                 {/****************** Employment Advertisement *****************************/}
@@ -133,9 +119,6 @@ export default function Routes() {
                 {/****************** Contact *****************************/}
                 <Route path="/contact" exact component={ContactAdmin}/>
 
-                {/************* Company *************/}
-                <Route path={getRoutesItems().companyList.route} exact component={CompaniesList}/>
-                <Route path={getRoutesItems().companySingle.route} exact component={CompanySingle}/>
 
 
                 {/****************** Controller *****************************/}
@@ -146,6 +129,25 @@ export default function Routes() {
                     <Route path={getRoutesItems().DashboardParentAdmin.route + "*" }  exact  component={DashboardParentAdmin}/>
                     <Route path={getRoutesItems().dashboardParentCompany.route + "*" }  exact  component={DashboardParentCompany}/>
 
+                    {/****************** Resume *****************************/}
+                    <Route path={getRoutesItems().resume.route} exact component={Resume}/>
+                    <Route path={getRoutesItems().resumeType2.route} exact component={ResumeType2}/>
+                    <Route path={getRoutesItems().resumeStep1.route} exact component={ResumeStep1}/>
+                    <Route path={getRoutesItems().resumeStep2.route} exact component={ResumeStep2}/>
+                    <Route path={getRoutesItems().resumeStep3.route} exact component={ResumeStep3}/>
+                    <Route path={getRoutesItems().resumeStep4.route} exact component={ResumeStep4}/>
+                    <Route path={getRoutesItems().resumeStep5.route} exact component={ResumeStep5}/>
+                    <Route path={getRoutesItems().resumeStep6.route} exact component={ResumeStep6}/>
+                    <Route path={getRoutesItems().resumeStep7.route} exact component={ResumeStep7}/>
+                    <Route path={getRoutesItems().resumeStep8.route} exact component={ResumeStep8}/>
+                    <Route path={getRoutesItems().resumeStep9.route} exact component={ResumeStep9}/>
+                    <Route path={getRoutesItems().resumeStep10.route} exact component={ResumeStep10}/>
+                    <Route path={getRoutesItems().resumeStep11.route} exact component={ResumeStep11}/>
+                    <Route path={getRoutesItems().resumeStep12.route} exact component={ResumeStep12}/>
+
+                    {/************* Company *************/}
+                    <Route path={getRoutesItems().companyList.route} exact component={CompaniesList}/>
+                    <Route path={getRoutesItems().companySingle.route} exact component={CompanySingle}/>
 
                 </Controller>
 

@@ -3,9 +3,11 @@ import {generateCookieDomain, generateURL} from "../../global/Requests";
 import {getCookiesItems} from "../../CookiesList/CookiesList";
 import {NotificationManager} from "react-notifications";
 import {getRoutesItems} from "../../RoutesList/RoutesList";
+import {getSizeImageItems} from "../../SizeImageList/SizeImageList";
 
 export function isAccessTokenExpired() {//// finish
     let accessExp = Cookies.get(getCookiesItems().accessExp.nickName);
+    // console.log(accessExp)
     if (accessExp !== undefined && accessExp !== null && accessExp !== "") {
         let now = Date.now();
         accessExp = new Date(accessExp);
@@ -18,7 +20,7 @@ export function isAccessTokenExpired() {//// finish
 
 export function isRefreshTokenExpired() {/// finish
     let refreshExp = Cookies.get(getCookiesItems().refreshExp.nickName);
-    if (refreshExp !== undefined) {
+    if (refreshExp !== undefined && refreshExp !== null && refreshExp !== "") {
         let now = Date.now();
         refreshExp = new Date(refreshExp);
         if ( refreshExp <= now)
@@ -28,12 +30,18 @@ export function isRefreshTokenExpired() {/// finish
     else return true;
 
 }
+
 export function getAuthStatus() {
     return !isAccessTokenExpired();
 }
+
 export function refreshToken() {
     var axios = require('axios');
-    var data = JSON.stringify({});
+    var data = JSON.stringify({
+        "heights": [getSizeImageItems().UserNavbarPic.Heights],
+        "widths": [getSizeImageItems().UserNavbarPic.Widths],
+        "qualities": [getSizeImageItems().UserNavbarPic.Qualities]
+    });
 
     axios.defaults.withCredentials = true;
     var config = {
@@ -47,7 +55,8 @@ export function refreshToken() {
 
     axios(config)
         .then(function (response) {
-            if (response.isSuccess) {
+            console.log(response)
+            if (response.data.isSuccess) {
                 let accessExp = response.data.data.accessExp;
                 let refreshExp = response.data.data.refreshExp;
                 Cookies.set(getCookiesItems().accessExp.nickName, accessExp, {
@@ -79,15 +88,16 @@ export function refreshToken() {
                     expires: getCookiesItems().lastName.expires
                 })
 
-                localStorage.setItem(getCookiesItems().userPic.nickName, response.data.data.picAddress);
+                localStorage.setItem(getCookiesItems().userPic.nickName, response.data.data.picAddresses);
                 setTimeout(function () {
-                    NotificationManager.success(response.data.message);
+                    NotificationManager.success(response.data.message,'',2000);
 
                 }, 1000);
-                window.location.reload();
+                // window.location.reload();
 
             }
         })
         .catch(function (error) {
         });
+    return  isAccessTokenExpired
 }
